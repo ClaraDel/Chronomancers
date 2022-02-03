@@ -18,7 +18,9 @@ public class PlayerController : MonoBehaviour
         positionY = (int) Mathf.Floor(transform.position.y);
         PlayerTarget.parent = null;
         // moveManager = new MoveManager(this);
+        TimeManager.instance.NewCharacter(this);
         TimeManager.instance.AddAction(() => ResetPosition());
+        TimeManager.instance.playTick();
     }
 
     public void ResetPosition(){
