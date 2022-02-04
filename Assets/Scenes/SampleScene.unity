@@ -3844,6 +3844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTick: 0
   prefabPlayer: {fileID: 3240898002689301951, guid: a51d2f956360953428d7ce3060fccbe0, type: 3}
+  actifCharacter: {fileID: 0}
 --- !u!114 &2099067992
 MonoBehaviour:
   m_ObjectHideFlags: 0
