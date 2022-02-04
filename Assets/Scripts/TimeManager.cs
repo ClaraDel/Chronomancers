@@ -13,6 +13,7 @@ public class TimeManager : MonoBehaviour
 
     public GameObject prefabPlayer;
     public Queue<PlayerController> characterOrder;
+    public PlayerController actifCharacter;
 
     //Liste de piles d'appel de méthodes
     public List<Queue<Action>> turnTimeLine = new List<Queue<Action>>();
@@ -36,6 +37,7 @@ public class TimeManager : MonoBehaviour
 
     public void NewCharacter(PlayerController new_character)
     {
+        actifCharacter = new_character;
         characterOrder.Enqueue(new_character);
     }
 
@@ -52,6 +54,7 @@ public class TimeManager : MonoBehaviour
         {
             //endTurn Method ??
             numberTurn = numberTurn + 1;
+            actifCharacter.isControllable = false;
             Instantiate(prefabPlayer, new Vector3(6,0,0), prefabPlayer.transform.rotation);
             playTick();
         }
