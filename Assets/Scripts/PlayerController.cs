@@ -19,41 +19,28 @@ public class PlayerController : MonoBehaviour
         positionY = (int)Mathf.Floor(transform.position.y);
         PlayerTarget.parent = null;
         isControllable = true;
-        // moveManager = new MoveManager(this);
         TimeManager.instance.NewCharacter(this);
-        TimeManager.instance.AddAction(() => ResetPosition());
-        TimeManager.instance.playTick();
-    }
-
-    public void ResetPosition()
-    {
-        positionX = 0;
-        positionY = 0;
-        PlayerTarget.position = new Vector3(0, 0, 0);
-        transform.position = new Vector3(0, 0, 0);
+        moveManager.AddResetPosition();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // transform.position = Vector2.MoveTowards(transform.position, PlayerTarget.position, moveSpeed * Time.deltaTime);
-        if (isControllable)
+        if (isControllable && !TimeManager.instance.isPlaying)
         {
             if (Vector2.Distance(transform.position, PlayerTarget.position) == 0f)
             {
                 if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) >= 0.5f)
                 {
                     moveManager.AddMove(Mathf.Round(Input.GetAxisRaw("Horizontal")), 0);
-                    // PlayerTarget.Translate(new Vector2(Input.GetAxisRaw("Horizontal"), 0));
                 }
                 else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) >= 0.5f)
                 {
                     moveManager.AddMove(0, Mathf.Round(Input.GetAxisRaw("Vertical")));
-                    // PlayerTarget.Translate(new Vector2(0, Input.GetAxisRaw("Vertical")));
                 }
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    TimeManager.instance.playTick();
+                    TimeManager.instance.PlayTick();
                 }
             }
         }
