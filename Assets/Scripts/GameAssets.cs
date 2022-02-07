@@ -23,5 +23,6 @@ public class GameAssets : MonoBehaviour
         }
     }
     public Transform pfDamagePopup;
+    public Transform pfCharacterTest;
 
 }
