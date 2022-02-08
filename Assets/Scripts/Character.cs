@@ -17,13 +17,13 @@ public class Character : MonoBehaviour
     {
         Transform characterTransform = Instantiate(GameAssets.i.pfCharacterTest, position, Quaternion.identity);
         Character character = characterTransform.GetComponent<Character>();
-        character.initHealth(health);
+        character.init(health);
         character.setHealth(health);
         character.setNormalAttackDamage(damage);
         return character;
     }
 
-    public void initHealth(float health)
+    public void init(float health)
     {
         maxHealth = (int) health;
         atk = new AttackTest();
@@ -41,33 +41,20 @@ public class Character : MonoBehaviour
     public void die()
     {
         gameObject.GetComponent<SpriteRenderer>().sprite = ghostSprite;
+        healthBar.SetActive(false);
     }
 
     public void simulateDamage(int damage)
     {
         health = health - damage;
         healthBar.transform.GetComponent<Slider>().value = health;
+        DamagePopup.create(damage, gameObject);
     }
 
 
     public void setNormalAttackDamage(float damage)
     {
         this.normalAttackDamage = damage;
-    }
-
-
-    
-    public void setup()
-    {
-
-    }
-
-    // Start is called before the first frame update
-    void Awake()
-    {
-        /*healthBar = (gameObject.transform.Find("Canvas")).Find("HealthBar").gameObject;
-        healthBar.transform.GetComponent<Slider>().maxValue = this.maxHealth;
-        healthBar.transform.GetComponent<Slider>().value = maxHealth;*/
     }
 
     // Update is called once per frame

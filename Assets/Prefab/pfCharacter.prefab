@@ -360,6 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f517c44d4fc2c4e81e1124dc095c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ghostSprite: {fileID: 21300000, guid: 2a833689455d8d2449cd821bf32982be, type: 3}
 --- !u!1 &3738785287395304203
 GameObject:
   m_ObjectHideFlags: 0
