@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public int positionX;
     public int positionY;
     public bool isControllable;
+    private Character character;
 
 
     // Start is called before the first frame update
@@ -21,11 +22,23 @@ public class PlayerController : MonoBehaviour
         isControllable = true;
         TimeManager.instance.NewCharacter(this);
         moveManager.AddResetPosition();
+        character = gameObject.transform.GetComponent<Character>();
+        character.init(100,50);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(1))
+        {
+           
+            if (character != null)
+            {
+                character.atk.applyAttack(gameObject, 
+                    gameObject.transform.position + new Vector3(1, 0, 0));
+            }
+
+        }
         if (isControllable && !TimeManager.instance.isPlaying)
         {
             if (Vector2.Distance(transform.position, PlayerTarget.position) == 0f)

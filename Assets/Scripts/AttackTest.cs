@@ -14,12 +14,12 @@ public class AttackTest : Attack
 
     public void applyAttack(GameObject player, Vector3 position)
     {
-        int x1 = (int)position.x + 20;
-        int x2 = x1 - 20;
+        int x1 = (int)position.x + 1;
+        int x2 = x1 - 1;
         GameObject[] characters = GameObject.FindGameObjectsWithTag("character");
         for(int i = 0; i <  characters.Length; i++)
         {
-            if(characters[i].transform.position.x <= x1 && characters[i].transform.position.x >= x2)
+            if(characters[i].transform.position.x == position.x)
             {
                 characters[i].GetComponent<Character>().simulateDamage(damage);
             }

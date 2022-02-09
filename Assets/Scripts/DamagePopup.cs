@@ -12,7 +12,8 @@ public class DamagePopup : MonoBehaviour
     private Vector3 moveVector;
 
     public static DamagePopup create(int damageAmount, GameObject character) {
-        Transform damagePopupTransform = Instantiate(GameAssets.i.pfDamagePopup, character.transform.position + new Vector3(10,0,0), Quaternion.identity);
+        Debug.Log(character.transform.position);
+        Transform damagePopupTransform = Instantiate(GameAssets.i.pfDamagePopup, character.transform.position + new Vector3(0.5f,0,0), Quaternion.identity);
         DamagePopup damagePopup = damagePopupTransform.GetComponent<DamagePopup>();
         damagePopup.setDamageAmount(damageAmount);
         return damagePopup;
@@ -36,9 +37,9 @@ public class DamagePopup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveVector = new Vector3(.7f, 1)*10;
+        moveVector = new Vector3(.7f, 1)*1;
         transform.position += moveVector * Time.deltaTime;
-        moveVector -= moveVector * 8f * Time.deltaTime;
+        moveVector -= moveVector * .8f * Time.deltaTime;
 
         disappearTimer -= Time.deltaTime;
         float disappearSpeed = 3f;
