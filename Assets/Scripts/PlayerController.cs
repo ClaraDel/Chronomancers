@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public int positionY;
     public bool isControllable;
     private Character character;
+    private bool attackingProcess = false;
 
 
     // Start is called before the first frame update
@@ -31,13 +32,39 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
+            attackingProcess = true;
+            isControllable = false;
            
             if (character != null)
             {
-                character.atk.applyAttack(gameObject, 
-                    gameObject.transform.position + new Vector3(1, 0, 0));
+                Debug.Log("attack");
+                character.atk.setupAttack(gameObject.transform.position);
+         
             }
 
+        }
+        if (attackingProcess)
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                character.atk.selectAttack("W");
+            }
+            else if (Input.GetKey(KeyCode.A))
+            {
+                character.atk.selectAttack("A");
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                character.atk.selectAttack("S");
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                character.atk.selectAttack("D");
+            }
+            else
+            {
+
+            }
         }
         if (isControllable && !TimeManager.instance.isPlaying)
         {

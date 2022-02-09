@@ -14,7 +14,6 @@ public class GameAssets : MonoBehaviour
     {
         get
         {
-            Debug.Log((Resources.Load<GameAssets>("GameAssets")));
 
             if (_i == null) _i = Instantiate(Resources.Load<GameAssets>("GameAssets"));
            
@@ -24,5 +23,6 @@ public class GameAssets : MonoBehaviour
     }
     public Transform pfDamagePopup;
     public Transform pfCharacterTest;
+    public Transform pfRedTilePopup;
 
 }
