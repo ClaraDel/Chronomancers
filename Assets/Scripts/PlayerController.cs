@@ -75,7 +75,6 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Return))
             {
                 attackSelected = false;
-                Debug.Log("attack");
                 character.atk.applyAttack();
                 character.atk.endAtk();
                 attackingProcess = false;

@@ -38,7 +38,7 @@ public class AttackTest : Attack
         {
             for(int j = 0; j < tiles[i].Count; j++)
             {
-                GameObject.Destroy(tiles[i][j].gameObject);
+                tiles[i][j].gameObject.SetActive(false);
             }
         }
     }
