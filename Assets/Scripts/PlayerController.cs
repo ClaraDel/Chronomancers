@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     public bool isControllable;
     private Character character;
     private bool attackingProcess = false;
+    private bool attackSelected = false;
+    private bool selectingAttackPos = false;
 
 
     // Start is called before the first frame update
@@ -30,45 +32,56 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            attackingProcess = true;
-            isControllable = false;
-           
-            if (character != null)
-            {
-                Debug.Log("attack");
-                character.atk.setupAttack(gameObject.transform.position);
-         
-            }
-
-        }
-        if (attackingProcess)
-        {
-            if (Input.GetKey(KeyCode.W))
-            {
-                character.atk.selectAttack("W");
-            }
-            else if (Input.GetKey(KeyCode.A))
-            {
-                character.atk.selectAttack("A");
-            }
-            else if (Input.GetKey(KeyCode.S))
-            {
-                character.atk.selectAttack("S");
-            }
-            else if (Input.GetKey(KeyCode.D))
-            {
-                character.atk.selectAttack("D");
-            }
-            else
-            {
-
-            }
-        }
+        
         if (isControllable && !TimeManager.instance.isPlaying)
         {
-            if (Vector2.Distance(transform.position, PlayerTarget.position) == 0f)
+            if (Input.GetKeyUp(KeyCode.Alpha1))
+            {
+                attackingProcess = true;
+                if (character != null)
+                {
+                    character.atk.setupAttack(gameObject.transform.position);
+
+                }
+
+            }
+            if (attackingProcess)
+            {
+              
+                if (Input.GetKey(KeyCode.W))
+                {
+                    character.atk.selectAttack("W");
+                    attackSelected = true;
+                }
+                else if (Input.GetKey(KeyCode.A))
+                {
+                    character.atk.selectAttack("A");
+                    attackSelected = true;
+                }
+                else if (Input.GetKey(KeyCode.S))
+                {
+                    character.atk.selectAttack("S");
+                    attackSelected = true;
+                }
+                else if (Input.GetKey(KeyCode.D))
+                {
+                    character.atk.selectAttack("D");
+                    attackSelected = true;
+                }
+                else
+                {
+                }
+            }
+            if (Input.GetKeyUp(KeyCode.Return))
+            {
+                attackSelected = false;
+                Debug.Log("attack");
+                character.atk.applyAttack();
+                character.atk.endAtk();
+                attackingProcess = false;
+
+            }
+            if (!attackingProcess && Vector2.Distance(transform.position, PlayerTarget.position) == 0f)
             {
                 if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) >= 0.5f)
                 {

@@ -32,7 +32,7 @@ public class TestingDamagePopup : MonoBehaviour
             Debug.Log("attack");
             if (c1 != null)
             {
-                c1.atk.applyAttack(c1.gameObject, c1.gameObject.transform.position + new Vector3(20,0,0));
+               // c1.atk.applyAttack(c1.gameObject, c1.gameObject.transform.position + new Vector3(20,0,0));
             }
 
         }

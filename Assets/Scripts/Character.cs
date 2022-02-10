@@ -27,7 +27,11 @@ public class Character : MonoBehaviour
     {
         maxHealth = (int) health;
         setNormalAttackDamage(damage);
-        atk = new AttackTest();
+        atk = new AttackTest(new[] { 
+            new Vector3 { x = 0.5f, y = 1.5f, z = 0 }, 
+            new Vector3 { x = 0.5f, y = 2.5f, z = 0 } }
+        ,50
+            );
         healthBar = (gameObject.transform.Find("pfHealthBar")).Find("HealthBar").gameObject;
         healthBar.transform.GetComponent<Slider>().maxValue = this.maxHealth;
         healthBar.transform.GetComponent<Slider>().value = maxHealth;

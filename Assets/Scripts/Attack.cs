@@ -9,6 +9,6 @@ public interface Attack
     Vector3 [] possibleAttackPositions { get;  }
 
     void setupAttack(Vector3 playerPosition);
-    void applyAttack(GameObject player, Vector3 position);
+    void applyAttack();
     
 }
