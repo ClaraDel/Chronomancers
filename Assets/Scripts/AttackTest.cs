@@ -6,15 +6,25 @@ public class AttackTest : Attack
 {
 
     public List <RedTilePopup> [] tiles = new List <RedTilePopup> [4];
-    public List<RedTilePopup> activeTile;
-    public string directionAtk = "";
+    public enum directions
+    {
+        right,
+        up,
+        left,
+        down
+    }
+    public Vector3 playerPosition;
+    public List<RedTilePopup> activeTiles;
+    int currentDirection;
     public Vector3[] positions;
     int dmg;
+    public CursorManager cursor;
 
     public AttackTest(Vector3[] positions, int damage) {
         this.positions = positions;
         this.dmg = damage;
     }
+
     public int damage
     {
         get
@@ -22,9 +32,6 @@ public class AttackTest : Attack
             return dmg;
         }
     }
-
-
-
 
     public Vector3[] possibleAttackPositions { 
         get {
@@ -34,130 +41,118 @@ public class AttackTest : Attack
 
     public void endAtk()
     {
-        for(int i = 0; i < tiles.Length; i++)
+        int nb = activeTiles.Count;
+        for (int i = 0; i < nb; i++)
         {
-            for(int j = 0; j < tiles[i].Count; j++)
-            {
-                tiles[i][j].gameObject.SetActive(false);
-            }
+            RedTilePopup tmp = activeTiles[activeTiles.Count - 1];
+            activeTiles.Remove(tmp);
+            cursor.destroy();
+            tmp.destroy(); ;
         }
     }
 
     public void selectAttack(string direction)
     {
+        int offset = 0;
+        
         if(tiles.Length == 0)
         {
 
         } else
         {
-            if(activeTile != null)
+            if(activeTiles != null)
             {
-                changeColorListTiles(activeTile, Color.red);
+                int nb = activeTiles.Count;
+                for(int i = 0; i < nb; i++){
+                    RedTilePopup tmp = activeTiles[activeTiles.Count - 1];
+                    activeTiles.Remove(tmp);
+                    cursor.destroy();
+                    tmp.destroy();
+                }
             }
+
             if(direction == "W")
             {
-                changeColorListTiles(tiles[0], Color.green);
-                activeTile = tiles[0];
-                directionAtk = "W";
+                offset =  currentDirection - (int) directions.up;
+                currentDirection = (int)directions.up;
+
             } else if (direction == "A")
             {
-                changeColorListTiles(tiles[1], Color.green);
-                activeTile = tiles[1];
-                directionAtk = "A";
+                offset = currentDirection  - (int) directions.left;
+                currentDirection = (int)directions.left;
             }
             else if (direction == "S")
             {
-                changeColorListTiles(tiles[2], Color.green);
-                activeTile = tiles[2];
-                directionAtk = "S";
-
+                offset = currentDirection  - (int) directions.down;
+                currentDirection = (int)directions.down;
             }
             else if (direction == "D")
             {
-                changeColorListTiles(tiles[3], Color.green);
-                activeTile = tiles[3];
-                directionAtk = "D";
-
+                offset = currentDirection - (int) directions.right;
+                currentDirection = (int)directions.right;
             }
-        }  
+
+        projectPosition(possibleAttackPositions, (Mathf.PI/2)*(-offset));
+        createRedTiles(possibleAttackPositions, playerPosition);
+        cursor = CursorManager.create(possibleAttackPositions[0] + playerPosition, activeTiles);
+
+        } 
     }
 
-    public void changeColorListTiles(List <RedTilePopup> redTilePopups, Color color)
+
+    public void projectPosition(Vector3 [] positions, float theta)
     {
-        for (int i = 0; i < redTilePopups.Count; i++)
+
+        for (int i = 0; i < positions.Length; i++)
         {
-            redTilePopups[i].GetComponent<SpriteRenderer>().color = color;
+            float tmp = positions[i].x*Mathf.Cos(theta) - positions[i].y * Mathf.Sin(theta);
+            positions[i].y = Mathf.RoundToInt(positions[i].x * Mathf.Sin(theta) + positions[i].y * Mathf.Cos(theta)); 
+            positions[i].x = Mathf.RoundToInt(tmp);
         }
+        
     }
 
-    public Vector3[] getUpdatedPos(Vector3 [] positions, int i)
-    {
-       
-        if (i == 1)
-        {
-            projectList(positions);
-        } else if(i == 2)
-        {
-            projectList(positions);
-        } else if (i == 3)
-        {
-            projectList(positions);
-        }
-        return positions;
-    }
 
-    public void projectList(Vector3 [] positions)
+    public void createRedTiles(Vector3[] positions, Vector3 playerPosition)
     {
-
-        for (int j = 0; j < positions.Length; j++)
+        for (int i = 0; i < positions.Length; i++)
         {
-            float tmp = positions[j].x;
-            positions[j].x = -positions[j].y + 1;
-            positions[j].y = tmp;
+            RedTilePopup tmp = RedTilePopup.create(playerPosition + possibleAttackPositions[i]);
+            activeTiles.Add(tmp);
         }
     }
 
     public void setupAttack(Vector3 playerPosition)
     {
-        for(int i = 0; i < 4; i++)
+
+        activeTiles = new List<RedTilePopup>();
+        currentDirection = (int) directions.right;
+        this.playerPosition = playerPosition;
+        createRedTiles(possibleAttackPositions, playerPosition);
+        cursor = CursorManager.create(possibleAttackPositions[0] + playerPosition, activeTiles);
+
+    }
+    public void applyAttack(Vector3 [] positions)
+    {
+        Vector3 position1 = positions[0];
+        Vector3 position2 = positions[1];
+        Vector3 dir2target = -position1 + position2;
+        float lenRay = Vector3.Distance(position1, position2);
+        RaycastHit2D hit = Physics2D.Raycast(position1,
+            dir2target, lenRay);
+
+        if (hit.collider != null)
         {
-            tiles[i] = new List<RedTilePopup>();
-            Vector3 [] newPositions = getUpdatedPos(possibleAttackPositions, i);
-            
-            for (int j = 0; j < newPositions.Length; j++)
-            {
-                RedTilePopup tmp = RedTilePopup.create(playerPosition + newPositions[j]);
-                tiles[i].Add(tmp);
-            }
+            Character target = hit.collider.gameObject.GetComponent<Character>();
+            target.simulateDamage(damage);
         }
     }
-
     public void applyAttack()
     {
+        Vector3 cursorPos = cursor.transform.position;
 
-        GameObject[] characters = GameObject.FindGameObjectsWithTag("character");
-        if(activeTile == null)
-        {
-
-        } else
-        {
-            for (int i = 0; i < characters.Length; i++)
-            {
-                for (int j = 0; j < activeTile.Count; j++)
-                {
-                   
-                    if (characters[i].transform.position.y == 
-                        activeTile[j].gameObject.transform.position.y - 0.5 &&
-                        characters[i].transform.position.x ==
-                        activeTile[j].gameObject.transform.position.x - 0.5)
-                    {
-                        characters[i].GetComponent<Character>().simulateDamage(damage);
-                    }
-                }
-
-            }
-        }
-        
+        TimeManager.instance.AddAction(() => applyAttack(new[] {playerPosition,cursorPos}));
+        TimeManager.instance.PlayTick();
     }
    
 }

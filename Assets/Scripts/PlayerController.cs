@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private bool attackSelected = false;
     private bool selectingAttackPos = false;
 
+   
+
 
     // Start is called before the first frame update
     void Start()
@@ -37,33 +39,32 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyUp(KeyCode.Alpha1))
             {
-                attackingProcess = true;
-                if (character != null)
+                if (!attackingProcess && character != null)
                 {
                     character.atk.setupAttack(gameObject.transform.position);
-
                 }
+                attackingProcess = true;
 
             }
             if (attackingProcess)
             {
               
-                if (Input.GetKey(KeyCode.W))
+                if (Input.GetKeyUp(KeyCode.W))
                 {
                     character.atk.selectAttack("W");
                     attackSelected = true;
                 }
-                else if (Input.GetKey(KeyCode.A))
+                else if (Input.GetKeyUp(KeyCode.A))
                 {
                     character.atk.selectAttack("A");
                     attackSelected = true;
                 }
-                else if (Input.GetKey(KeyCode.S))
+                else if (Input.GetKeyUp(KeyCode.S))
                 {
                     character.atk.selectAttack("S");
                     attackSelected = true;
                 }
-                else if (Input.GetKey(KeyCode.D))
+                else if (Input.GetKeyUp(KeyCode.D))
                 {
                     character.atk.selectAttack("D");
                     attackSelected = true;
@@ -74,9 +75,10 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetKeyUp(KeyCode.Return))
             {
+               
                 attackSelected = false;
                 character.atk.applyAttack();
-                character.atk.endAtk();
+                character.endAtk();
                 attackingProcess = false;
 
             }

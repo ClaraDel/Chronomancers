@@ -28,14 +28,26 @@ public class Character : MonoBehaviour
         maxHealth = (int) health;
         setNormalAttackDamage(damage);
         atk = new AttackTest(new[] { 
-            new Vector3 { x = 0.5f, y = 1.5f, z = 0 }, 
-            new Vector3 { x = 0.5f, y = 2.5f, z = 0 } }
+            new Vector3 { x = 1, y = 0, z = 0 }, 
+            new Vector3 { x = 2, y = 0, z = 0 } }
         ,50
             );
         healthBar = (gameObject.transform.Find("pfHealthBar")).Find("HealthBar").gameObject;
         healthBar.transform.GetComponent<Slider>().maxValue = this.maxHealth;
         healthBar.transform.GetComponent<Slider>().value = maxHealth;
         setHealth(health);
+    }
+
+    public void endAtk()
+    {
+        atk.endAtk();
+        this.setHealth(maxHealth);
+        healthBar.transform.GetComponent<Slider>().value = maxHealth;
+        atk = new AttackTest(new[] {
+            new Vector3 { x = 1, y = 0, z = 0 },
+            new Vector3 { x = 2, y = 0, z = 0 } }
+       , 50
+           );
     }
 
     public void setHealth(float health)

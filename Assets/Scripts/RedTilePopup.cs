@@ -18,11 +18,15 @@ public class RedTilePopup : MonoBehaviour
         return redTilePopup;
     }
 
-  
+    public void destroy()
+    {
+        Destroy(transform.gameObject);
+    }
     // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();    
+        GameObject square = gameObject.transform.Find("Square").gameObject; 
+        spriteRenderer = square.transform.GetComponent<SpriteRenderer>();    
     }
 
     // Update is called once per frame

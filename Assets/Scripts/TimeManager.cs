@@ -52,7 +52,7 @@ public class TimeManager : MonoBehaviour
         Stack<Action> currentStack = turnTimeLine[currentTick];
         foreach (Action method in currentStack)
         {
-            method();
+            method.Invoke();
         }
         isPlaying = false;
         currentTick++;
