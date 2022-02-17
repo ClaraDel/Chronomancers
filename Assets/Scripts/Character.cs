@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class Character : MonoBehaviour
+public class Character : MonoBehaviour
 {
 
     private float health;
@@ -108,10 +108,15 @@ public abstract class Character : MonoBehaviour
         this.alive = alive;
     }
 
+    private void setHealth(float health)
+    {
+        this.health = health;
+    }
+
 
     //int pour savoir combien de tour il reste à cast
 
-    /*public static Character create(Vector3 position, float health, int damage)
+    public static Character create(Vector3 position, float health, int damage)
     {
         Transform characterTransform = Instantiate(GameAssets.i.pfCharacterTest, position, Quaternion.identity);
         Character character = characterTransform.GetComponent<Character>();
@@ -119,66 +124,60 @@ public abstract class Character : MonoBehaviour
         character.setHealth(health);
         character.setNormalAttackDamage(damage);
         return character;
-    }*/
+    }
 
     // à override
-    public abstract void init(float health, int damage);
-    //{
-    /*maxHealth = (int) health;
-    atk = new AttackTest(new[] { 
-        new Vector3 { x = 1, y = 0, z = 0 }, 
-        new Vector3 { x = 2, y = 0, z = 0 } }
-    ,50,this
-        );
-    healthBar = (gameObject.transform.Find("pfHealthBar")).Find("HealthBar").gameObject;
-    healthBar.transform.GetComponent<Slider>().maxValue = this.maxHealth;
-    healthBar.transform.GetComponent<Slider>().value = maxHealth;
-    setHealth(health);
-    if (!alive)
+    public void init(float health, int damage)
     {
-        revive();
-    }*/
-    //}
+        maxHealth = (int) health;
+        atk = new Attack(new[] { 
+            new Vector3 { x = 1, y = 0, z = 0 }, 
+            new Vector3 { x = 2, y = 0, z = 0 } }
+        ,damage,this
+            );
+        healthBar = (gameObject.transform.Find("pfHealthBar")).Find("HealthBar").gameObject;
+        healthBar.transform.GetComponent<Slider>().maxValue = this.maxHealth;
+        healthBar.transform.GetComponent<Slider>().value = maxHealth;
+        setHealth(health);
+        if (!alive)
+        {
+            reset();
+        }
+    }
 
 
-    public abstract void endAtk();
+    public void endAtk()
 
-    /*{
+    {
         atk.endAtk();
         
-        atk = new AttackTest(new[] {
+        atk = new Attack(new[] {
             new Vector3 { x = 1, y = 0, z = 0 },
             new Vector3 { x = 2, y = 0, z = 0 } }
        , 50, this
            );
-    }*/
+    }
+
+   
 
     //à renommer en reset
-    public abstract void reset();
-
-    //{
-    /*gameObject.GetComponent<SpriteRenderer>().sprite = characterSprite;
-    healthBar.SetActive(true);
-    alive = true;*/
-    //}
-
-    /*
-    public void setHealth(float health)
+    public void reset()
     {
-        this.health = health;
-        healthBar.transform.GetComponent<Slider>().value = health;
-    }*/
+        gameObject.GetComponent<SpriteRenderer>().sprite = characterSprite;
+        healthBar.SetActive(true);
+        alive = true;
+    }
 
-    public abstract void die();
-    /*{
+
+    public void die()
+    {
         gameObject.GetComponent<SpriteRenderer>().sprite = ghostSprite;
         healthBar.SetActive(false);
         alive = false;
-    }*/
+    }
 
-    public abstract void takeDamage(int damage);
-
-    /*{
+    public void takeDamage(int damage)
+    {
         if (alive)
         {
             health = health - damage;
@@ -187,7 +186,7 @@ public abstract class Character : MonoBehaviour
             DamagePopup.create(damage, gameObject);
         }
         
-    }*/
+    }
 
    
 
@@ -195,7 +194,7 @@ public abstract class Character : MonoBehaviour
   
 
     // Update is called once per frame
-    /*void Update()
+    void Update()
     {
         if(health <= 0 && alive)
         {
@@ -203,5 +202,5 @@ public abstract class Character : MonoBehaviour
             die();
         }
        
-    }*/
+    }
 }
