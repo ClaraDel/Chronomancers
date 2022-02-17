@@ -7,19 +7,15 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public Transform PlayerTarget;
     public MoveManager moveManager;
-    public int positionX;
-    public int positionY;
     public bool isControllable;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        positionX = (int)Mathf.Floor(transform.position.x);
-        positionY = (int)Mathf.Floor(transform.position.y);
         PlayerTarget.parent = null;
         isControllable = true;
-        TimeManager.instance.NewCharacter(this);
+        TimeManager.instance.AddNewCharacter(this);
         moveManager.AddResetPosition();
     }
 
@@ -40,7 +36,8 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    TimeManager.instance.PlayTick();
+                    //TimeManager.instance.PlayTick();
+                    StartCoroutine(TimeManager.instance.PlayTick());
                 }
             }
         }

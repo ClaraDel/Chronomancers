@@ -10,13 +10,17 @@ public class TimeManager : MonoBehaviour
 
     public int currentTick;
     private int currentTurn;
-    private int maxTick = 15;
-    private int maxTurn = 5;
+    public int maxTick = 25;
+    public int maxTurn = 5;
+    public int positionSpawnX = 22;
+    public int positionSpawnY = 1;
+    private PlayerController actifCharacter;
 
+
+    public GameObject TimeManagerText;
     public bool isPlaying;
     public GameObject prefabPlayer;
     public Stack<PlayerController> characterOrder;
-    public PlayerController actifCharacter;
     public GameObject EndTurnPanel;
 
     //Liste de piles d'appel de méthodes
@@ -40,19 +44,37 @@ public class TimeManager : MonoBehaviour
         turnTimeLine[currentTick].Push(calledMethod);
     }
 
-    public void NewCharacter(PlayerController new_character)
+    public void AddNewCharacter(PlayerController new_character)
     {
         actifCharacter = new_character;
         characterOrder.Push(new_character);
     }
 
-    public void PlayTick()
+    /*public void PlayTick()
+    {
+        isPlaying = true;
+        Stack<Action> currentStack = turnTimeLine[currentTick];
+        foreach (Action method in currentStack)
+        {
+
+            method();
+        }
+        isPlaying = false;
+        currentTick++;
+        if (currentTick == maxTick)
+        {
+            EndTurn();
+        }
+    }*/
+
+    public IEnumerator PlayTick()
     {
         isPlaying = true;
         Stack<Action> currentStack = turnTimeLine[currentTick];
         foreach (Action method in currentStack)
         {
             method();
+            yield return new WaitForSeconds(0.2f);
         }
         isPlaying = false;
         currentTick++;
@@ -81,7 +103,7 @@ public class TimeManager : MonoBehaviour
         EndTurnPanel.SetActive(false);
         currentTurn = currentTurn + 1;
         currentTick = 0;
-        Instantiate(prefabPlayer, new Vector3(6, 0, 0), prefabPlayer.transform.rotation);
+        Instantiate(prefabPlayer);
         //NB : Je n'ai pas mis de PlayTick ici afin d'être sûr que la méthode ResetPosition a bien été ajouté au tick 0 avant de lancer le tick
     }
 
@@ -94,13 +116,15 @@ public class TimeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
     void Update()
     {
         string message = currentTurn.ToString() + '/' + currentTick.ToString();
-        gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = message;
+        //gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = message;
+        TimeManagerText.GetComponent<TMPro.TextMeshProUGUI>().text = message;
+
+
     }
 }
