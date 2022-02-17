@@ -34,6 +34,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(TimeManager.currentTick == TimeManager.maxTick)
+        {
+            character.init(100, 50);
+        }
         
         if (isControllable && !TimeManager.instance.isPlaying)
         {
@@ -73,11 +77,24 @@ public class PlayerController : MonoBehaviour
                 {
                 }
             }
-            if (Input.GetKeyUp(KeyCode.Return))
+
+            /*if (Input.GetKeyUp(KeyCode.F))
+            {
+                Debug.Log("revive");
+                character.revive();
+            }*/
+
+            if (attackingProcess && Input.GetKeyUp(KeyCode.Return))
             {
                
                 attackSelected = false;
                 character.atk.applyAttack();
+                character.endAtk();
+                attackingProcess = false;
+
+            } else if (attackingProcess && Input.GetKeyUp(KeyCode.Escape))
+            {
+                attackSelected = false;
                 character.endAtk();
                 attackingProcess = false;
 

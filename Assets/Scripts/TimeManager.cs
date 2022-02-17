@@ -8,9 +8,9 @@ public class TimeManager : MonoBehaviour
 {
     public static TimeManager instance { get; set; }
 
-    public int currentTick;
+    public static int currentTick;
     private int currentTurn;
-    private int maxTick = 15;
+    public static int maxTick = 15;
     private int maxTurn = 5;
 
     public bool isPlaying;

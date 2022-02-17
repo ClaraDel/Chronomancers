@@ -13,16 +13,19 @@ public class AttackTest : Attack
         left,
         down
     }
+
     public Vector3 playerPosition;
     public List<RedTilePopup> activeTiles;
     int currentDirection;
     public Vector3[] positions;
     int dmg;
     public CursorManager cursor;
+    private Character character;
 
-    public AttackTest(Vector3[] positions, int damage) {
+    public AttackTest(Vector3[] positions, int damage, Character character) {
         this.positions = positions;
         this.dmg = damage;
+        this.character = character;
     }
 
     public int damage
@@ -134,24 +137,29 @@ public class AttackTest : Attack
     }
     public void applyAttack(Vector3 [] positions)
     {
-        Vector3 position1 = positions[0];
-        Vector3 position2 = positions[1];
-        Vector3 dir2target = -position1 + position2;
-        float lenRay = Vector3.Distance(position1, position2);
-        RaycastHit2D hit = Physics2D.Raycast(position1,
-            dir2target, lenRay);
-
-        if (hit.collider != null)
+        if (character.alive())
         {
-            Character target = hit.collider.gameObject.GetComponent<Character>();
-            target.simulateDamage(damage);
-        }
+            Vector3 position1 = positions[0];
+            Vector3 position2 = positions[1];
+            Vector3 dir2target = -position1 + position2;
+            float lenRay = Vector3.Distance(position1, position2);
+            RaycastHit2D hit = Physics2D.Raycast(position1,
+                dir2target, lenRay);
+
+            if (hit.collider != null)
+            {
+                Character target = hit.collider.gameObject.GetComponent<Character>();
+                target.simulateDamage(damage);
+            }
+        }    
     }
     public void applyAttack()
     {
         Vector3 cursorPos = cursor.transform.position;
-
-        TimeManager.instance.AddAction(() => applyAttack(new[] {playerPosition,cursorPos}));
+        //if (character.alive())
+        //{
+            TimeManager.instance.AddAction(() => applyAttack(new[] { playerPosition, cursorPos }));
+        //}
         TimeManager.instance.PlayTick();
     }
    
