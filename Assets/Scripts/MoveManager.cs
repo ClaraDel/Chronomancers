@@ -12,7 +12,6 @@ public class MoveManager : MonoBehaviour
     public void AddMove(float horizontalDirection, float verticalDirection)
     {
         TimeManager.instance.AddAction(() => this.StartCoroutine(Move(horizontalDirection, verticalDirection)));
-        //TimeManager.instance.PlayTick();
         StartCoroutine(TimeManager.instance.PlayTick());
     }
 
@@ -30,7 +29,6 @@ public class MoveManager : MonoBehaviour
     {
         TimeManager.instance.AddAction(() => this.ResetPosition());
         StartCoroutine(TimeManager.instance.PlayTick());
-        //TimeManager.instance.PlayTick();
     }
 
     public void ResetPosition()

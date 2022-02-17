@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    //TimeManager.instance.PlayTick();
                     StartCoroutine(TimeManager.instance.PlayTick());
                 }
             }
