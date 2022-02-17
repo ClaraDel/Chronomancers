@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AttackTest : Attack
 {
+    //séparer affichage et attaque, pas forcément affichage d'attaque mais affichage en général
 
     public List <RedTilePopup> [] tiles = new List <RedTilePopup> [4];
     public enum directions
@@ -135,9 +136,10 @@ public class AttackTest : Attack
         cursor = CursorManager.create(possibleAttackPositions[0] + playerPosition, activeTiles);
 
     }
+
     public void applyAttack(Vector3 [] positions)
     {
-        if (character.alive())
+        if (character.isAlive())
         {
             Vector3 position1 = positions[0];
             Vector3 position2 = positions[1];
@@ -149,17 +151,15 @@ public class AttackTest : Attack
             if (hit.collider != null)
             {
                 Character target = hit.collider.gameObject.GetComponent<Character>();
-                target.simulateDamage(damage);
+                target.takeDamage(damage);
             }
         }    
     }
+
     public void applyAttack()
     {
         Vector3 cursorPos = cursor.transform.position;
-        //if (character.alive())
-        //{
-            TimeManager.instance.AddAction(() => applyAttack(new[] { playerPosition, cursorPos }));
-        //}
+        TimeManager.instance.AddAction(() => applyAttack(new[] { playerPosition, cursorPos }));
         TimeManager.instance.PlayTick();
     }
    

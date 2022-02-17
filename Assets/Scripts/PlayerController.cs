@@ -89,13 +89,13 @@ public class PlayerController : MonoBehaviour
                
                 attackSelected = false;
                 character.atk.applyAttack();
-                character.endAtk();
+                //character.endAtk();
                 attackingProcess = false;
 
             } else if (attackingProcess && Input.GetKeyUp(KeyCode.Escape))
             {
                 attackSelected = false;
-                character.endAtk();
+                //character.endAtk();
                 attackingProcess = false;
 
             }
