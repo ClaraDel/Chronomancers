@@ -50,22 +50,6 @@ public class TimeManager : MonoBehaviour
         characterOrder.Push(new_character);
     }
 
-    /*public void PlayTick()
-    {
-        isPlaying = true;
-        Stack<Action> currentStack = turnTimeLine[currentTick];
-        foreach (Action method in currentStack)
-        {
-
-            method();
-        }
-        isPlaying = false;
-        currentTick++;
-        if (currentTick == maxTick)
-        {
-            EndTurn();
-        }
-    }*/
 
     public IEnumerator PlayTick()
     {
@@ -113,18 +97,12 @@ public class TimeManager : MonoBehaviour
         currentTurn++;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
     // Update is called once per frame
     void Update()
     {
         string message = currentTurn.ToString() + '/' + currentTick.ToString();
-        //gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = message;
         TimeManagerText.GetComponent<TMPro.TextMeshProUGUI>().text = message;
-
 
     }
 }
