@@ -10,7 +10,7 @@ public abstract class Character : MonoBehaviour
     private float maxHealth;
     private GameObject healthBar;
     private float normalAttackDamage;
-    public AttackTest atk;
+    public Attack atk;
     public Sprite ghostSprite;
     private Sprite characterSprite;
     private bool alive = true;
@@ -52,6 +52,16 @@ public abstract class Character : MonoBehaviour
         return this.characterSprite;
     }
 
+    private Attack getAttack()
+    {
+        return this.atk;
+    }
+
+    public bool isAlive()
+    {
+        return alive;
+    }
+
     /***********************************************setter********************************************/
     private void setTeam(bool team)
     {
@@ -86,6 +96,16 @@ public abstract class Character : MonoBehaviour
     private void setCharacterSprite(Sprite characterSprite)
     {
         this.characterSprite = characterSprite;
+    }
+
+    private void setAttaque (Attack atk)
+    {
+        this.atk = atk;
+    }
+
+    private void setAlive(bool alive)
+    {
+        this.alive = alive;
     }
 
 
@@ -169,10 +189,7 @@ public abstract class Character : MonoBehaviour
         
     }*/
 
-    public bool isAlive()
-    {
-        return alive;
-    }
+   
 
 
   
