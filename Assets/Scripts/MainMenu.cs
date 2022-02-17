@@ -11,13 +11,13 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("START");
-        SceneManager.LoadScene("JT");
+        SceneManager.LoadScene("MainScene");
     } 
     
     public void StartTutorial()
     {
         Debug.Log("TUTORIAL");
-        SceneManager.LoadScene("JT");
+        SceneManager.LoadScene("MainScene");
     } 
 
     public void SetFullscreen()
