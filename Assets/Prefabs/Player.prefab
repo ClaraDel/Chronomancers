@@ -214,6 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f517c44d4fc2c4e81e1124dc095c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  equipe: 1
   ghostSprite: {fileID: 21300000, guid: 2a833689455d8d2449cd821bf32982be, type: 3}
 --- !u!61 &4194547060994677756
 BoxCollider2D:
@@ -380,6 +381,10 @@ PrefabInstance:
     - target: {fileID: 3697863087585769721, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
       propertyPath: m_Name
       value: pfHealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 3697863087585769722, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
+      propertyPath: m_SortingOrder
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3697863087585769723, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
       propertyPath: m_PresetInfoIsWorld

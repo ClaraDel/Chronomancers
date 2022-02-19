@@ -78,6 +78,7 @@ public class TimeManager : MonoBehaviour
         }
         else
         {
+            ScoreManager.instance.ResetScore();
             EndTurnPanel.SetActive(true);
         }
     }
@@ -88,6 +89,8 @@ public class TimeManager : MonoBehaviour
         currentTurn = currentTurn + 1;
         currentTick = 0;
         Instantiate(prefabPlayer);
+        ScoreManager.instance.SwitchTeam((currentTurn - 1) % 2);
+
         //NB : Je n'ai pas mis de PlayTick ici afin d'être sûr que la méthode ResetPosition a bien été ajouté au tick 0 avant de lancer le tick
     }
 

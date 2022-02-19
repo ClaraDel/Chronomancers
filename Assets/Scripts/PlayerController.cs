@@ -8,12 +8,12 @@ public class PlayerController : MonoBehaviour
     public Transform PlayerTarget;
     public MoveManager moveManager;
     public bool isControllable;
+
+
     private Character character;
     private bool attackingProcess = false;
     private bool attackSelected = false;
     private bool selectingAttackPos = false;
-
-   
 
 
     // Start is called before the first frame update

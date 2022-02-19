@@ -5,20 +5,21 @@ using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
-
     private float health;
     private float maxHealth;
     private GameObject healthBar;
+    private GameObject fill;
     private float normalAttackDamage;
     public Attack atk;
     public Sprite ghostSprite;
     private Sprite characterSprite;
     private bool alive = true;
     private int numberTickLeft;
-    private bool team;
+    private int team = 0; //vaut 0 s'il est dans l'équipe rouche et 1 s'il est dans l'équipe bleu
+
 
     /***********************************************getter********************************************/
-    private bool getTeam()
+    public int getTeam()
     {
         return this.team;
     }
@@ -63,7 +64,7 @@ public class Character : MonoBehaviour
     }
 
     /***********************************************setter********************************************/
-    private void setTeam(bool team)
+    public void setTeam(int team)
     {
         this.team = team;
     }
@@ -129,19 +130,29 @@ public class Character : MonoBehaviour
     // à override
     public void init(float health, int damage)
     {
-        maxHealth = (int) health;
-        atk = new Attack(new[] { 
-            new Vector3 { x = 1, y = 0, z = 0 }, 
+        maxHealth = (int)health;
+        atk = new Attack(new[] {
+            new Vector3 { x = 1, y = 0, z = 0 },
             new Vector3 { x = 2, y = 0, z = 0 } }
-        ,damage,this
+        , damage, this
             );
         healthBar = (gameObject.transform.Find("pfHealthBar")).Find("HealthBar").gameObject;
+        fill = GameObject.Find("Fill");
         healthBar.transform.GetComponent<Slider>().maxValue = this.maxHealth;
         healthBar.transform.GetComponent<Slider>().value = maxHealth;
         setHealth(health);
         if (!alive)
         {
             reset();
+        }
+        setTeam(ScoreManager.instance.getCurrentTeam()); //A MODIFIER ET VOIR AVEC NOMANINA
+        if (getTeam() == 0)
+        {
+            fill.GetComponent<Image>().color = Color.red;
+        }
+        else if (getTeam() == 1)
+        {
+            fill.GetComponent<Image>().color = Color.blue;
         }
     }
 
@@ -187,10 +198,6 @@ public class Character : MonoBehaviour
         }
         
     }
-
-   
-
-
   
 
     // Update is called once per frame

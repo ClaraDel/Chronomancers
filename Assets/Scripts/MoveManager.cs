@@ -6,8 +6,15 @@ public class MoveManager : MonoBehaviour
 {
 
     public PlayerController entity;
+    //public GameObject characterObject;
+    //private PlayerController playerController;
     public int positionSpawnX = 22;
     public int positionSpawnY = 1;
+
+    void Start()
+    {
+        //playerController = characterObject.GetComponent<PlayerController>();
+    }
 
     public void AddMove(float horizontalDirection, float verticalDirection)
     {
@@ -18,16 +25,20 @@ public class MoveManager : MonoBehaviour
     public IEnumerator Move(float horizontalDirection, float verticalDirection)
     {
         entity.PlayerTarget.Translate(new Vector2(horizontalDirection, verticalDirection));
-        Debug.Log(entity.gameObject.transform.position.y + verticalDirection + ", "+ entity.gameObject.transform.position.x + horizontalDirection);
-        int orderLayout = (int)entity.gameObject.transform.position.y + (int)verticalDirection;
-        entity.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 13 - orderLayout;
+
+        //gestion de l'order Layout
+        int posX = (int)entity.transform.position.x + (int)horizontalDirection;
+        int posY = (int)entity.transform.position.y + (int)verticalDirection;
+        entity.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 13 - posY;
+
+        //Mise à jour du score
+        ScoreManager.instance.CheckInControlArea(entity.gameObject.GetComponent<Character>(), posX, posY);
+
         while (Vector2.Distance(transform.position, entity.PlayerTarget.position) != 0f)
         {
             entity.transform.position = Vector2.MoveTowards(entity.transform.position, entity.PlayerTarget.position, entity.moveSpeed * Time.deltaTime);
             yield return null;
-        }
-        
-        
+        }        
     }
 
     public void AddResetPosition()
