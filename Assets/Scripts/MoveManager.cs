@@ -8,8 +8,10 @@ public class MoveManager : MonoBehaviour
     public PlayerController entity;
     //public GameObject characterObject;
     //private PlayerController playerController;
-    public int positionSpawnX = 22;
-    public int positionSpawnY = 1;
+    public int positionSpawnXTeam0 = 22;
+    public int positionSpawnYTeam0 = 1;
+    public int positionSpawnXTeam1 = 1;
+    public int positionSpawnYTeam1 = 10;
 
     void Start()
     {
@@ -49,8 +51,16 @@ public class MoveManager : MonoBehaviour
 
     public void ResetPosition()
     {
-        entity.PlayerTarget.position = new Vector3(positionSpawnX, positionSpawnY, 0);
-        entity.transform.position = new Vector3(positionSpawnX, positionSpawnY, 0);
+        if (entity.gameObject.GetComponent<Character>().getTeam() ==0)
+        {
+            entity.PlayerTarget.position = new Vector3(positionSpawnXTeam0, positionSpawnYTeam0, 0);
+            entity.transform.position = new Vector3(positionSpawnXTeam0, positionSpawnYTeam0, 0);
+        } else if(entity.gameObject.GetComponent<Character>().getTeam() == 1)
+        {
+            entity.PlayerTarget.position = new Vector3(positionSpawnXTeam1, positionSpawnYTeam1, 0);
+            entity.transform.position = new Vector3(positionSpawnXTeam1, positionSpawnYTeam1, 0);
+        }
+
     }
 
 

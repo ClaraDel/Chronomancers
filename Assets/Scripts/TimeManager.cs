@@ -12,8 +12,7 @@ public class TimeManager : MonoBehaviour
     private int currentTurn;
     public static int maxTick = 25;
     public int maxTurn = 5;
-    public int positionSpawnX = 22;
-    public int positionSpawnY = 1;
+
     private PlayerController actifCharacter;
 
 

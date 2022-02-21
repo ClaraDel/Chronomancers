@@ -33,11 +33,10 @@ public class ScoreManager : MonoBehaviour
 
     public void CheckInControlArea(Character character, int posX, int posY)
     {
-        if (posY >= coordXArea1 && posY < coordXArea1 + hauteurArea && posX >= coordYArea1 && posX < coordYArea1 + largeurArea
-            || posY >= coordXArea2 && posY < coordXArea2 + hauteurArea && posX >= coordYArea2 && posX < coordYArea2 + largeurArea)
+        if (posX >= coordXArea1 && posX < coordXArea1 + largeurArea && posY >= coordYArea1 && posY < coordYArea1 + hauteurArea
+            || posX >= coordXArea2 && posX < coordXArea2 + largeurArea && posY >= coordYArea2 && posY < coordYArea2 + hauteurArea)
         {
             Debug.Log("Character from team " + character.getTeam() + " is in area !");
-            //character.getTeam() pas utilisé pour l'instant mais peut être utile
             UpdateScore(1, character.getTeam());
         }
         

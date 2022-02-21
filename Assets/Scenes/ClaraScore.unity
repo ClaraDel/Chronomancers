@@ -15921,6 +15921,30 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1671575383}
     - target: {fileID: 5250173352582057663, guid: 37c8fcfb80b773d47863ed63d798f5ca, type: 3}
+      propertyPath: coordXArea1
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5250173352582057663, guid: 37c8fcfb80b773d47863ed63d798f5ca, type: 3}
+      propertyPath: coordXArea2
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5250173352582057663, guid: 37c8fcfb80b773d47863ed63d798f5ca, type: 3}
+      propertyPath: coordYArea1
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5250173352582057663, guid: 37c8fcfb80b773d47863ed63d798f5ca, type: 3}
+      propertyPath: coordYArea2
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5250173352582057663, guid: 37c8fcfb80b773d47863ed63d798f5ca, type: 3}
+      propertyPath: hauteurArea
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5250173352582057663, guid: 37c8fcfb80b773d47863ed63d798f5ca, type: 3}
+      propertyPath: largeurArea
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5250173352582057663, guid: 37c8fcfb80b773d47863ed63d798f5ca, type: 3}
       propertyPath: coordZoneControle1.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -16162,5 +16186,13 @@ PrefabInstance:
       propertyPath: TimeManagerText
       value: 
       objectReference: {fileID: 1903486440}
+    - target: {fileID: 8176065901973242773, guid: d67fb68df0767e14882942f8781175c8, type: 3}
+      propertyPath: positionSpawnXTeam1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176065901973242773, guid: d67fb68df0767e14882942f8781175c8, type: 3}
+      propertyPath: positionSpawnYTeam1
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d67fb68df0767e14882942f8781175c8, type: 3}

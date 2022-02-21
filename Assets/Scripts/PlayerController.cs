@@ -24,16 +24,16 @@ public class PlayerController : MonoBehaviour
         TimeManager.instance.AddNewCharacter(this);
         moveManager.AddResetPosition();
         character = gameObject.transform.GetComponent<Character>();
-        character.init(100,50);
+        character.initialise(100,50);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(TimeManager.currentTick == TimeManager.maxTick)
+        /*if(TimeManager.currentTick == TimeManager.maxTick)
         {
             character.init(100, 50);
-        }
+        }*/
         
         if (isControllable && !TimeManager.instance.isPlaying)
         {
