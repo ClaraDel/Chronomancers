@@ -18,7 +18,6 @@ public class MoveManager : MonoBehaviour
     public IEnumerator Move(float horizontalDirection, float verticalDirection)
     {
         entity.PlayerTarget.Translate(new Vector2(horizontalDirection, verticalDirection));
-        Debug.Log(entity.gameObject.transform.position.y + verticalDirection + ", "+ entity.gameObject.transform.position.x + horizontalDirection);
         int orderLayout = (int)entity.gameObject.transform.position.y + (int)verticalDirection;
         entity.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 13 - orderLayout;
         while (Vector2.Distance(transform.position, entity.PlayerTarget.position) != 0f)
@@ -26,8 +25,6 @@ public class MoveManager : MonoBehaviour
             entity.transform.position = Vector2.MoveTowards(entity.transform.position, entity.PlayerTarget.position, entity.moveSpeed * Time.deltaTime);
             yield return null;
         }
-        
-        
     }
 
     public void AddResetPosition()
