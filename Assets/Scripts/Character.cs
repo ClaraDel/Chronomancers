@@ -196,7 +196,7 @@ public class Character : MonoBehaviour
             health = health - damage;
             healthBar.transform.GetComponent<Slider>().value = health;
 
-            DamagePopup.create(damage, gameObject);
+            DamagePopup.create(-damage, gameObject);
         }
         
     }
