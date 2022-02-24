@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
+    
     private float health;
     private float maxHealth;
     private GameObject healthBar;
-    private GameObject fill;
+    [SerializeField] private GameObject fill;
     private float normalAttackDamage;
     public Attack atk;
     public Sprite ghostSprite;
@@ -68,6 +69,7 @@ public class Character : MonoBehaviour
     {
         this.team = team;
     }
+
 
     private void getHealth(float health)
     {
@@ -131,7 +133,7 @@ public class Character : MonoBehaviour
     public void initialise(float health, int damage)
     {
         setTeam(ScoreManager.instance.getCurrentTeam()); //A MODIFIER ET VOIR AVEC NOMANINA
-        fill = GameObject.Find("Fill");
+        //fill = GameObject.Find("Fill");
         if (getTeam() == 0)
         {
             fill.GetComponent<Image>().color = Color.red;
@@ -140,7 +142,7 @@ public class Character : MonoBehaviour
         {
             fill.GetComponent<Image>().color = Color.blue;
         }
-        Debug.Log("init of character from team" + getTeam());
+        Debug.Log("init of character order" + gameObject.GetComponent<PlayerController>().id + " from team " + getTeam());
         maxHealth = (int)health;
         atk = new Attack(new[] {
             new Vector3 { x = 1, y = 0, z = 0 },
@@ -155,7 +157,6 @@ public class Character : MonoBehaviour
         {
             reset();
         }
-
     }
 
 

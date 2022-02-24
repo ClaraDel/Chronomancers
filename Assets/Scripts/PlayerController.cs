@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public int id;
     public float moveSpeed = 5f;
     public Transform PlayerTarget;
     public MoveManager moveManager;
@@ -16,13 +17,17 @@ public class PlayerController : MonoBehaviour
     private bool selectingAttackPos = false;
 
 
+    public void setId(int id)
+    {
+        this.id = id;
+    }
     // Start is called before the first frame update
     void Start()
     {
         PlayerTarget.parent = null;
         isControllable = true;
-        TimeManager.instance.AddNewCharacter(this);
         moveManager.AddResetPosition();
+        TimeManager.instance.AddNewCharacter(this);
         character = gameObject.transform.GetComponent<Character>();
         character.initialise(100,50);
     }

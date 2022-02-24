@@ -51,15 +51,16 @@ public class MoveManager : MonoBehaviour
 
     public void ResetPosition()
     {
-        if (entity.gameObject.GetComponent<Character>().getTeam() ==0)
-        {
+        /*if (gameObject.GetComponent<Character>().getTeam() ==0)
+        {*/
+            //Debug.Log("Spawn1");
             entity.PlayerTarget.position = new Vector3(positionSpawnXTeam0, positionSpawnYTeam0, 0);
-            entity.transform.position = new Vector3(positionSpawnXTeam0, positionSpawnYTeam0, 0);
-        } else if(entity.gameObject.GetComponent<Character>().getTeam() == 1)
-        {
+            transform.position = new Vector3(positionSpawnXTeam0, positionSpawnYTeam0, 0);
+       /*} else if(gameObject.GetComponent<Character>().getTeam() == 1) {
+            Debug.Log("Spawn2");
             entity.PlayerTarget.position = new Vector3(positionSpawnXTeam1, positionSpawnYTeam1, 0);
-            entity.transform.position = new Vector3(positionSpawnXTeam1, positionSpawnYTeam1, 0);
-        }
+            transform.position = new Vector3(positionSpawnXTeam1, positionSpawnYTeam1, 0);
+        }*/
 
     }
 

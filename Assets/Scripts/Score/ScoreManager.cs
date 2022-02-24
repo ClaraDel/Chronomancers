@@ -36,7 +36,7 @@ public class ScoreManager : MonoBehaviour
         if (posX >= coordXArea1 && posX < coordXArea1 + largeurArea && posY >= coordYArea1 && posY < coordYArea1 + hauteurArea
             || posX >= coordXArea2 && posX < coordXArea2 + largeurArea && posY >= coordYArea2 && posY < coordYArea2 + hauteurArea)
         {
-            Debug.Log("Character from team " + character.getTeam() + " is in area !");
+            //Debug.Log("Character from team " + character.getTeam() + " is in area !");
             UpdateScore(1, character.getTeam());
         }
         

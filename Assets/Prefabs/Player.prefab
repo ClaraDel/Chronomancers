@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fc3d8b4119dcaa4e8a606d39e9fe4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   moveSpeed: 5
   PlayerTarget: {fileID: 2512450268868441787}
   moveManager: {fileID: 3240898002689301947}
@@ -200,8 +201,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 3240898002689301944}
-  positionSpawnX: 22
-  positionSpawnY: 1
+  positionSpawnXTeam0: 22
+  positionSpawnYTeam0: 1
+  positionSpawnXTeam1: 1
+  positionSpawnYTeam1: 10
 --- !u!114 &1237002448010238860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f517c44d4fc2c4e81e1124dc095c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipe: 1
+  fill: {fileID: 2311324376455850940}
   ghostSprite: {fileID: 21300000, guid: 2a833689455d8d2449cd821bf32982be, type: 3}
 --- !u!61 &4194547060994677756
 BoxCollider2D:
@@ -395,5 +398,10 @@ PrefabInstance:
 --- !u!224 &2311324375897589622 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3697863087585769701, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
+  m_PrefabInstance: {fileID: 1387684438238298003}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2311324376455850940 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3697863087036945455, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
   m_PrefabInstance: {fileID: 1387684438238298003}
   m_PrefabAsset: {fileID: 0}

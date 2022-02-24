@@ -13,7 +13,7 @@ public class TimeManager : MonoBehaviour
     public static int maxTick = 25;
     public int maxTurn = 5;
 
-    private PlayerController actifCharacter;
+    public PlayerController actifCharacter;
 
 
     public GameObject TimeManagerText;
@@ -45,19 +45,21 @@ public class TimeManager : MonoBehaviour
 
     public void AddNewCharacter(PlayerController new_character)
     {
+        new_character.setId(currentTurn);
         actifCharacter = new_character;
         characterOrder.Push(new_character);
     }
-
 
     public IEnumerator PlayTick()
     {
         isPlaying = true;
         Stack<Action> currentStack = turnTimeLine[currentTick];
+        float index = 0.0f;
         foreach (Action method in currentStack)
         {
+            index++;
             method();
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.2f / index);
         }
         isPlaying = false;
         currentTick++;
@@ -87,9 +89,9 @@ public class TimeManager : MonoBehaviour
         EndTurnPanel.SetActive(false);
         currentTurn = currentTurn + 1;
         currentTick = 0;
-        Instantiate(prefabPlayer);
         ScoreManager.instance.SwitchTeam((currentTurn - 1) % 2);
-
+        Instantiate(prefabPlayer);
+        
         //NB : Je n'ai pas mis de PlayTick ici afin d'être sûr que la méthode ResetPosition a bien été ajouté au tick 0 avant de lancer le tick
     }
 
