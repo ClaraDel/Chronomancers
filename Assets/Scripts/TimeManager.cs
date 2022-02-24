@@ -59,7 +59,7 @@ public class TimeManager : MonoBehaviour
         {
             index++;
             method();
-            yield return new WaitForSeconds(0.2f / index);
+            yield return new WaitForSeconds(0.2f/index);
         }
         isPlaying = false;
         currentTick++;
