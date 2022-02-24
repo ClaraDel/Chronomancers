@@ -33,14 +33,16 @@ public class MoveManager : MonoBehaviour
         int posY = (int)entity.transform.position.y + (int)verticalDirection;
         entity.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 13 - posY;
 
-        //Mise à jour du score
+        //Mise ï¿½ jour du score
         ScoreManager.instance.CheckInControlArea(entity.gameObject.GetComponent<Character>(), posX, posY);
 
+        //int orderLayout = (int)entity.gameObject.transform.position.y + (int)verticalDirection;
+        entity.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 13 - posY;
         while (Vector2.Distance(transform.position, entity.PlayerTarget.position) != 0f)
         {
             entity.transform.position = Vector2.MoveTowards(entity.transform.position, entity.PlayerTarget.position, entity.moveSpeed * Time.deltaTime);
             yield return null;
-        }        
+        } 
     }
 
     public void AddResetPosition()
