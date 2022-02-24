@@ -55,10 +55,12 @@ public class TimeManager : MonoBehaviour
     {
         isPlaying = true;
         Stack<Action> currentStack = turnTimeLine[currentTick];
+        float index = 0.0f;
         foreach (Action method in currentStack)
         {
+            index++;
             method();
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.2f/index);
         }
         isPlaying = false;
         currentTick++;

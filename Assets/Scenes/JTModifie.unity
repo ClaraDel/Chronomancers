@@ -8831,9 +8831,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTick: 0
+  maxTick: 25
+  maxTurn: 5
+  positionSpawnX: 22
+  positionSpawnY: 1
+  TimeManagerText: {fileID: 2099067989}
   isPlaying: 0
   prefabPlayer: {fileID: 3240898002689301951, guid: a51d2f956360953428d7ce3060fccbe0, type: 3}
-  actifCharacter: {fileID: 0}
   EndTurnPanel: {fileID: 1202343636}
 --- !u!114 &2099067992
 MonoBehaviour:
