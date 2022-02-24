@@ -98,7 +98,7 @@ public class Attack
 
         projectPosition(possibleAttackPositions, (Mathf.PI/2)*(-offset));
         createRedTiles(possibleAttackPositions, playerPosition);
-        cursor = CursorManager.create(possibleAttackPositions[0] + playerPosition, activeTiles);
+        //cursor = CursorManager.create(possibleAttackPositions[0] + playerPosition, activeTiles,new List<Vector3>());
 
         } 
     }
@@ -133,7 +133,7 @@ public class Attack
         currentDirection = (int) directions.right;
         this.playerPosition = playerPosition;
         createRedTiles(possibleAttackPositions, playerPosition);
-        cursor = CursorManager.create(possibleAttackPositions[0] + playerPosition, activeTiles);
+        //cursor = CursorManager.create(possibleAttackPositions[0] + playerPosition, activeTiles,0);
 
     }
 

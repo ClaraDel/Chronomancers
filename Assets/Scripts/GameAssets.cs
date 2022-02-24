@@ -25,6 +25,7 @@ public class GameAssets : MonoBehaviour
     public Transform pfCharacterTest;
     public Transform pfRedTilePopup;
     public Transform pfCursor;
+    public Transform pfAfficheur;
 
 
 }

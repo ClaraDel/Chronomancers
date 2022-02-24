@@ -47,3 +47,4 @@ MonoBehaviour:
   pfCharacterTest: {fileID: 3738785287104890030, guid: 1eb4b4277c7170e4fb7e71182727a4c1, type: 3}
   pfRedTilePopup: {fileID: 353452676726460589, guid: 8d05d33b668185b4daf14cee54b73736, type: 3}
   pfCursor: {fileID: 4798279020879011018, guid: 3dde82f24ccf5154f8e3cd0c0d55da61, type: 3}
+  pfAfficheur: {fileID: 2836388347732319236, guid: 337cf51a79f943a45b449e724f47df7b, type: 3}
