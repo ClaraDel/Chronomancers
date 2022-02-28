@@ -5,20 +5,22 @@ using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
-
+    
     private float health;
     private float maxHealth;
     private GameObject healthBar;
+    [SerializeField] private GameObject fill;
     private float normalAttackDamage;
     public Attack atk;
     public Sprite ghostSprite;
     private Sprite characterSprite;
     private bool alive = true;
     private int numberTickLeft;
-    private bool team;
+    private int team ; //vaut 0 s'il est dans l'équipe rouche et 1 s'il est dans l'équipe bleu
+
 
     /***********************************************getter********************************************/
-    private bool getTeam()
+    public int getTeam()
     {
         return this.team;
     }
@@ -63,10 +65,11 @@ public class Character : MonoBehaviour
     }
 
     /***********************************************setter********************************************/
-    private void setTeam(bool team)
+    public void setTeam(int team)
     {
         this.team = team;
     }
+
 
     private void getHealth(float health)
     {
@@ -120,20 +123,31 @@ public class Character : MonoBehaviour
     {
         Transform characterTransform = Instantiate(GameAssets.i.pfCharacterTest, position, Quaternion.identity);
         Character character = characterTransform.GetComponent<Character>();
-        character.init(health, damage);
+        character.initialise(health, damage);
         character.setHealth(health);
         character.setNormalAttackDamage(damage);
         return character;
     }
 
     // à override
-    public void init(float health, int damage)
+    public void initialise(float health, int damage)
     {
-        maxHealth = (int) health;
-        atk = new Attack(new[] { 
-            new Vector3 { x = 1, y = 0, z = 0 }, 
+        setTeam(ScoreManager.instance.getCurrentTeam()); //A MODIFIER ET VOIR AVEC NOMANINA
+        //fill = GameObject.Find("Fill");
+        if (getTeam() == 0)
+        {
+            fill.GetComponent<Image>().color = Color.red;
+        }
+        else if (getTeam() == 1)
+        {
+            fill.GetComponent<Image>().color = Color.blue;
+        }
+        Debug.Log("init of character order" + gameObject.GetComponent<PlayerController>().id + " from team " + getTeam());
+        maxHealth = (int)health;
+        atk = new Attack(new[] {
+            new Vector3 { x = 1, y = 0, z = 0 },
             new Vector3 { x = 2, y = 0, z = 0 } }
-        ,damage,this
+        , damage, this
             );
         healthBar = (gameObject.transform.Find("pfHealthBar")).Find("HealthBar").gameObject;
         healthBar.transform.GetComponent<Slider>().maxValue = this.maxHealth;
@@ -183,14 +197,10 @@ public class Character : MonoBehaviour
             health = health - damage;
             healthBar.transform.GetComponent<Slider>().value = health;
 
-            DamagePopup.create(damage, gameObject);
+            DamagePopup.create(-damage, gameObject);
         }
         
     }
-
-   
-
-
   
 
     // Update is called once per frame
