@@ -13,7 +13,6 @@ public class Afficheur : MonoBehaviour
     private int porteeMin;
     private int porteeMax;
     Vector3 cursorPosition;
-    bool firstCreate = true;
     bool done = false;
     public bool isDisplaying = false;
 
@@ -45,6 +44,49 @@ public class Afficheur : MonoBehaviour
         this.zoneEffet = zoneEffet;
     }
 
+    List<Vector3> buildLosange(int range)
+    {
+        List<Vector3> positions = new List<Vector3>();
+        int y = range;
+        int x = 0;
+        int s = 1;
+        positions.Add(new Vector3(0, y, 0));
+        for(int i = range - 1; i > -range; i--)
+        {
+            
+            if(true)
+            {
+                if (i == -1)
+                {
+                    s = -1;
+                }
+                x +=s;
+                Vector3 positionTile = new Vector3(x, i, 0);
+                Vector3 projectedPosition = project1Position(positionTile, Mathf.PI);
+                positions.Add(positionTile);
+                positions.Add(projectedPosition);
+            }
+          
+        }
+        positions.Add(new Vector3(0, -y, 0));
+
+
+        for (int i = 0; i < positions.Count; i++)
+        {
+            Debug.Log(positions[i]);
+
+        }
+        return positions;
+    }
+
+    public void rotateEffects()
+    {
+        for (int i = 0; i < effectTiles.Count; i++)
+        {
+            Vector3 newPositionEffect = project1Position(effectTiles[i].transform.position - cursor.transform.position, (Mathf.PI / 2));
+            effectTiles[i].transform.position = newPositionEffect + cursor.transform.position;
+        }
+    }
 
     public List<Vector3> displayedPositions
     {
@@ -78,19 +120,21 @@ public class Afficheur : MonoBehaviour
         }
         isDisplaying = false;
     }
-
+    public void buildLosanges()
+    {
+        for(int i = porteeMin; i <= porteeMax; i++)
+        {
+            createRedTiles(buildLosange(i));
+            
+        }
+    }
     public void display()
     {
         isDisplaying = true;
         activeTiles = new List<RedTilePopup>();
-        createRedTiles(displayedPositions);
-        for (int i = 1; i < 4; i++)
-        {
-            List<Vector3> projectedPositions = projectPosition(displayedPositions, (Mathf.PI / 2) * (-i));
-            createRedTiles(projectedPositions);
-        }
+        buildLosanges();
         createZoneEffet(zoneEffet);
-        cursor = CursorManager.create(position + displayedPositions[0], activeTiles, porteeMax - porteeMin,effectTiles,position);
+        cursor = CursorManager.create(activeTiles[0].transform.position, activeTiles, porteeMax - porteeMin,effectTiles,position);
         if (cursor!= null)
         {
             cursorPosition = cursor.transform.position;
@@ -115,6 +159,13 @@ public class Afficheur : MonoBehaviour
 
     }
 
+    public Vector3 project1Position(Vector3 position, float theta)
+    {
+        List<Vector3> positions = new List<Vector3>();
+        positions.Add(position);
+        return projectPosition(positions, theta)[0];
+    }
+
     public void createZoneEffet(List<Vector3> zoneEffet)
     {
         effectTiles = new List<RedTilePopup>();
@@ -128,7 +179,7 @@ public class Afficheur : MonoBehaviour
 
     public void createRedTiles(List<Vector3> projectedPositions)
     {
-        for (int i = 0; i < displayedPositions.Count; i++)
+        for (int i = 0; i < projectedPositions.Count; i++)
         {
             RedTilePopup tmp = RedTilePopup.create(position + projectedPositions[i]);
             activeTiles.Add(tmp);
@@ -141,19 +192,22 @@ public class Afficheur : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-
+        /*activeTiles = new List<RedTilePopup>();
+        createRedTiles(buildLosange(3));*/
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            rotateEffects();
+        }
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
             cursorPosition = cursor.transform.position;
             done = true;
-            Debug.Log(cursorPosition);
         }
 
     }

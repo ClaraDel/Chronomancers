@@ -71,7 +71,6 @@ public class CursorManager : MonoBehaviour
     public Vector3 projectPosition(Vector3 position, float theta)
     {
         Vector3 projectedPosition;
-
         float tmp = (position.x) * Mathf.Cos(theta) - (position.y) * Mathf.Sin(theta);
         Vector3 pos = position;
         pos.y = Mathf.RoundToInt((position.x) * Mathf.Sin(theta) + (position.y) * Mathf.Cos(theta));
@@ -104,16 +103,27 @@ public class CursorManager : MonoBehaviour
     {
         pos += step;
         Vector3 newPos = new Vector3(positionX, positionY, 0);
-        if (travelArea.ContainsKey(newPos))
+        if (travelArea.ContainsKey(newPos) || nbTiles == 1)
         {
             transform.Translate(translator);
             for (int i = 0; i < effectTiles.Count; i++)
             {
                 effectTiles[i].transform.Translate(translator);
+                if (!travelArea.ContainsKey(newPos))
+                {
+                    effectTiles[i].gameObject.SetActive(false);
+                } else
+                {
+                    effectTiles[i].gameObject.SetActive(true);
+
+                }
             }
         }
         else
         {
+            pos -= step;
+
+            /*
             int newPosy = (int)activeTiles[idx].transform.position.y;
             if (cond)
             {
@@ -136,7 +146,7 @@ public class CursorManager : MonoBehaviour
                 positionY = Mathf.RoundToInt(tmpPosition.y);
                 gameObject.transform.position = new Vector3(positionX, positionY,0);
 
-            }
+            }*/
 
         }
 
@@ -165,6 +175,7 @@ public class CursorManager : MonoBehaviour
                 }
             }
         }
+        //should never get there
         return  -100;
     }
 
