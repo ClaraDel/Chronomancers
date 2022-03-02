@@ -151,7 +151,7 @@ public class Attack
             if (hit.collider != null)
             {
                 Character target = hit.collider.gameObject.GetComponent<Character>();
-                target.takeDamage(damage);
+                target.takeDamage(character, damage);
             }
         }    
     }

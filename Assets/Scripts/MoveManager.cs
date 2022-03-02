@@ -15,6 +15,11 @@ public class MoveManager : MonoBehaviour
         StartCoroutine(TimeManager.instance.PlayTick());
     }
 
+    public void AddDash(float horizontalDirection, float verticalDirection)
+    {
+        TimeManager.instance.AddAction(() => this.StartCoroutine(Move(horizontalDirection, verticalDirection)));
+    }
+
     public IEnumerator Move(float horizontalDirection, float verticalDirection)
     {
         entity.PlayerTarget.Translate(new Vector2(horizontalDirection, verticalDirection));

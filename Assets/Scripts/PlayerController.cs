@@ -10,8 +10,6 @@ public class PlayerController : MonoBehaviour
     public bool isControllable;
     private Character character;
     private bool attackingProcess = false;
-    private bool attackSelected = false;
-    private bool selectingAttackPos = false;
 
    
 
@@ -22,9 +20,8 @@ public class PlayerController : MonoBehaviour
         PlayerTarget.parent = null;
         isControllable = true;
         TimeManager.instance.AddNewCharacter(this);
-        moveManager.AddResetPosition();
-        character = gameObject.transform.GetComponent<Character>();
-        character.init(100,50);
+        
+        character = gameObject.transform.GetComponent<Roublard>();
     }
 
     // Update is called once per frame
@@ -32,7 +29,8 @@ public class PlayerController : MonoBehaviour
     {
         if(TimeManager.currentTick == TimeManager.maxTick)
         {
-            character.init(100, 50);
+            //character.reset();
+            moveManager.AddResetPosition();
         }
         
         if (isControllable && !TimeManager.instance.isPlaying)
@@ -41,57 +39,27 @@ public class PlayerController : MonoBehaviour
             {
                 if (!attackingProcess && character != null)
                 {
-                    character.atk.setupAttack(gameObject.transform.position);
-                }
-                attackingProcess = true;
-
-            }
-            if (attackingProcess)
-            {
-              
-                if (Input.GetKeyUp(KeyCode.W))
-                {
-                    character.atk.selectAttack("W");
-                    attackSelected = true;
-                }
-                else if (Input.GetKeyUp(KeyCode.A))
-                {
-                    character.atk.selectAttack("A");
-                    attackSelected = true;
-                }
-                else if (Input.GetKeyUp(KeyCode.S))
-                {
-                    character.atk.selectAttack("S");
-                    attackSelected = true;
-                }
-                else if (Input.GetKeyUp(KeyCode.D))
-                {
-                    character.atk.selectAttack("D");
-                    attackSelected = true;
-                }
-                else
-                {
+                    character.attack();
+                    attackingProcess = true;
                 }
             }
-
+            
             if (attackingProcess && Input.GetKeyUp(KeyCode.Return))
             {
                
-                attackSelected = false;
-                character.atk.applyAttack();
+                character.getAtk().applyAttack();
                 character.endAtk();
                 attackingProcess = false;
 
             } else if (attackingProcess && Input.GetKeyUp(KeyCode.Escape))
             {
-                attackSelected = false;
-                character.endAtk();
                 attackingProcess = false;
 
             }
+
             if (!attackingProcess && Vector2.Distance(transform.position, PlayerTarget.position) == 0f)
             {
-                if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) >= 0.5f)
+                if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) >= 0.5f) 
                 {
                     moveManager.AddMove(Mathf.Round(Input.GetAxisRaw("Horizontal")), 0);
                 }
@@ -101,7 +69,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    StartCoroutine(TimeManager.instance.PlayTick());
+                    character.wait();
                 }
             }
         }
