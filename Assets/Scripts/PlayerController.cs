@@ -13,8 +13,6 @@ public class PlayerController : MonoBehaviour
 
     private Character character;
     private bool attackingProcess = false;
-    private bool attackSelected = false;
-    private bool selectingAttackPos = false;
 
     Afficheur a;
 
@@ -30,8 +28,8 @@ public class PlayerController : MonoBehaviour
         isControllable = true;
         moveManager.AddResetPosition();
         TimeManager.instance.AddNewCharacter(this);
-        character = gameObject.transform.GetComponent<Character>();
-        character.initialise(100,50);
+        
+        character = gameObject.transform.GetComponent<Roublard>();
     }
 
     // Update is called once per frame
@@ -39,8 +37,9 @@ public class PlayerController : MonoBehaviour
     {
         /*if(TimeManager.currentTick == TimeManager.maxTick)
         {
-            character.init(100, 50);
-        }*/
+            //character.reset();
+            moveManager.AddResetPosition();
+        }
         
         if (isControllable && !TimeManager.instance.isPlaying)
         {
@@ -48,65 +47,20 @@ public class PlayerController : MonoBehaviour
             {
                 if (!attackingProcess && character != null)
                 {
-                    //character.atk.setupAttack(gameObject.transform.position);
-                    a = Afficheur.create(gameObject.transform.position, 2, 3,
-                        new List<Vector3>() { new Vector3(0,1,0), new Vector3(0,-1,0), new Vector3(0,0,0) }
-                        );
-                    a.display();
+                    character.attack();
+                    attackingProcess = true;
                 }
-                attackingProcess = true;
             }
-            if (attackingProcess)
-            {
-                if (Input.GetKeyDown(KeyCode.J))
-                {
-                    a.rotateEffects();
-                }
-                /*
-              
-                if (Input.GetKeyUp(KeyCode.W))
-                {
-                    character.atk.selectAttack("W");
-                    attackSelected = true;
-                }
-                else if (Input.GetKeyUp(KeyCode.A))
-                {
-                    character.atk.selectAttack("A");
-                    attackSelected = true;
-                }
-                else if (Input.GetKeyUp(KeyCode.S))
-                {
-                    character.atk.selectAttack("S");
-                    attackSelected = true;
-                }
-                else if (Input.GetKeyUp(KeyCode.D))
-                {
-                    character.atk.selectAttack("D");
-                    attackSelected = true;
-                }
-                else
-                {
-                }*/
-                attackSelected = true;
-
-            }
-
+            
             if (attackingProcess && Input.GetKeyUp(KeyCode.Return))
             {
-                a.endDisplay();
-                attackSelected = false;
-                attackingProcess = false;
-
-                /*
-                attackSelected = false;
-                character.atk.applyAttack();
+               
+                character.getAtk().applyAttack();
                 character.endAtk();
                 attackingProcess = false;*/
 
             } else if (attackingProcess && Input.GetKeyUp(KeyCode.Escape))
             {
-                a.endDisplay();
-                attackSelected = false;
                 attackingProcess = false;
 
                 /*
@@ -115,9 +69,10 @@ public class PlayerController : MonoBehaviour
                 attackingProcess = false;*/
 
             }
+
             if (!attackingProcess && Vector2.Distance(transform.position, PlayerTarget.position) == 0f)
             {
-                if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) >= 0.5f)
+                if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) >= 0.5f) 
                 {
                     //Checks for wall collision
                     Vector3 start = new Vector3(PlayerTarget.position.x+0.5f, PlayerTarget.position.y+0.5f, 0f);
@@ -139,7 +94,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    StartCoroutine(TimeManager.instance.PlayTick());
+                    character.wait();
                 }
             }
         }
