@@ -103,22 +103,25 @@ public class Afficheur : MonoBehaviour
 
     public void endDisplay()
     {
-        int nb = activeTiles.Count;
-        for (int i = 0; i < nb; i++)
+        if (isDisplaying)
         {
-            RedTilePopup tmp = activeTiles[activeTiles.Count - 1];
-            activeTiles.Remove(tmp);
-            cursor.destroy();
-            tmp.destroy(); ;
-        }
-        int nb1 = effectTiles.Count;
-        for (int i = 0; i < nb1; i++)
-        {
-            RedTilePopup tmp = effectTiles[effectTiles.Count - 1];
-            effectTiles.Remove(tmp);
-            tmp.destroy(); 
-        }
-        isDisplaying = false;
+            int nb = activeTiles.Count;
+            for (int i = 0; i < nb; i++)
+            {
+                RedTilePopup tmp = activeTiles[activeTiles.Count - 1];
+                activeTiles.Remove(tmp);
+                cursor.destroy();
+                tmp.destroy(); ;
+            }
+            int nb1 = effectTiles.Count;
+            for (int i = 0; i < nb1; i++)
+            {
+                RedTilePopup tmp = effectTiles[effectTiles.Count - 1];
+                effectTiles.Remove(tmp);
+                tmp.destroy();
+            }
+            isDisplaying = false;
+        }  
     }
     public void buildLosanges()
     {
@@ -128,17 +131,22 @@ public class Afficheur : MonoBehaviour
             
         }
     }
+
+
     public void display()
     {
-        isDisplaying = true;
-        activeTiles = new List<RedTilePopup>();
-        buildLosanges();
-        createZoneEffet(zoneEffet);
-        cursor = CursorManager.create(activeTiles[0].transform.position, activeTiles, porteeMax - porteeMin,effectTiles,position);
-        if (cursor!= null)
+        if (!isDisplaying)
         {
-            cursorPosition = cursor.transform.position;
-        }
+            isDisplaying = true;
+            activeTiles = new List<RedTilePopup>();
+            buildLosanges();
+            createZoneEffet(zoneEffet);
+            cursor = CursorManager.create(activeTiles[0].transform.position, activeTiles, porteeMax - porteeMin, effectTiles, position);
+            if (cursor != null)
+            {
+                cursorPosition = cursor.transform.position;
+            }
+        }  
     }
 
 
@@ -206,8 +214,8 @@ public class Afficheur : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            cursorPosition = cursor.transform.position;
-            done = true;
+            //cursorPosition = cursor.transform.position;
+            //done = true;
         }
 
     }
