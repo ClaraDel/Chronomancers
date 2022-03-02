@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private bool attackSelected = false;
     private bool selectingAttackPos = false;
 
+    Afficheur a;
+
 
     public void setId(int id)
     {
@@ -46,13 +48,21 @@ public class PlayerController : MonoBehaviour
             {
                 if (!attackingProcess && character != null)
                 {
-                    character.atk.setupAttack(gameObject.transform.position);
+                    //character.atk.setupAttack(gameObject.transform.position);
+                    a = Afficheur.create(gameObject.transform.position, 2, 3,
+                        new List<Vector3>() { new Vector3(0,1,0), new Vector3(0,-1,0), new Vector3(0,0,0) }
+                        );
+                    a.display();
                 }
                 attackingProcess = true;
-
             }
             if (attackingProcess)
             {
+                if (Input.GetKeyDown(KeyCode.J))
+                {
+                    a.rotateEffects();
+                }
+                /*
               
                 if (Input.GetKeyUp(KeyCode.W))
                 {
@@ -76,22 +86,33 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                }
+                }*/
+                attackSelected = true;
+
             }
 
             if (attackingProcess && Input.GetKeyUp(KeyCode.Return))
             {
-               
+                a.endDisplay();
+                attackSelected = false;
+                attackingProcess = false;
+
+                /*
                 attackSelected = false;
                 character.atk.applyAttack();
                 character.endAtk();
-                attackingProcess = false;
+                attackingProcess = false;*/
 
             } else if (attackingProcess && Input.GetKeyUp(KeyCode.Escape))
             {
+                a.endDisplay();
+                attackSelected = false;
+                attackingProcess = false;
+
+                /*
                 attackSelected = false;
                 character.endAtk();
-                attackingProcess = false;
+                attackingProcess = false;*/
 
             }
             if (!attackingProcess && Vector2.Distance(transform.position, PlayerTarget.position) == 0f)

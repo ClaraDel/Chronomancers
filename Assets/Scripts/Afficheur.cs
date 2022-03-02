@@ -36,7 +36,7 @@ public class Afficheur : MonoBehaviour
         }
     }
 
-    public void setUp(Vector3 position, int porteeMin, int porteeMax, List<Vector3> zoneEffet)
+    private void setUp(Vector3 position, int porteeMin, int porteeMax, List<Vector3> zoneEffet)
     {
         this.position = position;
         this.porteeMax = porteeMax;
@@ -44,7 +44,7 @@ public class Afficheur : MonoBehaviour
         this.zoneEffet = zoneEffet;
     }
 
-    List<Vector3> buildLosange(int range)
+    private List<Vector3> buildLosange(int range)
     {
         List<Vector3> positions = new List<Vector3>();
         int y = range;
@@ -69,13 +69,6 @@ public class Afficheur : MonoBehaviour
           
         }
         positions.Add(new Vector3(0, -y, 0));
-
-
-        for (int i = 0; i < positions.Count; i++)
-        {
-            Debug.Log(positions[i]);
-
-        }
         return positions;
     }
 
@@ -88,7 +81,7 @@ public class Afficheur : MonoBehaviour
         }
     }
 
-    public List<Vector3> displayedPositions
+    private List<Vector3> displayedPositions
     {
         get
         {
@@ -123,7 +116,7 @@ public class Afficheur : MonoBehaviour
             isDisplaying = false;
         }  
     }
-    public void buildLosanges()
+    private void buildLosanges()
     {
         for(int i = porteeMin; i <= porteeMax; i++)
         {
@@ -150,7 +143,7 @@ public class Afficheur : MonoBehaviour
     }
 
 
-    public List<Vector3> projectPosition(List<Vector3> positions, float theta)
+    private List<Vector3> projectPosition(List<Vector3> positions, float theta)
     {
         List<Vector3> projectedPositions;
         for (int i = 0; i < positions.Count; i++)
@@ -167,14 +160,14 @@ public class Afficheur : MonoBehaviour
 
     }
 
-    public Vector3 project1Position(Vector3 position, float theta)
+    private Vector3 project1Position(Vector3 position, float theta)
     {
         List<Vector3> positions = new List<Vector3>();
         positions.Add(position);
         return projectPosition(positions, theta)[0];
     }
 
-    public void createZoneEffet(List<Vector3> zoneEffet)
+    private void createZoneEffet(List<Vector3> zoneEffet)
     {
         effectTiles = new List<RedTilePopup>();
         for (int i = 0; i < zoneEffet.Count; i++)
@@ -185,7 +178,7 @@ public class Afficheur : MonoBehaviour
         }
     }
 
-    public void createRedTiles(List<Vector3> projectedPositions)
+    private void createRedTiles(List<Vector3> projectedPositions)
     {
         for (int i = 0; i < projectedPositions.Count; i++)
         {
@@ -207,11 +200,7 @@ public class Afficheur : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            rotateEffects();
-        }
-
+        
         if (Input.GetKeyDown(KeyCode.Return))
         {
             //cursorPosition = cursor.transform.position;
