@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     public int id;
     public float moveSpeed = 5f;
     public Transform PlayerTarget;
-    public MoveManager moveManager;
     public bool isControllable;
 
 
@@ -29,7 +28,7 @@ public class PlayerController : MonoBehaviour
         moveManager.AddResetPosition();
         TimeManager.instance.AddNewCharacter(this);
         
-        character = gameObject.transform.GetComponent<Roublard>();
+        character = gameObject.transform.GetComponent<Character>();
     }
 
     // Update is called once per frame
@@ -37,64 +36,63 @@ public class PlayerController : MonoBehaviour
     {
         /*if(TimeManager.currentTick == TimeManager.maxTick)
         {
-            //character.reset();
-            moveManager.AddResetPosition();
+            character.reset();
         }
         
         if (isControllable && !TimeManager.instance.isPlaying)
         {
-            if (Input.GetKeyUp(KeyCode.Alpha1))
+            if (character.getCastingTicks() > 1)
             {
-                if (!attackingProcess && character != null)
-                {
-                    character.attack();
-                    attackingProcess = true;
-                }
+                character.casting();
             }
-            
-            if (attackingProcess && Input.GetKeyUp(KeyCode.Return))
+            else if (character.getCastingTicks() == 1)
             {
-               
-                character.getAtk().applyAttack();
-                character.endAtk();
-                attackingProcess = false;*/
-
-            } else if (attackingProcess && Input.GetKeyUp(KeyCode.Escape))
-            {
-                attackingProcess = false;
-
-                /*
-                attackSelected = false;
-                character.endAtk();
-                attackingProcess = false;*/
-
+                character.cast();
             }
-
-            if (!attackingProcess && Vector2.Distance(transform.position, PlayerTarget.position) == 0f)
+            else
             {
-                if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) >= 0.5f) 
+                if (character.isMoveAction())
                 {
-                    //Checks for wall collision
-                    Vector3 start = new Vector3(PlayerTarget.position.x+0.5f, PlayerTarget.position.y+0.5f, 0f);
-                    Vector3 dir = new Vector3(Mathf.Round(Input.GetAxisRaw("Horizontal")), 0f, 0f);
-                    RaycastHit hit;
-                    if (Physics.Raycast(start, dir, out hit, 1f) && hit.transform.tag == "Wall") return;
-
-                    moveManager.AddMove(Mathf.Round(Input.GetAxisRaw("Horizontal")), 0);
+                    attackingProcess = false;
                 }
-                else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) >= 0.5f)
-                {
-                    //Checks for wall collision
-                    Vector3 start = new Vector3(PlayerTarget.position.x + 0.5f, PlayerTarget.position.y + 0.5f, 0f);
-                    Vector3 dir = new Vector3(0f, Mathf.Round(Input.GetAxisRaw("Vertical")), 0f);
-                    RaycastHit hit;
-                    if (Physics.Raycast(start, dir, out hit, 1f) && hit.transform.tag == "Wall") return;
 
-                    moveManager.AddMove(0, Mathf.Round(Input.GetAxisRaw("Vertical")));
-                }
-                else if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyUp(KeyCode.Alpha1))
                 {
-                    character.wait();
+                    if (!attackingProcess && character != null)
+                    {
+                        character.attack();
+                        attackingProcess = true;
+                    }
+                }
+
+                if (attackingProcess && Input.GetKeyUp(KeyCode.Return))
+                {
+
+                    character.getAtk().applyAttack();
+                    character.endAtk();
+                    attackingProcess = false;
+
+                }
+                else if (attackingProcess && Input.GetKeyUp(KeyCode.Escape))
+                {
+                    attackingProcess = false;
+
+                }
+
+                if (!attackingProcess && Vector2.Distance(transform.position, PlayerTarget.position) == 0f)
+                {
+                    if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) >= 0.5f)
+                    {
+                        character.moveH();
+                    }
+                    else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) >= 0.5f)
+                    {
+                        character.moveV();
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        character.wait();
+                    }
                 }
             }
         }
