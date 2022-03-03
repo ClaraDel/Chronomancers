@@ -5,49 +5,106 @@ using UnityEngine.UI;
 
 public class Roublard : Character
 {
+    public Sprite hiddenSprite;
+    public bool hidden;
+    public int hiddenDuration;
 
-    private bool isHidden { get; set; }
-
-    public Roublard(Vector3 position, int maxHealth, int damage, bool isBlue) : base(position,  maxHealth, damage, isBlue)
+    public Roublard(Vector3 position, bool isBlue) : base(position,  100, 50, isBlue)
     {
-        isHidden = false;
+        hidden = false;
         characterType = type.roublard;
+        hiddenDuration = 0;
+        skill1CastTime = 1;
+        skill1CoolDownTime = 5;
+        skill2CastTime = 1;
+        skill2CoolDownTime = 15;
     }
 
-    public override void move(Vector3 target)
+    public void testHidden() 
     {
-        int moveRange = 1;
-        if (isHidden)
+        if (hidden)
         {
-            moveRange = 2;
+            if (hiddenDuration == 0)
+            {
+                hidden = false;
+                gameObject.GetComponent<SpriteRenderer>().sprite = characterSprite;
+            }
+            else
+            {
+                hiddenDuration--;
+            }
+        }
+    }
+
+    public override void wait()
+    {
+        testHidden();
+        base.wait();
+    }
+
+    public override void moveH()
+    {
+        testHidden();
+        if (hidden && !moveAction)
+        {
+            moveManager.AddDash(Mathf.Round(Input.GetAxisRaw("Horizontal")), 0);
+            moveAction = true;
+        }
+        else
+        {
+            base.moveH();
+            moveAction = false;
+        }
+    }
+
+    public override void moveV()
+    {
+        testHidden();
+        if (hidden && !moveAction)
+        {
+            moveManager.AddDash(0, Mathf.Round(Input.GetAxisRaw("Vertical")));
+            moveAction = true;
+        } 
+        else
+        {
+            base.moveV();
+            moveAction = false;
         }
     }
 
     public override void attack()
     {
-        if (isHidden)
+        if (hidden)
         {
-            isHidden = false;
+            hidden = false;
+            hiddenDuration = 0;
         }
-
+        base.attack();
     }
 
     // Trap
-    public override void skill1()
+    public override void castSkill1()
     {
-        if (isHidden)
+        if (hidden)
         {
-            isHidden = false;
+            hidden = false;
+            hiddenDuration = 0;
         }
+        base.castSkill1();
     }
 
-    // Stealth
-    public override void skill2()
+    public override void launchSkill1()
     {
-        if (isHidden)
-        {
-            isHidden = false;
-        }
+        // Creer objet piège et le faire spawner
+        base.launchSkill1();
+    }
+
+    public override void launchSkill2()
+    {
+        hidden = true;
+        hiddenDuration = 5;
+        gameObject.GetComponent<SpriteRenderer>().sprite = hiddenSprite;
+        base.launchSkill2();
     }
 
 }

@@ -8,35 +8,74 @@ public class Character : MonoBehaviour
 
     public enum type
     {
-        roublard
+        roublard,
+        ranger,
+        pyromancien,
+        paladin,
+        barbare
     }
 
-    protected int health { get; set; }
-    protected int maxHealth { get; set; }
-    protected GameObject healthBar { get; set; }
-    protected int normalAttackDamage { get; set; }
-    protected Attack atk;
-    public Sprite ghostSprite { get; }
-    protected Sprite characterSprite { get; }
-    protected bool alive; 
-    protected int numberTickLeft { get; set; }
-    protected bool isBlue { get; set; }
-    protected Vector3 position { get; set; }
-    protected type characterType;
+    public int health;
+    public int maxHealth;
+    public GameObject healthBar;
+
+    public int normalAttackDamage;
+    public Attack atk;
+
+    public Sprite ghostSprite;
+    public Sprite characterSprite;
+
+    public bool alive;
+    public bool isBlue;
+    public Vector3 position;
+    public type characterType;
+
+    public bool moveAction;
+
+    public int castingTicks;
+
+    public bool castingSkill1;
+    public int skill1CastTime;
+    public int skill1CoolDownTime;
+    public int coolDownSkill1;
+
+    public bool castingSkill2;
+    public int skill2CastTime;
+    public int skill2CoolDownTime;
+    public int coolDownSkill2 { get; set; }
+
+    public bool shielded { get; set; }
+    public int shieldDuration { get; set; }
+
+    public MoveManager moveManager;
 
     public Character (Vector3 position, int maxHealth, int damage, bool isBlue) 
     {
         this.maxHealth = maxHealth;
         this.health = maxHealth;
+
         this.normalAttackDamage = damage;
+
         this.alive = true;
         this.isBlue = isBlue;
         this.position = position;
+
         this.atk = new Attack(new[] {
             new Vector3 { x = 1, y = 0, z = 0 },
             new Vector3 { x = 2, y = 0, z = 0 } }
        , 50, this
            );
+        this.moveAction = false;
+
+        this.castingTicks = 0;
+
+        this.castingSkill1 = false;
+        this.coolDownSkill1 = 0;
+        this.castingSkill2 = false;
+        this.coolDownSkill2 = 0;
+
+        this.shielded = false;
+        this.shieldDuration = 0;
 
         Transform characterTransform = Instantiate(GameAssets.i.pfCharacterTest, position, Quaternion.identity);
         Character character = characterTransform.GetComponent<Character>();
@@ -47,6 +86,14 @@ public class Character : MonoBehaviour
 
     public Attack getAtk() { return atk; }
 
+    public type getType() { return characterType; }
+
+    public bool isAlive() { return alive; }
+    
+    public int getCastingTicks() { return castingTicks; }
+
+    public bool isMoveAction() { return moveAction; }
+
     public virtual void reset()
     {
         gameObject.GetComponent<SpriteRenderer>().sprite = characterSprite;
@@ -54,8 +101,24 @@ public class Character : MonoBehaviour
         healthBar.transform.GetComponent<Slider>().value = health;
         healthBar.SetActive(true);
         alive = true;
+        moveManager.AddResetPosition();
     }
 
+    public void coolDowns()
+    {
+        if (coolDownSkill1 > 0)
+        {
+            coolDownSkill1--;
+        }
+        if (coolDownSkill2 > 0)
+        {
+            coolDownSkill2--;
+        }
+        if (shieldDuration > 0)
+        {
+            shieldDuration--;
+        }
+    }
 
     public virtual void die()
     {
@@ -70,66 +133,143 @@ public class Character : MonoBehaviour
     {
         if (alive)
         {
-            if (attacker.getType() == type.roublard)
+            if (shielded)
             {
-                int dmg = 2 * damage;
-                health = health - dmg;
-                DamagePopup.create(dmg, gameObject);
+                shielded = false;
+                shieldDuration = 0;
             }
             else
             {
-                health = health - damage;
-                DamagePopup.create(damage, gameObject);
-            }            
-            if (health > 0)
-            {
-                healthBar.transform.GetComponent<Slider>().value = health;
-            } 
-            else
-            {
-                die();
+                if (attacker.getType() == type.roublard)
+                {
+                    int dmg = 2 * damage;
+                    health = health - dmg;
+                    DamagePopup.create(dmg, gameObject);
+                }
+                else
+                {
+                    health = health - damage;
+                    DamagePopup.create(damage, gameObject);
+                }
+                if (health > 0)
+                {
+                    healthBar.transform.GetComponent<Slider>().value = health;
+                }
+                else
+                {
+                    die();
+                }
             }
         }
-        
+    }
+
+    public virtual void cast()
+    {
+        coolDowns();
+        if (castingSkill1)
+        {
+            castingSkill1 = false;
+            launchSkill1();
+        }
+        else if (castingSkill2)
+        {
+            castingSkill2 = false;
+            launchSkill2();
+        }
+        castingTicks = 0;
     }
 
     public virtual void wait()
     {
         StartCoroutine(TimeManager.instance.PlayTick());
+        coolDowns();
     }
 
-    public virtual void move(Vector3 target)
+    public virtual void casting()
     {
+        castingTicks--;
+        wait();
+    }
 
+    public virtual void moveH()
+    {
+        moveManager.AddMove(Mathf.Round(Input.GetAxisRaw("Horizontal")), 0);
+        coolDowns();
+    }
+
+    public virtual void moveV()
+    {
+        moveManager.AddMove(0, Mathf.Round(Input.GetAxisRaw("Vertical")));
+        coolDowns();
     }
 
     public virtual void attack() 
     {
         atk = new Attack(new[] {
-            new Vector3 { x = 1, y = 0, z = 0 },
-            new Vector3 { x = 2, y = 0, z = 0 } }
-       , 50, this
+            new Vector3 { x = 1, y = 0, z = 0 } }
+       , normalAttackDamage, this
            );
         atk.setupAttack(position);
+        coolDowns();
     }
 
-    public virtual void skill1() { }
+    public virtual void castSkill1()
+    {
+        if (coolDownSkill1 == 0)
+        {
+            castingTicks = skill1CastTime;
+            castingSkill1 = true;
+        }
+        coolDowns();
+    }
 
-    public virtual void skill2() { }
+    public virtual void launchSkill1()
+    {
+        coolDownSkill1 = skill1CoolDownTime;
+        coolDowns();
+    }
 
-    public type getType() { return characterType; }
+    public virtual void castSkill2()
+    {
+        if (coolDownSkill2 == 0)
+        {
+            castingTicks = skill2CastTime;
+            castingSkill2 = true;
+        }
+        coolDowns();
+    }
 
-    public bool isAlive() { return alive; }
+    public virtual void launchSkill2()
+    {
+        coolDownSkill2 = skill2CoolDownTime;
+        coolDowns();
+    }
 
     public void endAtk()
-    {
+    { 
+        coolDowns();
+        atk.applyAttack();
         atk.endAtk();
 
         atk = new Attack(new[] {
-            new Vector3 { x = 1, y = 0, z = 0 },
-            new Vector3 { x = 2, y = 0, z = 0 } }
+            new Vector3 { x = 1, y = 0, z = 0 } }
        , 50, this
            );
+    }
+
+    public void heal(int pvs)
+    {
+        health += pvs;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+    }
+
+    public void shield (int nbturns)
+    {
+        shielded = true;
+        shieldDuration = nbturns;
     }
 
     // Update is called once per frame

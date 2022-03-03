@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public Transform PlayerTarget;
-    public MoveManager moveManager;
     public bool isControllable;
     private Character character;
     private bool attackingProcess = false;
@@ -21,7 +20,7 @@ public class PlayerController : MonoBehaviour
         isControllable = true;
         TimeManager.instance.AddNewCharacter(this);
         
-        character = gameObject.transform.GetComponent<Roublard>();
+        character = gameObject.transform.GetComponent<Character>();
     }
 
     // Update is called once per frame
@@ -29,47 +28,63 @@ public class PlayerController : MonoBehaviour
     {
         if(TimeManager.currentTick == TimeManager.maxTick)
         {
-            //character.reset();
-            moveManager.AddResetPosition();
+            character.reset();
         }
         
         if (isControllable && !TimeManager.instance.isPlaying)
         {
-            if (Input.GetKeyUp(KeyCode.Alpha1))
+            if (character.getCastingTicks() > 1)
             {
-                if (!attackingProcess && character != null)
-                {
-                    character.attack();
-                    attackingProcess = true;
-                }
+                character.casting();
             }
-            
-            if (attackingProcess && Input.GetKeyUp(KeyCode.Return))
+            else if (character.getCastingTicks() == 1)
             {
-               
-                character.getAtk().applyAttack();
-                character.endAtk();
-                attackingProcess = false;
-
-            } else if (attackingProcess && Input.GetKeyUp(KeyCode.Escape))
-            {
-                attackingProcess = false;
-
+                character.cast();
             }
-
-            if (!attackingProcess && Vector2.Distance(transform.position, PlayerTarget.position) == 0f)
+            else
             {
-                if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) >= 0.5f) 
+                if (character.isMoveAction())
                 {
-                    moveManager.AddMove(Mathf.Round(Input.GetAxisRaw("Horizontal")), 0);
+                    attackingProcess = false;
                 }
-                else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) >= 0.5f)
+
+                if (Input.GetKeyUp(KeyCode.Alpha1))
                 {
-                    moveManager.AddMove(0, Mathf.Round(Input.GetAxisRaw("Vertical")));
+                    if (!attackingProcess && character != null)
+                    {
+                        character.attack();
+                        attackingProcess = true;
+                    }
                 }
-                else if (Input.GetKeyDown(KeyCode.Space))
+
+                if (attackingProcess && Input.GetKeyUp(KeyCode.Return))
                 {
-                    character.wait();
+
+                    character.getAtk().applyAttack();
+                    character.endAtk();
+                    attackingProcess = false;
+
+                }
+                else if (attackingProcess && Input.GetKeyUp(KeyCode.Escape))
+                {
+                    attackingProcess = false;
+
+                }
+
+                if (!attackingProcess && Vector2.Distance(transform.position, PlayerTarget.position) == 0f)
+                {
+                    if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) >= 0.5f)
+                    {
+                        character.moveH();
+                    }
+                    else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) >= 0.5f)
+                    {
+                        character.moveV();
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        character.wait();
+                    }
                 }
             }
         }
