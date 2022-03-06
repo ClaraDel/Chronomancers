@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attack
+public class Attack : MonoBehaviour
 {
     //séparer affichage et attaque, pas forcément affichage d'attaque mais affichage en général
 
@@ -41,6 +41,7 @@ public class Attack
     public void endAtk()
     {
         a.endDisplay();
+        Destroy(a.gameObject);
     }
 
 
