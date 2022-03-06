@@ -63,7 +63,7 @@ public class Character : MonoBehaviour
         this.atk = new Attack(new[] {
             new Vector3 { x = 1, y = 0, z = 0 },
             new Vector3 { x = 2, y = 0, z = 0 } }
-       , 50, this
+       , 50, this, 1, 1
            );
         this.moveAction = false;
 
@@ -77,11 +77,7 @@ public class Character : MonoBehaviour
         this.shielded = false;
         this.shieldDuration = 0;
 
-        Transform characterTransform = Instantiate(GameAssets.i.pfCharacterTest, position, Quaternion.identity);
-        Character character = characterTransform.GetComponent<Character>();
-        healthBar = (gameObject.transform.Find("pfHealthBar")).Find("HealthBar").gameObject;
-        healthBar.transform.GetComponent<Slider>().maxValue = maxHealth;
-        healthBar.transform.GetComponent<Slider>().value = health;
+        
     }
 
     public Attack getAtk() { return atk; }
@@ -206,8 +202,8 @@ public class Character : MonoBehaviour
     public virtual void attack() 
     {
         atk = new Attack(new[] {
-            new Vector3 { x = 1, y = 0, z = 0 } }
-       , normalAttackDamage, this
+            new Vector3 { x = 0, y = 0, z = 0 } }
+       , normalAttackDamage, this, 1, 1
            );
         atk.setupAttack(position);
         coolDowns();
@@ -252,8 +248,8 @@ public class Character : MonoBehaviour
         atk.endAtk();
 
         atk = new Attack(new[] {
-            new Vector3 { x = 1, y = 0, z = 0 } }
-       , 50, this
+            new Vector3 { x = 1, y = 0, z = 0 }, }
+       , 50, this, 1, 1
            );
     }
 
@@ -275,5 +271,14 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {       
+    }
+
+    void Start()
+    {
+        moveManager = gameObject.GetComponent<MoveManager>();
+        moveManager.AddResetPosition();
+        healthBar = (gameObject.transform.Find("pfHealthBar")).Find("HealthBar").gameObject;
+        healthBar.transform.GetComponent<Slider>().maxValue = maxHealth;
+        healthBar.transform.GetComponent<Slider>().value = health;
     }
 }

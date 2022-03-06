@@ -41,6 +41,7 @@ public class TimeManager : MonoBehaviour
 
     public void AddAction(Action calledMethod)
     {
+        Debug.Log("add");
         turnTimeLine[currentTick].Push(calledMethod);
     }
 

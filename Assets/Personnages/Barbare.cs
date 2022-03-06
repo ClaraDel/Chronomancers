@@ -68,7 +68,7 @@ public class Barbare : Character
         {
             atk = new Attack(new[] {
             new Vector3 { x = 1, y = 0, z = 0 } }
-       , 2 * normalAttackDamage, this
+       , 2 * normalAttackDamage, this, 1, 1
            );
             atk.setupAttack(position);
             base.coolDowns();
@@ -89,7 +89,7 @@ public class Barbare : Character
         new Vector3 { x = 1, y = 0, z = 0 },
         new Vector3 { x = 1, y = 0, z = 1 },
         new Vector3 { x = 1, y = 0, z = -1 } }
-        , 2 * normalAttackDamage, this
+        , 2 * normalAttackDamage, this, 1, 1
             );
             atk.setupAttack(position);
         }
@@ -99,7 +99,7 @@ public class Barbare : Character
         new Vector3 { x = 1, y = 0, z = 0 },
         new Vector3 { x = 1, y = 0, z = 1 },
         new Vector3 { x = 1, y = 0, z = -1 } }
-        , normalAttackDamage, this
+        , normalAttackDamage, this, 1, 1
             );
             atk.setupAttack(position);
         }

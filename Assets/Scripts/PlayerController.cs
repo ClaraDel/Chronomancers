@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
     public float moveSpeed = 5f;
     public Transform PlayerTarget;
     public bool isControllable;
@@ -20,7 +21,7 @@ public class PlayerController : MonoBehaviour
         isControllable = true;
         TimeManager.instance.AddNewCharacter(this);
         
-        character = gameObject.transform.GetComponent<Character>();
+        character = gameObject.transform.GetComponent<Roublard>();
     }
 
     // Update is called once per frame
@@ -60,19 +61,23 @@ public class PlayerController : MonoBehaviour
                 if (attackingProcess && Input.GetKeyUp(KeyCode.Return))
                 {
 
-                    character.getAtk().applyAttack();
-                    character.endAtk();
-                    attackingProcess = false;
-
+                    bool successAtk = character.getAtk().applyAttack();
+                    if (successAtk)
+                    {
+                        character.endAtk();
+                        attackingProcess = false;
+                    }
                 }
+
                 else if (attackingProcess && Input.GetKeyUp(KeyCode.Escape))
                 {
+                    character.endAtk();
                     attackingProcess = false;
-
                 }
 
                 if (!attackingProcess && Vector2.Distance(transform.position, PlayerTarget.position) == 0f)
                 {
+                    
                     if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) >= 0.5f)
                     {
                         character.moveH();
