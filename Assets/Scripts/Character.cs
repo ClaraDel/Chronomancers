@@ -97,7 +97,7 @@ public class Character : MonoBehaviour
         healthBar.transform.GetComponent<Slider>().value = health;
         healthBar.SetActive(true);
         alive = true;
-        moveManager.AddResetPosition();
+        //moveManager.AddResetPosition();
     }
 
     public void coolDowns()

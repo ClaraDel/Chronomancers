@@ -41,7 +41,6 @@ public class TimeManager : MonoBehaviour
 
     public void AddAction(Action calledMethod)
     {
-        Debug.Log("add");
         turnTimeLine[currentTick].Push(calledMethod);
     }
 
@@ -54,6 +53,7 @@ public class TimeManager : MonoBehaviour
 
     public IEnumerator PlayTick()
     {
+
         isPlaying = true;
         Stack<Action> currentStack = turnTimeLine[currentTick];
         foreach (Action method in currentStack)

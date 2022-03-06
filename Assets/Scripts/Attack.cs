@@ -76,9 +76,8 @@ public class Attack
         {
             return false;
         }
-
         Vector3 cursorPos = a.getCursorPosition();
-        TimeManager.instance.AddAction(() => applyAttack(new[] { playerPosition, cursorPos }));
+        TimeManager.instance.AddAction(() => applyAttack(new[] { character.gameObject.transform.position, cursorPos }));
         TimeManager.instance.PlayTick();
         return true;
     }
