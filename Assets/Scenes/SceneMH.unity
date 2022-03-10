@@ -17532,7 +17532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIGroup: {fileID: 1954414855}
-  fadingIn: 1
+  fadingIn: 0
   field: {fileID: 844081331}
 --- !u!225 &1954414855
 CanvasGroup:

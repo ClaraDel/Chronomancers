@@ -16,9 +16,17 @@ public class Fade : MonoBehaviour
 
     void Update()
     {
-        if (!fadingIn) return;
-
         if (UIGroup.alpha >= 1) return;
+
+        if (!fadingIn)
+        {
+            if (Input.GetKeyDown("space"))
+            {
+                UIGroup.alpha = 0;
+                fadingIn = true;
+            }
+            return;
+        }
 
         UIGroup.alpha += Time.deltaTime;
         if (UIGroup.alpha >= 1)
