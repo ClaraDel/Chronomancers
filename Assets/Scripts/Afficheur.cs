@@ -86,7 +86,7 @@ public class Afficheur : MonoBehaviour
             effectTiles[i].transform.position = newPositionEffect + cursor.transform.position;
             zoneEffet[i] = effectTiles[i].transform.position;
         }
-        zone.setZoneEffet(zoneEffet);
+        //zone.setZoneEffet(zoneEffet);
     }
 
     
@@ -132,7 +132,7 @@ public class Afficheur : MonoBehaviour
             activeTiles = new List<RedTilePopup>();
             buildLosanges();
             createZoneEffet(zoneEffet);
-            cursor = CursorManager.create(activeTiles[0].transform.position, activeTiles, porteeMax - porteeMin, effectTiles, position);
+            cursor = CursorManager.create(activeTiles[0].transform.position, activeTiles, porteeMax - porteeMin, effectTiles, position, zone);
             if (cursor != null)
             {
                 cursorPosition = cursor.transform.position;
@@ -197,8 +197,9 @@ public class Afficheur : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-       
-
+        if (cursor != null && Input.GetKeyDown(KeyCode.J))
+        {
+            cursor.rotateEffects(Mathf.PI/2);
+        }
     }
 }

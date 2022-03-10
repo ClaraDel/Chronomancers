@@ -13,6 +13,17 @@ public class CursorManager : MonoBehaviour
     public bool hasValidated = false;
     public Vector3 posAfterReturn = new Vector3();
     private bool validPosition = true;
+    Vector3 positionAfficheur;
+    Zone zone;
+    enum directions
+    {
+        up,
+        left,
+        down,
+        right
+    }
+
+    int direction = (int)directions.right;
 
     
 
@@ -31,15 +42,15 @@ public class CursorManager : MonoBehaviour
     }
 
     public static CursorManager create(Vector3 position, List<RedTilePopup> activeTiles,
-        int nb, List<RedTilePopup> effectTiles, Vector3 positionAfficheur)
+        int nb, List<RedTilePopup> effectTiles, Vector3 positionAfficheur, Zone zone)
     {
         Transform cursorManagerTransform = Instantiate(GameAssets.i.pfCursor, position, Quaternion.identity);
         CursorManager cursorManager = cursorManagerTransform.GetComponent<CursorManager>();
-        cursorManager.setUp(activeTiles, nb, effectTiles, positionAfficheur);
+        cursorManager.setUp(activeTiles, nb, effectTiles, positionAfficheur, zone);
         return cursorManager;
     }
 
-    void setUp(List<RedTilePopup> activeTiles, int nb, List<RedTilePopup> effectTiles, Vector3 positionAfficheur)
+    void setUp(List<RedTilePopup> activeTiles, int nb, List<RedTilePopup> effectTiles, Vector3 positionAfficheur, Zone zone)
     {
         travelArea = new Dictionary<Vector3, RedTilePopup>();
         for (int i = 0; i < activeTiles.Count; i++)
@@ -51,10 +62,81 @@ public class CursorManager : MonoBehaviour
         nbTiles = nb + 1;
         this.activeTiles = activeTiles;
         this.effectTiles = effectTiles;
+        this.positionAfficheur = positionAfficheur;
+        this.zone = zone;
+        adaptPosEffects();
+    }
+
+    private List<Vector3> projectPosition(List<Vector3> positions, float theta)
+    {
+        List<Vector3> projectedPositions;
+        for (int i = 0; i < positions.Count; i++)
+        {
+            float tmp = (positions[i].x) * Mathf.Cos(theta) - (positions[i].y) * Mathf.Sin(theta);
+            Vector3 pos = positions[i];
+            pos.y = Mathf.RoundToInt((positions[i].x) * Mathf.Sin(theta) + (positions[i].y) * Mathf.Cos(theta));
+            pos.x = Mathf.RoundToInt(tmp);
+            positions[i] = pos;
+
+        }
+        projectedPositions = positions;
+        return projectedPositions;
+
+    }
+
+    private Vector3 project1Position(Vector3 position, float theta)
+    {
+        List<Vector3> positions = new List<Vector3>();
+        positions.Add(position);
+        return projectPosition(positions, theta)[0];
     }
 
 
+    public void rotateEffects(float theta)
+    {
+        List<Vector3> newZoneEffets = new List<Vector3>() ;
+        for (int i = 0; i < effectTiles.Count; i++)
+        {
+            Vector3 newPositionEffect = project1Position(effectTiles[i].transform.position - gameObject.transform.position, theta);
+            effectTiles[i].transform.position = newPositionEffect + gameObject.transform.position;
+            newZoneEffets.Add(newPositionEffect);
+        }
+        zone.setZoneEffet(newZoneEffets);
+    }
 
+    public void adaptPosEffects()
+    {
+        if (validPosition)
+        {
+
+            int posXRelatif = Mathf.RoundToInt(positionX - positionAfficheur.x);
+            int posYRelatif = Mathf.RoundToInt(positionY - positionAfficheur.y);
+            int offset = 0;
+
+            if (posXRelatif == 0 && posYRelatif < 0)
+            {
+                offset = direction - (int)directions.down;
+                direction = (int)directions.down;
+            }
+            else if (posXRelatif == 0 && posYRelatif > 0)
+            {
+                offset = direction - (int)directions.up;
+                direction = (int)directions.up;
+
+            }
+            else if (posXRelatif < 0)
+            {
+                offset = direction - (int)directions.left;
+                direction = (int)directions.left;
+            }
+            else
+            {
+                offset = direction - (int)directions.right;
+                direction = (int)directions.right;
+            }
+            rotateEffects(-offset * (Mathf.PI / 2));
+        }
+    }
 
 
 
@@ -68,7 +150,9 @@ public class CursorManager : MonoBehaviour
             transform.Translate(translator);
             for (int i = 0; i < effectTiles.Count; i++)
             {
-                effectTiles[i].transform.Translate(translator);
+                effectTiles[i].transform.position += (translator);
+                
+
                 if (!travelArea.ContainsKey(newPos))
                 {
                     effectTiles[i].gameObject.SetActive(false);
@@ -78,14 +162,15 @@ public class CursorManager : MonoBehaviour
                 {
                     effectTiles[i].gameObject.SetActive(true);
                     validPosition = true;
+
                 }
             }
+            adaptPosEffects();
         }
         else
         {
             pos -= step;
         }
-
     }
 
     public bool isValidPosition()
@@ -119,6 +204,7 @@ public class CursorManager : MonoBehaviour
         {
 
         }
+       
     }
 
 }

@@ -60,7 +60,7 @@ public class Character : MonoBehaviour
         this.isBlue = isBlue;
         this.position = position;
 
-        this.atk = AttackManager.create(new[] {
+        this.atk = new AttackManager(new[] {
             new Vector3 { x = 0, y = 0, z = 0 } }, normalAttackDamage, this, 1, 1);
         this.moveAction = false;
 
@@ -198,8 +198,9 @@ public class Character : MonoBehaviour
 
     public virtual void attack() 
     {
-        this.atk = AttackManager.create(new[] {
-            new Vector3 { x = 0, y = 0, z = 0 } }, normalAttackDamage, this, 1, 1);
+        this.atk = new AttackManager(new[] {
+            new Vector3 { x = 0, y = 0, z = 0 },
+            new Vector3 { x = 1, y = 0, z = 0 }}, normalAttackDamage, this, 1, 1);
         atk.setupAttack(position);
         coolDowns();
     }

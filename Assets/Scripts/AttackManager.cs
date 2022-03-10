@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackManager : MonoBehaviour
+public class AttackManager
 {
 
     int dmg;
@@ -10,39 +10,22 @@ public class AttackManager : MonoBehaviour
     Afficheur afficheur;
     private Zone zone;
 
-    public static AttackManager create(Vector3[] positions, int damage, Character character, int porteeMin, int porteeMax)
-    {
-        Transform attackManagerTransform = Instantiate(GameAssets.i.attackManager);
-        AttackManager attackManager = attackManagerTransform.GetComponent<AttackManager>();
-        attackManager.init(positions, damage, character, porteeMin, porteeMax);
-        return attackManager;
-    }
-
-    public void init(Vector3[] positions, int damage, Character character, int porteeMin, int porteeMax)
+    public AttackManager (Vector3[] positions, int damage, Character character, int porteeMin, int porteeMax)
     {
         this.dmg = damage;
         this.character = character;
         List<Vector3> listPositions = new List<Vector3>();
-        for(int i = 0; i < positions.Length; i++)
+        for (int i = 0; i < positions.Length; i++)
         {
             listPositions.Add(positions[i]);
         }
         zone = new Zone(character.gameObject.transform.position, porteeMin, porteeMax, listPositions);
     }
 
-    public int damage
-    {
-        get
-        {
-            return dmg;
-        }
-    }
-
 
     public void endAtk()
     {
         afficheur.endDisplay();
-        Destroy(gameObject);
     }
 
 
@@ -52,34 +35,33 @@ public class AttackManager : MonoBehaviour
         afficheur.display();
     }
 
-    public void applyAttack(Vector3[] positions)
-    {   
+    public void attackTiles(List<Vector3> positions, Vector3 cursorPosition)
+    {
+        for (int i = positions.Count - 1; i >= 0; i--)
+        {
+            attackTile(positions[i] + cursorPosition);
+        }
+    }
+    
+    public void attackTile(Vector3 position)
+    {
         if (character.isAlive())
         {
-            Vector3 position1 = positions[0];
-            Vector3 position2 = positions[1];
-            Vector3 dir2target = -position1 + position2;
-            RaycastHit[] hits;
-            hits = Physics.RaycastAll(transform.position, dir2target);
+            RaycastHit2D[] hits;
+            hits = Physics2D.RaycastAll(position, Vector3.forward);
 
             for(int i = 0; i < hits.Length; i++)
             {
                 if (hits[i].collider != null)
                 {
                     Character target = hits[i].collider.gameObject.GetComponent<Character>();
-                    target.takeDamage(character, damage);
+                    target.takeDamage(character, dmg);
+                }
+                else
+                {
                 }
 
             }
-            /*
-            RaycastHit2D hit = Physics2D.Raycast(position1,
-                dir2target);
-
-            if (hit.collider != null)
-            {
-                Character target = hit.collider.gameObject.GetComponent<Character>();
-                target.takeDamage(character, damage);
-            }*/
         }
     }
 
@@ -91,9 +73,9 @@ public class AttackManager : MonoBehaviour
         }
 
         Vector3 cursorPos = afficheur.getCursorPosition();
-        Vector3 playerPos = character.gameObject.transform.position;
+        List<Vector3> zoneEffets = zone.getZoneEffets();
 
-        TimeManager.instance.AddAction(() => applyAttack(new[] { new Vector3(0,0,10), cursorPos }));
+        TimeManager.instance.AddAction(() => attackTiles(zoneEffets, cursorPos));
         character.StartCoroutine(TimeManager.instance.PlayTick());
 
         return true;
