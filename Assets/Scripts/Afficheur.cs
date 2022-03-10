@@ -15,7 +15,7 @@ public class Afficheur : MonoBehaviour
     Vector3 cursorPosition;
     bool done = false;
     public bool isDisplaying = false;
-
+    private Zone zone;
 
     public static Afficheur create(Vector3 position, int porteeMin, int porteeMax, List<Vector3> zoneEffet)
     {
@@ -25,16 +25,26 @@ public class Afficheur : MonoBehaviour
         return afficheur;
     }
 
+    public static Afficheur create(Zone zone)
+    {
+        Transform afficheurTransform = Instantiate(GameAssets.i.pfAfficheur, zone.getPosition(), Quaternion.identity);
+        Afficheur afficheur = afficheurTransform.GetComponent<Afficheur>();
+        afficheur.setUp(zone); 
+        return afficheur;
+    }
+
     public Vector3 getCursorPosition()
     {
-        if (done)
-        {
-            return cursorPosition;
-        }
-        else
-        {
-            return new Vector3();
-        }
+        return cursor.transform.position;
+    }
+
+    private void setUp(Zone zone)
+    {
+        this.position = zone.getPosition();
+        this.porteeMax = zone.getPorteeMax();
+        this.porteeMin = zone.getPorteeMin();
+        this.zoneEffet = zone.getZoneEffets();
+        this.zone = zone;
     }
 
     private void setUp(Vector3 position, int porteeMin, int porteeMax, List<Vector3> zoneEffet)
@@ -74,21 +84,12 @@ public class Afficheur : MonoBehaviour
         {
             Vector3 newPositionEffect = project1Position(effectTiles[i].transform.position - cursor.transform.position, (Mathf.PI / 2));
             effectTiles[i].transform.position = newPositionEffect + cursor.transform.position;
+            zoneEffet[i] = effectTiles[i].transform.position;
         }
+        zone.setZoneEffet(zoneEffet);
     }
 
-    private List<Vector3> displayedPositions
-    {
-        get
-        {
-            List<Vector3> positions = new List<Vector3>();
-            for (int i = 0; i <= porteeMax - porteeMin; i++)
-            {
-                positions.Add(new Vector3(porteeMin + i, 0, 0));
-            }
-            return positions;
-        }
-    }
+    
 
     public void endDisplay()
     {
@@ -110,8 +111,10 @@ public class Afficheur : MonoBehaviour
                 tmp.destroy();
             }
             isDisplaying = false;
+            Destroy(gameObject);
         }
     }
+
     private void buildLosanges()
     {
         for (int i = porteeMin; i <= porteeMax; i++)
@@ -120,7 +123,6 @@ public class Afficheur : MonoBehaviour
 
         }
     }
-
 
     public void display()
     {
@@ -189,19 +191,14 @@ public class Afficheur : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        /*activeTiles = new List<RedTilePopup>();
-        createRedTiles(buildLosange(3));*/
+        
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            //cursorPosition = cursor.transform.position;
-            //done = true;
-        }
+       
 
     }
 }

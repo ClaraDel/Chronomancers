@@ -17,11 +17,8 @@ public class Ranger : Character
 
     public override void attack()
     {
-        atk = new Attack(new[] {
-            new Vector3 { x = 0, y = 0, z = 0 }
-        }
-       , normalAttackDamage, this, 2, 3
-           );
+        atk = AttackManager.create(new[] {
+            new Vector3 { x = 0, y = 0, z = 0 } }, normalAttackDamage, this, 1, 1);
         atk.setupAttack(position);
         base.coolDowns();
     }

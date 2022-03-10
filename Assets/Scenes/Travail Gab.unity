@@ -2626,6 +2626,7 @@ MonoBehaviour:
   maxHealth: 0
   healthBar: {fileID: 0}
   normalAttackDamage: 0
+  atk: {fileID: 0}
   ghostSprite: {fileID: 0}
   characterSprite: {fileID: 0}
   alive: 0

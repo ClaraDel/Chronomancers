@@ -35,12 +35,8 @@ public class Pyromancien : Character
     public void launchAttack()
     {
         castingTicks = 1;
-        atk = new Attack(new[] {
-            new Vector3 { x = 1, y = 0, z = 0 },
-            new Vector3 { x = 2, y = 0, z = 0 },
-            new Vector3 { x = 3, y = 0, z = 0 }}
-       , normalAttackDamage, this, 1, 1
-           );
+        atk = AttackManager.create(new[] {
+            new Vector3 { x = 0, y = 0, z = 0 } }, normalAttackDamage, this, 1, 1);
         atk.setupAttack(position);
         base.coolDowns();
     }
@@ -48,18 +44,8 @@ public class Pyromancien : Character
     // Explosion
     public override void launchSkill1()
     {
-        atk = new Attack(new[] {
-        new Vector3 { x = -1, y = 0, z = -1 },
-        new Vector3 { x = 0, y = 0, z = -1 },
-        new Vector3 { x = 1, y = 0, z = -1 },
-        new Vector3 { x = -1, y = 0, z = 0 },
-        new Vector3 { x = 0, y = 0, z = 0 },
-        new Vector3 { x = 1, y = 0, z = 0 },
-        new Vector3 { x = -1, y = 0, z = 1 },
-        new Vector3 { x = 0, y = 0, z = 1 },
-        new Vector3 { x = 1, y = 0, z = 1 }}
-    , normalAttackDamage, this, 1, 1
-        );
+        atk = AttackManager.create(new[] {
+            new Vector3 { x = 0, y = 0, z = 0 } }, normalAttackDamage, this, 1, 1);
         atk.setupAttack(position);
         
         base.launchSkill1();

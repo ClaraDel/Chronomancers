@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attack : MonoBehaviour
+public class Attack
 {
     //séparer affichage et attaque, pas forcément affichage d'attaque mais affichage en général
 
@@ -12,7 +12,7 @@ public class Attack : MonoBehaviour
     private Character character;
     private int porteeMin;
     private int porteeMax;
-    Afficheur a;
+    Afficheur afficheur;
 
 
 
@@ -40,16 +40,15 @@ public class Attack : MonoBehaviour
 
     public void endAtk()
     {
-        a.endDisplay();
-        Destroy(a.gameObject);
+        afficheur.endDisplay();
     }
 
 
     public void setupAttack(Vector3 playerPosition)
     {
 
-        a = Afficheur.create(character.gameObject.transform.position, porteeMin, porteeMax, positions);
-        a.display();
+        afficheur = Afficheur.create(character.gameObject.transform.position, porteeMin, porteeMax, positions);
+        afficheur.display();
     }
 
     public void applyAttack(Vector3 [] positions)
@@ -73,11 +72,11 @@ public class Attack : MonoBehaviour
 
     public bool applyAttack()
     {
-        if (!a.cursor.isValidPosition())
+        if (!afficheur.cursor.isValidPosition())
         {
             return false;
         }
-        Vector3 cursorPos = a.getCursorPosition();
+        Vector3 cursorPos = afficheur.getCursorPosition();
         TimeManager.instance.AddAction(() => applyAttack(new[] { character.gameObject.transform.position, cursorPos }));
         TimeManager.instance.PlayTick();
         return true;

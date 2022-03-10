@@ -66,10 +66,8 @@ public class Barbare : Character
         testEnraged();
         if (enraged)
         {
-            atk = new Attack(new[] {
-            new Vector3 { x = 1, y = 0, z = 0 } }
-       , 2 * normalAttackDamage, this, 1, 1
-           );
+            atk = AttackManager.create(new[] {
+            new Vector3 { x = 0, y = 0, z = 0 } }, normalAttackDamage, this, 1, 1);
             atk.setupAttack(position);
             base.coolDowns();
         }
@@ -85,7 +83,7 @@ public class Barbare : Character
         testEnraged();
         if (enraged)
         {
-            atk = new Attack(new[] {
+            atk = AttackManager.create(new[] {
         new Vector3 { x = 1, y = 0, z = 0 },
         new Vector3 { x = 1, y = 0, z = 1 },
         new Vector3 { x = 1, y = 0, z = -1 } }
@@ -95,7 +93,7 @@ public class Barbare : Character
         }
         else
         {
-            atk = new Attack(new[] {
+            atk = AttackManager.create(new[] {
         new Vector3 { x = 1, y = 0, z = 0 },
         new Vector3 { x = 1, y = 0, z = 1 },
         new Vector3 { x = 1, y = 0, z = -1 } }

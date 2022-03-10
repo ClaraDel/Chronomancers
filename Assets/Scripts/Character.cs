@@ -20,7 +20,7 @@ public class Character : MonoBehaviour
     public GameObject healthBar;
 
     public int normalAttackDamage;
-    public Attack atk;
+    public AttackManager atk;
 
     public Sprite ghostSprite;
     public Sprite characterSprite;
@@ -60,11 +60,8 @@ public class Character : MonoBehaviour
         this.isBlue = isBlue;
         this.position = position;
 
-        this.atk = new Attack(new[] {
-            new Vector3 { x = 1, y = 0, z = 0 },
-            new Vector3 { x = 2, y = 0, z = 0 } }
-       , 50, this, 1, 1
-           );
+        this.atk = AttackManager.create(new[] {
+            new Vector3 { x = 0, y = 0, z = 0 } }, normalAttackDamage, this, 1, 1);
         this.moveAction = false;
 
         this.castingTicks = 0;
@@ -80,7 +77,7 @@ public class Character : MonoBehaviour
         
     }
 
-    public Attack getAtk() { return atk; }
+    public AttackManager getAtk() { return atk; }
 
     public type getType() { return characterType; }
 
@@ -201,10 +198,8 @@ public class Character : MonoBehaviour
 
     public virtual void attack() 
     {
-        atk = new Attack(new[] {
-            new Vector3 { x = 0, y = 0, z = 0 } }
-       , normalAttackDamage, this, 1, 1
-           );
+        this.atk = AttackManager.create(new[] {
+            new Vector3 { x = 0, y = 0, z = 0 } }, normalAttackDamage, this, 1, 1);
         atk.setupAttack(position);
         coolDowns();
     }
@@ -244,13 +239,8 @@ public class Character : MonoBehaviour
     public void endAtk()
     { 
         coolDowns();
-        atk.applyAttack();
+        //atk.applyAttack();
         atk.endAtk();
-
-        atk = new Attack(new[] {
-            new Vector3 { x = 1, y = 0, z = 0 }, }
-       , 50, this, 1, 1
-           );
     }
 
     public void heal(int pvs)
@@ -275,6 +265,7 @@ public class Character : MonoBehaviour
 
     void Start()
     {
+        
         moveManager = gameObject.GetComponent<MoveManager>();
         moveManager.AddResetPosition();
         healthBar = (gameObject.transform.Find("pfHealthBar")).Find("HealthBar").gameObject;
