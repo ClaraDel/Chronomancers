@@ -7,14 +7,19 @@ public class Afficheur : MonoBehaviour
 
     private List<RedTilePopup> activeTiles;
     private List<RedTilePopup> effectTiles;
+
     private List<Vector3> positionTiles;
     private List<Vector3> zoneEffet;
+
     private Vector3 position;
     public CursorManager cursor;
+
     private int porteeMin;
     private int porteeMax;
+
     Vector3 cursorPosition;
     public bool isDisplaying = false;
+
     private Zone zone;
 
     /*************** create *************/
@@ -95,35 +100,6 @@ public class Afficheur : MonoBehaviour
         return positions;
     }
 
-    public void rotateEffects()
-    {
-        cursor.rotateEffects(Mathf.PI/2);
-    }
-
-    public void endDisplay()
-    {
-        if (isDisplaying)
-        {
-            int nb = activeTiles.Count;
-            for (int i = 0; i < nb; i++)
-            {
-                RedTilePopup tmp = activeTiles[activeTiles.Count - 1];
-                activeTiles.Remove(tmp);
-                cursor.destroy();
-                tmp.destroy(); ;
-            }
-            int nb1 = effectTiles.Count;
-            for (int i = 0; i < nb1; i++)
-            {
-                RedTilePopup tmp = effectTiles[effectTiles.Count - 1];
-                effectTiles.Remove(tmp);
-                tmp.destroy();
-            }
-            isDisplaying = false;
-            Destroy(gameObject);
-        }
-    }
-
     private void buildLosanges()
     {
         for (int i = porteeMin; i <= porteeMax; i++)
@@ -133,29 +109,10 @@ public class Afficheur : MonoBehaviour
         }
     }
 
-    public void display()
+    public void rotateEffects()
     {
-        if (!isDisplaying)
-        {
-            isDisplaying = true;
-            activeTiles = new List<RedTilePopup>();
-            if(positionTiles == null)
-            {
-                buildLosanges();
-                createZoneEffet(zoneEffet);
-            }
-            else
-            {
-                createRedTiles(positionTiles);
-            }
-            cursor = CursorManager.create(activeTiles, porteeMax - porteeMin, effectTiles, position, zone);
-            if (cursor != null)
-            {
-                cursorPosition = cursor.transform.position;
-            }
-        }
+        cursor.rotateEffects(Mathf.PI/2);
     }
-
 
     private List<Vector3> projectPosition(List<Vector3> positions, float theta)
     {
@@ -198,6 +155,53 @@ public class Afficheur : MonoBehaviour
         {
             RedTilePopup tmp = RedTilePopup.create(position + projectedPositions[i]);
             activeTiles.Add(tmp);
+        }
+    }
+
+    public void display()
+    {
+        if (!isDisplaying)
+        {
+            isDisplaying = true;
+            activeTiles = new List<RedTilePopup>();
+            if (positionTiles == null)
+            {
+                buildLosanges();
+                createZoneEffet(zoneEffet);
+            }
+            else
+            {
+                createRedTiles(positionTiles);
+            }
+            cursor = CursorManager.create(activeTiles, porteeMax - porteeMin, effectTiles, position, zone);
+            if (cursor != null)
+            {
+                cursorPosition = cursor.transform.position;
+            }
+        }
+    }
+
+    public void endDisplay()
+    {
+        if (isDisplaying)
+        {
+            int nb = activeTiles.Count;
+            for (int i = 0; i < nb; i++)
+            {
+                RedTilePopup tmp = activeTiles[activeTiles.Count - 1];
+                activeTiles.Remove(tmp);
+                cursor.destroy();
+                tmp.destroy(); ;
+            }
+            int nb1 = effectTiles.Count;
+            for (int i = 0; i < nb1; i++)
+            {
+                RedTilePopup tmp = effectTiles[effectTiles.Count - 1];
+                effectTiles.Remove(tmp);
+                tmp.destroy();
+            }
+            isDisplaying = false;
+            Destroy(gameObject);
         }
     }
 

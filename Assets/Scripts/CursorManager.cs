@@ -7,13 +7,17 @@ public class CursorManager : MonoBehaviour
 
     private int positionX;
     private int positionY;
+
     private int nbTiles;
+
     private List<RedTilePopup> activeTiles;
     private List<RedTilePopup> effectTiles;
+
     public bool hasValidated = false;
-    public Vector3 posAfterReturn = new Vector3();
     private bool validPosition = true;
+
     Vector3 positionAfficheur;
+
     Zone zone;
     enum directions
     {
@@ -22,11 +26,7 @@ public class CursorManager : MonoBehaviour
         down,
         right
     }
-
     int direction = (int)directions.right;
-
-    
-
 
     private Dictionary<Vector3, RedTilePopup> travelArea;
 
