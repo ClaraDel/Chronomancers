@@ -41,9 +41,10 @@ public class CursorManager : MonoBehaviour
         Destroy(transform.gameObject);
     }
 
-    public static CursorManager create(Vector3 position, List<RedTilePopup> activeTiles,
+    public static CursorManager create(List<RedTilePopup> activeTiles,
         int nb, List<RedTilePopup> effectTiles, Vector3 positionAfficheur, Zone zone)
     {
+        Vector3 position = activeTiles[0].transform.position;
         Transform cursorManagerTransform = Instantiate(GameAssets.i.pfCursor, position, Quaternion.identity);
         CursorManager cursorManager = cursorManagerTransform.GetComponent<CursorManager>();
         cursorManager.setUp(activeTiles, nb, effectTiles, positionAfficheur, zone);
@@ -81,7 +82,6 @@ public class CursorManager : MonoBehaviour
         }
         projectedPositions = positions;
         return projectedPositions;
-
     }
 
     private Vector3 project1Position(Vector3 position, float theta)
@@ -90,7 +90,6 @@ public class CursorManager : MonoBehaviour
         positions.Add(position);
         return projectPosition(positions, theta)[0];
     }
-
 
     public void rotateEffects(float theta)
     {
@@ -106,7 +105,7 @@ public class CursorManager : MonoBehaviour
 
     public void adaptPosEffects()
     {
-        if (validPosition)
+        if (validPosition && effectTiles != null)
         {
 
             int posXRelatif = Mathf.RoundToInt(positionX - positionAfficheur.x);
@@ -138,17 +137,16 @@ public class CursorManager : MonoBehaviour
         }
     }
 
-
-
-
     void updatePosCursor(ref int pos, int step, Vector3 translator)
     {
         pos += step;
         Vector3 newPos = new Vector3(positionX, positionY, 0);
-        if (travelArea.ContainsKey(newPos) || nbTiles == 1)
+        if (travelArea.ContainsKey(newPos) || (nbTiles == 1 && effectTiles != null))
         {
             transform.Translate(translator);
-            for (int i = 0; i < effectTiles.Count; i++)
+            int n = effectTiles == null ? 0 : effectTiles.Count;
+
+            for (int i = 0; i < n; i++)
             {
                 effectTiles[i].transform.position += (translator);
                 

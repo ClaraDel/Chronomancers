@@ -7,21 +7,30 @@ public class Afficheur : MonoBehaviour
 
     private List<RedTilePopup> activeTiles;
     private List<RedTilePopup> effectTiles;
+    private List<Vector3> positionTiles;
     private List<Vector3> zoneEffet;
     private Vector3 position;
     public CursorManager cursor;
     private int porteeMin;
     private int porteeMax;
     Vector3 cursorPosition;
-    bool done = false;
     public bool isDisplaying = false;
     private Zone zone;
 
+    /*************** create *************/
     public static Afficheur create(Vector3 position, int porteeMin, int porteeMax, List<Vector3> zoneEffet)
     {
         Transform afficheurTransform = Instantiate(GameAssets.i.pfAfficheur, position, Quaternion.identity);
         Afficheur afficheur = afficheurTransform.GetComponent<Afficheur>();
         afficheur.setUp(position, porteeMin, porteeMax, zoneEffet);
+        return afficheur;
+    }
+
+    public static Afficheur create(Vector3 position, List<Vector3> positionTiles)
+    {
+        Transform afficheurTransform = Instantiate(GameAssets.i.pfAfficheur, position, Quaternion.identity);
+        Afficheur afficheur = afficheurTransform.GetComponent<Afficheur>();
+        afficheur.setUp(position, positionTiles);
         return afficheur;
     }
 
@@ -33,9 +42,12 @@ public class Afficheur : MonoBehaviour
         return afficheur;
     }
 
-    public Vector3 getCursorPosition()
+
+    /*************** setUp *************/
+    private void setUp(Vector3 position, List<Vector3> positionTiles)
     {
-        return cursor.transform.position;
+        this.position = position;
+        this.positionTiles = positionTiles;
     }
 
     private void setUp(Zone zone)
@@ -53,6 +65,11 @@ public class Afficheur : MonoBehaviour
         this.porteeMax = porteeMax;
         this.porteeMin = porteeMin;
         this.zoneEffet = zoneEffet;
+    }
+
+    public Vector3 getCursorPosition()
+    {
+        return cursor.transform.position;
     }
 
     private List<Vector3> buildLosange(int range)
@@ -80,16 +97,8 @@ public class Afficheur : MonoBehaviour
 
     public void rotateEffects()
     {
-        for (int i = 0; i < effectTiles.Count; i++)
-        {
-            Vector3 newPositionEffect = project1Position(effectTiles[i].transform.position - cursor.transform.position, (Mathf.PI / 2));
-            effectTiles[i].transform.position = newPositionEffect + cursor.transform.position;
-            zoneEffet[i] = effectTiles[i].transform.position;
-        }
-        //zone.setZoneEffet(zoneEffet);
+        cursor.rotateEffects(Mathf.PI/2);
     }
-
-    
 
     public void endDisplay()
     {
@@ -130,9 +139,16 @@ public class Afficheur : MonoBehaviour
         {
             isDisplaying = true;
             activeTiles = new List<RedTilePopup>();
-            buildLosanges();
-            createZoneEffet(zoneEffet);
-            cursor = CursorManager.create(activeTiles[0].transform.position, activeTiles, porteeMax - porteeMin, effectTiles, position, zone);
+            if(positionTiles == null)
+            {
+                buildLosanges();
+                createZoneEffet(zoneEffet);
+            }
+            else
+            {
+                createRedTiles(positionTiles);
+            }
+            cursor = CursorManager.create(activeTiles, porteeMax - porteeMin, effectTiles, position, zone);
             if (cursor != null)
             {
                 cursorPosition = cursor.transform.position;
