@@ -217,9 +217,10 @@ public class Afficheur : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (cursor != null && Input.GetKeyDown(KeyCode.J))
         {
             cursor.rotateEffects(Mathf.PI/2);
-        }
+        }*/
     }
 }

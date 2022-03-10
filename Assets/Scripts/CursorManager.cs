@@ -149,8 +149,6 @@ public class CursorManager : MonoBehaviour
             for (int i = 0; i < n; i++)
             {
                 effectTiles[i].transform.position += (translator);
-                
-
                 if (!travelArea.ContainsKey(newPos))
                 {
                     effectTiles[i].gameObject.SetActive(false);

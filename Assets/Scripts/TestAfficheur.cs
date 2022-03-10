@@ -15,7 +15,7 @@ public class TestAfficheur : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             a = Afficheur.create(new Vector3(0, 0, 0), positions);
             a.display();
