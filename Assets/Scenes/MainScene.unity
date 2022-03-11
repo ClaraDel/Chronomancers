@@ -4648,6 +4648,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2463012, guid: 08cd8efbdd9b1904b940aaecff83b7d2, type: 3}
   m_PrefabInstance: {fileID: 6079902061789517490}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &496588335 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1780869683, guid: 08cd8efbdd9b1904b940aaecff83b7d2, type: 3}
+  m_PrefabInstance: {fileID: 6079902061789517490}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &499025389
 GameObject:
   m_ObjectHideFlags: 0
@@ -23161,9 +23166,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5250173352582057663, guid: 37c8fcfb80b773d47863ed63d798f5ca, type: 3}
+      propertyPath: UIGame
+      value: 
+      objectReference: {fileID: 496588335}
+    - target: {fileID: 5250173352582057663, guid: 37c8fcfb80b773d47863ed63d798f5ca, type: 3}
       propertyPath: UIScore
       value: 
       objectReference: {fileID: 2094354477}
+    - target: {fileID: 5250173352582057663, guid: 37c8fcfb80b773d47863ed63d798f5ca, type: 3}
+      propertyPath: MageBleu
+      value: 
+      objectReference: {fileID: 363692750}
     - target: {fileID: 5250173352582057663, guid: 37c8fcfb80b773d47863ed63d798f5ca, type: 3}
       propertyPath: UIScore1
       value: 
@@ -23172,6 +23185,10 @@ PrefabInstance:
       propertyPath: UIScore2
       value: 
       objectReference: {fileID: 1671575383}
+    - target: {fileID: 5250173352582057663, guid: 37c8fcfb80b773d47863ed63d798f5ca, type: 3}
+      propertyPath: MageRouge
+      value: 
+      objectReference: {fileID: 1793039369}
     - target: {fileID: 5250173352582057663, guid: 37c8fcfb80b773d47863ed63d798f5ca, type: 3}
       propertyPath: coordXArea1
       value: 6
@@ -23285,6 +23302,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: fe9af70a068682b4c8afa0136ee0e9e0, type: 3}
+    - target: {fileID: 744670987, guid: 08cd8efbdd9b1904b940aaecff83b7d2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1780869684, guid: 08cd8efbdd9b1904b940aaecff83b7d2, type: 3}
       propertyPath: m_Pivot.y
       value: 0

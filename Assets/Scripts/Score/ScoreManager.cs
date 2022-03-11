@@ -9,6 +9,8 @@ public class ScoreManager : MonoBehaviour
 
     public GameObject UIScore1;
     public GameObject UIScore2;
+    public GameObject MageRouge;
+    public GameObject MageBleu;
 
     [Header("Score :")]
     public int scoreTeam1;
@@ -63,6 +65,16 @@ public class ScoreManager : MonoBehaviour
     public void SwitchTeam(int team)
     {
         currentTeam = team;
+        if(currentTeam == 0)
+        {
+            MageRouge.SetActive(true);
+            MageBleu.SetActive(false);
+        } else if (currentTeam == 1)
+        {
+            MageRouge.SetActive(false);
+            MageBleu.SetActive(true);
+        }
+        
         Debug.Log("Team n." + currentTeam);
     }
         
