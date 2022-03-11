@@ -221,9 +221,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fc3d8b4119dcaa4e8a606d39e9fe4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   moveSpeed: 5
   PlayerTarget: {fileID: 3997230169204260313}
   isControllable: 0
+  character: {fileID: 1560224163029322592}
 --- !u!114 &4134018670345688793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,8 +239,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 4134018670345688794}
-  positionSpawnX: 22
-  positionSpawnY: 10
+  positionSpawnXTeam0: 22
+  positionSpawnYTeam0: 1
+  positionSpawnXTeam1: 1
+  positionSpawnYTeam1: 10
 --- !u!61 &3427522750236266654
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -319,7 +323,7 @@ MonoBehaviour:
   castingSkill2: 0
   skill2CastTime: 0
   skill2CoolDownTime: 0
-  moveManager: {fileID: 0}
+  moveManager: {fileID: 4134018670345688793}
   hiddenSprite: {fileID: 0}
   hidden: 0
   hiddenDuration: 0

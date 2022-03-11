@@ -10,10 +10,8 @@ public class PlayerController : MonoBehaviour
     public bool isControllable;
 
 
-    private Character character;
+    public Character character;
     private bool attackingProcess = false;
-
-    Afficheur a;
 
 
     public void setId(int id)
@@ -25,10 +23,10 @@ public class PlayerController : MonoBehaviour
     {
         PlayerTarget.parent = null;
         isControllable = true;
+        character = gameObject.transform.GetComponent<Roublard>();
         character.moveManager.AddResetPosition();
         TimeManager.instance.AddNewCharacter(this);
         
-        character = gameObject.transform.GetComponent<Roublard>();
     }
 
     // Update is called once per frame

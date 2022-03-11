@@ -22,7 +22,7 @@ public class CursorManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     public void setUp(Zone zone)
@@ -156,70 +156,21 @@ public class CursorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        List<Vector3> projectedPositions;
-        for (int i = 0; i < positions.Count; i++)
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             updatePosCursor(new Vector3(this.positionX, this.positionY + 1, 0), directions.up);
         }
-        projectedPositions = positions;
-        return projectedPositions;
-
-    }
-
-
-
-    void updatePosCursor(ref int pos, int step, Vector3 translator, bool cond, int idx, int direction)
-    {
-        pos += step;
-        Vector3 newPos = new Vector3(positionX, positionY, 0);
-        if (travelArea.ContainsKey(newPos) || nbTiles == 1)
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             updatePosCursor(new Vector3(this.positionX, this.positionY - 1, 0), directions.down);
         }
-        else
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             updatePosCursor(new Vector3(this.positionX - 1, this.positionY, 0), directions.left);
         }
-
-    }
-
-    int getCurrentDirection(Vector3 position, List<RedTilePopup> tiles )
-    {
-        for (int i = 0; i < tiles.Count; i++)
-        {
-            updatePosCursor(new Vector3(this.positionX + 1, this.positionY, 0), directions.right);
-        }
-        //should never get there
-        return  -100;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            updatePosCursor(ref positionY, 1, new Vector3(0, 1, 0),
-                (int)activeTiles[idxUp].transform.position.y < positionY,idxUp,(int) directions.up);
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            updatePosCursor(ref positionY, -1, new Vector3(0, -1, 0), 
-                (int)activeTiles[idxDown].transform.position.y > positionY, idxDown, (int)directions.down);
-
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            updatePosCursor(ref positionX, -1, new Vector3(-1, 0, 0), 
-                (int)activeTiles[idxLeft].transform.position.x > positionX, idxLeft, (int)directions.left);
-        }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            updatePosCursor(ref positionX, 1, new Vector3(1, 0, 0), 
-                (int)activeTiles[idxRight].transform.position.x < positionX, idxRight, (int)directions.right);
-
-        } else if (Input.GetKeyDown(KeyCode.Return))
-        {
-            
+            updatePosCursor(new Vector3(this.positionX + 1, this.positionY, 0), directions.right);
         }
     }
 

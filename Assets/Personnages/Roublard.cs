@@ -23,7 +23,6 @@ public class Roublard : Character
 
     public void init(Vector3 position, bool isBlue) {
         base.init(position,  100, 50, isBlue);
-        Debug.Log("coucou");
         hidden = false;
         characterType = type.roublard;
         hiddenDuration = 0;

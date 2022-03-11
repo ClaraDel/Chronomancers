@@ -355,6 +355,7 @@ public class Character : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("coucou");
         moveManager = gameObject.GetComponent<MoveManager>();
         moveManager.AddResetPosition();
         healthBar = (gameObject.transform.Find("pfHealthBar")).Find("HealthBar").gameObject;
