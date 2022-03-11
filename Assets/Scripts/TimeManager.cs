@@ -89,7 +89,7 @@ public class TimeManager : MonoBehaviour
         currentTurn = currentTurn + 1;
         currentTick = 0;
         GameObject go = Instantiate(prefabPlayer);
-        go.GetComponent<Character>().init(new Vector3(0,0,0), 100, 50, true);
+        go.GetComponent<Character>().init(new Vector3(0,0,0), 3000, 50, true);
         //NB : Je n'ai pas mis de PlayTick ici afin d'être sûr que la méthode ResetPosition a bien été ajouté au tick 0 avant de lancer le tick
     }
 

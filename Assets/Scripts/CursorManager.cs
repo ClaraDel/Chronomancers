@@ -37,19 +37,20 @@ public class CursorManager : MonoBehaviour
         transform.position = listPositionsActif[0];
         positionX = (int)Mathf.Floor(transform.position.x);
         positionY = (int)Mathf.Floor(transform.position.y);
-        activeZone.getZoneEffet().transform.parent = this.transform;
         activeZone.getZoneEffet().SetActive(true);
     }
 
     private void calculOrientationCursor()
     {
-        if (positionX <= positionY && positionX > -positionY)
+        float positionXrelative = positionX - this.transform.parent.position.x;
+        float positionYrelative = positionY - this.transform.parent.position.y;
+        if (positionXrelative <= positionYrelative && positionXrelative > -positionYrelative)
             this.direction = directions.up;
-        else if (positionX > positionY && positionX >= -positionY)
+        else if (positionXrelative > positionYrelative && positionXrelative >= -positionYrelative)
             this.direction = directions.right;
-        else if (positionX < -positionY && positionX >= positionY)
+        else if (positionXrelative < -positionYrelative && positionXrelative >= positionYrelative)
             this.direction = directions.down;
-        else if (positionX <= -positionY && positionX < positionY)
+        else if (positionXrelative <= -positionYrelative && positionXrelative < positionYrelative)
             this.direction = directions.left;
     }
 

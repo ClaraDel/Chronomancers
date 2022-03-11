@@ -22,7 +22,7 @@ public class Roublard : Character
     }
 
     public void init(Vector3 position, bool isBlue) {
-        base.init(position,  100, 50, isBlue);
+        base.init(position, 3000, 50, isBlue);
         Debug.Log("coucou");
         hidden = false;
         characterType = type.roublard;

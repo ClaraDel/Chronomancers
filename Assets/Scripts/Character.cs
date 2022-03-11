@@ -102,7 +102,7 @@ public class Character : MonoBehaviour
 
         GameObject rangeArea = gameObject.transform.Find("BasicAttackRange").gameObject;
 
-        GameObject effectArea = gameObject.transform.Find("BasicAttackEffet").gameObject;
+        GameObject effectArea = gameObject.transform.Find("Cursor").Find("BasicAttackEffet").gameObject;
 
         this.cursor = gameObject.transform.Find("Cursor").gameObject;
 
@@ -172,6 +172,7 @@ public class Character : MonoBehaviour
 
     public virtual void takeDamage(Character attacker, int damage)
     {
+        Debug.Log(damage);
         if (alive)
         {
             if (shielded)
@@ -181,17 +182,12 @@ public class Character : MonoBehaviour
             }
             else
             {
-                if (attacker.getType() == type.roublard)
+                if (attacker.getType() == type.roublard && castingTicks > 0)
                 {
-                    int dmg = 2 * damage;
-                    health = health - dmg;
-                    DamagePopup.create(dmg, gameObject);
+                    damage = 2 * damage;
                 }
-                else
-                {
-                    health = health - damage;
-                    DamagePopup.create(damage, gameObject);
-                }
+                health = health - damage;
+                DamagePopup.create(damage, gameObject);
                 if (health > 0)
                 {
                     healthBar.transform.GetComponent<Slider>().value = health;
@@ -255,10 +251,11 @@ public class Character : MonoBehaviour
 
     public void validAttack()
     {
-        AttackManager.instance.attackTiles(this, zoneBasicAttack, normalAttackDamage);
+        GameObject Cursor = gameObject.transform.Find("Cursor").gameObject;
+        AttackManager.instance.attackTiles(this, Cursor, zoneBasicAttack, normalAttackDamage);
 
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
-        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().gameObject.SetActive(false);
+        Cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
 
     }
 
