@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         character.moveManager.AddResetPosition();
         TimeManager.instance.AddNewCharacter(this);
         
-        character = gameObject.transform.GetComponent<Character>();
+        character = gameObject.transform.GetComponent<Roublard>();
     }
 
     // Update is called once per frame
@@ -67,20 +67,19 @@ public class PlayerController : MonoBehaviour
 
                 if (attackingProcess && Input.GetKeyUp(KeyCode.Return))
                 {
-
-                    character.getAtk().applyAttack();
-                    character.endAtk();
+                    character.validAttack();
                     attackingProcess = false;
-
                 }
+
                 else if (attackingProcess && Input.GetKeyUp(KeyCode.Escape))
                 {
+                    character.endAtk();
                     attackingProcess = false;
-
                 }
 
                 if (!attackingProcess && Vector2.Distance(transform.position, PlayerTarget.position) == 0f)
                 {
+                    
                     if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) >= 0.5f)
                     {
                         character.moveH();

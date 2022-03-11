@@ -1,43 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+// using System.Collections;
+// using System.Collections.Generic;
+// using UnityEngine;
+// using UnityEngine.UI;
 
-public class Ranger : Character
-{
+// public class Ranger : Character
+// {
 
-    public Ranger(Vector3 position, bool isBlue) : base(position,  125, 50, isBlue)
-    {
-        characterType = type.ranger;
-        skill1CastTime = 2;
-        skill1CoolDownTime = 10;
-        skill2CastTime = 0;
-        skill2CoolDownTime = 7;
-    }
+//     public Ranger(Vector3 position, bool isBlue) : base(position,  125, 50, isBlue)
+//     {
+//         characterType = type.ranger;
+//         skill1CastTime = 2;
+//         skill1CoolDownTime = 10;
+//         skill2CastTime = 0;
+//         skill2CoolDownTime = 7;
+//     }
 
-    public override void attack()
-    {
-        atk = new Attack(new[] {
-            new Vector3 { x = 2, y = 0, z = 0 },
-            new Vector3 { x = 3, y = 0, z = 0 }}
-       , normalAttackDamage, this
-           );
-        atk.setupAttack(position);
-        base.coolDowns();
-    }
+//     public override void attack()
+//     {
+//         atk = new AttackManager(new[] {
+//             new Vector3 { x = 0, y = 0, z = 0 } }, normalAttackDamage, this, 1, 1);
+//         atk.setupAttack(position);
+//         base.coolDowns();
+//     }
 
-    // Tir précis
-    public override void launchSkill1()
-    {
-        // Creer objet flèche et le faire spawner, puis lui faire infliger des dégats après 1 tour
-        base.launchSkill1();
-    }
+//     // Tir prï¿½cis
+//     public override void launchSkill1()
+//     {
+//         // Creer objet flï¿½che et le faire spawner, puis lui faire infliger des dï¿½gats aprï¿½s 1 tour
+//         base.launchSkill1();
+//     }
 
-    // Dash
-    public override void launchSkill2()
-    {
-        // Ajouter mouvement vers case ciblée à 3 de portée
-        base.launchSkill2();
-    }
+//     // Dash
+//     public override void launchSkill2()
+//     {
+//         // Ajouter mouvement vers case ciblï¿½e ï¿½ 3 de portï¿½e
+//         base.launchSkill2();
+//     }
 
-}
+// }

@@ -186,7 +186,6 @@ MonoBehaviour:
   id: 0
   moveSpeed: 5
   PlayerTarget: {fileID: 2512450268868441787}
-  moveManager: {fileID: 3240898002689301947}
   isControllable: 0
 --- !u!114 &3240898002689301947
 MonoBehaviour:
@@ -217,8 +216,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f517c44d4fc2c4e81e1124dc095c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 0
+  healthBar: {fileID: 0}
+  normalAttackDamage: 0
   fill: {fileID: 2311324376455850940}
   ghostSprite: {fileID: 21300000, guid: 2a833689455d8d2449cd821bf32982be, type: 3}
+  characterSprite: {fileID: 0}
+  alive: 0
+  isBlue: 0
+  position: {x: 0, y: 0, z: 0}
+  characterType: 0
+  moveAction: 0
+  castingTicks: 0
+  castingSkill1: 0
+  skill1CastTime: 0
+  skill1CoolDownTime: 0
+  coolDownSkill1: 0
+  castingSkill2: 0
+  skill2CastTime: 0
+  skill2CoolDownTime: 0
+  moveManager: {fileID: 0}
 --- !u!61 &4194547060994677756
 BoxCollider2D:
   m_ObjectHideFlags: 0

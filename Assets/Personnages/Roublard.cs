@@ -11,6 +11,19 @@ public class Roublard : Character
 
     public Roublard(Vector3 position, bool isBlue) : base(position,  100, 50, isBlue)
     {
+        Debug.Log("coucou");
+        hidden = false;
+        characterType = type.roublard;
+        hiddenDuration = 0;
+        skill1CastTime = 1;
+        skill1CoolDownTime = 5;
+        skill2CastTime = 1;
+        skill2CoolDownTime = 15;
+    }
+
+    public void init(Vector3 position, bool isBlue) {
+        base.init(position,  100, 50, isBlue);
+        Debug.Log("coucou");
         hidden = false;
         characterType = type.roublard;
         hiddenDuration = 0;
@@ -95,7 +108,7 @@ public class Roublard : Character
 
     public override void launchSkill1()
     {
-        // Creer objet piège et le faire spawner
+        // Creer objet piï¿½ge et le faire spawner
         base.launchSkill1();
     }
 
