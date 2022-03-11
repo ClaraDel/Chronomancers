@@ -11,17 +11,16 @@ public class TimeManager : MonoBehaviour
     public static int currentTick;
     private int currentTurn;
     public static int maxTick = 25;
-    public int maxTurn = 5;
+    public static int maxTurn = 2;
 
     public PlayerController actifCharacter;
-
 
     public GameObject TimeManagerText;
     public bool isPlaying;
     public GameObject prefabPlayer;
     public Stack<PlayerController> characterOrder;
     public GameObject EndTurnPanel;
-
+    [SerializeField] private Fade fade;
     //Liste de piles d'appel de méthodes
     public List<Stack<Action>> turnTimeLine = new List<Stack<Action>>();
 
@@ -76,6 +75,7 @@ public class TimeManager : MonoBehaviour
         {
             // End Game Method
             Debug.Log("Fin de la partie !");
+            fade.fadeIn();
         }
         else
         {

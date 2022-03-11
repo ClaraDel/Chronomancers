@@ -12,6 +12,8 @@ public class Fade : MonoBehaviour
     public void fadeIn()
     {
         fadingIn = true;
+        UIGroup.alpha = 0;
+        gameObject.GetComponent<Canvas>().enabled = true;
     }
 
     void Update()
@@ -20,11 +22,6 @@ public class Fade : MonoBehaviour
 
         if (!fadingIn)
         {
-            if (Input.GetKeyDown("space"))
-            {
-                UIGroup.alpha = 0;
-                fadingIn = true;
-            }
             return;
         }
 

@@ -1176,6 +1176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0742e499d189d648aea03523208b1c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasValidated: 0
+  posAfterReturn: {x: 0, y: 0, z: 0}
 --- !u!1 &192721779
 GameObject:
   m_ObjectHideFlags: 0
@@ -18878,6 +18880,10 @@ PrefabInstance:
       propertyPath: EndTurnPanel
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8176065901973242773, guid: d67fb68df0767e14882942f8781175c8, type: 3}
+      propertyPath: actifCharacter
+      value: 
+      objectReference: {fileID: 3240898002689301944, guid: a51d2f956360953428d7ce3060fccbe0, type: 3}
     - target: {fileID: 8176065901973242773, guid: d67fb68df0767e14882942f8781175c8, type: 3}
       propertyPath: TimeManagerText
       value: 

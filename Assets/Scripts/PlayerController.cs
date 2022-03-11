@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public Transform PlayerTarget;
     public MoveManager moveManager;
     public bool isControllable;
-
+    private PauseToggle pause;
 
     private Character character;
     private bool attackingProcess = false;
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pause = GameObject.Find("PauseMenu").GetComponent<PauseToggle>();
         PlayerTarget.parent = null;
         isControllable = true;
         moveManager.AddResetPosition();
@@ -41,7 +42,8 @@ public class PlayerController : MonoBehaviour
         {
             character.init(100, 50);
         }*/
-        
+        if (pause.getIfPaused()) return;
+
         if (isControllable && !TimeManager.instance.isPlaying)
         {
             if (Input.GetKeyUp(KeyCode.Alpha1))

@@ -9,9 +9,14 @@ public class PauseToggle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
         {
             pauseMenu.enabled = !pauseMenu.enabled;
         }
+    }
+
+    public bool getIfPaused()
+    {
+        return pauseMenu.enabled;
     }
 }
