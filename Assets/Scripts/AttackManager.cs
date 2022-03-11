@@ -15,7 +15,10 @@ public class AttackManager : MonoBehaviour
 
     }
 
-
+    public void addAttack(Character attacker, GameObject cursor, Zone zone, int damage){
+        TimeManager.instance.AddAction(() => attackTiles(attacker, cursor, zone, damage));
+        StartCoroutine(TimeManager.instance.PlayTick());
+    }
 
     public void attackTiles(Character attacker, GameObject cursor, Zone zone, int damage)
     {

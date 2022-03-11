@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
         isControllable = true;
         TimeManager.instance.AddNewCharacter(this);
         
-        character = gameObject.transform.GetComponent<Roublard>();
+        character = gameObject.transform.GetComponent<Character>();
     }
 
     // Update is called once per frame
@@ -53,14 +53,14 @@ public class PlayerController : MonoBehaviour
                 {
                     if (!attackingProcess && character != null)
                     {
-                        character.attack();
+                        character.setUpAttack();
                         attackingProcess = true;
                     }
                 }
 
                 if (attackingProcess && Input.GetKeyUp(KeyCode.Return))
                 {
-                    character.validAttack();
+                    character.addAttack();
                     attackingProcess = false;
                 }
 

@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Zone : MonoBehaviour
 {
-    private Vector3 origin; // Centre de la zone où le curseur peut se déplacer
     private GameObject zoneCiblable;
     private GameObject zoneEffets;
     private List<GameObject> tilesCiblable;
     private List<GameObject> tilesEffets;
-    public void init(Vector3 origin, GameObject zoneCiblable, GameObject zoneEffets){
-        this.origin = origin;
+    public void init(GameObject zoneCiblable, GameObject zoneEffets){
         tilesCiblable = new List<GameObject>();
         tilesEffets = new List<GameObject>();
         this.zoneCiblable = zoneCiblable;
@@ -23,11 +21,6 @@ public class Zone : MonoBehaviour
         {
             tilesEffets.Add(tile.gameObject);
         }
-    }
-
-    public Vector3 getorigin()
-    {
-        return origin;
     }
 
     public List<GameObject> getTilesEffets()

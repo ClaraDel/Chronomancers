@@ -28,7 +28,6 @@ public class Character : MonoBehaviour
 
     public bool alive;
     public bool isBlue;
-    public Vector3 position;
     public type characterType;
 
     public bool moveAction;
@@ -50,45 +49,7 @@ public class Character : MonoBehaviour
 
     public MoveManager moveManager;
 
-    public Character(Vector3 position, int maxHealth, int damage, bool isBlue)
-    {
-        // Debug.Log("coucou");
-        // this.maxHealth = maxHealth;
-        // this.health = maxHealth;
-
-        // this.normalAttackDamage = damage;
-
-        // this.alive = true;
-        // this.isBlue = isBlue;
-        // this.position = position;
-
-        // GameObject rangeArea = gameObject.transform.Find("BasicAttackRange").gameObject;
-
-        // GameObject effectArea = gameObject.transform.Find("BasicAttackEffet").gameObject;
-
-        // rangeArea.SetActive(false);
-        // effectArea.SetActive(false);
-
-        // this.zoneBasicAttack = new Zone(this.position, rangeArea, effectArea);
-
-
-
-        // this.moveAction = false;
-
-        // this.castingTicks = 0;
-
-        // this.castingSkill1 = false;
-        // this.coolDownSkill1 = 0;
-        // this.castingSkill2 = false;
-        // this.coolDownSkill2 = 0;
-
-        // this.shielded = false;
-        // this.shieldDuration = 0;
-
-
-    }
-
-    public void init(Vector3 position, int maxHealth, int damage, bool isBlue)
+    public void init(int maxHealth, int damage, bool isBlue)
     {
         Debug.Log("coucou");
         this.maxHealth = maxHealth;
@@ -98,7 +59,6 @@ public class Character : MonoBehaviour
 
         this.alive = true;
         this.isBlue = isBlue;
-        this.position = position;
 
         GameObject rangeArea = gameObject.transform.Find("BasicAttackRange").gameObject;
 
@@ -108,7 +68,7 @@ public class Character : MonoBehaviour
 
 
         this.zoneBasicAttack = gameObject.AddComponent<Zone>();
-        this.zoneBasicAttack.init(this.position, rangeArea, effectArea);
+        this.zoneBasicAttack.init(rangeArea, effectArea);
 
         rangeArea.SetActive(false);
         effectArea.SetActive(false);
@@ -128,11 +88,8 @@ public class Character : MonoBehaviour
         this.shieldDuration = 0;
     }
     public type getType() { return characterType; }
-
     public bool isAlive() { return alive; }
-
     public int getCastingTicks() { return castingTicks; }
-
     public bool isMoveAction() { return moveAction; }
 
     public virtual void reset()
@@ -240,7 +197,7 @@ public class Character : MonoBehaviour
         coolDowns();
     }
 
-    public virtual void attack()
+    public virtual void setUpAttack()
     {
         this.zoneBasicAttack.getZoneCiblable().SetActive(true);
         cursor.SetActive(true);
@@ -249,10 +206,10 @@ public class Character : MonoBehaviour
         coolDowns();
     }
 
-    public void validAttack()
+    public void addAttack()
     {
         GameObject Cursor = gameObject.transform.Find("Cursor").gameObject;
-        AttackManager.instance.attackTiles(this, Cursor, zoneBasicAttack, normalAttackDamage);
+        AttackManager.instance.addAttack(this, Cursor, zoneBasicAttack, normalAttackDamage);
 
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
         Cursor.GetComponent<CursorManager>().gameObject.SetActive(false);

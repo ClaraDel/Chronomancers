@@ -9,20 +9,8 @@ public class Roublard : Character
     public bool hidden;
     public int hiddenDuration;
 
-    public Roublard(Vector3 position, bool isBlue) : base(position,  100, 50, isBlue)
-    {
-        Debug.Log("coucou");
-        hidden = false;
-        characterType = type.roublard;
-        hiddenDuration = 0;
-        skill1CastTime = 1;
-        skill1CoolDownTime = 5;
-        skill2CastTime = 1;
-        skill2CoolDownTime = 15;
-    }
-
-    public void init(Vector3 position, bool isBlue) {
-        base.init(position, 3000, 50, isBlue);
+    public void init(bool isBlue) {
+        base.init(100, 50, isBlue);
         Debug.Log("coucou");
         hidden = false;
         characterType = type.roublard;
@@ -85,14 +73,14 @@ public class Roublard : Character
         }
     }
 
-    public override void attack()
+    public override void setUpAttack()
     {
         if (hidden)
         {
             hidden = false;
             hiddenDuration = 0;
         }
-        base.attack();
+        base.setUpAttack();
     }
 
     // Trap

@@ -9,8 +9,8 @@ public class Barbare : Character
     public bool enraged;
     public int rageDuration;
 
-    public Barbare(Vector3 position, bool isBlue) : base(position,  150, 50, isBlue)
-    {
+    public void init(bool isBlue) {
+        base.init(100, 50, isBlue);
         enraged = false;
         characterType = type.barbare;
         rageDuration = 0;
@@ -61,7 +61,7 @@ public class Barbare : Character
         base.moveV();
     }
 
-    public override void attack()
+    public override void setUpAttack()
     {
         testEnraged();
         if (enraged)
@@ -73,7 +73,7 @@ public class Barbare : Character
         }
         else
         {
-            // base.attack();
+            // base.setUpAttack();
         }
     }
 
