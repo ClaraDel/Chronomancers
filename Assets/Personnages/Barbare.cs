@@ -66,60 +66,60 @@ public class Barbare : Character
         testEnraged();
         if (enraged)
         {
-            atk = new AttackManager(new[] {
-            new Vector3 { x = 0, y = 0, z = 0 } }, normalAttackDamage, this, 1, 1);
-            atk.setupAttack(position);
-            base.coolDowns();
+            // atk = new AttackManager(new[] {
+            // new Vector3 { x = 0, y = 0, z = 0 } }, normalAttackDamage, this, 1, 1);
+            // atk.setupAttack(position);
+            // base.coolDowns();
         }
         else
         {
-            base.attack();
+            // base.attack();
         }
     }
 
     // GRO TAPE
     public override void launchSkill1()
     {
-        testEnraged();
-        if (enraged)
-        {
-            atk = new AttackManager(new[] {
-        new Vector3 { x = 1, y = 0, z = 0 },
-        new Vector3 { x = 1, y = 0, z = 1 },
-        new Vector3 { x = 1, y = 0, z = -1 } }
-        , 2 * normalAttackDamage, this, 1, 1
-            );
-            atk.setupAttack(position);
-        }
-        else
-        {
-            atk = new AttackManager(new[] {
-        new Vector3 { x = 1, y = 0, z = 0 },
-        new Vector3 { x = 1, y = 0, z = 1 },
-        new Vector3 { x = 1, y = 0, z = -1 } }
-        , normalAttackDamage, this, 1, 1
-            );
-            atk.setupAttack(position);
-        }
-        base.launchSkill1();
+        // testEnraged();
+        // if (enraged)
+        // {
+        //     atk = new AttackManager(new[] {
+        // new Vector3 { x = 1, y = 0, z = 0 },
+        // new Vector3 { x = 1, y = 0, z = 1 },
+        // new Vector3 { x = 1, y = 0, z = -1 } }
+        // , 2 * normalAttackDamage, this, 1, 1
+        //     );
+        //     atk.setupAttack(position);
+        // }
+        // else
+        // {
+        //     atk = new AttackManager(new[] {
+        // new Vector3 { x = 1, y = 0, z = 0 },
+        // new Vector3 { x = 1, y = 0, z = 1 },
+        // new Vector3 { x = 1, y = 0, z = -1 } }
+        // , normalAttackDamage, this, 1, 1
+        //     );
+        //     atk.setupAttack(position);
+        // }
+        // base.launchSkill1();
     }
 
     public override void castSkill2()
     {
-        if (coolDownSkill2 == 0)
-        {
-            castingTicks = skill2CastTime;
-            coolDownSkill1 = skill2CoolDownTime;
-        }
-        launchSkill2();
-        base.coolDowns();
+        // if (coolDownSkill2 == 0)
+        // {
+        //     castingTicks = skill2CastTime;
+        //     coolDownSkill1 = skill2CoolDownTime;
+        // }
+        // launchSkill2();
+        // base.coolDowns();
     }
 
     // CROOOoom !
     public override void launchSkill2()
     {
-        //TODO : Rush + Stop si collision et dégâts
-        base.launchSkill2();
+        //TODO : Rush + Stop si collision et dï¿½gï¿½ts
+        // base.launchSkill2();
     }
 
 }

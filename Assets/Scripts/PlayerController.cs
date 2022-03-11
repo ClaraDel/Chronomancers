@@ -60,13 +60,8 @@ public class PlayerController : MonoBehaviour
 
                 if (attackingProcess && Input.GetKeyUp(KeyCode.Return))
                 {
-
-                    bool successAtk = character.getAtk().applyAttack();
-                    if (successAtk)
-                    {
-                        character.endAtk();
-                        attackingProcess = false;
-                    }
+                    character.validAttack();
+                    attackingProcess = false;
                 }
 
                 else if (attackingProcess && Input.GetKeyUp(KeyCode.Escape))

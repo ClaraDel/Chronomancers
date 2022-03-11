@@ -2,45 +2,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Zone
+public class Zone : MonoBehaviour
 {
-
-    private int porteeMax;
-    private int porteeMin;
-    private Vector3 position;
-    private List<Vector3> zoneEffets;
-
-    public Zone(Vector3 position, int porteeMin, int porteeMax, List <Vector3> zoneEffets)
-    {
-        this.porteeMax = porteeMax;
-        this.porteeMin = porteeMin;
-        this.position = position;
+    private Vector3 origin; // Centre de la zone où le curseur peut se déplacer
+    private GameObject zoneCiblable;
+    private GameObject zoneEffets;
+    private List<GameObject> tilesCiblable;
+    private List<GameObject> tilesEffets;
+    public void init(Vector3 origin, GameObject zoneCiblable, GameObject zoneEffets){
+        this.origin = origin;
+        tilesCiblable = new List<GameObject>();
+        tilesEffets = new List<GameObject>();
+        this.zoneCiblable = zoneCiblable;
         this.zoneEffets = zoneEffets;
+        foreach (Transform tile in zoneCiblable.transform)
+        {
+            tilesCiblable.Add(tile.gameObject);
+        }
+        foreach (Transform tile in zoneEffets.transform)
+        {
+            tilesEffets.Add(tile.gameObject);
+        }
     }
 
-    public Vector3 getPosition()
+    public Vector3 getorigin()
     {
-        return position;
+        return origin;
     }
 
-    public List<Vector3> getZoneEffets()
+    public List<GameObject> getTilesEffets()
     {
-        return zoneEffets;
+        return tilesEffets;
     }
 
-    public int getPorteeMax()
+    public void setTilesEffet(List<GameObject> tilesEffets)
     {
-        return porteeMax;
+        this.tilesEffets = tilesEffets;
     }
 
-    public int getPorteeMin()
+    public List<GameObject> getTilesCiblable()
     {
-        return porteeMin;
+        return tilesCiblable;
     }
 
-    public void setZoneEffet(List<Vector3> zoneEffets)
+    public void setTilesCiblable(List<GameObject> tilesCiblable)
     {
-        this.zoneEffets = zoneEffets;
+        this.tilesCiblable = tilesCiblable;
+    }
+
+    public GameObject getZoneCiblable(){
+        return this.zoneCiblable;
+    }
+    public GameObject getZoneEffet(){
+        return this.zoneEffets;
     }
 
 }

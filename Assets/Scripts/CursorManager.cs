@@ -7,18 +7,6 @@ public class CursorManager : MonoBehaviour
 
     private int positionX;
     private int positionY;
-
-    private int nbTiles;
-
-    private List<RedTilePopup> activeTiles;
-    private List<RedTilePopup> effectTiles;
-
-    public bool hasValidated = false;
-    private bool validPosition = true;
-
-    Vector3 positionAfficheur;
-
-    Zone zone;
     enum directions
     {
         up,
@@ -26,9 +14,10 @@ public class CursorManager : MonoBehaviour
         down,
         right
     }
-    int direction = (int)directions.right;
+    directions direction = directions.up;
 
-    private Dictionary<Vector3, RedTilePopup> travelArea;
+    private Zone activeZone;
+    private List<Vector3> listPositionsActif;
 
     // Start is called before the first frame update
     void Start()
@@ -36,171 +25,153 @@ public class CursorManager : MonoBehaviour
 
     }
 
-    public void destroy()
+    public void setUp(Zone zone)
     {
-        Destroy(transform.gameObject);
-    }
-
-    public static CursorManager create(List<RedTilePopup> activeTiles,
-        int nb, List<RedTilePopup> effectTiles, Vector3 positionAfficheur, Zone zone)
-    {
-        Vector3 position = activeTiles[0].transform.position;
-        Transform cursorManagerTransform = Instantiate(GameAssets.i.pfCursor, position, Quaternion.identity);
-        CursorManager cursorManager = cursorManagerTransform.GetComponent<CursorManager>();
-        cursorManager.setUp(activeTiles, nb, effectTiles, positionAfficheur, zone);
-        return cursorManager;
-    }
-
-    void setUp(List<RedTilePopup> activeTiles, int nb, List<RedTilePopup> effectTiles, Vector3 positionAfficheur, Zone zone)
-    {
-        travelArea = new Dictionary<Vector3, RedTilePopup>();
-        for (int i = 0; i < activeTiles.Count; i++)
+        zone.getZoneCiblable().SetActive(true);
+        listPositionsActif = new List<Vector3>();
+        foreach (var tile in zone.getTilesCiblable())
         {
-            travelArea[activeTiles[i].transform.position] = activeTiles[i];
+            listPositionsActif.Add(tile.transform.position);
         }
-        positionX = Mathf.RoundToInt(transform.position.x);
-        positionY = Mathf.RoundToInt(transform.position.y);
-        nbTiles = nb + 1;
-        this.activeTiles = activeTiles;
-        this.effectTiles = effectTiles;
-        this.positionAfficheur = positionAfficheur;
-        this.zone = zone;
-        adaptPosEffects();
+        this.activeZone = zone;
+        transform.position = listPositionsActif[0];
+        positionX = (int)Mathf.Floor(transform.position.x);
+        positionY = (int)Mathf.Floor(transform.position.y);
+        activeZone.getZoneEffet().transform.parent = this.transform;
+        activeZone.getZoneEffet().SetActive(true);
     }
 
-    private List<Vector3> projectPosition(List<Vector3> positions, float theta)
+    private void calculOrientationCursor()
     {
-        List<Vector3> projectedPositions;
-        for (int i = 0; i < positions.Count; i++)
+        if (positionX <= positionY && positionX > -positionY)
+            this.direction = directions.up;
+        else if (positionX > positionY && positionX >= -positionY)
+            this.direction = directions.right;
+        else if (positionX < -positionY && positionX >= positionY)
+            this.direction = directions.down;
+        else if (positionX <= -positionY && positionX < positionY)
+            this.direction = directions.left;
+    }
+
+    public void rotateEffects()
+    {
+        switch (this.direction)
         {
-            float tmp = (positions[i].x) * Mathf.Cos(theta) - (positions[i].y) * Mathf.Sin(theta);
-            Vector3 pos = positions[i];
-            pos.y = Mathf.RoundToInt((positions[i].x) * Mathf.Sin(theta) + (positions[i].y) * Mathf.Cos(theta));
-            pos.x = Mathf.RoundToInt(tmp);
-            positions[i] = pos;
-
-        }
-        projectedPositions = positions;
-        return projectedPositions;
-    }
-
-    private Vector3 project1Position(Vector3 position, float theta)
-    {
-        List<Vector3> positions = new List<Vector3>();
-        positions.Add(position);
-        return projectPosition(positions, theta)[0];
-    }
-
-    public void rotateEffects(float theta)
-    {
-        List<Vector3> newZoneEffets = new List<Vector3>() ;
-        for (int i = 0; i < effectTiles.Count; i++)
-        {
-            Vector3 newPositionEffect = project1Position(effectTiles[i].transform.position - gameObject.transform.position, theta);
-            effectTiles[i].transform.position = newPositionEffect + gameObject.transform.position;
-            newZoneEffets.Add(newPositionEffect);
-        }
-        zone.setZoneEffet(newZoneEffets);
-    }
-
-    public void adaptPosEffects()
-    {
-        if (validPosition && effectTiles != null)
-        {
-
-            int posXRelatif = Mathf.RoundToInt(positionX - positionAfficheur.x);
-            int posYRelatif = Mathf.RoundToInt(positionY - positionAfficheur.y);
-            int offset = 0;
-
-            if (posXRelatif == 0 && posYRelatif < 0)
-            {
-                offset = direction - (int)directions.down;
-                direction = (int)directions.down;
-            }
-            else if (posXRelatif == 0 && posYRelatif > 0)
-            {
-                offset = direction - (int)directions.up;
-                direction = (int)directions.up;
-
-            }
-            else if (posXRelatif < 0)
-            {
-                offset = direction - (int)directions.left;
-                direction = (int)directions.left;
-            }
-            else
-            {
-                offset = direction - (int)directions.right;
-                direction = (int)directions.right;
-            }
-            rotateEffects(-offset * (Mathf.PI / 2));
+            case directions.up:
+                activeZone.getZoneEffet().transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
+                break;
+            case directions.right:
+                activeZone.getZoneEffet().transform.rotation = Quaternion.AngleAxis(270, Vector3.forward);
+                break;
+            case directions.down:
+                activeZone.getZoneEffet().transform.rotation = Quaternion.AngleAxis(180, Vector3.forward);
+                break;
+            case directions.left:
+                activeZone.getZoneEffet().transform.rotation = Quaternion.AngleAxis(90, Vector3.forward);
+                break;
         }
     }
-
-    void updatePosCursor(ref int pos, int step, Vector3 translator)
+    bool updatePosCursor(Vector3 new_position, directions new_direction)
     {
-        pos += step;
-        Vector3 newPos = new Vector3(positionX, positionY, 0);
-        if (travelArea.ContainsKey(newPos) || (nbTiles == 1 && effectTiles != null))
+        if (new_position.magnitude<1f)
         {
-            transform.Translate(translator);
-            int n = effectTiles == null ? 0 : effectTiles.Count;
-
-            for (int i = 0; i < n; i++)
+            switch (new_direction)
             {
-                effectTiles[i].transform.position += (translator);
-                if (!travelArea.ContainsKey(newPos))
-                {
-                    effectTiles[i].gameObject.SetActive(false);
-                    validPosition = false;
-                }
-                else
-                {
-                    effectTiles[i].gameObject.SetActive(true);
-                    validPosition = true;
-
-                }
+                case directions.up:
+                    new_position.y += 1;
+                    return updatePosCursor(new_position, directions.up);
+                case directions.right:
+                    new_position.x += 1;
+                    return updatePosCursor(new_position, directions.right);
+                case directions.down:
+                    new_position.y -= 1;
+                    return updatePosCursor(new_position, directions.down);
+                case directions.left:
+                    new_position.x -= 1;
+                    return updatePosCursor(new_position, directions.left);
+                default:
+                    return false;
             }
-            adaptPosEffects();
+        }
+        if (this.listPositionsActif.Contains(new_position))
+        {
+            return changeCursorPosition(new_position);
         }
         else
         {
-            pos -= step;
+            switch (new_direction)
+            {
+                case directions.up:
+                    new_position.x += 1;
+                    break;
+                case directions.right:
+                    new_position.y -= 1;
+                    break;
+                case directions.down:
+                    new_position.x -= 1;
+                    break;
+                case directions.left:
+                    new_position.y += 1;
+                    break;
+            }
+            if (this.listPositionsActif.Contains(new_position))
+            {
+                return changeCursorPosition(new_position);
+            }
+            else
+            {
+                switch (new_direction)
+                {
+                    case directions.up:
+                        new_position.x -= 2;
+                        break;
+                    case directions.right:
+                        new_position.y += 2;
+                        break;
+                    case directions.down:
+                        new_position.x += 2;
+                        break;
+                    case directions.left:
+                        new_position.y -= 2;
+                        break;
+                }
+                if (this.listPositionsActif.Contains(new_position))
+                {
+                    return changeCursorPosition(new_position);
+                }
+            }
+            return false;
         }
-    }
 
-    public bool isValidPosition()
+    }
+    bool changeCursorPosition(Vector3 new_position)
     {
-        return validPosition;
+        this.transform.position = new_position;
+        this.positionX = (int)Mathf.Floor(new_position.x);
+        this.positionY = (int)Mathf.Floor(new_position.y);
+        this.calculOrientationCursor();
+        this.rotateEffects();
+        return true;
     }
-
-
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            updatePosCursor(ref positionY, 1, new Vector3(0, 1, 0));
+            updatePosCursor(new Vector3(this.positionX, this.positionY + 1, 0), directions.up);
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            updatePosCursor(ref positionY, -1, new Vector3(0, -1, 0));
-
+            updatePosCursor(new Vector3(this.positionX, this.positionY - 1, 0), directions.down);
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            updatePosCursor(ref positionX, -1, new Vector3(-1, 0, 0));
+            updatePosCursor(new Vector3(this.positionX - 1, this.positionY, 0), directions.left);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            updatePosCursor(ref positionX, 1, new Vector3(1, 0, 0));
-
+            updatePosCursor(new Vector3(this.positionX + 1, this.positionY, 0), directions.right);
         }
-        else if (Input.GetKeyDown(KeyCode.Return))
-        {
-
-        }
-       
     }
 
 }
