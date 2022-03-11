@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerTarget.parent = null;
         isControllable = true;
-        moveManager.AddResetPosition();
+        character.moveManager.AddResetPosition();
         TimeManager.instance.AddNewCharacter(this);
         
         character = gameObject.transform.GetComponent<Character>();
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if(TimeManager.currentTick == TimeManager.maxTick)
+        if(TimeManager.currentTick == TimeManager.maxTick)
         {
             character.reset();
         }

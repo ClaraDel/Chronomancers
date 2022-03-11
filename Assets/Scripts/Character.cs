@@ -213,16 +213,6 @@ public class Character : MonoBehaviour
         coolDowns();
     }
 
-    public virtual void castSkill1()
-    {
-        if (coolDownSkill1 == 0)
-        {
-            castingTicks = skill1CastTime;
-            castingSkill1 = true;
-        }
-        coolDowns();
-    }
-
     public virtual void launchSkill1()
     {
         coolDownSkill1 = skill1CoolDownTime;
@@ -245,16 +235,6 @@ public class Character : MonoBehaviour
         coolDowns();
     }
 
-    public virtual void attack() 
-    {
-        atk = new Attack(new[] {
-            new Vector3 { x = 1, y = 0, z = 0 } }
-       , normalAttackDamage, this
-           );
-        atk.setupAttack(position);
-        coolDowns();
-    }
-
     public virtual void castSkill1()
     {
         if (coolDownSkill1 == 0)
@@ -265,51 +245,35 @@ public class Character : MonoBehaviour
         coolDowns();
     }
 
-    public virtual void launchSkill1()
-    {
-        Transform characterTransform = Instantiate(GameAssets.i.pfCharacterTest, position, Quaternion.identity);
-        Character character = characterTransform.GetComponent<Character>();
-        character.initialise(health, damage);
-        character.setHealth(health);
-        character.setNormalAttackDamage(damage);
-        return character;
-    }
-
     // � override
     public void initialise(float health, int damage)
     {
-        setTeam(ScoreManager.instance.getCurrentTeam()); //A MODIFIER ET VOIR AVEC NOMANINA
-        //fill = GameObject.Find("Fill");
-        if (getTeam() == 0)
-        {
-            fill.GetComponent<Image>().color = Color.red;
-        }
-        else if (getTeam() == 1)
-        {
-            fill.GetComponent<Image>().color = Color.blue;
-        }
-        Debug.Log("init of character order" + gameObject.GetComponent<PlayerController>().id + " from team " + getTeam());
-        maxHealth = (int)health;
-        atk = new Attack(new[] {
-            new Vector3 { x = 1, y = 0, z = 0 },
-            new Vector3 { x = 2, y = 0, z = 0 } }
-        , damage, this
-            );
-        healthBar = (gameObject.transform.Find("pfHealthBar")).Find("HealthBar").gameObject;
-        healthBar.transform.GetComponent<Slider>().maxValue = this.maxHealth;
-        healthBar.transform.GetComponent<Slider>().value = maxHealth;
-        setHealth(health);
-        if (!alive)
-        {
-            castingTicks = skill2CastTime;
-            castingSkill2 = true;
-        }
-        coolDowns();
-    }
-
-    public virtual void launchSkill2()
-    {
-        coolDownSkill2 = skill2CoolDownTime;
+        // setTeam(ScoreManager.instance.getCurrentTeam()); //A MODIFIER ET VOIR AVEC NOMANINA
+        // //fill = GameObject.Find("Fill");
+        // if (getTeam() == 0)
+        // {
+        //     fill.GetComponent<Image>().color = Color.red;
+        // }
+        // else if (getTeam() == 1)
+        // {
+        //     fill.GetComponent<Image>().color = Color.blue;
+        // }
+        // Debug.Log("init of character order" + gameObject.GetComponent<PlayerController>().id + " from team " + getTeam());
+        // maxHealth = (int)health;
+        // atk = new Attack(new[] {
+        //     new Vector3 { x = 1, y = 0, z = 0 },
+        //     new Vector3 { x = 2, y = 0, z = 0 } }
+        // , damage, this
+        //     );
+        // healthBar = (gameObject.transform.Find("pfHealthBar")).Find("HealthBar").gameObject;
+        // healthBar.transform.GetComponent<Slider>().maxValue = this.maxHealth;
+        // healthBar.transform.GetComponent<Slider>().value = maxHealth;
+        // setHealth(health);
+        // if (!alive)
+        // {
+        //     castingTicks = skill2CastTime;
+        //     castingSkill2 = true;
+        // }
         coolDowns();
     }
 
@@ -326,24 +290,6 @@ public class Character : MonoBehaviour
     }
 
     public void heal(int pvs)
-    {
-        health += pvs;
-        if (health > maxHealth)
-        {
-            health = maxHealth;
-        }
-    }
-
-    public void shield (int nbturns)
-    {
-        shielded = true;
-        shieldDuration = nbturns;
-    }
-
-   
-
-    //� renommer en reset
-    public void reset()
     {
         health += pvs;
         if (health > maxHealth)

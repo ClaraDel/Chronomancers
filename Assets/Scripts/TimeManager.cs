@@ -89,7 +89,7 @@ public class TimeManager : MonoBehaviour
         EndTurnPanel.SetActive(false);
         currentTurn = currentTurn + 1;
         currentTick = 0;
-        ScoreManager.instance.SwitchTeam((currentTurn - 1) % 2);
+        // ScoreManager.instance.SwitchTeam((currentTurn - 1) % 2);
         Instantiate(prefabPlayer);
         
         //NB : Je n'ai pas mis de PlayTick ici afin d'être sûr que la méthode ResetPosition a bien été ajouté au tick 0 avant de lancer le tick

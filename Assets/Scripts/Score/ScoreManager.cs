@@ -14,11 +14,11 @@ public class ScoreManager : MonoBehaviour
     public int scoreTeam1;
     public int scoreTeam2;
     [Space]
-    [Header("Coordonnées des zones de contrôle :")]
+    [Header("Coordonnï¿½es des zones de contrï¿½le :")]
     public int hauteurArea;
     public int largeurArea;
-    public int coordXArea1; //positionX de la case en bas à gauche de l'area1
-    public int coordYArea1; //positionY de la case en bas à gauche de l'area1
+    public int coordXArea1; //positionX de la case en bas ï¿½ gauche de l'area1
+    public int coordYArea1; //positionY de la case en bas ï¿½ gauche de l'area1
     public int coordXArea2; 
     public int coordYArea2; 
 
@@ -37,7 +37,7 @@ public class ScoreManager : MonoBehaviour
             || posX >= coordXArea2 && posX < coordXArea2 + largeurArea && posY >= coordYArea2 && posY < coordYArea2 + hauteurArea)
         {
             //Debug.Log("Character from team " + character.getTeam() + " is in area !");
-            UpdateScore(1, character.getTeam());
+            // UpdateScore(1, character.getTeam());
         }
         
     }
@@ -51,7 +51,7 @@ public class ScoreManager : MonoBehaviour
         {
             scoreTeam2 = scoreTeam2 >= 0 ? scoreTeam2 += value : 0;
         }
-        //Pour plus tard potentiellement : créer un struct de team regroupant toutes les infos sur l'équipe (personnalisation)
+        //Pour plus tard potentiellement : crï¿½er un struct de team regroupant toutes les infos sur l'ï¿½quipe (personnalisation)
     }
 
     public void ResetScore()
