@@ -245,20 +245,27 @@ public class Character : MonoBehaviour
         coolDowns();
     }
 
-    private void setAlive(bool alive)
+    public virtual void attack() 
     {
-        this.alive = alive;
+        atk = new Attack(new[] {
+            new Vector3 { x = 1, y = 0, z = 0 } }
+       , normalAttackDamage, this
+           );
+        atk.setupAttack(position);
+        coolDowns();
     }
 
-    private void setHealth(float health)
+    public virtual void castSkill1()
     {
-        this.health = health;
+        if (coolDownSkill1 == 0)
+        {
+            castingTicks = skill1CastTime;
+            castingSkill1 = true;
+        }
+        coolDowns();
     }
 
-
-    //int pour savoir combien de tour il reste � cast
-
-    public static Character create(Vector3 position, float health, int damage)
+    public virtual void launchSkill1()
     {
         Transform characterTransform = Instantiate(GameAssets.i.pfCharacterTest, position, Quaternion.identity);
         Character character = characterTransform.GetComponent<Character>();
@@ -294,10 +301,17 @@ public class Character : MonoBehaviour
         setHealth(health);
         if (!alive)
         {
-            reset();
+            castingTicks = skill2CastTime;
+            castingSkill2 = true;
         }
+        coolDowns();
     }
 
+    public virtual void launchSkill2()
+    {
+        coolDownSkill2 = skill2CoolDownTime;
+        coolDowns();
+    }
 
     public void endAtk()
     { 
@@ -331,31 +345,18 @@ public class Character : MonoBehaviour
     //� renommer en reset
     public void reset()
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = characterSprite;
-        healthBar.SetActive(true);
-        alive = true;
-    }
-
-
-    public void die()
-    {
-        gameObject.GetComponent<SpriteRenderer>().sprite = ghostSprite;
-        healthBar.SetActive(false);
-        alive = false;
-    }
-
-    public void takeDamage(int damage)
-    {
-        if (alive)
+        health += pvs;
+        if (health > maxHealth)
         {
-            health = health - damage;
-            healthBar.transform.GetComponent<Slider>().value = health;
-
-            DamagePopup.create(-damage, gameObject);
+            health = maxHealth;
         }
-        
     }
-  
+
+    public void shield (int nbturns)
+    {
+        shielded = true;
+        shieldDuration = nbturns;
+    }
 
     // Update is called once per frame
     void Update()
