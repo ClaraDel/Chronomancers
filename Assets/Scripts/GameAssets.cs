@@ -26,6 +26,7 @@ public class GameAssets : MonoBehaviour
     public Transform pfRedTilePopup;
     public Transform pfCursor;
     public Transform pfAfficheur;
+    public Transform attackManager;
 
 
 }
