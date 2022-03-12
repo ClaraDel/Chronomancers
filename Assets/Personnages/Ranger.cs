@@ -15,12 +15,6 @@ public class Ranger : Character
         skill2CoolDownTime = 7;
     }
 
-    public override void setUpAttack()
-    {
-
-        base.coolDowns();
-    }
-
     // Tir pr�cis
     public override void launchSkill1()
     {
