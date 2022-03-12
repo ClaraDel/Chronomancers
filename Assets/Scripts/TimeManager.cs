@@ -51,6 +51,7 @@ public class TimeManager : MonoBehaviour
 
     public IEnumerator PlayTick()
     {
+
         isPlaying = true;
         Stack<Action> currentStack = turnTimeLine[currentTick];
         float index = 0.0f;
@@ -90,8 +91,27 @@ public class TimeManager : MonoBehaviour
         currentTurn = currentTurn + 1;
         currentTick = 0;
         ScoreManager.instance.SwitchTeam((currentTurn - 1) % 2);
-        Instantiate(prefabPlayer);
-        
+        GameObject go = Instantiate(prefabPlayer);
+        switch (go.GetComponent<Character>().getType())
+        {
+            case Character.type.roublard:
+                go.GetComponent<Roublard>().init(true);
+                break;
+            case Character.type.barbare:
+                go.GetComponent<Barbare>().init(true);
+                break;
+            case Character.type.paladin:
+                go.GetComponent<Paladin>().init(true);
+                break;
+            case Character.type.pyromancien:
+                go.GetComponent<Pyromancien>().init(true);
+                break;
+            case Character.type.ranger:
+                go.GetComponent<Ranger>().init(true);
+                break;
+            default:
+                break;
+        }
         //NB : Je n'ai pas mis de PlayTick ici afin d'être sûr que la méthode ResetPosition a bien été ajouté au tick 0 avant de lancer le tick
     }
 

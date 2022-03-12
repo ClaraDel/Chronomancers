@@ -25,8 +25,8 @@ public class RedTilePopup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject square = gameObject.transform.Find("Square").gameObject; 
-        spriteRenderer = square.transform.GetComponent<SpriteRenderer>();    
+        GameObject square = gameObject.transform.Find("Square").gameObject;
+        spriteRenderer = square.transform.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame

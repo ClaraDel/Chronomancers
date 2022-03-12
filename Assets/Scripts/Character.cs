@@ -5,212 +5,283 @@ using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
-    
-    private float health;
-    private float maxHealth;
-    private GameObject healthBar;
-    [SerializeField] private GameObject fill;
-    private float normalAttackDamage;
-    public Attack atk;
+
+    public enum type
+    {
+        roublard,
+        ranger,
+        pyromancien,
+        paladin,
+        barbare
+    }
+
+    public int health;
+    public int maxHealth;
+    public GameObject healthBar;
+
+    public int normalAttackDamage;
+    public Zone zoneBasicAttack;
+    public GameObject cursor;
+
     public Sprite ghostSprite;
-    private Sprite characterSprite;
-    private bool alive = true;
-    private int numberTickLeft;
-    private int team ; //vaut 0 s'il est dans l'équipe rouche et 1 s'il est dans l'équipe bleu
+    public Sprite characterSprite;
 
+    public bool alive;
+    public bool isBlue;
+    public type characterType;
 
-    /***********************************************getter********************************************/
-    public int getTeam()
+    public bool moveAction;
+
+    public int castingTicks;
+
+    public bool castingSkill1;
+    public int skill1CastTime;
+    public int skill1CoolDownTime;
+    public int coolDownSkill1;
+
+    public bool castingSkill2;
+    public int skill2CastTime;
+    public int skill2CoolDownTime;
+    public int coolDownSkill2 { get; set; }
+
+    public bool shielded { get; set; }
+    public int shieldDuration { get; set; }
+
+    public MoveManager moveManager;
+
+    public void init(int maxHealth, int damage, bool isBlue)
     {
-        return this.team;
-    }
-
-    private float getHealth()
-    {
-        return this.health;
-    }
-
-    private float getMaxHealth()
-    {
-        return this.maxHealth;
-    }
-
-    private GameObject getHealthBar()
-    {
-        return this.healthBar;
-    }
-
-    private float getNormalAttackDamage()
-    {
-        return normalAttackDamage;
-    }
-
-    private Sprite getGhostSprite()
-    {
-        return this.ghostSprite;
-    }
-
-    private Sprite getCharacterSprite() {
-        return this.characterSprite;
-    }
-
-    private Attack getAttack()
-    {
-        return this.atk;
-    }
-
-    public bool isAlive()
-    {
-        return alive;
-    }
-
-    /***********************************************setter********************************************/
-    public void setTeam(int team)
-    {
-        this.team = team;
-    }
-
-
-    private void getHealth(float health)
-    {
-        this.health = health;
-    }
-
-    private void getMaxHealth(float maxHealth)
-    {
+        Debug.Log("coucou");
         this.maxHealth = maxHealth;
+        this.health = maxHealth;
+
+        this.normalAttackDamage = damage;
+
+        this.alive = true;
+        this.isBlue = isBlue;
+
+        GameObject rangeArea = gameObject.transform.Find("BasicAttackRange").gameObject;
+
+        GameObject effectArea = gameObject.transform.Find("Cursor").Find("BasicAttackEffet").gameObject;
+
+        this.cursor = gameObject.transform.Find("Cursor").gameObject;
+
+
+        this.zoneBasicAttack = gameObject.AddComponent<Zone>();
+        this.zoneBasicAttack.init(rangeArea, effectArea);
+
+        rangeArea.SetActive(false);
+        effectArea.SetActive(false);
+
+        this.cursor.SetActive(false);
+
+        this.moveAction = false;
+
+        this.castingTicks = 0;
+
+        this.castingSkill1 = false;
+        this.coolDownSkill1 = 0;
+        this.castingSkill2 = false;
+        this.coolDownSkill2 = 0;
+
+        this.shielded = false;
+        this.shieldDuration = 0;
     }
+    public type getType() { return characterType; }
+    public bool isAlive() { return alive; }
+    public int getCastingTicks() { return castingTicks; }
+    public bool isMoveAction() { return moveAction; }
 
-    private void getHealthBar(GameObject healthBar)
-    {
-        this.healthBar = healthBar;
-    }
-
-    private void setNormalAttackDamage(float normalAttackDamage)
-    {
-        this.normalAttackDamage = normalAttackDamage;
-    }
-
-    private void setGhostSprite(Sprite ghostSprite)
-    {
-        this.ghostSprite = ghostSprite;
-    }
-
-    private void setCharacterSprite(Sprite characterSprite)
-    {
-        this.characterSprite = characterSprite;
-    }
-
-    private void setAttaque (Attack atk)
-    {
-        this.atk = atk;
-    }
-
-    private void setAlive(bool alive)
-    {
-        this.alive = alive;
-    }
-
-    private void setHealth(float health)
-    {
-        this.health = health;
-    }
-
-
-    //int pour savoir combien de tour il reste à cast
-
-    public static Character create(Vector3 position, float health, int damage)
-    {
-        Transform characterTransform = Instantiate(GameAssets.i.pfCharacterTest, position, Quaternion.identity);
-        Character character = characterTransform.GetComponent<Character>();
-        character.initialise(health, damage);
-        character.setHealth(health);
-        character.setNormalAttackDamage(damage);
-        return character;
-    }
-
-    // à override
-    public void initialise(float health, int damage)
-    {
-        setTeam(ScoreManager.instance.getCurrentTeam()); //A MODIFIER ET VOIR AVEC NOMANINA
-        //fill = GameObject.Find("Fill");
-        if (getTeam() == 0)
-        {
-            fill.GetComponent<Image>().color = Color.red;
-        }
-        else if (getTeam() == 1)
-        {
-            fill.GetComponent<Image>().color = Color.blue;
-        }
-        Debug.Log("init of character order" + gameObject.GetComponent<PlayerController>().id + " from team " + getTeam());
-        maxHealth = (int)health;
-        atk = new Attack(new[] {
-            new Vector3 { x = 1, y = 0, z = 0 },
-            new Vector3 { x = 2, y = 0, z = 0 } }
-        , damage, this
-            );
-        healthBar = (gameObject.transform.Find("pfHealthBar")).Find("HealthBar").gameObject;
-        healthBar.transform.GetComponent<Slider>().maxValue = this.maxHealth;
-        healthBar.transform.GetComponent<Slider>().value = maxHealth;
-        setHealth(health);
-        if (!alive)
-        {
-            reset();
-        }
-    }
-
-
-    public void endAtk()
-
-    {
-        atk.endAtk();
-        
-        atk = new Attack(new[] {
-            new Vector3 { x = 1, y = 0, z = 0 },
-            new Vector3 { x = 2, y = 0, z = 0 } }
-       , 50, this
-           );
-    }
-
-   
-
-    //à renommer en reset
-    public void reset()
+    public virtual void reset()
     {
         gameObject.GetComponent<SpriteRenderer>().sprite = characterSprite;
+        health = maxHealth;
+        healthBar.transform.GetComponent<Slider>().value = health;
         healthBar.SetActive(true);
         alive = true;
+        //moveManager.AddResetPosition();
     }
 
+    public void coolDowns()
+    {
+        if (coolDownSkill1 > 0)
+        {
+            coolDownSkill1--;
+        }
+        if (coolDownSkill2 > 0)
+        {
+            coolDownSkill2--;
+        }
+        if (shieldDuration > 0)
+        {
+            shieldDuration--;
+        }
+    }
 
-    public void die()
+    public virtual void die()
     {
         gameObject.GetComponent<SpriteRenderer>().sprite = ghostSprite;
+        health = 0;
+        healthBar.transform.GetComponent<Slider>().value = health;
         healthBar.SetActive(false);
         alive = false;
     }
 
-    public void takeDamage(int damage)
+    public virtual void takeDamage(Character attacker, int damage)
     {
+        Debug.Log(damage);
         if (alive)
         {
-            health = health - damage;
-            healthBar.transform.GetComponent<Slider>().value = health;
-
-            DamagePopup.create(-damage, gameObject);
+            if (shielded)
+            {
+                shielded = false;
+                shieldDuration = 0;
+            }
+            else
+            {
+                if (attacker.getType() == type.roublard && castingTicks > 0)
+                {
+                    damage = 2 * damage;
+                }
+                health = health - damage;
+                DamagePopup.create(damage, gameObject);
+                if (health > 0)
+                {
+                    healthBar.transform.GetComponent<Slider>().value = health;
+                }
+                else
+                {
+                    die();
+                }
+            }
         }
-        
     }
-  
+
+    public virtual void cast()
+    {
+        coolDowns();
+        if (castingSkill1)
+        {
+            castingSkill1 = false;
+            launchSkill1();
+        }
+        else if (castingSkill2)
+        {
+            castingSkill2 = false;
+            launchSkill2();
+        }
+        castingTicks = 0;
+    }
+
+    public virtual void wait()
+    {
+        StartCoroutine(TimeManager.instance.PlayTick());
+        coolDowns();
+    }
+
+    public virtual void casting()
+    {
+        castingTicks--;
+        wait();
+    }
+
+    public virtual void moveH()
+    {
+        moveManager.AddMove(Mathf.Round(Input.GetAxisRaw("Horizontal")), 0);
+        coolDowns();
+    }
+
+    public virtual void moveV()
+    {
+        moveManager.AddMove(0, Mathf.Round(Input.GetAxisRaw("Vertical")));
+        coolDowns();
+    }
+
+    public virtual void setUpAttack()
+    {
+        this.zoneBasicAttack.getZoneCiblable().SetActive(true);
+        cursor.SetActive(true);
+        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().setUp(zoneBasicAttack);
+
+        coolDowns();
+    }
+
+    public void addAttack()
+    {
+        GameObject Cursor = gameObject.transform.Find("Cursor").gameObject;
+        AttackManager.instance.addAttack(this, Cursor, zoneBasicAttack, normalAttackDamage);
+
+        this.zoneBasicAttack.getZoneCiblable().SetActive(false);
+        Cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+
+    }
+
+    public virtual void castSkill1()
+    {
+        if (coolDownSkill1 == 0)
+        {
+            castingTicks = skill1CastTime;
+            castingSkill1 = true;
+        }
+        coolDowns();
+    }
+
+    public virtual void launchSkill1()
+    {
+        coolDownSkill1 = skill1CoolDownTime;
+        coolDowns();
+    }
+
+    public virtual void castSkill2()
+    {
+        if (coolDownSkill2 == 0)
+        {
+            castingTicks = skill2CastTime;
+            castingSkill2 = true;
+        }
+        coolDowns();
+    }
+
+    public virtual void launchSkill2()
+    {
+        coolDownSkill2 = skill2CoolDownTime;
+        coolDowns();
+    }
+
+    public void endAtk()
+    {
+
+        coolDowns();
+        this.zoneBasicAttack.getZoneCiblable().SetActive(false);
+        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().gameObject.SetActive(false);
+    }
+
+    public void heal(int pvs)
+    {
+        health += pvs;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+    }
+
+    public void shield(int nbturns)
+    {
+        shielded = true;
+        shieldDuration = nbturns;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if(health <= 0 && alive)
-        {
-            characterSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
-            die();
-        }
-       
+    }
+
+    void Start()
+    {
+        moveManager = gameObject.GetComponent<MoveManager>();
+        moveManager.AddResetPosition();
+        healthBar = (gameObject.transform.Find("pfHealthBar")).Find("HealthBar").gameObject;
+        healthBar.transform.GetComponent<Slider>().maxValue = maxHealth;
+        healthBar.transform.GetComponent<Slider>().value = health;
     }
 }
