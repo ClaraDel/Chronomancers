@@ -44,7 +44,6 @@ public class TimeManager : MonoBehaviour
 
     public void AddNewCharacter(PlayerController new_character)
     {
-        new_character.setId(currentTurn);
         actifCharacter = new_character;
         characterOrder.Push(new_character);
     }

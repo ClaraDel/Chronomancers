@@ -18,6 +18,7 @@ public class Character : MonoBehaviour
     public int health;
     public int maxHealth;
     public GameObject healthBar;
+    [SerializeField] private GameObject fill;
 
     public int normalAttackDamage;
     public Zone zoneBasicAttack;
@@ -49,6 +50,9 @@ public class Character : MonoBehaviour
 
     public MoveManager moveManager;
 
+    private int team ; //vaut 0 s'il est dans l'�quipe rouche et 1 s'il est dans l'�quipe bleu
+
+
     public void init(int maxHealth, int damage, bool isBlue)
     {
         Debug.Log("coucou");
@@ -77,6 +81,17 @@ public class Character : MonoBehaviour
 
         this.moveAction = false;
 
+        setTeam(ScoreManager.instance.getCurrentTeam()); //A MODIFIER ET VOIR AVEC NOMANINA
+        //fill = GameObject.Find("Fill");
+        if (getTeam() == 0)
+        {
+            fill.GetComponent<Image>().color = Color.red;
+        }
+        else if (getTeam() == 1)
+        {
+            fill.GetComponent<Image>().color = Color.blue;
+        }
+
         this.castingTicks = 0;
 
         this.castingSkill1 = false;
@@ -91,6 +106,8 @@ public class Character : MonoBehaviour
     public bool isAlive() { return alive; }
     public int getCastingTicks() { return castingTicks; }
     public bool isMoveAction() { return moveAction; }
+    public int getTeam() { return this.team; }
+    public void setTeam(int team) { this.team = team; }
 
     public virtual void reset()
     {
@@ -99,7 +116,6 @@ public class Character : MonoBehaviour
         healthBar.transform.GetComponent<Slider>().value = health;
         healthBar.SetActive(true);
         alive = true;
-        //moveManager.AddResetPosition();
     }
 
     public void coolDowns()
