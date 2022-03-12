@@ -31,7 +31,11 @@ public class CursorManager : MonoBehaviour
         listPositionsActif = new List<Vector3>();
         foreach (var tile in zone.getTilesCiblable())
         {
-            listPositionsActif.Add(tile.transform.position);
+            Vector3 tmp = tile.transform.position;
+            tmp.x = (int)tmp.x;
+            tmp.y = (int)tmp.y;
+            tmp.z = (int)tmp.z;
+            listPositionsActif.Add(tmp);
         }
         this.activeZone = zone;
         transform.position = listPositionsActif[0];
@@ -74,26 +78,6 @@ public class CursorManager : MonoBehaviour
     }
     bool updatePosCursor(Vector3 new_position, directions new_direction)
     {
-        if (new_position.magnitude<1f)
-        {
-            switch (new_direction)
-            {
-                case directions.up:
-                    new_position.y += 1;
-                    return updatePosCursor(new_position, directions.up);
-                case directions.right:
-                    new_position.x += 1;
-                    return updatePosCursor(new_position, directions.right);
-                case directions.down:
-                    new_position.y -= 1;
-                    return updatePosCursor(new_position, directions.down);
-                case directions.left:
-                    new_position.x -= 1;
-                    return updatePosCursor(new_position, directions.left);
-                default:
-                    return false;
-            }
-        }
         if (this.listPositionsActif.Contains(new_position))
         {
             return changeCursorPosition(new_position);
