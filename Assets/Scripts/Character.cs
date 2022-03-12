@@ -64,8 +64,10 @@ public class Character : MonoBehaviour
         this.isBlue = isBlue;
 
         GameObject rangeArea = gameObject.transform.Find("BasicAttackRange").gameObject;
+        Debug.Log(rangeArea.transform.childCount);
 
         GameObject effectArea = gameObject.transform.Find("Cursor").Find("BasicAttackEffet").gameObject;
+        Debug.Log(effectArea.transform.childCount);
 
         this.cursor = gameObject.transform.Find("Cursor").gameObject;
 
