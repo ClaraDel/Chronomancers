@@ -13,15 +13,16 @@ public class ScoreManager : MonoBehaviour
     public GameObject MageBleu;
 
     [Header("Score :")]
-    public int scoreTeam1;
-    public int scoreTeam2;
+    private int scoreTeam1;
+    private int scoreTeam2;
+    private int TeamWinner;
     [Space]
     [Header("Coordonnées des zones de contrôle :")]
     public int hauteurArea;
     public int largeurArea;
     public int coordXArea1; //positionX de la case en bas à gauche de l'area1
     public int coordYArea1; //positionY de la case en bas à gauche de l'area1
-    public int coordXArea2; 
+    public int coordXArea2;
     public int coordYArea2; 
 
     private int currentTeam;
@@ -86,5 +87,12 @@ public class ScoreManager : MonoBehaviour
     public int getCurrentTeam()
     {
         return this.currentTeam;
+    }
+
+    public int getTeamWinner()
+    {
+        if (scoreTeam1 > scoreTeam2) return 0;
+        else if (scoreTeam1 < scoreTeam2) return 1;
+        else return 2; //égalité
     }
 }
