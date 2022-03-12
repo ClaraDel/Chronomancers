@@ -300,11 +300,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 3869857456230194036}
   fill: {fileID: 3869857456129712350}
   normalAttackDamage: 50
   zoneBasicAttack: {fileID: 0}
-  cursor: {fileID: 0}
+  cursor: {fileID: 406374710124440785}
   ghostSprite: {fileID: 21300000, guid: 2a833689455d8d2449cd821bf32982be, type: 3}
   characterSprite: {fileID: 21300000, guid: 672b218c46724a344b736c47c39671a7, type: 3}
   alive: 1
@@ -482,6 +482,11 @@ PrefabInstance:
 --- !u!224 &3869857455614446612 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3697863087585769701, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
+  m_PrefabInstance: {fileID: 496816772559664369}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3869857456230194036 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3697863086437347205, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
   m_PrefabInstance: {fileID: 496816772559664369}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &3869857456129712350 stripped
@@ -818,6 +823,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dde82f24ccf5154f8e3cd0c0d55da61, type: 3}
+--- !u!1 &406374710124440785 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4798279020879011020, guid: 3dde82f24ccf5154f8e3cd0c0d55da61, type: 3}
+  m_PrefabInstance: {fileID: 5131098599422734365}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &406374710124440791 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4798279020879011018, guid: 3dde82f24ccf5154f8e3cd0c0d55da61, type: 3}

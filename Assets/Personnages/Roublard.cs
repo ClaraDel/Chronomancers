@@ -11,7 +11,6 @@ public class Roublard : Character
 
     public void init(bool isBlue) {
         base.init(100, 50, isBlue);
-        Debug.Log("coucou");
         hidden = false;
         characterType = type.roublard;
         hiddenDuration = 0;
@@ -19,6 +18,13 @@ public class Roublard : Character
         skill1CoolDownTime = 5;
         skill2CastTime = 1;
         skill2CoolDownTime = 15;
+    }
+
+    public override void reset()
+    {
+        hidden = false;
+        hiddenDuration = 0;
+
     }
 
     public void testHidden() 

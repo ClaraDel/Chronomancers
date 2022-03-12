@@ -43,10 +43,10 @@ public class Character : MonoBehaviour
     public bool castingSkill2;
     public int skill2CastTime;
     public int skill2CoolDownTime;
-    public int coolDownSkill2 { get; set; }
+    public int coolDownSkill2;
 
-    public bool shielded { get; set; }
-    public int shieldDuration { get; set; }
+    public bool shielded;
+    public int shieldDuration;
 
     public MoveManager moveManager;
 
@@ -64,8 +64,10 @@ public class Character : MonoBehaviour
         this.isBlue = isBlue;
 
         GameObject rangeArea = gameObject.transform.Find("BasicAttackRange").gameObject;
+        Debug.Log(rangeArea.transform.childCount);
 
         GameObject effectArea = gameObject.transform.Find("Cursor").Find("BasicAttackEffet").gameObject;
+        Debug.Log(effectArea.transform.childCount);
 
         this.cursor = gameObject.transform.Find("Cursor").gameObject;
 
@@ -217,18 +219,16 @@ public class Character : MonoBehaviour
         this.zoneBasicAttack.getZoneCiblable().SetActive(true);
         cursor.SetActive(true);
         gameObject.transform.Find("Cursor").GetComponent<CursorManager>().setUp(zoneBasicAttack);
-
-        coolDowns();
     }
 
-    public void addAttack()
+    public virtual void addAttack()
     {
         GameObject Cursor = gameObject.transform.Find("Cursor").gameObject;
         AttackManager.instance.addAttack(this, Cursor, zoneBasicAttack, normalAttackDamage);
 
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
         Cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
-
+        coolDowns();
     }
 
     public virtual void castSkill1()
@@ -261,14 +261,6 @@ public class Character : MonoBehaviour
     {
         coolDownSkill2 = skill2CoolDownTime;
         coolDowns();
-    }
-
-    public void endAtk()
-    {
-
-        coolDowns();
-        this.zoneBasicAttack.getZoneCiblable().SetActive(false);
-        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().gameObject.SetActive(false);
     }
 
     public void heal(int pvs)

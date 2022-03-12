@@ -45,6 +45,18 @@ public class Paladin : Character
         {
             base.takeDamage(attacker, damage);
         }
+        else
+        {
+            if (shielded)
+            {
+                shielded = false;
+                shieldDuration = 0;
+            }
+            else
+            {
+                blocking = false;
+            }
+        }
     }
 
     public override void moveH()
