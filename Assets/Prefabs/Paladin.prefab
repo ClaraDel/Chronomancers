@@ -119,8 +119,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 370336178062066483}
-  positionSpawnX: 22
-  positionSpawnY: 20
+  positionSpawnXTeam0: 22
+  positionSpawnYTeam0: 1
+  positionSpawnXTeam1: 1
+  positionSpawnYTeam1: 10
 --- !u!61 &1435609316788995447
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -183,6 +185,7 @@ MonoBehaviour:
   health: 200
   maxHealth: 200
   healthBar: {fileID: 0}
+  fill: {fileID: 705147606306010423}
   normalAttackDamage: 50
   zoneBasicAttack: {fileID: 0}
   cursor: {fileID: 0}
@@ -190,7 +193,6 @@ MonoBehaviour:
   characterSprite: {fileID: 21300000, guid: 672b218c46724a344b736c47c39671a7, type: 3}
   alive: 0
   isBlue: 0
-  position: {x: 0, y: 0, z: 0}
   characterType: 3
   moveAction: 0
   castingTicks: 0
@@ -661,6 +663,11 @@ PrefabInstance:
 --- !u!224 &705147607938226685 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3697863087585769701, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
+  m_PrefabInstance: {fileID: 4222198187995947288}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &705147606306010423 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3697863087036945455, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
   m_PrefabInstance: {fileID: 4222198187995947288}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4381938720747831833

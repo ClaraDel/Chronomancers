@@ -10,7 +10,7 @@ public class Paladin : Character
     public bool waited;
 
     public void init(bool isBlue) {
-        base.init(100, 50, isBlue);
+        base.init(200, 50, isBlue);
         blocking = false;
         characterType = type.paladin;
         waited = false;
