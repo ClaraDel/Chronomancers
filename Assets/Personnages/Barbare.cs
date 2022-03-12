@@ -61,20 +61,20 @@ public class Barbare : Character
         base.moveV();
     }
 
-    public override void setUpAttack()
+    public override void addAttack()
     {
-        testEnraged();
+        GameObject Cursor = gameObject.transform.Find("Cursor").gameObject;
         if (enraged)
         {
-            // atk = new AttackManager(new[] {
-            // new Vector3 { x = 0, y = 0, z = 0 } }, normalAttackDamage, this, 1, 1);
-            // atk.setupAttack(position);
-            // base.coolDowns();
+            AttackManager.instance.addAttack(this, Cursor, zoneBasicAttack, 2*normalAttackDamage);
         }
         else
         {
-            // base.setUpAttack();
+            AttackManager.instance.addAttack(this, Cursor, zoneBasicAttack, normalAttackDamage);
         }
+        this.zoneBasicAttack.getZoneCiblable().SetActive(false);
+        Cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        coolDowns();
     }
 
     // GRO TAPE

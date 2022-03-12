@@ -188,7 +188,7 @@ MonoBehaviour:
   fill: {fileID: 705147606306010423}
   normalAttackDamage: 50
   zoneBasicAttack: {fileID: 0}
-  cursor: {fileID: 0}
+  cursor: {fileID: 1846829514385339279}
   ghostSprite: {fileID: 21300000, guid: 2a833689455d8d2449cd821bf32982be, type: 3}
   characterSprite: {fileID: 21300000, guid: 672b218c46724a344b736c47c39671a7, type: 3}
   alive: 0
@@ -596,11 +596,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3697863087585769701, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 14.4591
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3697863087585769701, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 2.3269
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3697863087585769701, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -842,6 +842,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dde82f24ccf5154f8e3cd0c0d55da61, type: 3}
+--- !u!1 &1846829514385339279 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4798279020879011020, guid: 3dde82f24ccf5154f8e3cd0c0d55da61, type: 3}
+  m_PrefabInstance: {fileID: 6572907931276603203}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1846829514385339273 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4798279020879011018, guid: 3dde82f24ccf5154f8e3cd0c0d55da61, type: 3}

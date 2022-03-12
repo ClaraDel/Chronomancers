@@ -93,6 +93,7 @@ public class TimeManager : MonoBehaviour
         currentTick = 0;
         ScoreManager.instance.SwitchTeam((currentTurn - 1) % 2);
         GameObject go = Instantiate(prefabPlayer);
+        Debug.Log(go.GetComponent<Character>().getType());
         switch (go.GetComponent<Character>().getType())
         {
             case Character.type.roublard:
