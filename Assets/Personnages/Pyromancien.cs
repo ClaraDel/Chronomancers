@@ -32,6 +32,7 @@ public class Pyromancien : Character
     public override void setUpAttack()
     {
         castingTicks = 1;
+        base.setUpAttack();
     }
 
     public void launchAttack()
