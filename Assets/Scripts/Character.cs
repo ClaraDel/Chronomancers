@@ -231,6 +231,13 @@ public class Character : MonoBehaviour
         coolDowns();
     }
 
+    public void endAtk()
+    {
+        coolDowns();
+        this.zoneBasicAttack.getZoneCiblable().SetActive(false);
+        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().gameObject.SetActive(false);
+    }
+
     public virtual void castSkill1()
     {
         if (coolDownSkill1 == 0)
