@@ -23,6 +23,15 @@ TextureImporter:
   - first:
       213: 9186422126402343179
     second: DeathRed_6
+  - first:
+      213: 2674531408892290055
+    second: DeathRed_7
+  - first:
+      213: 6272805911362334664
+    second: DeathRed_8
+  - first:
+      213: -346043339797258033
+    second: DeathRed_9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:

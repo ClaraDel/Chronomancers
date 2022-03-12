@@ -1,25 +1,31 @@
 fileFormatVersion: 2
-guid: ca1f54d14ab8f49489652c4eb225d0b8
+guid: 5d14f74d52b679e49bba7964bee2bba5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4723107735738678597
-    second: Idle_0
+      213: -6564221218513141589
+    second: Attack2Red_0
   - first:
-      213: -7385789195546760866
-    second: Idle_1
+      213: 5369159803495847202
+    second: Attack2Red_1
   - first:
-      213: 3234629978573100161
-    second: Idle_2
+      213: 4652486601064408871
+    second: Attack2Red_2
   - first:
-      213: 6373048116405451881
-    second: Idle_3
+      213: -4989422938849651986
+    second: Attack2Red_3
   - first:
-      213: 7264182050183361747
-    second: Idle_4
+      213: -774353296558752231
+    second: Attack2Red_4
   - first:
-      213: -2834552850196481573
-    second: Idle_5
+      213: 7950262957165964770
+    second: Attack2Red_5
+  - first:
+      213: 7407117326222581353
+    second: Attack2Red_6
+  - first:
+      213: 8090003313421408698
+    second: Attack2Red_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -109,7 +115,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Idle_0
+      name: Attack2Red_0
       rect:
         serializedVersion: 2
         x: 0
@@ -123,14 +129,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54d7a982679db8140800000000000000
-      internalID: 4723107735738678597
+      spriteID: ba0417b949337e4a0800000000000000
+      internalID: -6564221218513141589
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_1
+      name: Attack2Red_1
       rect:
         serializedVersion: 2
         x: 231
@@ -144,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e596485bbd7608990800000000000000
-      internalID: -7385789195546760866
+      spriteID: 2251dade466138a40800000000000000
+      internalID: 5369159803495847202
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_2
+      name: Attack2Red_2
       rect:
         serializedVersion: 2
         x: 462
@@ -165,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 184dda4e3d6b3ec20800000000000000
-      internalID: 3234629978573100161
+      spriteID: 72765bae9e3f09040800000000000000
+      internalID: 4652486601064408871
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_3
+      name: Attack2Red_3
       rect:
         serializedVersion: 2
         x: 693
@@ -186,14 +192,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 96cb1dafe7d917850800000000000000
-      internalID: 6373048116405451881
+      spriteID: ee25eafa54202cab0800000000000000
+      internalID: -4989422938849651986
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_4
+      name: Attack2Red_4
       rect:
         serializedVersion: 2
         x: 924
@@ -207,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d4b2fc561f8fc460800000000000000
-      internalID: 7264182050183361747
+      spriteID: 91e76fb87c1f045f0800000000000000
+      internalID: -774353296558752231
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle_5
+      name: Attack2Red_5
       rect:
         serializedVersion: 2
         x: 1155
@@ -228,8 +234,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd9b7fa6335a9a8d0800000000000000
-      internalID: -2834552850196481573
+      spriteID: 2ede2d88902055e60800000000000000
+      internalID: 7950262957165964770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack2Red_6
+      rect:
+        serializedVersion: 2
+        x: 1386
+        y: 0
+        width: 231
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96e532fa6fd5bc660800000000000000
+      internalID: 7407117326222581353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack2Red_7
+      rect:
+        serializedVersion: 2
+        x: 1617
+        y: 0
+        width: 231
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab95730a627754070800000000000000
+      internalID: 8090003313421408698
       vertices: []
       indices: 
       edges: []

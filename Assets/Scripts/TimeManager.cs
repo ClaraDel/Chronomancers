@@ -10,7 +10,7 @@ public class TimeManager : MonoBehaviour
 
     public static int currentTick;
     private int currentTurn;
-    public static int maxTick = 25;
+    public static int maxTick = 10;
     public static int maxTurn = 2;
 
     public PlayerController actifCharacter;
@@ -74,11 +74,13 @@ public class TimeManager : MonoBehaviour
         if (currentTurn == maxTurn)
         {
             // End Game Method
+            ScoreManager.instance.UpdateScoreTotal();
             Debug.Log("Fin de la partie !");
             fade.fadeIn();
         }
         else
         {
+            ScoreManager.instance.UpdateScoreTotal();
             ScoreManager.instance.ResetScore();
             EndTurnPanel.SetActive(true);
         }

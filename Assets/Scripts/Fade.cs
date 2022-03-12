@@ -8,11 +8,13 @@ public class Fade : MonoBehaviour
     [SerializeField] private CanvasGroup UIGroup;
     [SerializeField] private bool fadingIn = false;
     [SerializeField] private Button field;
+    [SerializeField] private WinMenu winMenu;
 
     public void fadeIn()
     {
         fadingIn = true;
         UIGroup.alpha = 0;
+        winMenu.ResultUI();
         gameObject.GetComponent<Canvas>().enabled = true;
     }
 

@@ -15,6 +15,8 @@ public class ScoreManager : MonoBehaviour
     [Header("Score :")]
     private int scoreTeam1;
     private int scoreTeam2;
+    private int scoreTeam1Total;
+    private int scoreTeam2Total;
     private int TeamWinner;
     [Space]
     [Header("Coordonnées des zones de contrôle :")]
@@ -63,6 +65,16 @@ public class ScoreManager : MonoBehaviour
         scoreTeam2 = 0;
     }
 
+    public void UpdateScoreTotal()
+    {
+        scoreTeam1Total = scoreTeam1;
+        scoreTeam2Total = scoreTeam2;
+        
+        if (scoreTeam1Total > scoreTeam2Total) TeamWinner = 0;
+        else if (scoreTeam1Total < scoreTeam2Total) TeamWinner = 1;
+        else TeamWinner = 2; //égalité
+        Debug.Log("scoreTeam1Total = " + scoreTeam1Total + ", scoreTeam2Total = " + scoreTeam2Total + ", TeamWinner = " + TeamWinner);
+    }
     public void SwitchTeam(int team)
     {
         currentTeam = team;
@@ -91,8 +103,7 @@ public class ScoreManager : MonoBehaviour
 
     public int getTeamWinner()
     {
-        if (scoreTeam1 > scoreTeam2) return 0;
-        else if (scoreTeam1 < scoreTeam2) return 1;
-        else return 2; //égalité
+        return TeamWinner;
+
     }
 }
