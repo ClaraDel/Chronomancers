@@ -9,17 +9,22 @@ public class ScoreManager : MonoBehaviour
 
     public GameObject UIScore1;
     public GameObject UIScore2;
+    public GameObject MageRouge;
+    public GameObject MageBleu;
 
     [Header("Score :")]
-    public int scoreTeam1;
-    public int scoreTeam2;
+    private int scoreTeam1;
+    private int scoreTeam2;
+    private int scoreTeam1Total;
+    private int scoreTeam2Total;
+    private int TeamWinner;
     [Space]
     [Header("Coordonnées des zones de contrôle :")]
     public int hauteurArea;
     public int largeurArea;
     public int coordXArea1; //positionX de la case en bas à gauche de l'area1
     public int coordYArea1; //positionY de la case en bas à gauche de l'area1
-    public int coordXArea2; 
+    public int coordXArea2;
     public int coordYArea2; 
 
     private int currentTeam;
@@ -60,9 +65,29 @@ public class ScoreManager : MonoBehaviour
         scoreTeam2 = 0;
     }
 
+    public void UpdateScoreTotal()
+    {
+        scoreTeam1Total = scoreTeam1;
+        scoreTeam2Total = scoreTeam2;
+        
+        if (scoreTeam1Total > scoreTeam2Total) TeamWinner = 0;
+        else if (scoreTeam1Total < scoreTeam2Total) TeamWinner = 1;
+        else TeamWinner = 2; //égalité
+        Debug.Log("scoreTeam1Total = " + scoreTeam1Total + ", scoreTeam2Total = " + scoreTeam2Total + ", TeamWinner = " + TeamWinner);
+    }
     public void SwitchTeam(int team)
     {
         currentTeam = team;
+        if(currentTeam == 0)
+        {
+            MageRouge.SetActive(true);
+            MageBleu.SetActive(false);
+        } else if (currentTeam == 1)
+        {
+            MageRouge.SetActive(false);
+            MageBleu.SetActive(true);
+        }
+        
         Debug.Log("Team n." + currentTeam);
     }
         
@@ -74,5 +99,11 @@ public class ScoreManager : MonoBehaviour
     public int getCurrentTeam()
     {
         return this.currentTeam;
+    }
+
+    public int getTeamWinner()
+    {
+        return TeamWinner;
+
     }
 }

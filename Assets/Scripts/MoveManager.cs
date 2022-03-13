@@ -39,7 +39,10 @@ public class MoveManager : MonoBehaviour
         entity.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 13 - posY;
 
         //Mise � jour du score
-        ScoreManager.instance.CheckInControlArea(entity.gameObject.GetComponent<Character>(), posX, posY);
+        if (entity.gameObject.GetComponent<Character>().alive)
+        {
+            ScoreManager.instance.CheckInControlArea(entity.gameObject.GetComponent<Character>(), posX, posY);
+        }
 
         //int orderLayout = (int)entity.gameObject.transform.position.y + (int)verticalDirection;
         entity.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 13 - posY;
