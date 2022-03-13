@@ -20,6 +20,14 @@ public class Paladin : Character
         skill2CoolDownTime = 5;
     }
 
+    public override void reset()
+    {
+        blocking = false;
+        waited = false;
+        gameObject.GetComponent<SpriteRenderer>().sprite = characterSprite;
+        base.reset();
+    }
+
     public void action()
     {
         blocking = false;
@@ -71,7 +79,7 @@ public class Paladin : Character
         base.moveV();
     }
 
-    public override void setUpAttack()
+    public override void addAttack()
     {
         action();
         base.setUpAttack();

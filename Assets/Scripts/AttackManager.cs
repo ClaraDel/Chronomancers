@@ -20,6 +20,12 @@ public class AttackManager : MonoBehaviour
         StartCoroutine(TimeManager.instance.PlayTick());
     }
 
+    public void addFutureAttack(Character attacker, GameObject cursor, Zone zone, int damage, int tick)
+    {
+        TimeManager.instance.AddFutureAction(() => attackTiles(attacker, cursor, zone, damage), tick);
+        StartCoroutine(TimeManager.instance.PlayTick());
+    }
+
     public void attackTiles(Character attacker, GameObject cursor, Zone zone, int damage)
     {
         if (attacker.isAlive())
@@ -38,7 +44,6 @@ public class AttackManager : MonoBehaviour
         hits = Physics2D.RaycastAll(cible, Vector3.forward);
         for (int i = 0; i < hits.Length; i++)
         {
-            Debug.Log(hits.Length);
             if (hits[i].collider != null)
             {
                 Character target = hits[i].collider.gameObject.GetComponent<Character>();
