@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public bool isControllable;
     public PauseToggle pause;
 
-    private Character character;
+    public Character character;
     private bool attackingProcess = false;
 
 

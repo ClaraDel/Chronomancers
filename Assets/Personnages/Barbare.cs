@@ -15,9 +15,9 @@ public class Barbare : Character
         characterType = type.barbare;
         rageDuration = 0;
         skill1CastTime = 1;
-        skill1CoolDownTime = 5;
+        maxCoolDownSkill1 = 5;
         skill2CastTime = 0;
-        skill2CoolDownTime = 7;
+        maxCoolDownSkill2 = 7;
     }
 
     public override void reset()
