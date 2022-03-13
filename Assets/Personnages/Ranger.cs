@@ -10,9 +10,9 @@ public class Ranger : Character
         base.init(100, 50, isBlue);
         characterType = type.ranger;
         skill1CastTime = 2;
-        skill1CoolDownTime = 10;
+        maxCoolDownSkill1 = 10;
         skill2CastTime = 0;
-        skill2CoolDownTime = 7;
+        maxCoolDownSkill2 = 7;
     }
 
     // Tir pr�cis

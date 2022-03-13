@@ -66,6 +66,7 @@ public class TimeManager : MonoBehaviour
         {
             EndTurn();
         }
+        actifCharacter.character.coolDowns();
     }
 
     public void EndTurn()

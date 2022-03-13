@@ -10,11 +10,6 @@ public class AttackManager : MonoBehaviour
         instance = this;
     }
 
-    public void endAtk()
-    {
-
-    }
-
     public void addAttack(Character attacker, GameObject cursor, Zone zone, int damage){
         TimeManager.instance.AddAction(() => attackTiles(attacker, cursor, zone, damage));
         StartCoroutine(TimeManager.instance.PlayTick());
@@ -46,21 +41,4 @@ public class AttackManager : MonoBehaviour
             }
         }
     }
-
-    // public bool applyAttack()
-    // {
-    //     if (!afficheur.cursor.isValidPosition())
-    //     {
-    //         return false;
-    //     }
-
-    //     Vector3 cursorPos = afficheur.getCursorPosition();
-    //     List<Vector3> zoneEffets = zone.getZoneEffets();
-
-    //     TimeManager.instance.AddAction(() => attackTiles(zoneEffets, cursorPos));
-    //     character.StartCoroutine(TimeManager.instance.PlayTick());
-
-    //     return true;
-    // }
-
 }

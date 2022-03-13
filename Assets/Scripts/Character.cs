@@ -22,6 +22,8 @@ public class Character : MonoBehaviour
 
     public int normalAttackDamage;
     public Zone zoneBasicAttack;
+    public Zone zoneSkill1;
+    public Zone zoneSkill2;
     public GameObject cursor;
 
     public Sprite ghostSprite;
@@ -37,13 +39,13 @@ public class Character : MonoBehaviour
 
     public bool castingSkill1;
     public int skill1CastTime;
-    public int skill1CoolDownTime;
     public int coolDownSkill1;
+    public int maxCoolDownSkill1;
 
     public bool castingSkill2;
     public int skill2CastTime;
-    public int skill2CoolDownTime;
     public int coolDownSkill2;
+    public int maxCoolDownSkill2;
 
     public bool shielded;
     public int shieldDuration;
@@ -63,21 +65,37 @@ public class Character : MonoBehaviour
         this.alive = true;
         this.isBlue = isBlue;
 
-        GameObject rangeArea = gameObject.transform.Find("BasicAttackRange").gameObject;
-        Debug.Log(rangeArea.transform.childCount);
+        // Zone Basic Attack init
+        GameObject rangeAreaBasicAttack = gameObject.transform.Find("BasicAttackRange").gameObject;
+        Debug.Log(rangeAreaBasicAttack.transform.childCount);
+        GameObject effectAreaBasicAttack = gameObject.transform.Find("Cursor").Find("BasicAttackEffet").gameObject;
+        Debug.Log(effectAreaBasicAttack.transform.childCount);
+        this.zoneBasicAttack = gameObject.AddComponent<Zone>();
+        this.zoneBasicAttack.init(rangeAreaBasicAttack, effectAreaBasicAttack);
+        rangeAreaBasicAttack.SetActive(false);
+        effectAreaBasicAttack.SetActive(false);
 
-        GameObject effectArea = gameObject.transform.Find("Cursor").Find("BasicAttackEffet").gameObject;
-        Debug.Log(effectArea.transform.childCount);
+        // Zone Skill 1 init
+        GameObject rangeAreaSkill1 = gameObject.transform.Find("Skill1Range").gameObject;
+        Debug.Log(rangeAreaSkill1.transform.childCount);
+        GameObject effectAreaSkill1 = gameObject.transform.Find("Cursor").Find("Skill1Effet").gameObject;
+        Debug.Log(effectAreaSkill1.transform.childCount);
+        this.zoneBasicAttack = gameObject.AddComponent<Zone>();
+        this.zoneBasicAttack.init(rangeAreaSkill1, effectAreaSkill1);
+        rangeAreaSkill1.SetActive(false);
+        effectAreaSkill1.SetActive(false);
+
+        // Zone Skill 2 init
+        GameObject rangeAreaSkill2 = gameObject.transform.Find("Skill1Range").gameObject;
+        Debug.Log(rangeAreaSkill2.transform.childCount);
+        GameObject effectAreaSkill2 = gameObject.transform.Find("Cursor").Find("Skill1Effet").gameObject;
+        Debug.Log(effectAreaSkill2.transform.childCount);
+        this.zoneBasicAttack = gameObject.AddComponent<Zone>();
+        this.zoneBasicAttack.init(rangeAreaSkill2, effectAreaSkill2);
+        rangeAreaSkill2.SetActive(false);
+        effectAreaSkill2.SetActive(false);
 
         this.cursor = gameObject.transform.Find("Cursor").gameObject;
-
-
-        this.zoneBasicAttack = gameObject.AddComponent<Zone>();
-        this.zoneBasicAttack.init(rangeArea, effectArea);
-
-        rangeArea.SetActive(false);
-        effectArea.SetActive(false);
-
         this.cursor.SetActive(false);
 
         this.moveAction = false;
@@ -119,31 +137,26 @@ public class Character : MonoBehaviour
         alive = true;
     }
 
-    public void coolDowns()
+    // Basic movement methods
+    public virtual void moveH()
     {
-        if (coolDownSkill1 > 0)
-        {
-            coolDownSkill1--;
-        }
-        if (coolDownSkill2 > 0)
-        {
-            coolDownSkill2--;
-        }
-        if (shieldDuration > 0)
-        {
-            shieldDuration--;
-        }
+        moveManager.AddMove(Mathf.Round(Input.GetAxisRaw("Horizontal")), 0);
+        
     }
 
-    public virtual void die()
+    public virtual void moveV()
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = ghostSprite;
-        health = 0;
-        healthBar.transform.GetComponent<Slider>().value = health;
-        healthBar.SetActive(false);
-        alive = false;
+        moveManager.AddMove(0, Mathf.Round(Input.GetAxisRaw("Vertical")));
+        
     }
 
+    public virtual void wait()
+    {
+        StartCoroutine(TimeManager.instance.PlayTick());
+        
+    }
+    
+    // taking Damage method
     public virtual void takeDamage(Character attacker, int damage)
     {
         Debug.Log(damage);
@@ -174,46 +187,31 @@ public class Character : MonoBehaviour
         }
     }
 
-    public virtual void cast()
+    public virtual void die()
     {
-        coolDowns();
-        if (castingSkill1)
+        gameObject.GetComponent<SpriteRenderer>().sprite = ghostSprite;
+        health = 0;
+        healthBar.transform.GetComponent<Slider>().value = health;
+        healthBar.SetActive(false);
+        alive = false;
+    }
+
+    public void shield(int nbturns)
+    {
+        shielded = true;
+        shieldDuration = nbturns;
+    }
+
+    public void heal(int pvs)
+    {
+        health += pvs;
+        if (health > maxHealth)
         {
-            castingSkill1 = false;
-            launchSkill1();
+            health = maxHealth;
         }
-        else if (castingSkill2)
-        {
-            castingSkill2 = false;
-            launchSkill2();
-        }
-        castingTicks = 0;
     }
 
-    public virtual void wait()
-    {
-        StartCoroutine(TimeManager.instance.PlayTick());
-        coolDowns();
-    }
-
-    public virtual void casting()
-    {
-        castingTicks--;
-        wait();
-    }
-
-    public virtual void moveH()
-    {
-        moveManager.AddMove(Mathf.Round(Input.GetAxisRaw("Horizontal")), 0);
-        coolDowns();
-    }
-
-    public virtual void moveV()
-    {
-        moveManager.AddMove(0, Mathf.Round(Input.GetAxisRaw("Vertical")));
-        coolDowns();
-    }
-
+    // Basic attack methods
     public virtual void setUpAttack()
     {
         this.zoneBasicAttack.getZoneCiblable().SetActive(true);
@@ -228,14 +226,53 @@ public class Character : MonoBehaviour
 
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
         Cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
-        coolDowns();
+        
     }
 
     public void endAtk()
     {
-        coolDowns();
+        
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
         gameObject.transform.Find("Cursor").GetComponent<CursorManager>().gameObject.SetActive(false);
+    }
+
+    // cast and cooldown methods
+    public virtual void casting()
+    {
+        castingTicks--;
+        wait();
+    }
+
+    public virtual void cast()
+    {
+        
+        if (castingSkill1)
+        {
+            castingSkill1 = false;
+            launchSkill1();
+        }
+        else if (castingSkill2)
+        {
+            castingSkill2 = false;
+            launchSkill2();
+        }
+        castingTicks = 0;
+    }
+
+    public void coolDowns()
+    {
+        if (coolDownSkill1 > 0)
+        {
+            coolDownSkill1--;
+        }
+        if (coolDownSkill2 > 0)
+        {
+            coolDownSkill2--;
+        }
+        if (shieldDuration > 0)
+        {
+            shieldDuration--;
+        }
     }
 
     public virtual void castSkill1()
@@ -245,13 +282,11 @@ public class Character : MonoBehaviour
             castingTicks = skill1CastTime;
             castingSkill1 = true;
         }
-        coolDowns();
     }
 
     public virtual void launchSkill1()
     {
-        coolDownSkill1 = skill1CoolDownTime;
-        coolDowns();
+        coolDownSkill1 = maxCoolDownSkill1;
     }
 
     public virtual void castSkill2()
@@ -261,28 +296,12 @@ public class Character : MonoBehaviour
             castingTicks = skill2CastTime;
             castingSkill2 = true;
         }
-        coolDowns();
     }
 
     public virtual void launchSkill2()
     {
-        coolDownSkill2 = skill2CoolDownTime;
-        coolDowns();
-    }
 
-    public void heal(int pvs)
-    {
-        health += pvs;
-        if (health > maxHealth)
-        {
-            health = maxHealth;
-        }
-    }
-
-    public void shield(int nbturns)
-    {
-        shielded = true;
-        shieldDuration = nbturns;
+        coolDownSkill2 = maxCoolDownSkill2;
     }
 
     // Update is called once per frame

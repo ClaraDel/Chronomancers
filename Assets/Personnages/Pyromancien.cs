@@ -13,9 +13,9 @@ public class Pyromancien : Character
         base.init(100, 50, isBlue);
         characterType = type.pyromancien;
         skill1CastTime = 4;
-        skill1CoolDownTime = 8;
+        maxCoolDownSkill1 = 8;
         skill2CastTime = 2;
-        skill2CoolDownTime = 10;
+        maxCoolDownSkill2 = 10;
         attacking = false;
     }
 

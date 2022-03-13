@@ -15,9 +15,9 @@ public class Paladin : Character
         characterType = type.paladin;
         waited = false;
         skill1CastTime = 1;
-        skill1CoolDownTime = 6;
+        maxCoolDownSkill1 = 6;
         skill2CastTime = 2;
-        skill2CoolDownTime = 5;
+        maxCoolDownSkill2 = 5;
     }
 
     public void action()
