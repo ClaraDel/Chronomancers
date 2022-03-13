@@ -30,6 +30,7 @@ public class WinMenu : MonoBehaviour
             stringVainqueur = "Egalité des deux équipes !";
             mageRouge.GetComponent<Animator>().Play("WizardRedAttack2");
             mageBleu.GetComponent<Animator>().Play("WizardBlueAttack2");
+            GameObject.Find("NomVainqueur").GetComponent<TextMeshProUGUI>().color = new Color32(255, 255, 255, 255); ;
         }
         GameObject.Find("NomVainqueur").GetComponent<TextMeshProUGUI>().text = stringVainqueur;
 
