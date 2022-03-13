@@ -5,10 +5,6 @@ using UnityEngine.UI;
 
 public class Pyromancien : Character
 {
-    public bool attacking;
-
-
-
     public void init(bool isBlue) {
         base.init(100, 50, isBlue);
         characterType = type.pyromancien;
@@ -16,28 +12,25 @@ public class Pyromancien : Character
         skill1CoolDownTime = 8;
         skill2CastTime = 2;
         skill2CoolDownTime = 10;
-        attacking = false;
     }
 
-    public override void cast()
+    public override void reset()
     {
-        if (attacking)
-        {
-            attacking = false;
-            launchAttack();
-        }
-        base.cast();
+        base.reset();
     }
 
-    public override void setUpAttack()
+    public override void addAttack()
     {
-        castingTicks = 1;
-    }
+        
+        GameObject Cursor = gameObject.transform.Find("Cursor").gameObject;
+        
+        base.wait();
+        
+        AttackManager.instance.addFutureAttack(this, Cursor, zoneBasicAttack, normalAttackDamage, TimeManager.currentTick);
 
-    public void launchAttack()
-    {
-        castingTicks = 1;
-        base.coolDowns();
+        this.zoneBasicAttack.getZoneCiblable().SetActive(false);
+        Cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        coolDowns();
     }
 
     // Explosion

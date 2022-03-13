@@ -18,14 +18,14 @@ public class Ranger : Character
     // Tir pr�cis
     public override void launchSkill1()
     {
-        // Creer objet fl�che et le faire spawner, puis lui faire infliger des d�gats apr�s 1 tour
+        // Creer objet fleche et le faire spawner, puis lui faire infliger des degats apres 1 tour
         base.launchSkill1();
     }
 
     // Dash
     public override void launchSkill2()
     {
-        // Ajouter mouvement vers case cibl�e � 3 de port�e
+        // Ajouter mouvement vers case ciblee a 3 de port�e
         base.launchSkill2();
     }
 

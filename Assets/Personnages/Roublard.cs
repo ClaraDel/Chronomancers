@@ -24,7 +24,8 @@ public class Roublard : Character
     {
         hidden = false;
         hiddenDuration = 0;
-
+        gameObject.GetComponent<SpriteRenderer>().sprite = characterSprite;
+        base.reset();
     }
 
     public void testHidden() 
@@ -79,14 +80,14 @@ public class Roublard : Character
         }
     }
 
-    public override void setUpAttack()
+    public override void addAttack()
     {
         if (hidden)
         {
             hidden = false;
             hiddenDuration = 0;
         }
-        base.setUpAttack();
+        base.addAttack();
     }
 
     // Trap

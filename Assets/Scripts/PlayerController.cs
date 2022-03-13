@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public Transform PlayerTarget;
     public bool isControllable;
-    private PauseToggle pause;
+    public PauseToggle pause;
 
     private Character character;
     private bool attackingProcess = false;

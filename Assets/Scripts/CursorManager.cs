@@ -17,7 +17,7 @@ public class CursorManager : MonoBehaviour
     directions direction = directions.up;
 
     private Zone activeZone;
-    private List<Vector3> listPositionsActif;
+    private List<Vector3Int> listPositionsActif;
 
     // Start is called before the first frame update
     void Start()
@@ -28,13 +28,13 @@ public class CursorManager : MonoBehaviour
     public void setUp(Zone zone)
     {
         zone.getZoneCiblable().SetActive(true);
-        listPositionsActif = new List<Vector3>();
+        listPositionsActif = new List<Vector3Int>();
         foreach (var tile in zone.getTilesCiblable())
         {
-            Vector3 tmp = tile.transform.position;
-            tmp.x = (int)tmp.x;
-            tmp.y = (int)tmp.y;
-            tmp.z = (int)tmp.z;
+            Vector3Int tmp = new Vector3Int(0,0,0);
+            tmp.x = (int)Mathf.RoundToInt(tile.transform.position.x);
+            tmp.y = (int)Mathf.RoundToInt(tile.transform.position.y);
+            tmp.z = (int)Mathf.RoundToInt(tile.transform.position.z);
             listPositionsActif.Add(tmp);
         }
         this.activeZone = zone;
@@ -63,20 +63,21 @@ public class CursorManager : MonoBehaviour
         switch (this.direction)
         {
             case directions.up:
-                activeZone.getZoneEffet().transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
+                activeZone.getZoneEffet().transform.rotation = Quaternion.AngleAxis(0, Vector3Int.forward);
                 break;
             case directions.right:
-                activeZone.getZoneEffet().transform.rotation = Quaternion.AngleAxis(270, Vector3.forward);
+                activeZone.getZoneEffet().transform.rotation = Quaternion.AngleAxis(270, Vector3Int.forward);
                 break;
             case directions.down:
-                activeZone.getZoneEffet().transform.rotation = Quaternion.AngleAxis(180, Vector3.forward);
+                activeZone.getZoneEffet().transform.rotation = Quaternion.AngleAxis(180, Vector3Int.forward);
                 break;
             case directions.left:
-                activeZone.getZoneEffet().transform.rotation = Quaternion.AngleAxis(90, Vector3.forward);
+                activeZone.getZoneEffet().transform.rotation = Quaternion.AngleAxis(90, Vector3Int.forward);
                 break;
         }
     }
-    bool updatePosCursor(Vector3 new_position, directions new_direction)
+
+    bool updatePosCursor(Vector3Int new_position, directions new_direction)
     {
         if (this.listPositionsActif.Contains(new_position))
         {
@@ -129,7 +130,7 @@ public class CursorManager : MonoBehaviour
         }
 
     }
-    bool changeCursorPosition(Vector3 new_position)
+    bool changeCursorPosition(Vector3Int new_position)
     {
         this.transform.position = new_position;
         this.positionX = (int)Mathf.Floor(new_position.x);
@@ -143,19 +144,19 @@ public class CursorManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            updatePosCursor(new Vector3(this.positionX, this.positionY + 1, 0), directions.up);
+            updatePosCursor(new Vector3Int(this.positionX, this.positionY + 1, 0), directions.up);
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            updatePosCursor(new Vector3(this.positionX, this.positionY - 1, 0), directions.down);
+            updatePosCursor(new Vector3Int(this.positionX, this.positionY - 1, 0), directions.down);
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            updatePosCursor(new Vector3(this.positionX - 1, this.positionY, 0), directions.left);
+            updatePosCursor(new Vector3Int(this.positionX - 1, this.positionY, 0), directions.left);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            updatePosCursor(new Vector3(this.positionX + 1, this.positionY, 0), directions.right);
+            updatePosCursor(new Vector3Int(this.positionX + 1, this.positionY, 0), directions.right);
         }
     }
 

@@ -42,6 +42,14 @@ public class TimeManager : MonoBehaviour
         turnTimeLine[currentTick].Push(calledMethod);
     }
 
+    public void AddFutureAction(Action calledMethod, int tick)
+    {
+        if (tick >= 0 && tick < maxTick)
+        {
+            turnTimeLine[tick].Push(calledMethod);
+        }
+    }
+
     public void AddNewCharacter(PlayerController new_character)
     {
         actifCharacter = new_character;
@@ -93,7 +101,6 @@ public class TimeManager : MonoBehaviour
         currentTick = 0;
         ScoreManager.instance.SwitchTeam((currentTurn - 1) % 2);
         GameObject go = Instantiate(prefabPlayer);
-        Debug.Log(go.GetComponent<Character>().getType());
         switch (go.GetComponent<Character>().getType())
         {
             case Character.type.roublard:

@@ -20,6 +20,14 @@ public class Barbare : Character
         skill2CoolDownTime = 7;
     }
 
+    public override void reset()
+    {
+        enraged = false;
+        rageDuration = 0;
+        gameObject.GetComponent<SpriteRenderer>().sprite = characterSprite;
+        base.reset();
+    }
+
     public void testEnraged() 
     {
         if (enraged)
