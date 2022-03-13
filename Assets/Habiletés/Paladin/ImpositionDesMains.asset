@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c674c2250017dc40b6ae065a32925a9, type: 3}
+  m_Name: ImpositionDesMains
+  m_EditorClassIdentifier: 
+  abilityName: Imposition des mains
+  description: "Soigne de la vie \xE0 lui-m\xEAme ou un alli\xE9 adjacent."
+  image: {fileID: 21300000, guid: 67e7030388d66bc48918cec0b612b7e4, type: 3}
+  canalisation: 1
+  limite: 6
