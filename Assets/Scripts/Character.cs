@@ -55,7 +55,6 @@ public class Character : MonoBehaviour
 
     public void init(int maxHealth, int damage, bool isBlue)
     {
-        Debug.Log("coucou");
         this.maxHealth = maxHealth;
         this.health = maxHealth;
 
