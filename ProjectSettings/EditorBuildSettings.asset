@@ -6,12 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/NomaninaSampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/UI.unity
-    guid: 5ba5ed6a190be8347a82143c7c980f33
+    path: Assets/Scenes/MainScene.unity
+    guid: 59e8f43a1e43c6448bd9b4786e9163f2
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
-    guid: 582035036fddac14b8eef3a904254ad2
+    guid: dc86b54cd6d18e64a958f84fbcec23c5
   m_configObjects: {}
