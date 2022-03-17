@@ -64,12 +64,14 @@ public class Slot : MonoBehaviour, IDropHandler
 
 
         eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<Image>().sprite = tmpSprite;
-        LobbyManager.instance.Add(gameObject.GetComponent<CharacterInfo>().characterPrefab);
+        LobbyManager.instance.Replace(eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().characterPrefab,
+            gameObject.GetComponent<CharacterInfo>().characterPrefab);
 
     }
 
     public void OnDrop(PointerEventData eventData)
     {
+        Debug.Log(RectTransformUtility.WorldToScreenPoint(Camera.main, new Vector3(21.5f,2.5f,0)));
         if(eventData.pointerDrag != null)
         {
             if(isEmpty)

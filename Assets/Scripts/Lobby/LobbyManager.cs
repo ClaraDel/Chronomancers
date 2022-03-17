@@ -29,7 +29,16 @@ public class LobbyManager : MonoBehaviour
     {
         lobbies[1].SetActive(false);
     }
-
+    public void Replace(GameObject oldGo, GameObject newGo)
+    {
+        for(int i = 0; i < prefabPlayers[team].Count; i++)
+        {
+            if(prefabPlayers[team][i] == oldGo)
+            {
+                prefabPlayers[team][i] = newGo;
+            }
+        }
+    }
     private void Awake()
     {
         instance = this;
