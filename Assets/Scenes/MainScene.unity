@@ -25658,7 +25658,7 @@ GameObject:
   - component: {fileID: 2113335511}
   - component: {fileID: 2113335512}
   m_Layer: 5
-  m_Name: SlotManagerSpawn
+  m_Name: SlotsManagerSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
