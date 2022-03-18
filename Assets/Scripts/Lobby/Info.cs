@@ -11,19 +11,9 @@ public class Info : MonoBehaviour
 
     }
 
-    public virtual void addInfo()
+    public virtual void addInfo(Info info)
     {
 
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -8,6 +8,14 @@ public class SelectionManager : MonoBehaviour
 
     public static GameObject selected;
 
+
+    public static void updateStatePreviousButton(Color normalColor)
+    {
+        selected.GetComponent<SelectController>().pressed = false;
+        selected.GetComponent<Image>().color = normalColor;
+        selected = null;
+    }
+
     public static void setSelected(GameObject go)
     {
         

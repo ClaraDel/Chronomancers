@@ -15,32 +15,41 @@ public class SelectController : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private Color normalColor;
     public bool pressed = false;
 
-    public void OnPointerEnter(PointerEventData eventData)
+    void displayUI()
     {
-        if (SelectionManager.selected != null && SelectionManager.selected != gameObject)
-        {
-            SelectionManager.selected.GetComponent<SelectController>().pressed = false;
-            SelectionManager.selected.GetComponent<Image>().color = normalColor;
-            SelectionManager.selected = null;
-        }
-
-        gameObject.GetComponent<Image>().color = highlightedColor;
-
         UIPerso.transform.Find("Name").GetComponent<TMP_Text>().text = characterInfo.nameCharacter;
         UIPerso.transform.Find("Attributs").Find("Atk").GetComponent<TMP_Text>().text = "Atk : " + characterInfo.atk.ToString();
         UIPerso.transform.Find("Attributs").Find("Hp").GetComponent<TMP_Text>().text = "hp : " + characterInfo.hp.ToString();
 
-        //transformer en for loop si il y a + ou - de 2 skills
-        UIPerso.transform.Find("Skills").Find("Skill1").GetComponent<SkillSelection>().ability = characterInfo.ability1;
-        UIPerso.transform.Find("Skills").Find("Skill1").GetComponent<Image>().sprite = characterInfo.ability1.image;
-        UIPerso.transform.Find("Skills").Find("Skill2").GetComponent<SkillSelection>().ability = characterInfo.ability2;
-        UIPerso.transform.Find("Skills").Find("Skill2").GetComponent<Image>().sprite = characterInfo.ability2.image;
+        for (int i = 1; i <= characterInfo.abilities.Length; i++)
+        {
+            UIPerso.transform.Find("Skills").Find("Skill" + i).GetComponent<SkillSelection>().ability = characterInfo.abilities[i-1];
+            UIPerso.transform.Find("Skills").Find("Skill" + i).GetComponent<Image>().sprite = characterInfo.abilities[i-1].image;
+        }
+    }
 
-        avatar.GetComponent<Image>().sprite = characterInfo.characterPrefab.GetComponent<SpriteRenderer>().sprite;
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (SelectionManager.selected != null && SelectionManager.selected != gameObject)
+        {
+            SelectionManager.updateStatePreviousButton(normalColor);
+        }
 
-        UIPerso.SetActive(true);
-        avatar.SetActive(true);
-        ability.SetActive(false);
+        gameObject.GetComponent<Image>().color = highlightedColor;
+
+
+
+        //display UI if they are present
+        if(UIPerso != null && avatar != null){
+            displayUI();
+
+            avatar.GetComponent<Image>().sprite = characterInfo.characterPrefab.GetComponent<SpriteRenderer>().sprite;
+
+            UIPerso.SetActive(true);
+            avatar.SetActive(true);
+            ability.SetActive(false);
+        }
+        
 
 
     }
@@ -50,10 +59,15 @@ public class SelectController : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         if (!pressed)
         {
-            UIPerso.SetActive(false);
-            avatar.SetActive(false);
-            ability.SetActive(false);
+            if (UIPerso != null && avatar != null)
+            {
+
+                UIPerso.SetActive(false);
+                avatar.SetActive(false);
+                ability.SetActive(false);
+            }
             gameObject.GetComponent<Image>().color = normalColor;
+
 
         }
     }
@@ -61,8 +75,11 @@ public class SelectController : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void OnPointerClick(PointerEventData eventData)
     {
         pressed = true;
-        UIPerso.SetActive(true);
-        avatar.SetActive(true);
+        if (UIPerso != null && avatar != null)
+        {
+            UIPerso.SetActive(true);
+            avatar.SetActive(true);
+        }
         SelectionManager.selected = gameObject;
     }
 

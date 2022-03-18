@@ -8,76 +8,57 @@ public class Slot : MonoBehaviour, IDropHandler
 {
     bool isEmpty = true;
 
+
+    public void removeSelf()
+    {
+        //delete sprite
+        gameObject.GetComponent<Image>().sprite = null;
+        Color tmpColor = gameObject.GetComponent<Image>().color;
+        tmpColor.a = 0;
+        gameObject.GetComponent<Image>().color = tmpColor;
+    }
+
     void placeCharacter(PointerEventData eventData)
     {
         isEmpty = false;
-        eventData.pointerDrag.GetComponent<RectTransform>().position = gameObject.transform.position;
-        gameObject.GetComponent<Image>().sprite = eventData.pointerDrag.GetComponent<Image>().sprite;
-        gameObject.GetComponent<Image>().color = new Color(1, 1, 1);
 
-        //temporaire
-        gameObject.GetComponent<CharacterInfo>().atk = eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().atk;
-        gameObject.GetComponent<CharacterInfo>().hp = eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().hp;
-        gameObject.GetComponent<CharacterInfo>().characterPrefab = eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().characterPrefab;
-        gameObject.GetComponent<CharacterInfo>().nameCharacter = eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().nameCharacter;
-        gameObject.GetComponent<CharacterInfo>().ability1 = eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().ability1;
-        gameObject.GetComponent<CharacterInfo>().ability2 = eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().ability2;
+        eventData.pointerDrag.GetComponent<RectTransform>().position = gameObject.transform.position;
+
+        gameObject.GetComponent<CharacterInfo>().addInfo(eventData.pointerDrag.GetComponent<CharacterInfo>());
 
         LobbyManager.instance.Add(gameObject.GetComponent<CharacterInfo>().characterPrefab);
+        LobbyManager.instance.Save(gameObject, eventData.pointerDrag);
 
-        Destroy(eventData.pointerDrag.GetComponent<RectTransform>().gameObject);
+        eventData.pointerDrag.GetComponent<RectTransform>().gameObject.SetActive(false);
+
     }
 
     void replaceCharacter(PointerEventData eventData)
     {
-
         eventData.pointerDrag.GetComponent<RectTransform>().position = gameObject.transform.position;
-        Sprite tmpSprite = gameObject.GetComponent<Image>().sprite;
-        gameObject.GetComponent<Image>().sprite = eventData.pointerDrag.GetComponent<Image>().sprite;
-        gameObject.GetComponent<Image>().color = new Color(1, 1, 1);
 
-        CharacterInfo tmpInfo = gameObject.GetComponent<CharacterInfo>();
-        int tmpAtk = tmpInfo.atk;
-        int tmpHp = tmpInfo.hp;
-        GameObject tmpPrefab = tmpInfo.characterPrefab;
-        string tmpName = tmpInfo.nameCharacter;
-        Ability tmpAbility1 = tmpInfo.ability1;
-        Ability tmpAbility2 = tmpInfo.ability2;
-
-
-        //temporaire
-        gameObject.GetComponent<CharacterInfo>().atk = eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().atk;
-        gameObject.GetComponent<CharacterInfo>().hp = eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().hp;
-        gameObject.GetComponent<CharacterInfo>().characterPrefab = eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().characterPrefab;
-        gameObject.GetComponent<CharacterInfo>().nameCharacter = eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().nameCharacter;
-        gameObject.GetComponent<CharacterInfo>().ability1 = eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().ability1;
-        gameObject.GetComponent<CharacterInfo>().ability2 = eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().ability2;
-
-
-        eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().atk = tmpAtk;
-        eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().hp = tmpHp;
-        eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().characterPrefab = tmpPrefab;
-        eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().nameCharacter = tmpName;
-        eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().ability1 = tmpAbility1;
-        eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().ability2 = tmpAbility2;
-
-
-
-        eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<Image>().sprite = tmpSprite;
+        CharacterInfo Info = gameObject.GetComponent<CharacterInfo>();
+        gameObject.GetComponent<CharacterInfo>().swapInfoWith(eventData.pointerDrag.GetComponent<CharacterInfo>());
+        
         LobbyManager.instance.Replace(eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().characterPrefab,
             gameObject.GetComponent<CharacterInfo>().characterPrefab);
+        LobbyManager.instance.Save(gameObject, eventData.pointerDrag);
 
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log(RectTransformUtility.WorldToScreenPoint(Camera.main, new Vector3(21.5f,2.5f,0)));
         if(eventData.pointerDrag != null)
         {
-            if(isEmpty)
+            if(isEmpty && !LobbyManager.instance.isFull())
             {
                 placeCharacter(eventData);
-            } else
+            } else if (LobbyManager.instance.isFull())
+            {
+                LobbyManager.instance.RemoveObjectFromLastSlot();
+                placeCharacter(eventData);
+            }
+            else
             {
                 replaceCharacter(eventData);
             }
