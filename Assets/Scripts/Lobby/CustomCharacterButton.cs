@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SelectController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class CustomCharacterButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] GameObject UIPerso;
     [SerializeField] GameObject avatar;
@@ -39,7 +39,7 @@ public class SelectController : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
 
 
-        //display UI if they are present
+        //display UI if they are not null
         if(UIPerso != null && avatar != null){
             displayUI();
 

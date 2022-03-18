@@ -24,10 +24,10 @@ public class Slot : MonoBehaviour, IDropHandler
 
         eventData.pointerDrag.GetComponent<RectTransform>().position = gameObject.transform.position;
 
-        gameObject.GetComponent<CharacterInfo>().addInfo(eventData.pointerDrag.GetComponent<CharacterInfo>());
+        gameObject.GetComponent<Info>().addInfo(eventData.pointerDrag.GetComponent<Info>());
 
-        LobbyManager.instance.Add(gameObject.GetComponent<CharacterInfo>().characterPrefab);
-        LobbyManager.instance.Save(gameObject, eventData.pointerDrag);
+        SlotsManager.instance.Add(gameObject.GetComponent<Info>());
+        SlotsManager.instance.Save(gameObject, eventData.pointerDrag);
 
         eventData.pointerDrag.GetComponent<RectTransform>().gameObject.SetActive(false);
 
@@ -37,12 +37,12 @@ public class Slot : MonoBehaviour, IDropHandler
     {
         eventData.pointerDrag.GetComponent<RectTransform>().position = gameObject.transform.position;
 
-        CharacterInfo Info = gameObject.GetComponent<CharacterInfo>();
-        gameObject.GetComponent<CharacterInfo>().swapInfoWith(eventData.pointerDrag.GetComponent<CharacterInfo>());
+        Info Info = gameObject.GetComponent<Info>();
+        gameObject.GetComponent<Info>().swapInfoWith(eventData.pointerDrag.GetComponent<Info>());
         
-        LobbyManager.instance.Replace(eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<CharacterInfo>().characterPrefab,
-            gameObject.GetComponent<CharacterInfo>().characterPrefab);
-        LobbyManager.instance.Save(gameObject, eventData.pointerDrag);
+        SlotsManager.instance.Replace(eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<Info>(),
+            gameObject.GetComponent<Info>());
+        SlotsManager.instance.Save(gameObject, eventData.pointerDrag);
 
     }
 
@@ -50,12 +50,12 @@ public class Slot : MonoBehaviour, IDropHandler
     {
         if(eventData.pointerDrag != null)
         {
-            if(isEmpty && !LobbyManager.instance.isFull())
+            if(isEmpty && !SlotsManager.instance.isFull())
             {
                 placeCharacter(eventData);
-            } else if (LobbyManager.instance.isFull())
+            } else if (SlotsManager.instance.isFull())
             {
-                LobbyManager.instance.RemoveObjectFromLastSlot();
+                SlotsManager.instance.RemoveObjectFromLastSlot();
                 placeCharacter(eventData);
             }
             else

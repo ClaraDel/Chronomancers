@@ -2,22 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LobbyManager : MonoBehaviour
+public class SlotsManager : MonoBehaviour
 {
-    public static LobbyManager instance { get; set;}
+    public static SlotsManager instance { get; set;}
 
     public int nbEquipedSlot = 0;
     public int team = 1;
     bool full = false;
 
+
     [SerializeField] int nbMax = 5;
     [SerializeField] GameObject[] lobbies;
 
-    private Dictionary<int, List<GameObject>> prefabPlayers;
+    private Dictionary<int, List<Info>> infos;
 
     public GameObject [] confirmButtons;
-    public GameObject lastFilledSlot;
-    public GameObject lastChosenCharacter;
+    private GameObject lastFilledSlot;
+    private GameObject lastChosenCharacter;
+
+    [SerializeField] GameObject [] targets;
+    List <Receiver> receivers;
 
     public virtual void showButtonEnd()
     {
@@ -40,22 +44,32 @@ public class LobbyManager : MonoBehaviour
     {
         lobbies[0].SetActive(false);
         lobbies[1].SetActive(true);
+        full = false;
+        EndCharacterSelection();
         team += 1;
 
+    }
+
+    public void EndCharacterSelection()
+    {
+        receivers[team - 1].receive(infos[team]);
     }
 
     public void confirmSelectionTeam2()
     {
         lobbies[1].SetActive(false);
+        targets[0].SetActive(true);
+        EndCharacterSelection();
+        instance.gameObject.SetActive(false);
     }
 
-    public void Replace(GameObject oldGo, GameObject newGo)
+    public void Replace(Info oldInfo, Info newInfo)
     {
-        for(int i = 0; i < prefabPlayers[team].Count; i++)
+        for(int i = 0; i < infos[team].Count; i++)
         {
-            if(prefabPlayers[team][i] == oldGo)
+            if(infos[team][i] == oldInfo)
             {
-                prefabPlayers[team][i] = newGo;
+                infos[team][i] = newInfo;
             }
         }
     }
@@ -63,11 +77,11 @@ public class LobbyManager : MonoBehaviour
     public void RemoveObjectFromLastSlot()
     {
         //remove prefab from the list of prefabs
-        for (int i = 0; i < prefabPlayers[team].Count; i++)
+        for (int i = 0; i < infos[team].Count; i++)
         {
-            if (prefabPlayers[team][i] == lastFilledSlot.GetComponent<CharacterInfo>().characterPrefab)
+            if (infos[team][i] == lastFilledSlot.GetComponent<CharacterInfo>().characterPrefab)
             {
-                prefabPlayers[team].RemoveAt(i);
+                infos[team].RemoveAt(i);
             }
         }
 
@@ -78,25 +92,32 @@ public class LobbyManager : MonoBehaviour
         lastChosenCharacter.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 
-    public void Add(GameObject player)
+    public void Add(Info playerInfo)
     {
-        if (!prefabPlayers.ContainsKey(team)){
-            prefabPlayers.Add(team, new List<GameObject>());
+        if (!infos.ContainsKey(team)){
+            infos.Add(team, new List<Info>());
         }
-        prefabPlayers[team].Add(player);
-        nbEquipedSlot = prefabPlayers[team].Count;
-        Debug.Log(nbEquipedSlot);
+        infos[team].Add(playerInfo);
+        nbEquipedSlot = infos[team].Count;
         if (nbEquipedSlot == nbMax)
         {
             full = true;
             showButtonEnd();
+            nbEquipedSlot = 0;
         }
     }
 
     private void Awake()
     {
         instance = this;
-        prefabPlayers = new Dictionary<int, List<GameObject>>();
+        infos = new Dictionary<int, List<Info>>();
+        receivers = new List<Receiver>();
+        if (targets != null)
+        {
+            for(int i = 0; i < targets.Length; i++)
+            {
+                receivers.Add(targets[i].GetComponentInChildren<Receiver>());
+            }
+        }
     }
-
 }
