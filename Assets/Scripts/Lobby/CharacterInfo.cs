@@ -10,6 +10,13 @@ public class CharacterInfo : Info
     public int hp;
     public string nameCharacter;
     public Ability [] abilities;
+    public Vector3 position;
+
+
+    public GameObject getPrefab()
+    {
+        return characterPrefab;
+    } 
 
     public override void swapInfoWith(Info otherInfo)
     {
@@ -27,6 +34,7 @@ public class CharacterInfo : Info
         otherInfo.addInfo(this);
 
         this.addCharacterInfo(tmpName, tmpPrefab, tmpHp, tmpAtk, tmpAbilities,tmpSprite,tmpColor);
+        position = gameObject.transform.position;
     }
 
     public  void addCharacterInfo(string nameCharacter,GameObject characterPrefab, int atk, int hp, Ability [] abilities, Sprite sprite, Color color)
@@ -46,6 +54,8 @@ public class CharacterInfo : Info
         addCharacterInfo(characterInfo.nameCharacter, characterInfo.characterPrefab, 
             characterInfo.atk, characterInfo.hp, characterInfo.abilities, 
             characterInfo.gameObject.GetComponent<Image>().sprite, characterInfo.gameObject.GetComponent<Image>().color);
+        position = gameObject.transform.position;
+
     }
 
     private void Start()

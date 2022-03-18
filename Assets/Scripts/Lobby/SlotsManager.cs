@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class SlotsManager : MonoBehaviour
 {
-    public static SlotsManager instance { get; set;}
 
     public int nbEquipedSlot = 0;
     public int team = 1;
-    bool full = false;
+    public bool full = false;
 
 
     [SerializeField] int nbMax = 5;
     [SerializeField] GameObject[] lobbies;
 
-    private Dictionary<int, List<Info>> infos;
+    public Dictionary<int, List<Info>> infos;
 
     public GameObject [] confirmButtons;
     private GameObject lastFilledSlot;
     private GameObject lastChosenCharacter;
 
     [SerializeField] GameObject [] targets;
-    List <Receiver> receivers;
+    public List <Receiver> receivers;
 
     public virtual void showButtonEnd()
     {
@@ -46,13 +45,37 @@ public class SlotsManager : MonoBehaviour
         lobbies[1].SetActive(true);
         full = false;
         EndCharacterSelection();
-        team += 1;
-
     }
 
     public void EndCharacterSelection()
     {
-        receivers[team - 1].receive(infos[team]);
+        if(receivers.Count == 1)
+            receivers[0].receive(infos[team]);
+        else
+            receivers[team - 1].receive(infos[team]);
+
+        removeUnEmptySlots();
+        infos[team] = new List<Info>();
+
+        team += 1;
+        if(team > 2)
+        {
+            team = 1;
+        }
+    }
+
+    public void removeUnEmptySlots()
+    {
+        if(nbMax == 1)
+        {
+            lastFilledSlot.SetActive(false);
+            lastFilledSlot.transform.parent.gameObject.SetActive(false);
+            nbEquipedSlot = 0;
+            full = false;
+        } else
+        {
+            //not necessary here
+        }
     }
 
     public void confirmSelectionTeam2()
@@ -60,7 +83,7 @@ public class SlotsManager : MonoBehaviour
         lobbies[1].SetActive(false);
         targets[0].SetActive(true);
         EndCharacterSelection();
-        instance.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     public void Replace(Info oldInfo, Info newInfo)
@@ -79,7 +102,7 @@ public class SlotsManager : MonoBehaviour
         //remove prefab from the list of prefabs
         for (int i = 0; i < infos[team].Count; i++)
         {
-            if (infos[team][i] == lastFilledSlot.GetComponent<CharacterInfo>().characterPrefab)
+            if (infos[team][i] == lastFilledSlot.GetComponent<CharacterInfo>())
             {
                 infos[team].RemoveAt(i);
             }
@@ -98,6 +121,8 @@ public class SlotsManager : MonoBehaviour
             infos.Add(team, new List<Info>());
         }
         infos[team].Add(playerInfo);
+        Debug.Log(infos[team].Count);
+
         nbEquipedSlot = infos[team].Count;
         if (nbEquipedSlot == nbMax)
         {
@@ -109,7 +134,6 @@ public class SlotsManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
         infos = new Dictionary<int, List<Info>>();
         receivers = new List<Receiver>();
         if (targets != null)

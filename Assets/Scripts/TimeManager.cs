@@ -11,7 +11,10 @@ public class TimeManager : MonoBehaviour
     public static int currentTick;
     private int currentTurn;
     public static int maxTick = 10;
-    public static int maxTurn = 2;
+    public static int maxTurn = 4;
+
+    [SerializeField] SlotsManager slotsManager;
+
 
     public PlayerController actifCharacter;
 
@@ -20,6 +23,7 @@ public class TimeManager : MonoBehaviour
     public GameObject prefabPlayer;
     public Stack<PlayerController> characterOrder;
     public GameObject EndTurnPanel;
+    public GameObject [] spawnZones;
     [SerializeField] private Fade fade;
     //Liste de piles d'appel de méthodes
     public List<Stack<Action>> turnTimeLine = new List<Stack<Action>>();
@@ -82,13 +86,17 @@ public class TimeManager : MonoBehaviour
         {
             ScoreManager.instance.UpdateScoreTotal();
             ScoreManager.instance.ResetScore();
-            EndTurnPanel.SetActive(true);
+            //EndTurnPanel.SetActive(true);
+            spawnZones[(currentTurn % 2)].SetActive(true);
+
         }
     }
 
     public void BeginTurn()
     {
         EndTurnPanel.SetActive(false);
+        slotsManager.EndCharacterSelection();
+        spawnZones[(currentTurn % 2)].SetActive(false);
         currentTurn = currentTurn + 1;
         currentTick = 0;
         ScoreManager.instance.SwitchTeam((currentTurn - 1) % 2);

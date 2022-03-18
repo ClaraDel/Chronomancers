@@ -7,6 +7,13 @@ using UnityEngine.UI;
 public class Slot : MonoBehaviour, IDropHandler
 {
     bool isEmpty = true;
+    [SerializeReference] SlotsManager slotsManager;
+
+
+    private void Start()
+    {
+
+    }
 
 
     public void removeSelf()
@@ -26,8 +33,8 @@ public class Slot : MonoBehaviour, IDropHandler
 
         gameObject.GetComponent<Info>().addInfo(eventData.pointerDrag.GetComponent<Info>());
 
-        SlotsManager.instance.Add(gameObject.GetComponent<Info>());
-        SlotsManager.instance.Save(gameObject, eventData.pointerDrag);
+        slotsManager.Add(gameObject.GetComponent<Info>());
+        slotsManager.Save(gameObject, eventData.pointerDrag);
 
         eventData.pointerDrag.GetComponent<RectTransform>().gameObject.SetActive(false);
 
@@ -40,9 +47,9 @@ public class Slot : MonoBehaviour, IDropHandler
         Info Info = gameObject.GetComponent<Info>();
         gameObject.GetComponent<Info>().swapInfoWith(eventData.pointerDrag.GetComponent<Info>());
         
-        SlotsManager.instance.Replace(eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<Info>(),
+        slotsManager.Replace(eventData.pointerDrag.GetComponent<RectTransform>().gameObject.GetComponent<Info>(),
             gameObject.GetComponent<Info>());
-        SlotsManager.instance.Save(gameObject, eventData.pointerDrag);
+        slotsManager.Save(gameObject, eventData.pointerDrag);
 
     }
 
@@ -50,12 +57,12 @@ public class Slot : MonoBehaviour, IDropHandler
     {
         if(eventData.pointerDrag != null)
         {
-            if(isEmpty && !SlotsManager.instance.isFull())
+            if(isEmpty && !slotsManager.isFull())
             {
                 placeCharacter(eventData);
-            } else if (SlotsManager.instance.isFull())
+            } else if (slotsManager.isFull())
             {
-                SlotsManager.instance.RemoveObjectFromLastSlot();
+                slotsManager.RemoveObjectFromLastSlot();
                 placeCharacter(eventData);
             }
             else
