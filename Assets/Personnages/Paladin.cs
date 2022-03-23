@@ -8,6 +8,7 @@ public class Paladin : Character
     public Sprite blockingSprite;
     public bool blocking { get; set; }
     public bool waited;
+    private Animator paladinAnim ;
 
     public void init(bool isBlue) {
         base.init(200, 50, isBlue);
@@ -18,6 +19,7 @@ public class Paladin : Character
         skill1CoolDownTime = 6;
         skill2CastTime = 2;
         skill2CoolDownTime = 5;
+        paladinAnim = transform.GetComponent <Animator> ();
     }
 
     public void action()
@@ -47,16 +49,34 @@ public class Paladin : Character
         }
     }
 
-    public override void moveH()
+    public override void die()
     {
-        action();
-        base.moveH();
+        paladinAnim.Play("deathPaladin");
     }
 
-    public override void moveV()
+    /*public override void addAttack()
+    {
+        //paladinAnim.Play("hitPaladin");
+    }*/
+
+    public override void moveH(float sens)
     {
         action();
-        base.moveV();
+        base.moveH(sens);
+        paladinAnim.Play("runPaladin");
+        /*if(sens > 0)
+        {
+            paladinAnim.Play("runPaladin");
+        }
+        sens > 0 ? : paladinAnim.Play("runPaladin"); : paladinAnim.Play("runPaladin");*/
+
+    }
+
+    public override void moveV(float sens)
+    {
+        action();
+        base.moveV(sens);
+        paladinAnim.Play("runPaladin");
     }
 
     public override void setUpAttack()
@@ -70,6 +90,7 @@ public class Paladin : Character
     {
         // R�cup�rer case cible et ajouter 50 pvs en utilisant heal sur tous les persos
         base.launchSkill1();
+        paladinAnim.Play("hillPaladin");
     }
 
     // Stealth
@@ -78,6 +99,7 @@ public class Paladin : Character
         // Trouver un moyen de faire en sorte que cooldown ne descende que si le bouclier n'existe plus
         // Donner shield aux persos gr�ce � collision et � m�thode shield
         base.launchSkill2();
+        paladinAnim.Play("hillPaladin");
     }
 
 }

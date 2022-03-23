@@ -80,19 +80,21 @@ public class PlayerController : MonoBehaviour
                     {
                         //Checks for wall collision
                         Vector3 start = new Vector3(PlayerTarget.position.x+0.5f, PlayerTarget.position.y+0.5f, 0f);
-                        Vector3 dir = new Vector3(Mathf.Round(Input.GetAxisRaw("Horizontal")), 0f, 0f);
+                        float sens = Mathf.Round(Input.GetAxisRaw("Horizontal"));
+                        Vector3 dir = new Vector3(sens, 0f, 0f);
                         RaycastHit hit;
                         if (Physics.Raycast(start, dir, out hit, 1f) && hit.transform.tag == "Wall") return;
-                        character.moveH();
+                        character.moveH(sens);
                     }
                     else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) >= 0.5f)
                     {
                         //Checks for wall collision
                         Vector3 start = new Vector3(PlayerTarget.position.x + 0.5f, PlayerTarget.position.y + 0.5f, 0f);
-                        Vector3 dir = new Vector3(0f, Mathf.Round(Input.GetAxisRaw("Vertical")), 0f);
+                        float sens = Mathf.Round(Input.GetAxisRaw("Horizontal"));
+                        Vector3 dir = new Vector3(0f, sens, 0f);
                         RaycastHit hit;
                         if (Physics.Raycast(start, dir, out hit, 1f) && hit.transform.tag == "Wall") return;
-                        character.moveV();
+                        character.moveV(sens);
                     }
                     else if (Input.GetKeyDown(KeyCode.Space))
                     {

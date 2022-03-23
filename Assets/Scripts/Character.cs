@@ -200,15 +200,15 @@ public class Character : MonoBehaviour
         wait();
     }
 
-    public virtual void moveH()
+    public virtual void moveH(float sens)
     {
-        moveManager.AddMove(Mathf.Round(Input.GetAxisRaw("Horizontal")), 0);
+        moveManager.AddMove(sens, 0);
         coolDowns();
     }
 
-    public virtual void moveV()
+    public virtual void moveV(float sens)
     {
-        moveManager.AddMove(0, Mathf.Round(Input.GetAxisRaw("Vertical")));
+        moveManager.AddMove(0, sens);
         coolDowns();
     }
 
@@ -225,6 +225,7 @@ public class Character : MonoBehaviour
     {
         GameObject Cursor = gameObject.transform.Find("Cursor").gameObject;
         AttackManager.instance.addAttack(this, Cursor, zoneBasicAttack, normalAttackDamage);
+        
 
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
         Cursor.GetComponent<CursorManager>().gameObject.SetActive(false);

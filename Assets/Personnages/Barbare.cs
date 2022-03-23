@@ -49,16 +49,16 @@ public class Barbare : Character
         base.wait();
     }
 
-    public override void moveH()
+    public override void moveH(float sens)
     {
         testEnraged();
-        base.moveH();
+        base.moveH(sens);
     }
 
-    public override void moveV()
+    public override void moveV(float sens)
     {
         testEnraged();
-        base.moveV();
+        base.moveV(sens);
     }
 
     public override void setUpAttack()

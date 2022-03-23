@@ -43,7 +43,7 @@ public class Roublard : Character
         base.wait();
     }
 
-    public override void moveH()
+    public override void moveH(float sens)
     {
         testHidden();
         if (hidden && !moveAction)
@@ -53,12 +53,12 @@ public class Roublard : Character
         }
         else
         {
-            base.moveH();
+            base.moveH(sens);
             moveAction = false;
         }
     }
 
-    public override void moveV()
+    public override void moveV(float sens)
     {
         testHidden();
         if (hidden && !moveAction)
@@ -68,7 +68,7 @@ public class Roublard : Character
         } 
         else
         {
-            base.moveV();
+            base.moveV(sens);
             moveAction = false;
         }
     }
