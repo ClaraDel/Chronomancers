@@ -455,7 +455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 282.83484, y: 89.313995}
+  m_AnchoredPosition: {x: 246, y: 49}
   m_SizeDelta: {x: 194.5703, y: 200.0361}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &32910043
@@ -11158,6 +11158,7 @@ GameObject:
   - component: {fileID: 1099238004}
   - component: {fileID: 1099238003}
   - component: {fileID: 1099238002}
+  - component: {fileID: 1099238005}
   m_Layer: 5
   m_Name: Avatar
   m_TagString: Untagged
@@ -11222,6 +11223,25 @@ RectTransform:
   m_AnchoredPosition: {x: -9.4577, y: 21.615}
   m_SizeDelta: {x: 262.6718, y: 268.62}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1099238005
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099238001}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dc5df8786c3afac4fb83646ce45496d6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1099677017
 GameObject:
   m_ObjectHideFlags: 0
@@ -16013,7 +16033,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1496827646
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16081,7 +16101,7 @@ Animator:
   m_GameObject: {fileID: 1496827645}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dc5df8786c3afac4fb83646ce45496d6, type: 2}
+  m_Controller: {fileID: 9100000, guid: d933b7bd891fb064f8ba2a7ba546be4b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -17312,6 +17332,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6935939197637270796, guid: fd4b3b89b325d2943a076180c5a8bdb6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ce1b8d79921a2945ba15d8ded4e854e, type: 3}
     - target: {fileID: 6935939197637270798, guid: fd4b3b89b325d2943a076180c5a8bdb6, type: 3}
       propertyPath: canvas
       value: 
@@ -26422,6 +26446,10 @@ PrefabInstance:
     - target: {fileID: 6935939198645315425, guid: fd4b3b89b325d2943a076180c5a8bdb6, type: 3}
       propertyPath: m_Name
       value: characters
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935939198645315425, guid: fd4b3b89b325d2943a076180c5a8bdb6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6935939198645315430, guid: fd4b3b89b325d2943a076180c5a8bdb6, type: 3}
       propertyPath: m_Pivot.x
