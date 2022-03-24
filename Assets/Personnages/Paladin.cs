@@ -61,22 +61,23 @@ public class Paladin : Character
 
     public override void moveH(float sens)
     {
-        action();
-        base.moveH(sens);
-        paladinAnim.Play("runPaladin");
-        /*if(sens > 0)
+        if (sens > 0)
+        {
+            paladinAnim.Play("runPaladinR");
+        }
+        else if (sens < 0)
         {
             paladinAnim.Play("runPaladin");
         }
-        sens > 0 ? : paladinAnim.Play("runPaladin"); : paladinAnim.Play("runPaladin");*/
-
+        action();
+        base.moveH(sens);
     }
 
     public override void moveV(float sens)
     {
+        paladinAnim.Play("runPaladin");
         action();
         base.moveV(sens);
-        paladinAnim.Play("runPaladin");
     }
 
     public override void setUpAttack()

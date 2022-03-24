@@ -8,6 +8,7 @@ public class Roublard : Character
     public Sprite hiddenSprite;
     public bool hidden;
     public int hiddenDuration;
+    private Animator roublardAnim;
 
     public void init(bool isBlue) {
         base.init(100, 50, isBlue);
@@ -19,6 +20,7 @@ public class Roublard : Character
         skill1CoolDownTime = 5;
         skill2CastTime = 1;
         skill2CoolDownTime = 15;
+        roublardAnim = transform.GetComponent<Animator>();
     }
 
     public void testHidden() 
@@ -53,6 +55,14 @@ public class Roublard : Character
         }
         else
         {
+            if (sens > 0)
+            {
+                roublardAnim.Play("runRoublardR");
+            }
+            else if (sens < 0)
+            {
+                roublardAnim.Play("runRoublard");
+            }
             base.moveH(sens);
             moveAction = false;
         }
@@ -68,6 +78,7 @@ public class Roublard : Character
         } 
         else
         {
+            roublardAnim.Play("runRoublard");
             base.moveV(sens);
             moveAction = false;
         }
