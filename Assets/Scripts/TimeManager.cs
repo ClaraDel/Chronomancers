@@ -39,6 +39,7 @@ public class TimeManager : MonoBehaviour
         isPlaying = false;
         currentTick = 0;
         currentTurn = 0;
+        TimeManagerText = GameObject.Find("TimeManagerText");
     }
 
     public void AddAction(Action calledMethod)
