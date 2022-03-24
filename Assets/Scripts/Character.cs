@@ -208,7 +208,7 @@ public class Character : MonoBehaviour
 
     public virtual void moveV(float sens)
     {
-        moveManager.AddMove(0, sens);
+        moveManager.AddMove(0, Mathf.Round(Input.GetAxisRaw("Vertical")));
         coolDowns();
     }
 
