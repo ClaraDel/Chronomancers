@@ -18,7 +18,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Start Controller");
         pause = GameObject.Find("PauseMenu").GetComponent<PauseToggle>();
+        Debug.Log(pause);
         PlayerTarget.parent = null;
         isControllable = true;
         TimeManager.instance.AddNewCharacter(this);

@@ -16,8 +16,8 @@ public class TimeManagerReceiver : Receiver
     public void spreadSpawnPos(CharacterInfo info)
     {
         Vector3 worldPosition = Camera.main.ScreenToWorldPoint(info.position);
-        info.characterPrefab.GetComponent<MoveManager>().positionSpawnXTeam0 = Mathf.RoundToInt(worldPosition.x -0.5f);
-        info.characterPrefab.GetComponent<MoveManager>().positionSpawnYTeam0 = Mathf.RoundToInt(worldPosition.y -0.5f);
+        info.characterPrefab.GetComponent<MoveManager>().positionSpawnXTeam0 = Mathf.RoundToInt(info.position.x -0.5f);
+        info.characterPrefab.GetComponent<MoveManager>().positionSpawnYTeam0 = Mathf.RoundToInt(info.position.y -0.5f);
     }
 
     // Start is called before the first frame update

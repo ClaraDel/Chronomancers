@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private Canvas pauseMenu;
+    [SerializeField] private CanvasGroup pauseMenu;
 
     public void ContinueGame()
     {
-        pauseMenu.enabled = false;
+        pauseMenu.alpha = 0.0f;
+        pauseMenu.blocksRaycasts = false;
     }
     public void QuitGame()
     {

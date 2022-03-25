@@ -16,7 +16,6 @@ public class Fade : MonoBehaviour
         UIGroup.alpha = 0;
         Debug.Log(winMenu);
         winMenu.ResultUI();
-        gameObject.GetComponent<Canvas>().enabled = true;
     }
 
     void Update()
@@ -32,6 +31,7 @@ public class Fade : MonoBehaviour
         if (UIGroup.alpha >= 1)
         {
             fadingIn = false;
+            UIGroup.blocksRaycasts = true;
             field.interactable = true;
         }
     }
