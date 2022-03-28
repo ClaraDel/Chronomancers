@@ -7,7 +7,7 @@ using TMPro;
 public class CharacterInfoPanel : MonoBehaviour
 {
     public static CharacterInfoPanel instance;
-    public CharacterInfoScriptable characterInfo;
+    public CharacterInfoScriptableObject characterInfo;
     public AbilitySet ability0;
     public AbilitySet ability1;
     public AbilitySet ability2;
@@ -25,8 +25,7 @@ public class CharacterInfoPanel : MonoBehaviour
 
     }
 
-    void setSelf(){
-        gameObject.GetComponent<CanvasGroup>().alpha = (gameObject.GetComponent<CanvasGroup>().alpha == 1)? 0 : 1;
+    public void setSelf(){
         ability0.ability = characterInfo.ability0;
         ability1.ability = characterInfo.ability1;
         ability2.ability = characterInfo.ability2;
@@ -34,18 +33,19 @@ public class CharacterInfoPanel : MonoBehaviour
         ability1.setValues();
         ability2.setValues();
         Nom.text = characterInfo.characterName;
-        image = characterInfo.profilPicture;
+        image.sprite = characterInfo.profilPicture;
         PV.text = characterInfo.maxPV.ToString();
         Attaque.text = characterInfo.valueAttaque.ToString();
         Description.text = characterInfo.description;
+        // Description.text = "Description Missing";
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            instance.GetComponent<CanvasGroup>().alpha = (instance.GetComponent<CanvasGroup>().alpha == 0.0f)? 1.0f : 0.0f;
-            // this.setSelf();
+            gameObject.GetComponent<CanvasGroup>().alpha = (gameObject.GetComponent<CanvasGroup>().alpha == 0.0f)? 1.0f : 0.0f;
+            this.setSelf();
         }
     }
 

@@ -9,14 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: e382c2ebb87522b479d586ba871b9e39, type: 3}
   m_Name: Barbare
-  m_EditorClassIdentifier: Assembly-CSharp::CharacterInfoScriptable
-  characterName: 
-  description: 
-  maxPV: 0
-  valueAttaque: 0
-  profilPicture: {fileID: 0}
+  m_EditorClassIdentifier: 
+  characterName: Barbare
+  description: "Guerrier provenant des plaines arides, il est la force \xE0 l'\xE9tat
+    pure. Le barbare fonce dans le tas afin d'infliguer un maximum de d\xE9g\xE2ts."
+  maxPV: 150
+  valueAttaque: 50
+  profilPicture: {fileID: 21300000, guid: 7d9dc08417cfd23449e4c56c5c8da148, type: 3}
   ability0: {fileID: 11400000, guid: 0d731e22abcb3ee428ec021c98bfcc11, type: 2}
   ability1: {fileID: 11400000, guid: 652dc6f43ab81fb4a935823dee9d9d32, type: 2}
   ability2: {fileID: 11400000, guid: 55073a54044a5664a9e1aacd79411684, type: 2}

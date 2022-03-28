@@ -15,7 +15,7 @@ public class Character : MonoBehaviour
         barbare
     }
     
-    public CharacterInfoScriptable selfInfo;
+    public CharacterInfoScriptableObject selfInfo;
     public int health;
     public int maxHealth;
     public GameObject healthBar;

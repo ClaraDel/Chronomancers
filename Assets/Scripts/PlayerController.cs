@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public bool isControllable;
     public PauseToggle pause;
 
-    private Character character;
+    public Character character;
     private bool attackingProcess = false;
 
 
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
         TimeManager.instance.AddNewCharacter(this);
         
         character = gameObject.transform.GetComponent<Character>();
+        CharacterInfoPanel.instance.characterInfo = character.selfInfo;
     }
 
     // Update is called once per frame
