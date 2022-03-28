@@ -284,6 +284,8 @@ GameObject:
   - component: {fileID: 897715139561412689}
   - component: {fileID: 897715139561412687}
   - component: {fileID: 897715139561412686}
+  - component: {fileID: 1038548768}
+  - component: {fileID: 1038548769}
   m_Layer: 5
   m_Name: CharacterInfoPanel
   m_TagString: Untagged
@@ -351,6 +353,39 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &1038548768
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897715139561412688}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!114 &1038548769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897715139561412688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8a7980a3424b834b925b5633817802f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterInfo: {fileID: 0}
+  ability0: {fileID: 0}
+  ability1: {fileID: 0}
+  ability2: {fileID: 0}
+  Nom: {fileID: 0}
+  image: {fileID: 0}
+  PV: {fileID: 0}
+  Attaque: {fileID: 0}
+  Description: {fileID: 0}
 --- !u!1 &897715139616217135
 GameObject:
   m_ObjectHideFlags: 0
