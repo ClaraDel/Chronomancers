@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e382c2ebb87522b479d586ba871b9e39, type: 3}
+  m_Name: Ranger
+  m_EditorClassIdentifier: 
+  characterName: Ranger
+  description: "Archer hors pair, il est capable d'\xE9liminer les menaces ennemies
+    sur de tr\xE8s longues distances."
+  maxPV: 125
+  valueAttaque: 50
+  profilPicture: {fileID: 21300000, guid: 6710bae16134b2444af368e76c1c03a7, type: 3}
+  ability0: {fileID: 11400000, guid: 9605a86515905e940a51e2e77cd688e0, type: 2}
+  ability1: {fileID: 11400000, guid: bcb53a6b7bacac24c98076fc402ee37c, type: 2}
+  ability2: {fileID: 11400000, guid: 341c7fb79d5a22e4cb11b99a33910676, type: 2}

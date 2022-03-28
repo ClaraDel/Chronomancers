@@ -8,9 +8,9 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public Transform PlayerTarget;
     public bool isControllable;
-    private PauseToggle pause;
+    public PauseToggle pause;
 
-    private Character character;
+    public Character character;
     private bool attackingProcess = false;
 
 
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
         TimeManager.instance.AddNewCharacter(this);
         
         character = gameObject.transform.GetComponent<Character>();
+        CharacterInfoPanel.instance.characterInfo = character.selfInfo;
     }
 
     // Update is called once per frame
@@ -35,7 +36,7 @@ public class PlayerController : MonoBehaviour
         {
             character.reset();
         }
-        if (pause.getIfPaused()) return;
+        if (pause.getIfPaused() || CharacterInfoPanel.instance.getIfPaused()) return;
 
         if (isControllable && !TimeManager.instance.isPlaying)
         {

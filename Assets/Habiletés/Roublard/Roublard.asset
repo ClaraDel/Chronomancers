@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e382c2ebb87522b479d586ba871b9e39, type: 3}
+  m_Name: Roublard
+  m_EditorClassIdentifier: 
+  characterName: Roublard
+  description: "Rapide et rus\xE9, ce voleur prend de l'avance sur le champ de bataille
+    afin de le pi\xE9ger et g\xEAner ses ennemies avant de les finir avec son attaque
+    sournoise."
+  maxPV: 100
+  valueAttaque: 50
+  profilPicture: {fileID: 21300000, guid: 8b33b15641f986b479a957e5d7e24ef3, type: 3}
+  ability0: {fileID: 11400000, guid: d0725fdf28b5660438af3d8aeef783e5, type: 2}
+  ability1: {fileID: 11400000, guid: 48029d7b33fc63841b72e170f8b06cde, type: 2}
+  ability2: {fileID: 11400000, guid: 832a5b16d7591c44d9e3126ba442f2ca, type: 2}

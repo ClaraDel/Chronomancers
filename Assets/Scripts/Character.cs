@@ -14,7 +14,8 @@ public class Character : MonoBehaviour
         paladin,
         barbare
     }
-
+    
+    public CharacterInfoScriptableObject selfInfo;
     public int health;
     public int maxHealth;
     public GameObject healthBar;

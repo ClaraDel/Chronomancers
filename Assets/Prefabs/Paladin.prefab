@@ -106,6 +106,7 @@ MonoBehaviour:
   moveSpeed: 5
   PlayerTarget: {fileID: 793844579650562096}
   isControllable: 0
+  pause: {fileID: 0}
 --- !u!114 &370336178062066480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3947cc2ada6b44c46826cee3fe2fefaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfInfo: {fileID: 11400000, guid: d25e22fcf9a0f1d44808a0c068b53415, type: 2}
   health: 200
   maxHealth: 200
   healthBar: {fileID: 0}
