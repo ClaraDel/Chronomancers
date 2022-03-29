@@ -12,6 +12,7 @@ public class SlotsManager : MonoBehaviour
 
     [SerializeField] int nbMax = 5;
     [SerializeField] GameObject[] lobbies;
+    
 
     public Dictionary<int, List<Info>> infos;
 
@@ -82,6 +83,7 @@ public class SlotsManager : MonoBehaviour
     {
         lobbies[1].SetActive(false);
         targets[0].SetActive(true);
+        //characterInfoPanel.SetActive(true);
         EndCharacterSelection();
         gameObject.SetActive(false);
     }
@@ -143,5 +145,10 @@ public class SlotsManager : MonoBehaviour
                 receivers.Add(targets[i].GetComponentInChildren<Receiver>());
             }
         }
+    }
+
+    private void Start()
+    {
+        //print(GetInstanceID());
     }
 }
