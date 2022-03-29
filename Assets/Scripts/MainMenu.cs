@@ -32,7 +32,7 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("START");
-        SceneManager.LoadScene("MainScene1");
+        SceneManager.LoadScene("MainScene");
     }
 
     public void SetFullscreen()
