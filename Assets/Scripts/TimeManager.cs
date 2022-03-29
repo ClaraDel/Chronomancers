@@ -25,6 +25,7 @@ public class TimeManager : MonoBehaviour
     public GameObject EndTurnPanel;
     public GameObject [] spawnZones;
     [SerializeField] private Fade fade;
+    [SerializeField] GameObject characterInfoPanel;
     //Liste de piles d'appel de méthodes
     public List<Stack<Action>> turnTimeLine = new List<Stack<Action>>();
 
@@ -40,6 +41,7 @@ public class TimeManager : MonoBehaviour
         currentTick = 0;
         currentTurn = 0;
         TimeManagerText = GameObject.Find("TimeManagerText");
+        characterInfoPanel.SetActive(false);
     }
 
     public void AddAction(Action calledMethod)
@@ -97,6 +99,7 @@ public class TimeManager : MonoBehaviour
     {
         EndTurnPanel.SetActive(false);
         slotsManager.EndCharacterSelection();
+        characterInfoPanel.SetActive(true);
         spawnZones[(currentTurn % 2)].SetActive(false);
         currentTurn = currentTurn + 1;
         currentTick = 0;
