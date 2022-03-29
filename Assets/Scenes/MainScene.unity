@@ -18870,6 +18870,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UITMP
       objectReference: {fileID: 0}
+    - target: {fileID: 8626632110552087919, guid: d15f63821abcc524a9022299eff9e514, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d15f63821abcc524a9022299eff9e514, type: 3}
 --- !u!114 &8108878915835307775 stripped
