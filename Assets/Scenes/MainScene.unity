@@ -1390,6 +1390,11 @@ Transform:
   m_Father: {fileID: 542667559}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &190328617 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2440454056036835829, guid: d15f63821abcc524a9022299eff9e514, type: 3}
+  m_PrefabInstance: {fileID: 6070695204005007432}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &192721779
 GameObject:
   m_ObjectHideFlags: 0
@@ -5301,6 +5306,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &690651395 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2440454055646192690, guid: d15f63821abcc524a9022299eff9e514, type: 3}
+  m_PrefabInstance: {fileID: 6070695204005007432}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &694403627
 GameObject:
   m_ObjectHideFlags: 0
@@ -17247,6 +17257,11 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1932386145 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5312699396793954491, guid: d15f63821abcc524a9022299eff9e514, type: 3}
+  m_PrefabInstance: {fileID: 6070695204005007432}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1953200397
 GameObject:
   m_ObjectHideFlags: 0
@@ -18363,11 +18378,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8484248153901208998, guid: d15f63821abcc524a9022299eff9e514, type: 3}
   m_PrefabInstance: {fileID: 6070695204005007432}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3869434544892395724 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7029431997228191876, guid: d15f63821abcc524a9022299eff9e514, type: 3}
-  m_PrefabInstance: {fileID: 6070695204005007432}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5250173351683704511
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18430,7 +18440,7 @@ PrefabInstance:
     - target: {fileID: 5250173352582057663, guid: 37c8fcfb80b773d47863ed63d798f5ca, type: 3}
       propertyPath: MageBleu
       value: 
-      objectReference: {fileID: 7453419370851751656}
+      objectReference: {fileID: 690651395}
     - target: {fileID: 5250173352582057663, guid: 37c8fcfb80b773d47863ed63d798f5ca, type: 3}
       propertyPath: UIScore1
       value: 
@@ -18442,7 +18452,7 @@ PrefabInstance:
     - target: {fileID: 5250173352582057663, guid: 37c8fcfb80b773d47863ed63d798f5ca, type: 3}
       propertyPath: MageRouge
       value: 
-      objectReference: {fileID: 3869434544892395724}
+      objectReference: {fileID: 190328617}
     - target: {fileID: 5250173352582057663, guid: 37c8fcfb80b773d47863ed63d798f5ca, type: 3}
       propertyPath: coordXArea1
       value: 6
@@ -18760,10 +18770,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6070695204540058974, guid: d15f63821abcc524a9022299eff9e514, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 8080992554439909797, guid: d15f63821abcc524a9022299eff9e514, type: 3}
+      propertyPath: NomVainqueur
+      value: 
+      objectReference: {fileID: 1932386145}
     - target: {fileID: 8484248154259767169, guid: d15f63821abcc524a9022299eff9e514, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -18862,11 +18872,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d15f63821abcc524a9022299eff9e514, type: 3}
---- !u!1 &7453419370851751656 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3697644901035443872, guid: d15f63821abcc524a9022299eff9e514, type: 3}
-  m_PrefabInstance: {fileID: 6070695204005007432}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8108878915835307775 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2645855394687514295, guid: d15f63821abcc524a9022299eff9e514, type: 3}
