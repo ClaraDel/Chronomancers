@@ -37,8 +37,6 @@ public class CustomCharacterButton : MonoBehaviour, IPointerEnterHandler, IPoint
 
         gameObject.GetComponent<Image>().color = highlightedColor;
 
-
-
         //display UI if they are not null
         if(UIPerso != null && avatar != null){
             displayUI();
@@ -62,13 +60,13 @@ public class CustomCharacterButton : MonoBehaviour, IPointerEnterHandler, IPoint
     {
         if (!pressed)
         {
-            if (UIPerso != null && avatar != null)
+            /*if (UIPerso != null && avatar != null)
             {
 
                 UIPerso.SetActive(false);
                 avatar.SetActive(false);
                 ability.SetActive(false);
-            }
+            }*/
             gameObject.GetComponent<Image>().color = normalColor;
 
 

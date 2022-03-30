@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class SkillSelection : MonoBehaviour
+public class SkillSelection : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private Button button;
     public Ability ability;
     public GameObject abilityObject;
-    // Start is called before the first frame update
+    public bool pressed = false;
+
     void Start()
     {
         button = GetComponent<Button>();
@@ -17,15 +19,28 @@ public class SkillSelection : MonoBehaviour
 
     void onClick()
     {
+        pressed = true;
         abilityObject.GetComponent<AbilitySet>().ability = ability;
         abilityObject.GetComponent<AbilitySet>().setValues();
 
         abilityObject.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (!pressed)
+        {
+            abilityObject.SetActive(false);
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
     {
         
+        gameObject.GetComponent<Image>().color = new Color(1, 1, 1); ;
+        abilityObject.GetComponent<AbilitySet>().ability = ability;
+        abilityObject.GetComponent<AbilitySet>().setValues();
+
+        abilityObject.SetActive(true);
     }
 }
