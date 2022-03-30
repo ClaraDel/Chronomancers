@@ -12,7 +12,6 @@ public class Roublard : Character
 
     public void init(bool isBlue) {
         base.init(100, 50, isBlue);
-        Debug.Log("coucou");
         hidden = false;
         characterType = type.roublard;
         hiddenDuration = 0;

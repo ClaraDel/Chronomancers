@@ -136,6 +136,7 @@ public class Character : MonoBehaviour
 
     public virtual void die()
     {
+        //transform.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0.5f);
         gameObject.GetComponent<SpriteRenderer>().sprite = ghostSprite;
         health = 0;
         healthBar.transform.GetComponent<Slider>().value = health;
