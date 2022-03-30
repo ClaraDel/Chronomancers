@@ -52,6 +52,8 @@ public class Paladin : Character
     public override void die()
     {
         paladinAnim.Play("deathPaladin");
+        transform.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0.5f);
+
     }
 
     /*public override void addAttack()

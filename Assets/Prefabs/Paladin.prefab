@@ -108,6 +108,7 @@ MonoBehaviour:
   PlayerTarget: {fileID: 793844579650562096}
   isControllable: 0
   pause: {fileID: 0}
+  character: {fileID: 0}
 --- !u!114 &370336178062066480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,9 +141,9 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.32, y: 0.32}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.12, y: 0.03, z: 0.12, w: 0}
     pivot: {x: 0, y: 0}
-    oldSize: {x: 0.96, y: 0.69}
+    oldSize: {x: 0.7, y: 0.69}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
