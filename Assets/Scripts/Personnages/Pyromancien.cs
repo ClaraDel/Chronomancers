@@ -5,53 +5,45 @@ using UnityEngine.UI;
 
 public class Pyromancien : Character
 {
-    public bool attacking;
-
-
-
     public void init(bool isBlue) {
         base.init(100, 50, isBlue);
         characterType = type.pyromancien;
         skill1CastTime = 4;
-        skill1CoolDownTime = 8;
+        maxCoolDownSkill1 = 8;
         skill2CastTime = 2;
-        skill2CoolDownTime = 10;
-        attacking = false;
+        maxCoolDownSkill2 = 10;
     }
 
-    public override void cast()
+    public override void reset()
     {
-        if (attacking)
-        {
-            attacking = false;
-            launchAttack();
-        }
-        base.cast();
+        base.reset();
     }
 
-    public override void setUpAttack()
-    {
-        castingTicks = 1;
-    }
-
-    public void launchAttack()
-    {
-        castingTicks = 1;
-        base.coolDowns();
-    }
-
-    // Explosion
-    public override void launchSkill1()
+    public override void addAttack()
     {
         
-        base.launchSkill1();
+        GameObject Cursor = gameObject.transform.Find("Cursor").gameObject;
+        
+        base.wait();
+        
+        AttackManager.instance.addFutureAttack(this, Cursor, zoneBasicAttack, normalAttackDamage, TimeManager.currentTick);
+
+        this.zoneBasicAttack.getZoneCiblable().SetActive(false);
+        Cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        coolDowns();
     }
 
-    // Stealth
-    public override void launchSkill2()
+    // Boule de feu
+    public override void launchSkill1(GameObject cursor)
     {
-        // Creer objet mur de feu et le faire spawner
-        base.launchSkill2();
+        AttackManager.instance.attackTiles(this, cursor, zoneSkill1, 100);
+        // Mettre animation ici
+    }
+
+    // Mur de feu
+    public override void launchSkill2(GameObject cursor)
+    {
+        // Creer murs de feu
     }
 
 }

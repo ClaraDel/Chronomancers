@@ -15,9 +15,17 @@ public class Barbare : Character
         characterType = type.barbare;
         rageDuration = 0;
         skill1CastTime = 1;
-        skill1CoolDownTime = 5;
+        maxCoolDownSkill1 = 5;
         skill2CastTime = 0;
-        skill2CoolDownTime = 7;
+        maxCoolDownSkill2 = 7;
+    }
+
+    public override void reset()
+    {
+        enraged = false;
+        rageDuration = 0;
+        gameObject.GetComponent<SpriteRenderer>().sprite = characterSprite;
+        base.reset();
     }
 
     public void testEnraged() 
@@ -61,24 +69,24 @@ public class Barbare : Character
         base.moveV(sens);
     }
 
-    public override void setUpAttack()
+    public override void addAttack()
     {
-        testEnraged();
+        GameObject Cursor = gameObject.transform.Find("Cursor").gameObject;
         if (enraged)
         {
-            // atk = new AttackManager(new[] {
-            // new Vector3 { x = 0, y = 0, z = 0 } }, normalAttackDamage, this, 1, 1);
-            // atk.setupAttack(position);
-            // base.coolDowns();
+            AttackManager.instance.addAttack(this, Cursor, zoneBasicAttack, 2*normalAttackDamage);
         }
         else
         {
-            // base.setUpAttack();
+            AttackManager.instance.addAttack(this, Cursor, zoneBasicAttack, normalAttackDamage);
         }
+        this.zoneBasicAttack.getZoneCiblable().SetActive(false);
+        Cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        coolDowns();
     }
 
     // GRO TAPE
-    public override void launchSkill1()
+    public override void castSkill1()
     {
         // testEnraged();
         // if (enraged)
@@ -104,6 +112,7 @@ public class Barbare : Character
         // base.launchSkill1();
     }
 
+    // CROOOoom !
     public override void castSkill2()
     {
         // if (coolDownSkill2 == 0)
@@ -113,13 +122,6 @@ public class Barbare : Character
         // }
         // launchSkill2();
         // base.coolDowns();
-    }
-
-    // CROOOoom !
-    public override void launchSkill2()
-    {
-        //TODO : Rush + Stop si collision et d�g�ts
-        // base.launchSkill2();
     }
 
 }

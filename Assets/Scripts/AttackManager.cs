@@ -10,14 +10,14 @@ public class AttackManager : MonoBehaviour
         instance = this;
     }
 
-    public void endAtk()
-    {
-
-    }
-
     public void addAttack(Character attacker, GameObject cursor, Zone zone, int damage){
         TimeManager.instance.AddAction(() => attackTiles(attacker, cursor, zone, damage));
         StartCoroutine(TimeManager.instance.PlayTick());
+    }
+
+    public void addFutureAttack(Character attacker, GameObject cursor, Zone zone, int damage, int tick)
+    {
+        TimeManager.instance.AddFutureAction(() => attackTiles(attacker, cursor, zone, damage), tick);
     }
 
     public void attackTiles(Character attacker, GameObject cursor, Zone zone, int damage)
@@ -38,7 +38,6 @@ public class AttackManager : MonoBehaviour
         hits = Physics2D.RaycastAll(cible, Vector3.forward);
         for (int i = 0; i < hits.Length; i++)
         {
-            Debug.Log(hits.Length);
             if (hits[i].collider != null)
             {
                 Character target = hits[i].collider.gameObject.GetComponent<Character>();
@@ -46,21 +45,4 @@ public class AttackManager : MonoBehaviour
             }
         }
     }
-
-    // public bool applyAttack()
-    // {
-    //     if (!afficheur.cursor.isValidPosition())
-    //     {
-    //         return false;
-    //     }
-
-    //     Vector3 cursorPos = afficheur.getCursorPosition();
-    //     List<Vector3> zoneEffets = zone.getZoneEffets();
-
-    //     TimeManager.instance.AddAction(() => attackTiles(zoneEffets, cursorPos));
-    //     character.StartCoroutine(TimeManager.instance.PlayTick());
-
-    //     return true;
-    // }
-
 }

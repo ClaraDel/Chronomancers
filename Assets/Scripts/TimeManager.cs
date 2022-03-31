@@ -49,6 +49,14 @@ public class TimeManager : MonoBehaviour
         turnTimeLine[currentTick].Push(calledMethod);
     }
 
+    public void AddFutureAction(Action calledMethod, int tick)
+    {
+        if (tick >= 0 && tick + currentTick < maxTick)
+        {
+            turnTimeLine[tick + currentTick].Push(calledMethod);
+        }
+    }
+
     public void AddNewCharacter(PlayerController new_character)
     {
         actifCharacter = new_character;
@@ -73,6 +81,7 @@ public class TimeManager : MonoBehaviour
         {
             EndTurn();
         }
+        actifCharacter.character.coolDowns();
     }
 
     public void EndTurn()
@@ -140,6 +149,5 @@ public class TimeManager : MonoBehaviour
     {
         string message = currentTurn.ToString() + '/' + currentTick.ToString();
         TimeManagerText.GetComponent<TMPro.TextMeshProUGUI>().text = message;
-
     }
 }
