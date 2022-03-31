@@ -32,10 +32,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(TimeManager.currentTick == 0)
-        {
-            character.reset();
-        }
         if (pause.getIfPaused() || CharacterInfoPanel.instance.getIfPaused()) return;
 
         if (isControllable && !TimeManager.instance.isPlaying)
