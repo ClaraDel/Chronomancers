@@ -15,23 +15,6 @@ public class AttackManager : MonoBehaviour
 
     }
 
-    public void addAttack(Character attacker, GameObject cursor, Zone zone, int damage){
-        TimeManager.instance.AddAction(() => attackTiles(attacker, cursor, zone, damage));
-        StartCoroutine(TimeManager.instance.PlayTick());
-    }
-
-    public void attackTiles(Character attacker, GameObject cursor, Zone zone, int damage)
-    {
-        if (attacker.isAlive())
-        {
-            foreach (var tiles in zone.getTilesEffets())
-            {
-                Vector3 cible = tiles.transform.position;
-                attackTile(attacker, cible, damage);
-            }
-        }
-    }
-
     public void attackTile(Character attacker, Vector3 cible, int damage)
     {
         RaycastHit2D[] hits;
@@ -43,6 +26,19 @@ public class AttackManager : MonoBehaviour
             {
                 Character target = hits[i].collider.gameObject.GetComponent<Character>();
                 target.takeDamage(attacker, damage);
+            }
+        }
+    }
+
+    public IEnumerator attackTiles(Character attacker, GameObject cursor, Zone zone, int damage)
+    {
+        yield return new WaitForSeconds(0.7f);
+        if (attacker.isAlive())
+        {
+            foreach (var tiles in zone.getTilesEffets())
+            {
+                Vector3 cible = tiles.transform.position;
+                attackTile(attacker, cible, damage);
             }
         }
     }
@@ -62,5 +58,6 @@ public class AttackManager : MonoBehaviour
 
     //     return true;
     // }
+
 
 }

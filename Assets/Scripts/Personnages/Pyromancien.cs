@@ -34,6 +34,7 @@ public class Pyromancien : Character
         castingTicks = 1;
     }
 
+
     public void launchAttack()
     {
         castingTicks = 1;

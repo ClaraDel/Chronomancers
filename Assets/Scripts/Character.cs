@@ -210,7 +210,7 @@ public class Character : MonoBehaviour
 
     public virtual void moveV(float sens)
     {
-        moveManager.AddMove(0, Mathf.Round(Input.GetAxisRaw("Vertical")));
+        moveManager.AddMove(0, sens);
         coolDowns();
     }
 
@@ -223,15 +223,18 @@ public class Character : MonoBehaviour
         coolDowns();
     }
 
-    public void addAttack()
+    public virtual void addAttack()
     {
-        GameObject Cursor = gameObject.transform.Find("Cursor").gameObject;
-        AttackManager.instance.addAttack(this, Cursor, zoneBasicAttack, normalAttackDamage);
-        
-
+        GameObject cursor = gameObject.transform.Find("Cursor").gameObject;
+        TimeManager.instance.AddAction(() => castAttack(cursor));
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
-        Cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        StartCoroutine(TimeManager.instance.PlayTick());
+    }
 
+    public virtual void castAttack(GameObject cursor)
+    {
+        StartCoroutine(AttackManager.instance.attackTiles(this, cursor, zoneBasicAttack, normalAttackDamage));
     }
 
     public virtual void castSkill1()

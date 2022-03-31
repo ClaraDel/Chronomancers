@@ -44,6 +44,21 @@ public class Roublard : Character
         base.wait();
     }
 
+    public override void takeDamage(Character attacker, int damage)
+    {
+        if (!shielded && alive)
+        {
+            roublardAnim.Play("hurtRoublardR");
+        }
+        base.takeDamage(attacker, damage);
+    }
+
+    public override void die()
+    {
+        roublardAnim.Play("deathRoublard");
+        base.die();
+    }
+
     public override void moveH(float sens)
     {
         testHidden();
@@ -81,6 +96,12 @@ public class Roublard : Character
             base.moveV(sens);
             moveAction = false;
         }
+    }
+
+    public override void castAttack(GameObject cursor)
+    {
+        roublardAnim.Play("hit1Roublard");
+        base.castAttack(cursor);
     }
 
     public override void setUpAttack()
