@@ -18,7 +18,6 @@ public class AttackManager : MonoBehaviour
     public void addFutureAttack(Character attacker, GameObject cursor, Zone zone, int damage, int tick)
     {
         TimeManager.instance.AddFutureAction(() => attackTiles(attacker, cursor, zone, damage), tick);
-        StartCoroutine(TimeManager.instance.PlayTick());
     }
 
     public void attackTiles(Character attacker, GameObject cursor, Zone zone, int damage)

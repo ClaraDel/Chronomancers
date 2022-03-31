@@ -86,18 +86,16 @@ public class Paladin : Character
     }
 
     // Imposition des mains
-    public override void launchSkill1()
+    public override void castSkill1()
     {
         // R�cup�rer case cible et ajouter 50 pvs en utilisant heal sur tous les persos
-        base.launchSkill1();
     }
 
     // Stealth
-    public override void launchSkill2()
+    public override void castSkill2()
     {
         // Trouver un moyen de faire en sorte que cooldown ne descende que si le bouclier n'existe plus
         // Donner shield aux persos gr�ce � collision et � m�thode shield
-        base.launchSkill2();
     }
 
 }

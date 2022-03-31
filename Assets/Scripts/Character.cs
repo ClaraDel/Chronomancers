@@ -67,9 +67,7 @@ public class Character : MonoBehaviour
 
         // Zone Basic Attack init
         GameObject rangeAreaBasicAttack = gameObject.transform.Find("BasicAttackRange").gameObject;
-        Debug.Log(rangeAreaBasicAttack.transform.childCount);
         GameObject effectAreaBasicAttack = gameObject.transform.Find("Cursor").Find("BasicAttackEffet").gameObject;
-        Debug.Log(effectAreaBasicAttack.transform.childCount);
         this.zoneBasicAttack = gameObject.AddComponent<Zone>();
         this.zoneBasicAttack.init(rangeAreaBasicAttack, effectAreaBasicAttack);
         rangeAreaBasicAttack.SetActive(false);
@@ -77,21 +75,17 @@ public class Character : MonoBehaviour
 
         // Zone Skill 1 init
         GameObject rangeAreaSkill1 = gameObject.transform.Find("Skill1Range").gameObject;
-        Debug.Log(rangeAreaSkill1.transform.childCount);
         GameObject effectAreaSkill1 = gameObject.transform.Find("Cursor").Find("Skill1Effet").gameObject;
-        Debug.Log(effectAreaSkill1.transform.childCount);
-        this.zoneBasicAttack = gameObject.AddComponent<Zone>();
-        this.zoneBasicAttack.init(rangeAreaSkill1, effectAreaSkill1);
+        this.zoneSkill1 = gameObject.AddComponent<Zone>();
+        this.zoneSkill1.init(rangeAreaSkill1, effectAreaSkill1);
         rangeAreaSkill1.SetActive(false);
         effectAreaSkill1.SetActive(false);
 
         // Zone Skill 2 init
-        GameObject rangeAreaSkill2 = gameObject.transform.Find("Skill1Range").gameObject;
-        Debug.Log(rangeAreaSkill2.transform.childCount);
-        GameObject effectAreaSkill2 = gameObject.transform.Find("Cursor").Find("Skill1Effet").gameObject;
-        Debug.Log(effectAreaSkill2.transform.childCount);
-        this.zoneBasicAttack = gameObject.AddComponent<Zone>();
-        this.zoneBasicAttack.init(rangeAreaSkill2, effectAreaSkill2);
+        GameObject rangeAreaSkill2 = gameObject.transform.Find("Skill2Range").gameObject;
+        GameObject effectAreaSkill2 = gameObject.transform.Find("Cursor").Find("Skill2Effet").gameObject;
+        this.zoneSkill2 = gameObject.AddComponent<Zone>();
+        this.zoneSkill2.init(rangeAreaSkill2, effectAreaSkill2);
         rangeAreaSkill2.SetActive(false);
         effectAreaSkill2.SetActive(false);
 
@@ -140,20 +134,24 @@ public class Character : MonoBehaviour
     // Basic movement methods
     public virtual void moveH()
     {
+        coolDowns();
         moveManager.AddMove(Mathf.Round(Input.GetAxisRaw("Horizontal")), 0);
-        
     }
 
     public virtual void moveV()
     {
+        coolDowns();
         moveManager.AddMove(0, Mathf.Round(Input.GetAxisRaw("Vertical")));
-        
     }
 
     public virtual void wait()
     {
+        coolDowns();
         StartCoroutine(TimeManager.instance.PlayTick());
-        
+        if (castingTicks > 0)
+        {
+            castingTicks--;
+        }
     }
     
     // taking Damage method
@@ -223,39 +221,16 @@ public class Character : MonoBehaviour
         GameObject Cursor = gameObject.transform.Find("Cursor").gameObject;
         AttackManager.instance.addAttack(this, Cursor, zoneBasicAttack, normalAttackDamage);
 
+        coolDowns();
+
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
         Cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
-        
     }
 
-    public void endAtk()
+    public void cancelAtk()
     {
-        
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
         gameObject.transform.Find("Cursor").GetComponent<CursorManager>().gameObject.SetActive(false);
-    }
-
-    // cast and cooldown methods
-    public virtual void casting()
-    {
-        castingTicks--;
-        wait();
-    }
-
-    public virtual void cast()
-    {
-        
-        if (castingSkill1)
-        {
-            castingSkill1 = false;
-            launchSkill1();
-        }
-        else if (castingSkill2)
-        {
-            castingSkill2 = false;
-            launchSkill2();
-        }
-        castingTicks = 0;
     }
 
     public void coolDowns()
@@ -274,33 +249,67 @@ public class Character : MonoBehaviour
         }
     }
 
+
+    public virtual void setUpSkill1()
+    {
+        this.zoneSkill1.getZoneCiblable().SetActive(true);
+        cursor.SetActive(true);
+        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().setUp(zoneSkill1);
+    }
+
     public virtual void castSkill1()
     {
         if (coolDownSkill1 == 0)
         {
-            castingTicks = skill1CastTime;
+            coolDowns();
+            castingTicks = skill1CastTime - 1;
             castingSkill1 = true;
+            coolDownSkill1 = maxCoolDownSkill1 + skill1CastTime;
+
+            GameObject cursor = gameObject.transform.Find("Cursor").gameObject;
+
+            TimeManager.instance.AddFutureAction(() => launchSkill1(cursor), skill1CastTime);
+            StartCoroutine(TimeManager.instance.PlayTick());
         }
     }
 
-    public virtual void launchSkill1()
+    public virtual void launchSkill1(GameObject cursor) { }
+
+    public void cancelSkill1()
     {
-        coolDownSkill1 = maxCoolDownSkill1;
+        this.zoneSkill1.getZoneCiblable().SetActive(false);
+        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().gameObject.SetActive(false);
+    }
+
+    public virtual void setUpSkill2()
+    {
+        this.zoneSkill2.getZoneCiblable().SetActive(true);
+        cursor.SetActive(true);
+        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().setUp(zoneSkill2);
     }
 
     public virtual void castSkill2()
     {
         if (coolDownSkill2 == 0)
         {
-            castingTicks = skill2CastTime;
+            coolDowns();
+            castingTicks = skill2CastTime - 1;
             castingSkill2 = true;
+            coolDownSkill2 = maxCoolDownSkill2 + skill2CastTime;
+
+            GameObject cursor = gameObject.transform.Find("Cursor").gameObject;
+
+            TimeManager.instance.AddFutureAction(() => launchSkill2(cursor), skill1CastTime);
+            StartCoroutine(TimeManager.instance.PlayTick());
         }
     }
 
-    public virtual void launchSkill2()
-    {
+    public virtual void launchSkill2(GameObject cursor) { }
 
-        coolDownSkill2 = maxCoolDownSkill2;
+    public void cancelSkill2()
+    {
+        this.zoneSkill2.getZoneCiblable().SetActive(false);
+        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().gameObject.SetActive(false);
     }
 
     // Update is called once per frame

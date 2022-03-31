@@ -19,12 +19,6 @@ public class CursorManager : MonoBehaviour
     private Zone activeZone;
     private List<Vector3Int> listPositionsActif;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     public void setUp(Zone zone)
     {
         zone.getZoneCiblable().SetActive(true);
@@ -43,6 +37,13 @@ public class CursorManager : MonoBehaviour
         positionY = (int)Mathf.Floor(transform.position.y);
         activeZone.getZoneEffet().SetActive(true);
     }
+
+    public void reset()
+    {
+        listPositionsActif = new List<Vector3Int>();
+        this.activeZone = null;
+    }
+
 
     private void calculOrientationCursor()
     {
@@ -139,6 +140,7 @@ public class CursorManager : MonoBehaviour
         this.rotateEffects();
         return true;
     }
+
     // Update is called once per frame
     void Update()
     {

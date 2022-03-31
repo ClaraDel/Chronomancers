@@ -12,7 +12,6 @@ public class Pyromancien : Character
         maxCoolDownSkill1 = 8;
         skill2CastTime = 2;
         maxCoolDownSkill2 = 10;
-        attacking = false;
     }
 
     public override void reset()
@@ -34,18 +33,17 @@ public class Pyromancien : Character
         coolDowns();
     }
 
-    // Explosion
-    public override void launchSkill1()
+    // Boule de feu
+    public override void launchSkill1(GameObject cursor)
     {
-        
-        base.launchSkill1();
+        AttackManager.instance.attackTiles(this, cursor, zoneSkill1, 100);
+        // Mettre animation ici
     }
 
-    // Stealth
-    public override void launchSkill2()
+    // Mur de feu
+    public override void launchSkill2(GameObject cursor)
     {
-        // Creer objet mur de feu et le faire spawner
-        base.launchSkill2();
+        // Creer murs de feu
     }
 
 }

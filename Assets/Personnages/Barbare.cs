@@ -86,7 +86,7 @@ public class Barbare : Character
     }
 
     // GRO TAPE
-    public override void launchSkill1()
+    public override void castSkill1()
     {
         // testEnraged();
         // if (enraged)
@@ -112,6 +112,7 @@ public class Barbare : Character
         // base.launchSkill1();
     }
 
+    // CROOOoom !
     public override void castSkill2()
     {
         // if (coolDownSkill2 == 0)
@@ -121,13 +122,6 @@ public class Barbare : Character
         // }
         // launchSkill2();
         // base.coolDowns();
-    }
-
-    // CROOOoom !
-    public override void launchSkill2()
-    {
-        //TODO : Rush + Stop si collision et d�g�ts
-        // base.launchSkill2();
     }
 
 }

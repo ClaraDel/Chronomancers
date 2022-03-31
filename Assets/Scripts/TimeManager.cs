@@ -44,9 +44,9 @@ public class TimeManager : MonoBehaviour
 
     public void AddFutureAction(Action calledMethod, int tick)
     {
-        if (tick >= 0 && tick < maxTick)
+        if (tick >= 0 && tick + currentTick < maxTick)
         {
-            turnTimeLine[tick].Push(calledMethod);
+            turnTimeLine[tick + currentTick].Push(calledMethod);
         }
     }
 
@@ -102,7 +102,6 @@ public class TimeManager : MonoBehaviour
         currentTick = 0;
         ScoreManager.instance.SwitchTeam((currentTurn - 1) % 2);
         GameObject go = Instantiate(prefabPlayer);
-        Debug.Log(go.GetComponent<Character>().getType());
         switch (go.GetComponent<Character>().getType())
         {
             case Character.type.roublard:
@@ -138,6 +137,5 @@ public class TimeManager : MonoBehaviour
     {
         string message = currentTurn.ToString() + '/' + currentTick.ToString();
         TimeManagerText.GetComponent<TMPro.TextMeshProUGUI>().text = message;
-
     }
 }

@@ -12,7 +12,19 @@ public class PlayerController : MonoBehaviour
 
     public Character character;
     private bool attackingProcess = false;
+    private bool castSkill1 = false;
+    private bool castSkill2 = false;
+    private bool canMove = true;
 
+    void clearAtk()
+    {
+        attackingProcess = false;
+        character.cancelAtk();
+        castSkill1 = false;
+        character.cancelSkill1();
+        castSkill2 = false;
+        character.cancelSkill2();
+    }
 
 
     // Start is called before the first frame update
@@ -37,43 +49,75 @@ public class PlayerController : MonoBehaviour
 
         if (isControllable && !TimeManager.instance.isPlaying)
         {
-            if (character.getCastingTicks() > 1)
+            if (character.getCastingTicks() >= 1)
             {
-                character.casting();
-            }
-            else if (character.getCastingTicks() == 1)
-            {
-                character.cast();
+                character.wait();
             }
             else
             {
+                canMove = !(attackingProcess || castSkill1 || castSkill2);
+
                 if (character.isMoveAction())
                 {
                     attackingProcess = false;
+                    castSkill1 = false;
+                    castSkill2 = false;
                 }
 
                 if (Input.GetKeyUp(KeyCode.Alpha1))
                 {
                     if (!attackingProcess && character != null)
                     {
+                        clearAtk();
                         character.setUpAttack();
                         attackingProcess = true;
+                    }
+                }
+
+                if (Input.GetKeyUp(KeyCode.Alpha2) && character.coolDownSkill1 == 0)
+                {
+                    if (!castSkill1 && character != null)
+                    {
+                        clearAtk();
+                        character.setUpSkill1();
+                        castSkill1 = true;
+                    }
+                }
+
+                if (Input.GetKeyUp(KeyCode.Alpha3) && character.coolDownSkill2 == 0)
+                {
+                    if (!castSkill2 && character != null)
+                    {
+                        clearAtk();
+                        character.setUpSkill2();
+                        castSkill2 = true;
                     }
                 }
 
                 if (attackingProcess && Input.GetKeyUp(KeyCode.Return))
                 {
                     character.addAttack();
-                    attackingProcess = false;
+                    clearAtk();
                 }
 
-                else if (attackingProcess && Input.GetKeyUp(KeyCode.Escape))
+                if (castSkill1 && Input.GetKeyUp(KeyCode.Return))
                 {
-                    character.endAtk();
-                    attackingProcess = false;
+                    character.castSkill1();
+                    clearAtk();
                 }
 
-                if (!attackingProcess && Vector2.Distance(transform.position, PlayerTarget.position) == 0f)
+                if (castSkill2 && Input.GetKeyUp(KeyCode.Return))
+                {
+                    character.castSkill2();
+                    clearAtk();
+                }
+
+                else if (Input.GetKeyUp(KeyCode.Backspace))
+                {
+                    clearAtk();
+                }
+
+                if (canMove && Vector2.Distance(transform.position, PlayerTarget.position) == 0f)
                 {
                     
                     if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) >= 0.5f)

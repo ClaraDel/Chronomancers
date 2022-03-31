@@ -98,21 +98,14 @@ public class Roublard : Character
             hidden = false;
             hiddenDuration = 0;
         }
-        base.castSkill1();
     }
 
-    public override void launchSkill1()
-    {
-        // Creer objet pi�ge et le faire spawner
-        base.launchSkill1();
-    }
-
-    public override void launchSkill2()
+    // Stealth
+    public override void castSkill2()
     {
         hidden = true;
         hiddenDuration = 5;
         gameObject.GetComponent<SpriteRenderer>().sprite = hiddenSprite;
-        base.launchSkill2();
     }
 
 }
