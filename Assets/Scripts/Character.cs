@@ -241,6 +241,8 @@ public class Character : MonoBehaviour
 
     public virtual void addAttack()
     {
+        Debug.Log("addAtk");
+        AbilityTimer.instance.launchUIAbility(1);
         GameObject Cursor = gameObject.transform.Find("Cursor").gameObject;
         AttackManager.instance.addAttack(this, Cursor, zoneBasicAttack, normalAttackDamage);
         
