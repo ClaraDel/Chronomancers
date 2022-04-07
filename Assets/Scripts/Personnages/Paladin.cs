@@ -53,6 +53,7 @@ public class Paladin : Character
     {
         if (!blocking)
         {
+            paladinAnim.Play("hurtPaladinR");
             base.takeDamage(attacker, damage);
         }
         else
@@ -71,14 +72,15 @@ public class Paladin : Character
 
     public override void die()
     {
-        paladinAnim.Play("deathPaladin");
+        //paladinAnim.Play("deathPaladin");
         base.die();
     }
 
-    /*public override void addAttack()
+    public override void castAttack(GameObject cursor)
     {
-        //paladinAnim.Play("hitPaladin");
-    }*/
+        paladinAnim.Play("hitPaladin");
+        base.castAttack(cursor);
+    }
 
     public override void moveH(float sens)
     {

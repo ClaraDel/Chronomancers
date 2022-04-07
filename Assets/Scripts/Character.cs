@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
-
     public enum type
     {
         roublard,
@@ -26,6 +25,7 @@ public class Character : MonoBehaviour
     public Zone zoneSkill1;
     public Zone zoneSkill2;
     public GameObject cursor;
+    public Transform characterDie;
 
     public Sprite ghostSprite;
     public Sprite characterSprite;
@@ -33,6 +33,7 @@ public class Character : MonoBehaviour
     public bool alive;
     public bool isBlue;
     public type characterType;
+    GameObject cursor ;
 
     public bool moveAction;
 
@@ -68,7 +69,7 @@ public class Character : MonoBehaviour
 
         // Zone Basic Attack init
         GameObject rangeAreaBasicAttack = gameObject.transform.Find("BasicAttackRange").gameObject;
-        GameObject effectAreaBasicAttack = gameObject.transform.Find("Cursor").Find("BasicAttackEffet").gameObject;
+        GameObject effectAreaBasicAttack = cursor.Find("BasicAttackEffet").gameObject;
         this.zoneBasicAttack = gameObject.AddComponent<Zone>();
         this.zoneBasicAttack.init(rangeAreaBasicAttack, effectAreaBasicAttack);
         rangeAreaBasicAttack.SetActive(false);
@@ -76,7 +77,7 @@ public class Character : MonoBehaviour
 
         // Zone Skill 1 init
         GameObject rangeAreaSkill1 = gameObject.transform.Find("Skill1Range").gameObject;
-        GameObject effectAreaSkill1 = gameObject.transform.Find("Cursor").Find("Skill1Effet").gameObject;
+        GameObject effectAreaSkill1 = cursor.Find("Skill1Effet").gameObject;
         this.zoneSkill1 = gameObject.AddComponent<Zone>();
         this.zoneSkill1.init(rangeAreaSkill1, effectAreaSkill1);
         rangeAreaSkill1.SetActive(false);
@@ -84,13 +85,13 @@ public class Character : MonoBehaviour
 
         // Zone Skill 2 init
         GameObject rangeAreaSkill2 = gameObject.transform.Find("Skill2Range").gameObject;
-        GameObject effectAreaSkill2 = gameObject.transform.Find("Cursor").Find("Skill2Effet").gameObject;
+        GameObject effectAreaSkill2 = cursor.Find("Skill2Effet").gameObject;
         this.zoneSkill2 = gameObject.AddComponent<Zone>();
         this.zoneSkill2.init(rangeAreaSkill2, effectAreaSkill2);
         rangeAreaSkill2.SetActive(false);
         effectAreaSkill2.SetActive(false);
 
-        this.cursor = gameObject.transform.Find("Cursor").gameObject;
+        this.cursor = cursor.gameObject;
         this.cursor.SetActive(false);
 
         this.moveAction = false;
@@ -168,6 +169,7 @@ public class Character : MonoBehaviour
     // taking Damage method
     public virtual void takeDamage(Character attacker, int damage)
     {
+        Debug.Log("Take Damage : " + damage.ToString());
         if (alive)
         {
             if (shielded)
@@ -197,11 +199,14 @@ public class Character : MonoBehaviour
 
     public virtual void die()
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = ghostSprite;
+        transform.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0.5f);
+        Instantiate(characterDie, transform.position, transform.rotation);
+        //gameObject.GetComponent<SpriteRenderer>().sprite = ghostSprite;
         health = 0;
         healthBar.transform.GetComponent<Slider>().value = health;
         healthBar.SetActive(false);
         alive = false;
+        
     }
 
     public void shield(int nbturns)
@@ -227,7 +232,7 @@ public class Character : MonoBehaviour
 
     public virtual void moveV(float sens)
     {
-        moveManager.AddMove(0, Mathf.Round(Input.GetAxisRaw("Vertical")));
+        moveManager.AddMove(0, sens);
         coolDowns();
     }
 
@@ -236,27 +241,31 @@ public class Character : MonoBehaviour
     {
         this.zoneBasicAttack.getZoneCiblable().SetActive(true);
         cursor.SetActive(true);
-        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().setUp(zoneBasicAttack);
+        cursor.GetComponent<CursorManager>().setUp(zoneBasicAttack);
     }
 
     public virtual void addAttack()
     {
         Debug.Log("addAtk");
         AbilityTimer.instance.launchUIAbility(1);
-        GameObject Cursor = gameObject.transform.Find("Cursor").gameObject;
-        AttackManager.instance.addAttack(this, Cursor, zoneBasicAttack, normalAttackDamage);
+        TimeManager.instance.AddAction(() => castAttack(cursor));
         
-
         coolDowns();
 
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
         Cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        StartCoroutine(TimeManager.instance.PlayTick());
     }
 
     public void cancelAtk()
     {
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
-        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().gameObject.SetActive(false);
+        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+    }
+    
+    public virtual void castAttack(GameObject cursor)
+    {
+        AttackManager.instance.attackTiles(this, cursor, zoneBasicAttack, normalAttackDamage);
     }
 
     public void coolDowns()
@@ -280,7 +289,7 @@ public class Character : MonoBehaviour
     {
         this.zoneSkill1.getZoneCiblable().SetActive(true);
         cursor.SetActive(true);
-        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().setUp(zoneSkill1);
+        cursor.GetComponent<CursorManager>().setUp(zoneSkill1);
     }
 
     public virtual void castSkill1()
@@ -292,7 +301,7 @@ public class Character : MonoBehaviour
             castingSkill1 = true;
             coolDownSkill1 = maxCoolDownSkill1 + skill1CastTime;
 
-            GameObject cursor = gameObject.transform.Find("Cursor").gameObject;
+            cursor.gameObject;
 
             TimeManager.instance.AddFutureAction(() => launchSkill1(cursor), skill1CastTime);
             StartCoroutine(TimeManager.instance.PlayTick());
@@ -304,14 +313,14 @@ public class Character : MonoBehaviour
     public void cancelSkill1()
     {
         this.zoneSkill1.getZoneCiblable().SetActive(false);
-        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().gameObject.SetActive(false);
+        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
     }
 
     public virtual void setUpSkill2()
     {
         this.zoneSkill2.getZoneCiblable().SetActive(true);
         cursor.SetActive(true);
-        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().setUp(zoneSkill2);
+        cursor.GetComponent<CursorManager>().setUp(zoneSkill2);
     }
 
     public virtual void castSkill2()
@@ -323,7 +332,7 @@ public class Character : MonoBehaviour
             castingSkill2 = true;
             coolDownSkill2 = maxCoolDownSkill2 + skill2CastTime;
 
-            GameObject cursor = gameObject.transform.Find("Cursor").gameObject;
+            GameObject cursor = cursor.gameObject;
 
             TimeManager.instance.AddFutureAction(() => launchSkill2(cursor), skill1CastTime);
             StartCoroutine(TimeManager.instance.PlayTick());
@@ -335,7 +344,7 @@ public class Character : MonoBehaviour
     public void cancelSkill2()
     {
         this.zoneSkill2.getZoneCiblable().SetActive(false);
-        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().gameObject.SetActive(false);
+        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -345,6 +354,7 @@ public class Character : MonoBehaviour
 
     void Start()
     {
+        cursor = gameObject.transform.Find("Cursor").gameObject;
         moveManager = gameObject.GetComponent<MoveManager>();
         moveManager.AddResetPosition();
         healthBar = (gameObject.transform.Find("pfHealthBar")).Find("HealthBar").gameObject;

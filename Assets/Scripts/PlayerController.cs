@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         pause = GameObject.Find("PauseMenu").GetComponent<PauseToggle>();
-        Debug.Log(pause);
         PlayerTarget.parent = null;
         isControllable = true;
         TimeManager.instance.AddNewCharacter(this);
@@ -43,10 +42,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(TimeManager.currentTick == TimeManager.maxTick)
-        {
-            character.reset();
-        }
         if (pause.getIfPaused() || CharacterInfoPanel.instance.getIfPaused()) return;
 
         if (isControllable && !TimeManager.instance.isPlaying)
@@ -132,17 +127,21 @@ public class PlayerController : MonoBehaviour
                         Vector3 dir = new Vector3(sens, 0f, 0f);
                         RaycastHit hit;
                         if (Physics.Raycast(start, dir, out hit, 1f) && hit.transform.tag == "Wall") return;
-                        character.moveH(sens);
+                        TimeManager.instance.AddAction(() => character.moveH(sens));
+                        StartCoroutine(TimeManager.instance.PlayTick());
+                        //character.moveH(sens);
                     }
                     else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) >= 0.5f)
                     {
                         //Checks for wall collision
                         Vector3 start = new Vector3(PlayerTarget.position.x + 0.5f, PlayerTarget.position.y + 0.5f, 0f);
-                        float sens = Mathf.Round(Input.GetAxisRaw("Horizontal"));
+                        float sens = Mathf.Round(Input.GetAxisRaw("Vertical"));
                         Vector3 dir = new Vector3(0f, sens, 0f);
                         RaycastHit hit;
                         if (Physics.Raycast(start, dir, out hit, 1f) && hit.transform.tag == "Wall") return;
-                        character.moveV(sens);
+                        TimeManager.instance.AddAction(() => character.moveV(sens));
+                        StartCoroutine(TimeManager.instance.PlayTick());
+                        //character.moveV(sens);
                     }
                     else if (Input.GetKeyDown(KeyCode.Space))
                     {

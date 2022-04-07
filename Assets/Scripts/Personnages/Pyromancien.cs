@@ -26,12 +26,18 @@ public class Pyromancien : Character
         
         base.wait();
         
-        AttackManager.instance.addFutureAttack(this, Cursor, zoneBasicAttack, normalAttackDamage, TimeManager.currentTick);
+        AttackManager.instance.addFutureAttack(this, Cursor, zoneBasicAttack, normalAttackDamage,1);
 
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
         Cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
-        coolDowns();
+        TimeManager.instance.PlayTick();
     }
+
+    /*public void launchAttack()
+    {
+        castingTicks = 1;
+        base.coolDowns();
+    }*/
 
     // Boule de feu
     public override void launchSkill1(GameObject cursor)

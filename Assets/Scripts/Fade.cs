@@ -14,7 +14,6 @@ public class Fade : MonoBehaviour
     {
         fadingIn = true;
         UIGroup.alpha = 0;
-        Debug.Log(winMenu);
         winMenu.ResultUI();
     }
 
