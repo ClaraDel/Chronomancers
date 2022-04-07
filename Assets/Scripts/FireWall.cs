@@ -27,6 +27,15 @@ public class FireWall : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        TimeManager.instance.addAction();
+        TimeManager.instance.addFutureAction();
+        TimeManager.instance.addFutureAction();
+        TimeManager.instance.addFutureAction();
+        TimeManager.instance.addFutureAction();
+    }
+
     // Update is called once per frame
     void Update()
     {

@@ -6,7 +6,10 @@ public class Trap : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.GetComponent<Character>().takeDamage(null, 50);
-        Destroy(this.gameObject);
+        if (other.gameObject.GetComponent<Character>().alive)
+        {
+            other.gameObject.GetComponent<Character>().takeDamage(null, 50);
+            Destroy(this.gameObject);
+        }
     }
 }
