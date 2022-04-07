@@ -34,7 +34,13 @@ public class SelectionManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && !mouseOnObject)
         {
-            selected.transform.GetComponent<CustomCharacterButton>().hideUI();
+            if(selected != null)
+            {
+                selected.transform.GetComponent<CustomCharacterButton>().hideUI();
+                selected.GetComponent<CustomCharacterButton>().pressed = false;
+                selected.GetComponent<CustomCharacterButton>().resetButton();
+                selected = null;
+            }
         }
     }
 }

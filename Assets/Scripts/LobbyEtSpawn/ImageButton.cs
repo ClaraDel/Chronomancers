@@ -10,7 +10,6 @@ public class ImageButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         SelectionManager.mouseOnObject = true;
         gameObject.GetComponent<Image>().color = new Color(1,1,1);
-         
     }
 
     public void OnPointerExit(PointerEventData eventData)
