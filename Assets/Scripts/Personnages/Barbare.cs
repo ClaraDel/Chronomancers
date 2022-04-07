@@ -85,30 +85,67 @@ public class Barbare : Character
         coolDowns();
     }
 
+    public virtual void setUpSkill1()
+    {
+        this.zoneSkill1.getZoneCiblable().SetActive(true);
+        cursor.SetActive(true);
+        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().setUpRotation(zoneSkill1);
+    }
+
     // GRO TAPE
     public override void launchSkill1(GameObject cursor)
     {
-        testEnraged();
-        if (enraged)
+        if (alive)
         {
-            AttackManager.instance.attackTiles(this, cursor, zoneSkill1, 100);
-        }
-        else
-        {
-            AttackManager.instance.attackTiles(this, cursor, zoneSkill1, 50);
+            testEnraged();
+            if (enraged)
+            {
+                AttackManager.instance.attackTiles(this, cursor, zoneSkill1, 100);
+            }
+            else
+            {
+                AttackManager.instance.attackTiles(this, cursor, zoneSkill1, 50);
+            }
         }
     }
+
+    public virtual void setUpSkill2()
+    {
+        this.zoneSkill2.getZoneCiblable().SetActive(true);
+        cursor.SetActive(true);
+        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().setUpRotation(zoneSkill2);
+    }
+
+    /*
+    public virtual void castSkill2()
+    {
+        if (coolDownSkill2 == 0)
+        {
+            coolDowns();
+            castingTicks = skill2CastTime - 1;
+            castingSkill2 = true;
+            coolDownSkill2 = maxCoolDownSkill2 + skill2CastTime + 3;
+
+            GameObject cursor = gameObject.transform.Find("Cursor").gameObject;
+
+            TimeManager.instance.AddFutureAction(() => launchSkill2(cursor), skill1CastTime);
+            StartCoroutine(TimeManager.instance.PlayTick());
+        }
+    }
+    */
 
     // CROOOoom !
     public override void launchSkill2(GameObject cursor)
     {
-        // if (coolDownSkill2 == 0)
-        // {
-        //     castingTicks = skill2CastTime;
-        //     coolDownSkill1 = skill2CoolDownTime;
-        // }
-        // launchSkill2();
-        // base.coolDowns();
+        if (alive)
+        {
+            // if (coolDownSkill2 == 0)
+            // {
+            //     castingTicks = skill2CastTime;
+            //     coolDownSkill1 = skill2CoolDownTime;
+            // }
+            // launchSkill2();
+            // base.coolDowns();
+        }
     }
-
 }

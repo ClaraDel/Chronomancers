@@ -430,6 +430,7 @@ MonoBehaviour:
   hiddenSprite: {fileID: 0}
   hidden: 0
   hiddenDuration: 0
+  trap: {fileID: 8776624060962540055, guid: e864207b0c75517479f5a36394e8e1f8, type: 3}
 --- !u!95 &4710502383183083724
 Animator:
   serializedVersion: 3
