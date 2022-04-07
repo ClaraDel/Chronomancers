@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1903521571702192529}
   - component: {fileID: 9195896245800558516}
   - component: {fileID: 7279113445475842938}
+  - component: {fileID: 8417215976417848418}
   m_Layer: 0
   m_Name: Ranger
   m_TagString: Untagged
@@ -186,15 +187,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 994cf615dc30a4b439a25ba5d68c7fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfInfo: {fileID: 0}
   health: 125
   maxHealth: 125
   healthBar: {fileID: 22471658879218299}
   fill: {fileID: 22471659482974673}
   normalAttackDamage: 50
   zoneBasicAttack: {fileID: 0}
-  zoneSkill1: {fileID: 0}
-  zoneSkill2: {fileID: 0}
   cursor: {fileID: 35057493891132365}
+  characterDie: {fileID: 0}
   ghostSprite: {fileID: 21300000, guid: 2a833689455d8d2449cd821bf32982be, type: 3}
   characterSprite: {fileID: 0}
   alive: 1
@@ -204,15 +205,31 @@ MonoBehaviour:
   castingTicks: 0
   castingSkill1: 0
   skill1CastTime: 2
+  skill1CoolDownTime: 0
   coolDownSkill1: 0
-  maxCoolDownSkill1: 0
   castingSkill2: 0
   skill2CastTime: 0
-  coolDownSkill2: 0
-  maxCoolDownSkill2: 0
-  shielded: 0
-  shieldDuration: 0
+  skill2CoolDownTime: 0
   moveManager: {fileID: 911230239939805142}
+--- !u!95 &8417215976417848418
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911230239939805138}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a7d19a55b60cb9b49b94cfe6b645496a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1490919484635891484
 GameObject:
   m_ObjectHideFlags: 0
@@ -5667,14 +5684,14 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3697863087036945455, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
   m_PrefabInstance: {fileID: 3683565405305232894}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &22471657884411163 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3697863087585769701, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
-  m_PrefabInstance: {fileID: 3683565405305232894}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &22471658879218299 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3697863086437347205, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
+  m_PrefabInstance: {fileID: 3683565405305232894}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &22471657884411163 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3697863087585769701, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
   m_PrefabInstance: {fileID: 3683565405305232894}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3733991046041713346

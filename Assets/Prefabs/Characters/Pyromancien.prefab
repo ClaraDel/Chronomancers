@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1331976971692945730}
   - component: {fileID: 8613391431250368359}
   - component: {fileID: 1107112007215589743}
+  - component: {fileID: 8271067784843259241}
   m_Layer: 0
   m_Name: Pyromancien
   m_TagString: Untagged
@@ -82,7 +83,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 672b218c46724a344b736c47c39671a7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6ce1b8d79921a2945ba15d8ded4e854e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -186,15 +187,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05a2e7612a371e841934d890c45f5e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfInfo: {fileID: 0}
   health: 75
   maxHealth: 75
   healthBar: {fileID: 601616400793631400}
   fill: {fileID: 601616401150968066}
   normalAttackDamage: 50
   zoneBasicAttack: {fileID: 0}
-  zoneSkill1: {fileID: 0}
-  zoneSkill2: {fileID: 0}
   cursor: {fileID: 9189789462710945656}
+  characterDie: {fileID: 0}
   ghostSprite: {fileID: 0}
   characterSprite: {fileID: 0}
   alive: 1
@@ -204,15 +205,32 @@ MonoBehaviour:
   castingTicks: 0
   castingSkill1: 0
   skill1CastTime: 4
+  skill1CoolDownTime: 0
   coolDownSkill1: 0
-  maxCoolDownSkill1: 0
   castingSkill2: 0
   skill2CastTime: 2
-  coolDownSkill2: 0
-  maxCoolDownSkill2: 0
-  shielded: 0
-  shieldDuration: 0
+  skill2CoolDownTime: 0
   moveManager: {fileID: 338856445525931781}
+  attacking: 0
+--- !u!95 &8271067784843259241
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338856445525931777}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a7d19a55b60cb9b49b94cfe6b645496a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2212152205229622269
 GameObject:
   m_ObjectHideFlags: 0
@@ -6761,14 +6779,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
---- !u!224 &601616399528291784 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3697863087585769701, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
-  m_PrefabInstance: {fileID: 4253698292522341677}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &601616400793631400 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3697863086437347205, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
+  m_PrefabInstance: {fileID: 4253698292522341677}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &601616399528291784 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3697863087585769701, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
   m_PrefabInstance: {fileID: 4253698292522341677}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &601616401150968066 stripped
@@ -7233,14 +7251,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dde82f24ccf5154f8e3cd0c0d55da61, type: 3}
---- !u!1 &9189789462710945656 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4798279020879011020, guid: 3dde82f24ccf5154f8e3cd0c0d55da61, type: 3}
-  m_PrefabInstance: {fileID: 4404055941183462324}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9189789462710945662 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4798279020879011018, guid: 3dde82f24ccf5154f8e3cd0c0d55da61, type: 3}
+  m_PrefabInstance: {fileID: 4404055941183462324}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9189789462710945656 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4798279020879011020, guid: 3dde82f24ccf5154f8e3cd0c0d55da61, type: 3}
   m_PrefabInstance: {fileID: 4404055941183462324}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4443830404656569117

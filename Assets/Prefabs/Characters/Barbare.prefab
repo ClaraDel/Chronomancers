@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 4349303930244656580}
   - component: {fileID: 6462415604944014305}
   - component: {fileID: 5940542276562036855}
+  - component: {fileID: 359539870404293326}
   m_Layer: 0
   m_Name: Barbare
   m_TagString: character
@@ -198,7 +199,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 672b218c46724a344b736c47c39671a7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 26de7651cf0c8be4896000e4fe9038b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -260,7 +261,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
-    oldSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 0.7, y: 0.69}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -302,15 +303,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fefe87f21e60ba4f882f1fcf9cdbcaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfInfo: {fileID: 0}
   health: 150
   maxHealth: 150
   healthBar: {fileID: 1578543568715378586}
   fill: {fileID: 1578543568622752816}
   normalAttackDamage: 50
   zoneBasicAttack: {fileID: 0}
-  zoneSkill1: {fileID: 0}
-  zoneSkill2: {fileID: 0}
   cursor: {fileID: 5352162303870122522}
+  characterDie: {fileID: 0}
   ghostSprite: {fileID: 0}
   characterSprite: {fileID: 0}
   alive: 1
@@ -320,18 +321,34 @@ MonoBehaviour:
   castingTicks: 0
   castingSkill1: 0
   skill1CastTime: 1
+  skill1CoolDownTime: 0
   coolDownSkill1: 0
-  maxCoolDownSkill1: 0
   castingSkill2: 0
   skill2CastTime: 0
-  coolDownSkill2: 0
-  maxCoolDownSkill2: 0
-  shielded: 0
-  shieldDuration: 0
+  skill2CoolDownTime: 0
   moveManager: {fileID: 3068122577141492611}
   enragedSprite: {fileID: 0}
   enraged: 0
   rageDuration: 0
+--- !u!95 &359539870404293326
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3068122577141492615}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0bea260bd0fd8ae4fa14ca28f1a2ee83, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3488272334548718005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1137,11 +1154,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
---- !u!224 &1578543570253871354 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3697863087585769701, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
-  m_PrefabInstance: {fileID: 2790384459191500831}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1578543568715378586 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3697863086437347205, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
@@ -1150,6 +1162,11 @@ GameObject:
 --- !u!1 &1578543568622752816 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3697863087036945455, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
+  m_PrefabInstance: {fileID: 2790384459191500831}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1578543570253871354 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3697863087585769701, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
   m_PrefabInstance: {fileID: 2790384459191500831}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3525795306917755299
