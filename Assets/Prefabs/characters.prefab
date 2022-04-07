@@ -530,7 +530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5bdf0c604d6a8b458fca697b2935d7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterPrefab: {fileID: 3068122577141492615, guid: 2d4b6d4ce815c8e47ac889e512ccc71e, type: 3}
+  characterPrefab: {fileID: 338856445525931777, guid: 253098e4e5236ce49a62fd64116e270f, type: 3}
   atk: 50
   hp: 100
   nameCharacter: Pyro
