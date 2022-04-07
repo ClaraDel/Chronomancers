@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 672b218c46724a344b736c47c39671a7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3c934dc2d6e3e76418b908f5a5e26066, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -145,7 +145,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
-    oldSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 0.57, y: 0.57}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -194,6 +194,8 @@ MonoBehaviour:
   fill: {fileID: 22471659482974673}
   normalAttackDamage: 50
   zoneBasicAttack: {fileID: 0}
+  zoneSkill1: {fileID: 0}
+  zoneSkill2: {fileID: 0}
   cursor: {fileID: 35057493891132365}
   characterDie: {fileID: 0}
   ghostSprite: {fileID: 21300000, guid: 2a833689455d8d2449cd821bf32982be, type: 3}
@@ -205,11 +207,14 @@ MonoBehaviour:
   castingTicks: 0
   castingSkill1: 0
   skill1CastTime: 2
-  skill1CoolDownTime: 0
   coolDownSkill1: 0
+  maxCoolDownSkill1: 0
   castingSkill2: 0
   skill2CastTime: 0
-  skill2CoolDownTime: 0
+  coolDownSkill2: 0
+  maxCoolDownSkill2: 0
+  shielded: 0
+  shieldDuration: 0
   moveManager: {fileID: 911230239939805142}
 --- !u!95 &8417215976417848418
 Animator:

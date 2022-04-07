@@ -30,7 +30,7 @@ public class AttackManager : MonoBehaviour
                 attackTile(attacker, cible, damage);
             }
         }
-        
+    }
     public void endAtk()
     {
 
@@ -51,17 +51,7 @@ public class AttackManager : MonoBehaviour
         }
     }
 
-    public void attackTiles(Character attacker, GameObject cursor, Zone zone, int damage)
-    {
-        if (attacker.isAlive())
-        {
-            foreach (var tiles in zone.getTilesEffets())
-            {
-                Vector3 cible = tiles.transform.position;
-                attackTile(attacker, cible, damage);
-            }
-        }
-    }
+    
 
     // public bool applyAttack()
     // {
