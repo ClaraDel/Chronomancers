@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Start Controller");
         pause = GameObject.Find("PauseMenu").GetComponent<PauseToggle>();
         Debug.Log(pause);
         PlayerTarget.parent = null;
@@ -97,25 +96,27 @@ public class PlayerController : MonoBehaviour
                     }
                 }
 
-                if (attackingProcess && Input.GetKeyUp(KeyCode.Return))
-                {
-                    character.addAttack();
-                    clearAtk();
+                if (Input.GetKeyUp(KeyCode.Return)) {
+                    if (attackingProcess)
+                    {
+                        character.addAttack();
+                        clearAtk();
+                    }
+
+                    if (castSkill1)
+                    {
+                        character.castSkill1();
+                        clearAtk();
+                    }
+
+                    if (castSkill2)
+                    {
+                        character.castSkill2();
+                        clearAtk();
+                    }
                 }
 
-                if (castSkill1 && Input.GetKeyUp(KeyCode.Return))
-                {
-                    character.castSkill1();
-                    clearAtk();
-                }
-
-                if (castSkill2 && Input.GetKeyUp(KeyCode.Return))
-                {
-                    character.castSkill2();
-                    clearAtk();
-                }
-
-                else if (Input.GetKeyUp(KeyCode.Backspace))
+                if (Input.GetKeyUp(KeyCode.Backspace))
                 {
                     clearAtk();
                 }

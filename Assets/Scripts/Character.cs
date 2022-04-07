@@ -130,6 +130,16 @@ public class Character : MonoBehaviour
         healthBar.transform.GetComponent<Slider>().value = health;
         healthBar.SetActive(true);
         alive = true;
+
+        this.castingTicks = 0;
+
+        this.castingSkill1 = false;
+        this.coolDownSkill1 = 0;
+        this.castingSkill2 = false;
+        this.coolDownSkill2 = 0;
+
+        this.shielded = false;
+        this.shieldDuration = 0;
     }
 
     // Basic movement methods

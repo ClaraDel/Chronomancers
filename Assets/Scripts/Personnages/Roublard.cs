@@ -12,15 +12,22 @@ public class Roublard : Character
 
     public void init(bool isBlue) {
         base.init(100, 50, isBlue);
-        Debug.Log("coucou");
         hidden = false;
         characterType = type.roublard;
         hiddenDuration = 0;
         skill1CastTime = 1;
-        skill1CoolDownTime = 5;
+        coolDownSkill1 = 5;
         skill2CastTime = 1;
-        skill2CoolDownTime = 15;
+        coolDownSkill2 = 15;
         roublardAnim = transform.GetComponent<Animator>();
+    }
+
+    public override void reset()
+    {
+        hidden = false;
+        hiddenDuration = 0;
+        gameObject.GetComponent<SpriteRenderer>().sprite = characterSprite;
+        base.reset();
     }
 
     public void testHidden() 
@@ -84,39 +91,31 @@ public class Roublard : Character
         }
     }
 
-    public override void setUpAttack()
+    public override void addAttack()
     {
         if (hidden)
         {
             hidden = false;
             hiddenDuration = 0;
         }
-        base.setUpAttack();
+        base.addAttack();
     }
 
     // Trap
-    public override void castSkill1()
+    public override void launchSkill1(GameObject cursor)
     {
         if (hidden)
         {
             hidden = false;
             hiddenDuration = 0;
         }
-        base.castSkill1();
     }
 
-    public override void launchSkill1()
-    {
-        // Creer objet pi�ge et le faire spawner
-        base.launchSkill1();
-    }
-
-    public override void launchSkill2()
+    public override void launchSkill2(GameObject cursor)
     {
         hidden = true;
         hiddenDuration = 5;
         gameObject.GetComponent<SpriteRenderer>().sprite = hiddenSprite;
-        base.launchSkill2();
     }
 
 }

@@ -86,34 +86,21 @@ public class Barbare : Character
     }
 
     // GRO TAPE
-    public override void castSkill1()
+    public override void launchSkill1(GameObject cursor)
     {
-        // testEnraged();
-        // if (enraged)
-        // {
-        //     atk = new AttackManager(new[] {
-        // new Vector3 { x = 1, y = 0, z = 0 },
-        // new Vector3 { x = 1, y = 0, z = 1 },
-        // new Vector3 { x = 1, y = 0, z = -1 } }
-        // , 2 * normalAttackDamage, this, 1, 1
-        //     );
-        //     atk.setupAttack(position);
-        // }
-        // else
-        // {
-        //     atk = new AttackManager(new[] {
-        // new Vector3 { x = 1, y = 0, z = 0 },
-        // new Vector3 { x = 1, y = 0, z = 1 },
-        // new Vector3 { x = 1, y = 0, z = -1 } }
-        // , normalAttackDamage, this, 1, 1
-        //     );
-        //     atk.setupAttack(position);
-        // }
-        // base.launchSkill1();
+        testEnraged();
+        if (enraged)
+        {
+            AttackManager.instance.attackTiles(this, cursor, zoneSkill1, 100);
+        }
+        else
+        {
+            AttackManager.instance.attackTiles(this, cursor, zoneSkill1, 50);
+        }
     }
 
     // CROOOoom !
-    public override void castSkill2()
+    public override void launchSkill2(GameObject cursor)
     {
         // if (coolDownSkill2 == 0)
         // {
