@@ -147,7 +147,7 @@ public class Character : MonoBehaviour
 
     public virtual void takeDamage(Character attacker, int damage)
     {
-        Debug.Log(damage);
+        Debug.Log("Take Damage : " + damage.ToString());
         if (alive)
         {
             if (shielded)
@@ -235,7 +235,8 @@ public class Character : MonoBehaviour
 
     public virtual void castAttack(GameObject cursor)
     {
-        StartCoroutine(AttackManager.instance.attackTiles(this, cursor, zoneBasicAttack, normalAttackDamage));
+        Debug.Log("Attack !");
+        AttackManager.instance.attackTiles(this, cursor, zoneBasicAttack, normalAttackDamage);
     }
 
     public virtual void castSkill1()

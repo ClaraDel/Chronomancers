@@ -43,10 +43,8 @@ public class Paladin : Character
 
     public override void takeDamage(Character attacker, int damage)
     {
-        Debug.Log("hors if take damage");
         if (!blocking)
         {
-            Debug.Log("in if take damage");
             paladinAnim.Play("hurtPaladinR");
             base.takeDamage(attacker, damage);
         }
