@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 3068122577141492611}
   - component: {fileID: 4349303930244656580}
   - component: {fileID: 6462415604944014305}
-  - component: {fileID: 463258013840340486}
+  - component: {fileID: 1031373863591269986}
   m_Layer: 0
   m_Name: Barbare
   m_TagString: character
@@ -186,6 +186,8 @@ MonoBehaviour:
   moveSpeed: 5
   PlayerTarget: {fileID: 2644693254493339779}
   isControllable: 0
+  pause: {fileID: 0}
+  character: {fileID: 0}
 --- !u!114 &3068122577141492611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,8 +201,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 3068122577141492608}
-  positionSpawnX: 22
-  positionSpawnY: 15
+  positionSpawnXTeam0: 22
+  positionSpawnYTeam0: 1
+  positionSpawnXTeam1: 1
+  positionSpawnYTeam1: 10
 --- !u!61 &4349303930244656580
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -248,41 +252,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &463258013840340486
-MonoBehaviour:
+--- !u!95 &1031373863591269986
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3068122577141492615}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99efccad7dbc84449b56407091c6b3ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  maxHealth: 100
-  healthBar: {fileID: 0}
-  normalAttackDamage: 0
-  ghostSprite: {fileID: 0}
-  characterSprite: {fileID: 0}
-  alive: 0
-  isBlue: 0
-  position: {x: 0, y: 0, z: 0}
-  characterType: 0
-  moveAction: 0
-  castingTicks: 0
-  castingSkill1: 0
-  skill1CastTime: 0
-  skill1CoolDownTime: 0
-  coolDownSkill1: 0
-  castingSkill2: 0
-  skill2CastTime: 0
-  skill2CoolDownTime: 0
-  moveManager: {fileID: 0}
-  enragedSprite: {fileID: 0}
-  enraged: 0
-  rageDuration: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0bea260bd0fd8ae4fa14ca28f1a2ee83, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1526677467816364459
 PrefabInstance:
   m_ObjectHideFlags: 0

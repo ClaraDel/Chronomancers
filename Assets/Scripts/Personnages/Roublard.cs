@@ -55,7 +55,7 @@ public class Roublard : Character
 
     public override void die()
     {
-        roublardAnim.Play("deathRoublard");
+        //roublardAnim.Play("deathRoublard");
         base.die();
     }
 
