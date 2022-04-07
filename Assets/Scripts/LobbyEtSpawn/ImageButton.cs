@@ -8,12 +8,14 @@ public class ImageButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 {
     public void OnPointerEnter(PointerEventData eventData)
     {
+        SelectionManager.mouseOnObject = true;
         gameObject.GetComponent<Image>().color = new Color(1,1,1);
          
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        SelectionManager.mouseOnObject = false;
         gameObject.GetComponent<Image>().color = new Color(0.7924528f, 0.6479174f, 0.6479174f);
     }
 

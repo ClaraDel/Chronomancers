@@ -7,6 +7,7 @@ public class SelectionManager : MonoBehaviour
 {
 
     public static GameObject selected;
+    public static bool mouseOnObject = false;
 
 
     public static void updateStatePreviousButton(Color normalColor)
@@ -15,6 +16,8 @@ public class SelectionManager : MonoBehaviour
         selected.GetComponent<CustomCharacterButton>().resetButton();
         selected = null;
     }
+
+
 
     public static void setSelected(GameObject go)
     {
@@ -29,6 +32,9 @@ public class SelectionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetMouseButtonDown(0) && !mouseOnObject)
+        {
+            selected.transform.GetComponent<CustomCharacterButton>().hideUI();
+        }
     }
 }
