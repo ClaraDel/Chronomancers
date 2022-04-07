@@ -67,6 +67,7 @@ public class CustomCharacterButton : MonoBehaviour, IPointerEnterHandler, IPoint
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        SelectionManager.mouseOnObject = true;
         if (SelectionManager.selected != null && SelectionManager.selected != gameObject)
         {
             SelectionManager.updateStatePreviousButton(normalColor);
@@ -75,18 +76,14 @@ public class CustomCharacterButton : MonoBehaviour, IPointerEnterHandler, IPoint
 
         //display UI if they are not null
         displayUI();
-      
-
-
-
     }
 
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        SelectionManager.mouseOnObject = false;
         if (!pressed)
         {
-
             hideUI();
             resetButton();
         }
@@ -107,7 +104,6 @@ public class CustomCharacterButton : MonoBehaviour, IPointerEnterHandler, IPoint
         characterInfo = gameObject.GetComponent<CharacterInfo>();
         normalColor = new Color(0.7924528f, 0.6479174f, 0.6479174f);
         highlightedColor = new Color(1, 1, 1);
-
     }
 
     // Update is called once per frame
