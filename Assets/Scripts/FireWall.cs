@@ -27,15 +27,6 @@ public class FireWall : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void Start()
-    {
-        TimeManager.instance.addAction(() => fireTick());
-        TimeManager.instance.addFutureAction(() => fireTick(), 1);
-        TimeManager.instance.addFutureAction(() => fireTick(), 2);
-        TimeManager.instance.addFutureAction(() => fireTick(), 3);
-        TimeManager.instance.addFutureAction(() => fireTick(), 4);
-    }
-
     // Update is called once per frame
     void Update()
     {

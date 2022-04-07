@@ -94,13 +94,6 @@ public class Barbare : Character
         coolDowns();
     }
 
-    public virtual void setUpSkill1()
-    {
-        this.zoneSkill1.getZoneCiblable().SetActive(true);
-        cursor.SetActive(true);
-        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().setUpRotation(zoneSkill1);
-    }
-
     // GRO TAPE
     public override void launchSkill1(Vector3[] positions)
     {
