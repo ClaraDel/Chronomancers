@@ -9,6 +9,7 @@ public class Roublard : Character
     public bool hidden;
     public int hiddenDuration;
     private Animator roublardAnim;
+    public GameObject trap;
 
     public void init(bool isBlue) {
         base.init(100, 50, isBlue);
@@ -125,18 +126,24 @@ public class Roublard : Character
     // Trap
     public override void launchSkill1(GameObject cursor)
     {
-        if (hidden)
+        if (alive)
         {
-            hidden = false;
-            hiddenDuration = 0;
+            if (hidden)
+            {
+                hidden = false;
+                hiddenDuration = 0;
+            }
         }
     }
 
     public override void launchSkill2(GameObject cursor)
     {
-        hidden = true;
-        hiddenDuration = 5;
-        gameObject.GetComponent<SpriteRenderer>().sprite = hiddenSprite;
+        if (alive)
+        {
+            hidden = true;
+            hiddenDuration = 5;
+            gameObject.GetComponent<SpriteRenderer>().sprite = hiddenSprite;
+        }
     }
 
 }
