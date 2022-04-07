@@ -116,7 +116,6 @@ public class Paladin : Character
         {
             foreach (var cible in positions)
             {
-
                 RaycastHit2D[] hits;
                 hits = Physics2D.RaycastAll(cible, Vector3.forward);
                 for (int i = 0; i < hits.Length; i++)
