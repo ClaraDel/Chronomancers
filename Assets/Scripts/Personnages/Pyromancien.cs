@@ -36,14 +36,19 @@ public class Pyromancien : Character
     // Boule de feu
     public override void launchSkill1(GameObject cursor)
     {
-        AttackManager.instance.attackTiles(this, cursor, zoneSkill1, 100);
-        // Mettre animation ici
+        if (alive)
+        {
+            AttackManager.instance.attackTiles(this, cursor, zoneSkill1, 100);
+            // Mettre animation ici
+        }
     }
 
     // Mur de feu
     public override void launchSkill2(GameObject cursor)
     {
-        // Creer murs de feu
+        if (alive)
+        {
+            // Creer murs de feu
+        }
     }
-
 }

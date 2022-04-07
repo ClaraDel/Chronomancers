@@ -18,14 +18,36 @@ public class CursorManager : MonoBehaviour
 
     private Zone activeZone;
     private List<Vector3Int> listPositionsActif;
+    private bool rotationActive;
 
     public void setUp(Zone zone)
     {
+        rotationActive = false;
         zone.getZoneCiblable().SetActive(true);
         listPositionsActif = new List<Vector3Int>();
         foreach (var tile in zone.getTilesCiblable())
         {
             Vector3Int tmp = new Vector3Int(0,0,0);
+            tmp.x = (int)Mathf.RoundToInt(tile.transform.position.x);
+            tmp.y = (int)Mathf.RoundToInt(tile.transform.position.y);
+            tmp.z = (int)Mathf.RoundToInt(tile.transform.position.z);
+            listPositionsActif.Add(tmp);
+        }
+        this.activeZone = zone;
+        transform.position = listPositionsActif[0];
+        positionX = (int)Mathf.Floor(transform.position.x);
+        positionY = (int)Mathf.Floor(transform.position.y);
+        activeZone.getZoneEffet().SetActive(true);
+    }
+
+    public void setUpRotation(Zone zone)
+    {
+        rotationActive = true;
+        zone.getZoneCiblable().SetActive(true);
+        listPositionsActif = new List<Vector3Int>();
+        foreach (var tile in zone.getTilesCiblable())
+        {
+            Vector3Int tmp = new Vector3Int(0, 0, 0);
             tmp.x = (int)Mathf.RoundToInt(tile.transform.position.x);
             tmp.y = (int)Mathf.RoundToInt(tile.transform.position.y);
             tmp.z = (int)Mathf.RoundToInt(tile.transform.position.z);
@@ -136,8 +158,11 @@ public class CursorManager : MonoBehaviour
         this.transform.position = new_position;
         this.positionX = (int)Mathf.Floor(new_position.x);
         this.positionY = (int)Mathf.Floor(new_position.y);
-        this.calculOrientationCursor();
-        this.rotateEffects();
+        if (rotationActive)
+        {
+            this.calculOrientationCursor();
+            this.rotateEffects();
+        }
         return true;
     }
 

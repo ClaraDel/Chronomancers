@@ -177,7 +177,7 @@ public class Character : MonoBehaviour
             }
             else
             {
-                if (attacker.getType() == type.roublard && castingTicks > 0)
+                if (attacker != null && attacker.getType() == type.roublard && castingTicks > 0)
                 {
                     damage = 2 * damage;
                 }

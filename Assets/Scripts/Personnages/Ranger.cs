@@ -15,16 +15,36 @@ public class Ranger : Character
         coolDownSkill2 = 7;
     }
 
+    public virtual void castSkill1()
+    {
+        if (coolDownSkill1 == 0)
+        {
+            coolDowns();
+            castingTicks = skill1CastTime - 1;
+            castingSkill1 = true;
+            coolDownSkill1 = maxCoolDownSkill1 + skill1CastTime;
+
+            GameObject cursor = gameObject.transform.Find("Cursor").gameObject;
+
+            TimeManager.instance.AddAction(() => launchSkill1(cursor));
+            AttackManager.instance.addFutureAttack(this, cursor, zoneSkill1, 75, skill1CastTime + 1);
+            StartCoroutine(TimeManager.instance.PlayTick());
+        }
+    }
+
     // Tir pr�cis
     public override void launchSkill1(GameObject cursor)
     {
-        // Creer objet fleche et le faire spawner, puis lui faire infliger des degats apres 1 tour
+        if (alive)
+        {
+        }
     }
 
     // Dash
     public override void launchSkill2(GameObject cursor)
     {
         // Ajouter mouvement vers case ciblee a 3 de port�e
+        gameObject.transform.position = zoneSkill2.getTilesEffets()[0].transform.position;
     }
 
 }

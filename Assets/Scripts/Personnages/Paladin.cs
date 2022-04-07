@@ -110,46 +110,48 @@ public class Paladin : Character
     // Imposition des mains
     public override void launchSkill1(GameObject cursor)
     {
-
-        foreach (var tiles in zoneSkill1.getTilesEffets())
+        if (alive)
         {
-            Vector3 cible = tiles.transform.position;
-
-            RaycastHit2D[] hits;
-            hits = Physics2D.RaycastAll(cible, Vector3.forward);
-            for (int i = 0; i < hits.Length; i++)
+            foreach (var tiles in zoneSkill1.getTilesEffets())
             {
-                if (hits[i].collider != null)
+                Vector3 cible = tiles.transform.position;
+
+                RaycastHit2D[] hits;
+                hits = Physics2D.RaycastAll(cible, Vector3.forward);
+                for (int i = 0; i < hits.Length; i++)
                 {
-                    Character target = hits[i].collider.gameObject.GetComponent<Character>();
-                    target.heal(50);
+                    if (hits[i].collider != null)
+                    {
+                        Character target = hits[i].collider.gameObject.GetComponent<Character>();
+                        target.heal(50);
+                    }
                 }
             }
+            paladinAnim.Play("hillPaladin");
         }
-        paladinAnim.Play("hillPaladin");
     }
 
     // Shield
     public override void launchSkill2(GameObject cursor)
     {
-        foreach (var tiles in zoneSkill2.getTilesEffets())
+        if (alive)
         {
-            Vector3 cible = tiles.transform.position;
-            RaycastHit2D[] hits;
-            hits = Physics2D.RaycastAll(cible, Vector3.forward);
-            for (int i = 0; i < hits.Length; i++)
+            foreach (var tiles in zoneSkill2.getTilesEffets())
             {
-                if (hits[i].collider != null)
+                Vector3 cible = tiles.transform.position;
+                RaycastHit2D[] hits;
+                hits = Physics2D.RaycastAll(cible, Vector3.forward);
+                for (int i = 0; i < hits.Length; i++)
                 {
-                    Character target = hits[i].collider.gameObject.GetComponent<Character>();
-                    target.shield(6);
+                    if (hits[i].collider != null)
+                    {
+                        Character target = hits[i].collider.gameObject.GetComponent<Character>();
+                        target.shield(6);
+                    }
                 }
             }
+            paladinAnim.Play("hillPaladin");
         }
-
-        
-        // Donner shield aux persos gr�ce � collision et � m�thode shield
-        paladinAnim.Play("hillPaladin");
     }
 
 }
