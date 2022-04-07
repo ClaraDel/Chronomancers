@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1903521571702192529}
   - component: {fileID: 9195896245800558516}
   - component: {fileID: 2331928496099893859}
+  - component: {fileID: 5763570291197829793}
   m_Layer: 0
   m_Name: Ranger
   m_TagString: Untagged
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 672b218c46724a344b736c47c39671a7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6710bae16134b2444af368e76c1c03a7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,6 +105,8 @@ MonoBehaviour:
   moveSpeed: 5
   PlayerTarget: {fileID: 180892381201683670}
   isControllable: 0
+  pause: {fileID: 0}
+  character: {fileID: 0}
 --- !u!114 &911230239939805142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,8 +120,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 911230239939805141}
-  positionSpawnX: 22
-  positionSpawnY: 30
+  positionSpawnXTeam0: 22
+  positionSpawnYTeam0: 1
+  positionSpawnXTeam1: 1
+  positionSpawnYTeam1: 10
 --- !u!61 &1903521571702192529
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -175,18 +180,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 911230239939805138}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a39bc67208d344047a4718ed457c2f89, type: 3}
+  m_Script: {fileID: 11500000, guid: 994cf615dc30a4b439a25ba5d68c7fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfInfo: {fileID: 0}
   health: 0
   maxHealth: 0
   healthBar: {fileID: 0}
+  fill: {fileID: 0}
   normalAttackDamage: 0
+  zoneBasicAttack: {fileID: 0}
+  cursor: {fileID: 0}
+  characterDie: {fileID: 0}
   ghostSprite: {fileID: 0}
   characterSprite: {fileID: 0}
   alive: 0
   isBlue: 0
-  position: {x: 0, y: 0, z: 0}
   characterType: 0
   moveAction: 0
   castingTicks: 0
@@ -198,6 +207,25 @@ MonoBehaviour:
   skill2CastTime: 0
   skill2CoolDownTime: 0
   moveManager: {fileID: 0}
+--- !u!95 &5763570291197829793
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911230239939805138}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 833e00bf9d3c4804db5a1943f21bd14a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4478512535050031833
 GameObject:
   m_ObjectHideFlags: 0

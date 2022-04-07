@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1331976971692945730}
   - component: {fileID: 8613391431250368359}
   - component: {fileID: 2903176528055315132}
+  - component: {fileID: 6082849630325887669}
   m_Layer: 0
   m_Name: Pyromancien
   m_TagString: Untagged
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 672b218c46724a344b736c47c39671a7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6ce1b8d79921a2945ba15d8ded4e854e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,6 +105,8 @@ MonoBehaviour:
   moveSpeed: 5
   PlayerTarget: {fileID: 762273400948382725}
   isControllable: 0
+  pause: {fileID: 0}
+  character: {fileID: 0}
 --- !u!114 &338856445525931781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,8 +120,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 338856445525931782}
-  positionSpawnX: 22
-  positionSpawnY: 25
+  positionSpawnXTeam0: 22
+  positionSpawnYTeam0: 1
+  positionSpawnXTeam1: 1
+  positionSpawnYTeam1: 10
 --- !u!61 &1331976971692945730
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -175,18 +180,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 338856445525931777}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9d83a591177abd469bb76f1500ff731, type: 3}
+  m_Script: {fileID: 11500000, guid: 05a2e7612a371e841934d890c45f5e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfInfo: {fileID: 0}
   health: 0
   maxHealth: 0
   healthBar: {fileID: 0}
+  fill: {fileID: 0}
   normalAttackDamage: 0
+  zoneBasicAttack: {fileID: 0}
+  cursor: {fileID: 0}
+  characterDie: {fileID: 0}
   ghostSprite: {fileID: 0}
   characterSprite: {fileID: 0}
   alive: 0
   isBlue: 0
-  position: {x: 0, y: 0, z: 0}
   characterType: 0
   moveAction: 0
   castingTicks: 0
@@ -199,6 +208,25 @@ MonoBehaviour:
   skill2CoolDownTime: 0
   moveManager: {fileID: 0}
   attacking: 0
+--- !u!95 &6082849630325887669
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338856445525931777}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a7d19a55b60cb9b49b94cfe6b645496a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3904713627765217802
 GameObject:
   m_ObjectHideFlags: 0
