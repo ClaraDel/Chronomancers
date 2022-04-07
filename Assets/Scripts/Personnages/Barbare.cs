@@ -71,49 +71,44 @@ public class Barbare : Character
 
     public override void addAttack()
     {
-        GameObject Cursor = gameObject.transform.Find("Cursor").gameObject;
+        CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
+        Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
+        for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
+        {
+            positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
+        }
+
         if (enraged)
         {
-            AttackManager.instance.addAttack(this, Cursor, zoneBasicAttack, 2*normalAttackDamage);
+            AttackManager.instance.addAttack(this, positions, 2*normalAttackDamage);
+            StartCoroutine(TimeManager.instance.PlayTick());
         }
         else
         {
-            AttackManager.instance.addAttack(this, Cursor, zoneBasicAttack, normalAttackDamage);
+            AttackManager.instance.addAttack(this, positions, normalAttackDamage);
+            StartCoroutine(TimeManager.instance.PlayTick());
         }
+
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
-        Cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        cursor.gameObject.SetActive(false);
         coolDowns();
     }
 
-    public virtual void setUpSkill1()
-    {
-        this.zoneSkill1.getZoneCiblable().SetActive(true);
-        cursor.SetActive(true);
-        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().setUpRotation(zoneSkill1);
-    }
-
     // GRO TAPE
-    public override void launchSkill1(GameObject cursor)
+    public override void launchSkill1(Vector3[] positions)
     {
         if (alive)
         {
             testEnraged();
             if (enraged)
             {
-                AttackManager.instance.attackTiles(this, cursor, zoneSkill1, 100);
+                AttackManager.instance.attackTiles(this, positions, 100);
             }
             else
             {
-                AttackManager.instance.attackTiles(this, cursor, zoneSkill1, 50);
+                AttackManager.instance.attackTiles(this, positions, 50);
             }
         }
-    }
-
-    public virtual void setUpSkill2()
-    {
-        this.zoneSkill2.getZoneCiblable().SetActive(true);
-        cursor.SetActive(true);
-        gameObject.transform.Find("Cursor").GetComponent<CursorManager>().setUpRotation(zoneSkill2);
     }
 
     /*
@@ -135,7 +130,7 @@ public class Barbare : Character
     */
 
     // CROOOoom !
-    public override void launchSkill2(GameObject cursor)
+    public override void launchSkill2(Vector3[] positions)
     {
         if (alive)
         {

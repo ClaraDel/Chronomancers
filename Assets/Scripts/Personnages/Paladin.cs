@@ -110,13 +110,12 @@ public class Paladin : Character
     }
 
     // Imposition des mains
-    public override void launchSkill1(GameObject cursor)
+    public override void launchSkill1(Vector3[] positions)
     {
         if (alive)
         {
-            foreach (var tiles in zoneSkill1.getTilesEffets())
+            foreach (var cible in positions)
             {
-                Vector3 cible = tiles.transform.position;
 
                 RaycastHit2D[] hits;
                 hits = Physics2D.RaycastAll(cible, Vector3.forward);
@@ -134,13 +133,12 @@ public class Paladin : Character
     }
 
     // Shield
-    public override void launchSkill2(GameObject cursor)
+    public override void launchSkill2(Vector3[] positions)
     {
         if (alive)
         {
-            foreach (var tiles in zoneSkill2.getTilesEffets())
+            foreach (var cible in positions)
             {
-                Vector3 cible = tiles.transform.position;
                 RaycastHit2D[] hits;
                 hits = Physics2D.RaycastAll(cible, Vector3.forward);
                 for (int i = 0; i < hits.Length; i++)

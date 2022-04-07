@@ -244,13 +244,20 @@ public class Character : MonoBehaviour
     public virtual void addAttack()
     {
         Debug.Log("addAtk");
+        // AbilityTimer.instance.launchUIAbility(1);
         AbilityTimer.instance.launchUIAbility(1);
         TimeManager.instance.AddAction(() => castAttack(cursor));
         
+        Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
+        for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
+        {
+            positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
+        }
+        AttackManager.instance.addAttack(this, positions, normalAttackDamage);
         coolDowns();
 
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
-        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        cursor.gameObject.SetActive(false);
         StartCoroutine(TimeManager.instance.PlayTick());
     }
 
@@ -298,14 +305,19 @@ public class Character : MonoBehaviour
             castingSkill1 = true;
             coolDownSkill1 = maxCoolDownSkill1 + skill1CastTime;
 
-            //cursor.gameObject;
+            CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
+            Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
+            for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
+            {
+                positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
+            }
 
-            TimeManager.instance.AddFutureAction(() => launchSkill1(cursor), skill1CastTime);
+            TimeManager.instance.AddFutureAction(() => launchSkill1(positions), skill1CastTime - 1);
             StartCoroutine(TimeManager.instance.PlayTick());
         }
     }
 
-    public virtual void launchSkill1(GameObject cursor) { }
+    public virtual void launchSkill1(Vector3[] positions) { }
 
     public void cancelSkill1()
     {
@@ -329,12 +341,19 @@ public class Character : MonoBehaviour
             castingSkill2 = true;
             coolDownSkill2 = maxCoolDownSkill2 + skill2CastTime;
 
-            TimeManager.instance.AddFutureAction(() => launchSkill2(cursor), skill1CastTime);
+            CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
+            Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
+            for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
+            {
+                positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
+            }
+
+            TimeManager.instance.AddFutureAction(() => launchSkill2(positions), skill1CastTime - 1);
             StartCoroutine(TimeManager.instance.PlayTick());
         }
     }
 
-    public virtual void launchSkill2(GameObject cursor) { }
+    public virtual void launchSkill2(Vector3[] positions) { }
 
     public void cancelSkill2()
     {

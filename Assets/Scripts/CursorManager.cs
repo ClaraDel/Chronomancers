@@ -16,7 +16,7 @@ public class CursorManager : MonoBehaviour
     }
     directions direction = directions.up;
 
-    private Zone activeZone;
+    public Zone activeZone;
     private List<Vector3Int> listPositionsActif;
     private bool rotationActive;
 

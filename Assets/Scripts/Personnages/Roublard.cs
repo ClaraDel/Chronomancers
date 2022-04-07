@@ -124,7 +124,7 @@ public class Roublard : Character
     }
 
     // Trap
-    public override void launchSkill1(GameObject cursor)
+    public override void launchSkill1(Vector3[] positions)
     {
         if (alive)
         {
@@ -133,10 +133,11 @@ public class Roublard : Character
                 hidden = false;
                 hiddenDuration = 0;
             }
+            Instantiate(trap, positions[0], new Quaternion(), null);
         }
     }
 
-    public override void launchSkill2(GameObject cursor)
+    public override void launchSkill2(Vector3[] positions)
     {
         if (alive)
         {

@@ -4,36 +4,27 @@ using UnityEngine;
 
 public class FireWall : MonoBehaviour
 {
-    public List<GameObject> colliding;
-
-    private void OnTriggerEnter(Collider other)
-    {
-        colliding.Add(other.gameObject);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        colliding.Remove(other.gameObject);
-    }
 
     private void fireTick() 
     {
-        foreach (GameObject gameObject in colliding)
-        {
-            if (gameObject.GetComponent<Character>() != null)
-            {
-                gameObject.GetComponent<Character>().takeDamage(null, 25);
-            }
+        if(gameObject.activeSelf){
+            AttackManager.instance.attackTile(null, transform.position, 25);
         }
+    }
+
+    public void setSelf(){
+        int delay = Mathf.Min(TimeManager.maxTick - TimeManager.instance.currentTick, 6);
+        TimeManager.instance.AddFutureAction(() => gameObject.SetActive(true), 1);
+        for (int i = 1; i < delay-1; i++)
+        {
+            TimeManager.instance.AddFutureAction(() => fireTick(), i);   
+        }
+        TimeManager.instance.AddFutureAction(() => gameObject.SetActive(false), delay-1);
     }
 
     void Start()
     {
-        TimeManager.instance.addAction(() => fireTick());
-        TimeManager.instance.addFutureAction(() => fireTick(), 1);
-        TimeManager.instance.addFutureAction(() => fireTick(), 2);
-        TimeManager.instance.addFutureAction(() => fireTick(), 3);
-        TimeManager.instance.addFutureAction(() => fireTick(), 4);
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame

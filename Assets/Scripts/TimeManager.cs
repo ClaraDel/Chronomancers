@@ -8,7 +8,7 @@ public class TimeManager : MonoBehaviour
 {
     public static TimeManager instance { get; set; }
 
-    public static int currentTick;
+    public int currentTick;
     private int currentTurn;
     public static int maxTick = 10;
     public static int maxTurn = 4;
@@ -65,7 +65,7 @@ public class TimeManager : MonoBehaviour
 
     public IEnumerator PlayTick()
     {
-        AbilityTimer.instance.updateUIAbility();
+        // AbilityTimer.instance.updateUIAbility();
         isPlaying = true;
         Stack<Action> currentStack = turnTimeLine[currentTick];
         float index = 0.0f;
@@ -86,7 +86,7 @@ public class TimeManager : MonoBehaviour
 
     public void EndTurn()
     {
-        AbilityTimer.instance.resetTimers();
+        // AbilityTimer.instance.resetTimers();
         actifCharacter.isControllable = false;
         if (currentTurn == maxTurn)
         {
@@ -102,6 +102,9 @@ public class TimeManager : MonoBehaviour
             //EndTurnPanel.SetActive(true);
             spawnZones[(currentTurn % 2)].SetActive(true);
 
+        }
+        foreach (GameObject item in GameObject.FindGameObjectsWithTag("placedObjects")) {
+            Destroy(item);
         }
     }
 
