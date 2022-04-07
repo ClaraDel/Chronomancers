@@ -17,6 +17,7 @@ public class AttackManager : MonoBehaviour
 
     public void attackTile(Character attacker, Vector3 cible, int damage)
     {
+        Debug.Log("Attack Tile");
         RaycastHit2D[] hits;
         hits = Physics2D.RaycastAll(cible, Vector3.forward);
         for (int i = 0; i < hits.Length; i++)
@@ -30,9 +31,8 @@ public class AttackManager : MonoBehaviour
         }
     }
 
-    public IEnumerator attackTiles(Character attacker, GameObject cursor, Zone zone, int damage)
+    public void attackTiles(Character attacker, GameObject cursor, Zone zone, int damage)
     {
-        yield return new WaitForSeconds(0.7f);
         if (attacker.isAlive())
         {
             foreach (var tiles in zone.getTilesEffets())

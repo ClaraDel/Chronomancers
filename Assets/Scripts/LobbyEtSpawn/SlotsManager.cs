@@ -123,7 +123,6 @@ public class SlotsManager : MonoBehaviour
             infos.Add(team, new List<Info>());
         }
         infos[team].Add(playerInfo);
-        Debug.Log(infos[team].Count);
 
         nbEquipedSlot = infos[team].Count;
         if (nbEquipedSlot == nbMax)
