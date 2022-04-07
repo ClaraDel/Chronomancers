@@ -8,18 +8,19 @@ public class DeathCharacter : MonoBehaviour
     void Awake()
     {
         Animator animator = transform.GetComponent<Animator>();
-        if (animator.name == "DeathPaladin")
+        if (animator.name.Contains("DeathPaladin"))
             animator.Play("deathPaladin");
-        else if (animator.name == "DeathRoublard")
-            animator.Play("deathPaladin");
-        else if (animator.name == "DeathPyromancien")
+        else if (animator.name.Contains("DeathRoublard"))
+            animator.Play("deathRoublard");
+            //Debug.Log("in death roublard");
+        else if (animator.name.Contains("DisappearPyromancien"))
             animator.Play("deathPyromancien");
-        else if (animator.name == "DeathBarbare")
+        else if (animator.name.Contains("DeathBarbare"))
             animator.Play("deathBarbare");
-        else if (animator.name == "DeathRanger")
-            animator.Play("deathRanger");
+        else if (animator.name.Contains("DeathRanger"))
+            animator.Play("DeathRanger");
         else
-            print("Aucun perso ne correspond");
+            Debug.Log("Aucun perso ne correspond, Animator.parameters = "+ animator.parameters+ animator.name);
     }
 
 

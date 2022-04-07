@@ -122,8 +122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 370336178062066483}
-  positionSpawnXTeam0: 22
-  positionSpawnYTeam0: 1
+  positionSpawnXTeam0: 21
+  positionSpawnYTeam0: 2
   positionSpawnXTeam1: 1
   positionSpawnYTeam1: 10
 --- !u!61 &1435609316788995447
@@ -193,6 +193,7 @@ MonoBehaviour:
   normalAttackDamage: 50
   zoneBasicAttack: {fileID: 0}
   cursor: {fileID: 0}
+  characterDie: {fileID: 3231304020904056291, guid: f8e0c749844ca5c49bbe63a7e131c1e9, type: 3}
   ghostSprite: {fileID: 21300000, guid: 2a833689455d8d2449cd821bf32982be, type: 3}
   characterSprite: {fileID: 21300000, guid: 672b218c46724a344b736c47c39671a7, type: 3}
   alive: 0
