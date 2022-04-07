@@ -57,7 +57,7 @@ public class TimeManager : MonoBehaviour
 
     public IEnumerator PlayTick()
     {
-
+        AbilityTimer.instance.updateUIAbility();
         isPlaying = true;
         Stack<Action> currentStack = turnTimeLine[currentTick];
         float index = 0.0f;

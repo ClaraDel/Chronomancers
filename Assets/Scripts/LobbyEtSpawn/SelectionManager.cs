@@ -12,7 +12,7 @@ public class SelectionManager : MonoBehaviour
     public static void updateStatePreviousButton(Color normalColor)
     {
         selected.GetComponent<CustomCharacterButton>().pressed = false;
-        selected.GetComponent<Image>().color = normalColor;
+        selected.GetComponent<CustomCharacterButton>().resetButton();
         selected = null;
     }
 

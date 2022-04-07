@@ -224,10 +224,11 @@ public class Character : MonoBehaviour
 
     public void addAttack()
     {
+        Debug.Log("addAtk");
+        AbilityTimer.instance.launchUIAbility(1);
         GameObject Cursor = gameObject.transform.Find("Cursor").gameObject;
         AttackManager.instance.addAttack(this, Cursor, zoneBasicAttack, normalAttackDamage);
         
-
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
         Cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
 

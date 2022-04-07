@@ -9,13 +9,13 @@ public class CustomCharacterButton : MonoBehaviour, IPointerEnterHandler, IPoint
 {
     [SerializeField] GameObject UIPerso;
     [SerializeField] GameObject avatar;
-    [SerializeField] GameObject ability;
+    public GameObject ability;
     CharacterInfo characterInfo;
     private Color highlightedColor;
     private Color normalColor;
     public bool pressed = false;
 
-    void displayUI()
+    public virtual void updateInfoUI()
     {
         UIPerso.transform.Find("Name").GetComponent<TMP_Text>().text = characterInfo.nameCharacter;
         UIPerso.transform.Find("Attributs").Find("Atk").GetComponent<TMP_Text>().text = "Atk : " + characterInfo.atk.ToString();
@@ -28,30 +28,54 @@ public class CustomCharacterButton : MonoBehaviour, IPointerEnterHandler, IPoint
         }
     }
 
+
+    public virtual void highlightButton()
+    {
+        gameObject.GetComponent<Image>().color = highlightedColor;
+    }
+
+    public virtual void resetButton()
+    {
+        gameObject.GetComponent<Image>().color = normalColor;
+    }
+
+    public virtual void displayUI()
+    {
+        if (avatar != null && UIPerso != null)
+        {
+            updateInfoUI();
+
+            avatar.GetComponent<Image>().sprite = characterInfo.characterPrefab.GetComponent<SpriteRenderer>().sprite;
+
+            UIPerso.SetActive(true);
+            avatar.SetActive(true);
+            ability.SetActive(false);
+            avatar.GetComponent<Animator>().runtimeAnimatorController = characterInfo.characterPrefab.GetComponent<Animator>().runtimeAnimatorController;
+        }
+
+    }
+
+    public virtual void hideUI()
+    {
+        if (UIPerso != null && avatar != null)
+        {
+            UIPerso.SetActive(false);
+            avatar.SetActive(false);
+            ability.SetActive(false);
+        }
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (SelectionManager.selected != null && SelectionManager.selected != gameObject)
         {
             SelectionManager.updateStatePreviousButton(normalColor);
         }
-
-        gameObject.GetComponent<Image>().color = highlightedColor;
-
-
+        highlightButton();
 
         //display UI if they are not null
-        if(UIPerso != null && avatar != null){
-            displayUI();
-            avatar.GetComponent<Image>().sprite = characterInfo.characterPrefab.GetComponent<SpriteRenderer>().sprite;
-
-
-            UIPerso.SetActive(true);
-            avatar.SetActive(true);
-            ability.SetActive(false);
-
-            avatar.GetComponent<Animator>().runtimeAnimatorController = characterInfo.characterPrefab.GetComponent<Animator>().runtimeAnimatorController;
-
-        }
+        displayUI();
+      
 
 
 
@@ -62,27 +86,16 @@ public class CustomCharacterButton : MonoBehaviour, IPointerEnterHandler, IPoint
     {
         if (!pressed)
         {
-            if (UIPerso != null && avatar != null)
-            {
 
-                UIPerso.SetActive(false);
-                avatar.SetActive(false);
-                ability.SetActive(false);
-            }
-            gameObject.GetComponent<Image>().color = normalColor;
-
-
+            hideUI();
+            resetButton();
         }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         pressed = true;
-        if (UIPerso != null && avatar != null)
-        {
-            UIPerso.SetActive(true);
-            avatar.SetActive(true);
-        }
+        displayUI();
         SelectionManager.selected = gameObject;
     }
 
