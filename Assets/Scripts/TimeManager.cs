@@ -77,6 +77,7 @@ public class TimeManager : MonoBehaviour
 
     public void EndTurn()
     {
+        AbilityTimer.instance.resetTimers();
         actifCharacter.isControllable = false;
         if (currentTurn == maxTurn)
         {

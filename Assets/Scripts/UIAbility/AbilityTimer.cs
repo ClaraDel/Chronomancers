@@ -16,6 +16,14 @@ public class AbilityTimer : MonoBehaviour
         }
     }
 
+    public void resetTimers()
+    {
+        for(int i = 0; i < abilities.Count; i++)
+        {
+            abilities[i].transform.Find("CountDown").GetComponent<Timer>().resetTimer();
+        }
+    }
+
     public void launchUIAbility(int i)
     {
         abilities[i].SetActive(true);

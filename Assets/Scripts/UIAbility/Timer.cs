@@ -18,6 +18,11 @@ public class Timer : MonoBehaviour
         playTick();
     }
 
+    public void resetTimer()
+    {
+        onEnd();
+    }
+
 
     public void playTick()
     {
