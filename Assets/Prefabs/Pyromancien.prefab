@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 672b218c46724a344b736c47c39671a7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6ce1b8d79921a2945ba15d8ded4e854e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 338856445525931782}
-  positionSpawnXTeam0: 22
-  positionSpawnYTeam0: 1
+  positionSpawnXTeam0: 20
+  positionSpawnYTeam0: 2
   positionSpawnXTeam1: 1
   positionSpawnYTeam1: 10
 --- !u!61 &1331976971692945730
@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05a2e7612a371e841934d890c45f5e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfInfo: {fileID: 11400000, guid: ca1ac5bbf01c44c4184604f94ba3288f, type: 2}
   health: 75
   maxHealth: 75
   healthBar: {fileID: 601616400793631400}
@@ -213,6 +214,7 @@ MonoBehaviour:
   shielded: 0
   shieldDuration: 0
   moveManager: {fileID: 338856445525931781}
+  fireWallPrefab: {fileID: 5733318154153289747, guid: 06bdf5fe68fa6ba438ed6f6724615f34, type: 3}
 --- !u!1 &2212152205229622269
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,7 +317,7 @@ GameObject:
   - component: {fileID: 762273400948382725}
   - component: {fileID: 6547882996738304263}
   m_Layer: 0
-  m_Name: Square
+  m_Name: PlayerTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1273,6 +1275,10 @@ PrefabInstance:
     - target: {fileID: 3875495358034142765, guid: 63c7b5e0afea392458695cf014ef3a1a, type: 3}
       propertyPath: m_Name
       value: TileEffect (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875495358034142765, guid: 63c7b5e0afea392458695cf014ef3a1a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6423842539697493280, guid: 63c7b5e0afea392458695cf014ef3a1a, type: 3}
       propertyPath: m_Sprite
@@ -4354,6 +4360,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TileEffect (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3875495358034142765, guid: 63c7b5e0afea392458695cf014ef3a1a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6423842539697493280, guid: 63c7b5e0afea392458695cf014ef3a1a, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -5282,6 +5292,10 @@ PrefabInstance:
     - target: {fileID: 3875495358034142765, guid: 63c7b5e0afea392458695cf014ef3a1a, type: 3}
       propertyPath: m_Name
       value: TileEffect (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875495358034142765, guid: 63c7b5e0afea392458695cf014ef3a1a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6423842539697493280, guid: 63c7b5e0afea392458695cf014ef3a1a, type: 3}
       propertyPath: m_Sprite
@@ -13005,6 +13019,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TileEffect (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3875495358034142765, guid: 63c7b5e0afea392458695cf014ef3a1a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6423842539697493280, guid: 63c7b5e0afea392458695cf014ef3a1a, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -16798,6 +16816,10 @@ PrefabInstance:
     - target: {fileID: 3875495358034142765, guid: 63c7b5e0afea392458695cf014ef3a1a, type: 3}
       propertyPath: m_Name
       value: TileEffect (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875495358034142765, guid: 63c7b5e0afea392458695cf014ef3a1a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6423842539697493280, guid: 63c7b5e0afea392458695cf014ef3a1a, type: 3}
       propertyPath: m_Sprite

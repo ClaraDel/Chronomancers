@@ -10,23 +10,21 @@ public class AttackManager : MonoBehaviour
         instance = this;
     }
 
-    public void addAttack(Character attacker, GameObject cursor, Zone zone, int damage){
-        TimeManager.instance.AddAction(() => attackTiles(attacker, cursor, zone, damage));
-        StartCoroutine(TimeManager.instance.PlayTick());
+    public void addAttack(Character attacker, Vector3[] positions, int damage){
+        TimeManager.instance.AddAction(() => attackTiles(attacker, positions, damage));
     }
 
-    public void addFutureAttack(Character attacker, GameObject cursor, Zone zone, int damage, int tick)
+    public void addFutureAttack(Character attacker, Vector3[] positions, int damage, int tick)
     {
-        TimeManager.instance.AddFutureAction(() => attackTiles(attacker, cursor, zone, damage), tick);
+        TimeManager.instance.AddFutureAction(() => attackTiles(attacker, positions, damage), tick);
     }
 
-    public void attackTiles(Character attacker, GameObject cursor, Zone zone, int damage)
+    public void attackTiles(Character attacker, Vector3[] positions, int damage)
     {
         if (attacker.isAlive())
         {
-            foreach (var tiles in zone.getTilesEffets())
+            foreach (Vector3 cible in positions)
             {
-                Vector3 cible = tiles.transform.position;
                 attackTile(attacker, cible, damage);
             }
         }

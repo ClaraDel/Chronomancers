@@ -24,16 +24,21 @@ public class Ranger : Character
             castingSkill1 = true;
             coolDownSkill1 = maxCoolDownSkill1 + skill1CastTime;
 
-            GameObject cursor = gameObject.transform.Find("Cursor").gameObject;
+            CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
+            Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
+            for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
+            {
+                positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
+            }
 
-            TimeManager.instance.AddAction(() => launchSkill1(cursor));
-            AttackManager.instance.addFutureAttack(this, cursor, zoneSkill1, 75, skill1CastTime + 1);
+            TimeManager.instance.AddAction(() => launchSkill1(positions));
+            AttackManager.instance.addFutureAttack(this, positions, 75, skill1CastTime + 1);
             StartCoroutine(TimeManager.instance.PlayTick());
         }
     }
 
     // Tir pr�cis
-    public override void launchSkill1(GameObject cursor)
+    public override void launchSkill1(Vector3[] positions)
     {
         if (alive)
         {
@@ -41,10 +46,11 @@ public class Ranger : Character
     }
 
     // Dash
-    public override void launchSkill2(GameObject cursor)
+    public override void launchSkill2(Vector3[] positions)
     {
         // Ajouter mouvement vers case ciblee a 3 de port�e
-        gameObject.transform.position = zoneSkill2.getTilesEffets()[0].transform.position;
+        // TODO Check if target out of bounds
+        gameObject.GetComponent<PlayerController>().PlayerTarget.position = positions[0];
     }
 
 }

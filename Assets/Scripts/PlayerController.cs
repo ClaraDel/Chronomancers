@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(TimeManager.currentTick == TimeManager.maxTick)
+        if(TimeManager.instance.currentTick == TimeManager.maxTick)
         {
             character.reset();
         }
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
 
         if (isControllable && !TimeManager.instance.isPlaying)
         {
-            if (character.getCastingTicks() >= 1)
+            if (character.getCastingTicks() > 0)
             {
                 character.wait();
             }
@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour
                     {
                         //Checks for wall collision
                         Vector3 start = new Vector3(PlayerTarget.position.x + 0.5f, PlayerTarget.position.y + 0.5f, 0f);
-                        float sens = Mathf.Round(Input.GetAxisRaw("Horizontal"));
+                        float sens = Mathf.Round(Input.GetAxisRaw("Vertical"));
                         Vector3 dir = new Vector3(0f, sens, 0f);
                         RaycastHit hit;
                         if (Physics.Raycast(start, dir, out hit, 1f) && hit.transform.tag == "Wall") return;

@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 994cf615dc30a4b439a25ba5d68c7fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfInfo: {fileID: 0}
   health: 125
   maxHealth: 125
   healthBar: {fileID: 22471658879218299}
@@ -293,7 +294,7 @@ GameObject:
   - component: {fileID: 180892381201683670}
   - component: {fileID: 5965101078917685716}
   m_Layer: 0
-  m_Name: Square
+  m_Name: PlayerTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

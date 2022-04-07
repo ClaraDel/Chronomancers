@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 2644693254493339779}
   - component: {fileID: 8428827527939323265}
   m_Layer: 0
-  m_Name: Square
+  m_Name: PlayerTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,6 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fefe87f21e60ba4f882f1fcf9cdbcaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfInfo: {fileID: 0}
   health: 150
   maxHealth: 150
   healthBar: {fileID: 1578543568715378586}
