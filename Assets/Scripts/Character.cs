@@ -258,7 +258,6 @@ public class Character : MonoBehaviour
 
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
         cursor.gameObject.SetActive(false);
-        StartCoroutine(TimeManager.instance.PlayTick());
     }
 
     public void cancelAtk()
