@@ -247,14 +247,13 @@ public class Character : MonoBehaviour
 
         TimeManager.instance.AddAction(() => castAttack());
 
-        StartCoroutine(TimeManager.instance.PlayTick());
-
         coolDowns();
 
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
         cursor.gameObject.SetActive(false);
+        StartCoroutine(TimeManager.instance.PlayTick());
     }
-    
+
     public virtual void castAttack()
     {
         CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
@@ -263,12 +262,7 @@ public class Character : MonoBehaviour
         {
             positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
         }
-        AttackManager.instance.addAttack(this, positions, normalAttackDamage);
-        coolDowns();
-
-        this.zoneBasicAttack.getZoneCiblable().SetActive(false);
-        cursor.gameObject.SetActive(false);
-        StartCoroutine(TimeManager.instance.PlayTick());
+        AttackManager.instance.attackTiles(this, positions, normalAttackDamage);
     }
 
     public void cancelAtk()

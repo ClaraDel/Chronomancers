@@ -23,16 +23,14 @@ public class Pyromancien : Character
     }
 
     public override void addAttack()
-    {
-        
-        GameObject Cursor = gameObject.transform.Find("Cursor").gameObject;
+    {        
 
         castingTicks = 1;
 
         TimeManager.instance.AddAction(() => castAttack());
 
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
-        Cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
         TimeManager.instance.PlayTick();
     }
 
