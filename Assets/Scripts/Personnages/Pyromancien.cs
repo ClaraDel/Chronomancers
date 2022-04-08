@@ -26,21 +26,26 @@ public class Pyromancien : Character
     {
         
         GameObject Cursor = gameObject.transform.Find("Cursor").gameObject;
-        
-        base.wait();
-        
-        AttackManager.instance.addFutureAttack(this, Cursor, zoneBasicAttack, normalAttackDamage,1);
+
+        castingTicks = 1;
+
+        TimeManager.instance.AddAction(() => castAttack());
 
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
         Cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
         TimeManager.instance.PlayTick();
     }
 
-    /*public void launchAttack()
+    public override void castAttack()
     {
-        castingTicks = 1;
-        base.coolDowns();
-    }*/
+        CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
+        Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
+        for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
+        {
+            positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
+        }
+        AttackManager.instance.addFutureAttack(this, positions, normalAttackDamage, 1);
+    }
 
     // Boule de feu
     public override void launchSkill1(Vector3[] positions)

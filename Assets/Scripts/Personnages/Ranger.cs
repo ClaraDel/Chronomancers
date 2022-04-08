@@ -15,7 +15,7 @@ public class Ranger : Character
         coolDownSkill2 = 7;
     }
 
-    public virtual void castSkill1()
+    public override void castSkill1()
     {
         if (coolDownSkill1 == 0)
         {

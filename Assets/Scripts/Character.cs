@@ -243,15 +243,10 @@ public class Character : MonoBehaviour
 
     public virtual void addAttack()
     {
-        Debug.Log("addAtk");
         // AbilityTimer.instance.launchUIAbility(1);
-        CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
-        Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
-        for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
-        {
-            positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
-        }
-        AttackManager.instance.addAttack(this, positions, normalAttackDamage);
+
+        TimeManager.instance.AddAction(() => castAttack());
+
         StartCoroutine(TimeManager.instance.PlayTick());
 
         coolDowns();
@@ -259,16 +254,22 @@ public class Character : MonoBehaviour
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
         cursor.gameObject.SetActive(false);
     }
+    
+    public virtual void castAttack()
+    {
+        CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
+        Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
+        for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
+        {
+            positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
+        }
+        AttackManager.instance.addAttack(this, positions, normalAttackDamage);
+    }
 
     public void cancelAtk()
     {
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
         cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
-    }
-    
-    public virtual void castAttack(GameObject cursor)
-    {
-        AttackManager.instance.attackTiles(this, cursor, zoneBasicAttack, normalAttackDamage);
     }
 
     public void coolDowns()

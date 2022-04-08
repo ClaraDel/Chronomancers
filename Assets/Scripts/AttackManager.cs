@@ -36,7 +36,6 @@ public class AttackManager : MonoBehaviour
 
     public void attackTile(Character attacker, Vector3 cible, int damage)
     {
-        Debug.Log("Attack Tile");
         RaycastHit2D[] hits;
         hits = Physics2D.RaycastAll(cible, Vector3.forward);
         for (int i = 0; i < hits.Length; i++)
@@ -49,7 +48,21 @@ public class AttackManager : MonoBehaviour
         }
     }
 
-    
+    public void attackTileRelative(GameObject attacker, Vector3 cible, int damage)
+    {
+        RaycastHit2D[] hits;
+        hits = Physics2D.RaycastAll(cible + attacker.transform.position, Vector3.forward);
+        for (int i = 0; i < hits.Length; i++)
+        {
+            if (hits[i].collider != null)
+            {
+                Character target = hits[i].collider.gameObject.GetComponent<Character>();
+                target.takeDamage(attacker.GetComponent<Character>(), damage);
+            }
+        }
+    }
+
+
 
     // public bool applyAttack()
     // {

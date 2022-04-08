@@ -7,14 +7,14 @@ public class CursorManager : MonoBehaviour
 
     private int positionX;
     private int positionY;
-    enum directions
+    public enum directions
     {
         up,
         left,
         down,
         right
     }
-    directions direction = directions.up;
+    public directions direction = directions.up;
 
     public Zone activeZone;
     private List<Vector3Int> listPositionsActif;
