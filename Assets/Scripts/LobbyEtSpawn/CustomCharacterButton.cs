@@ -43,13 +43,14 @@ public class CustomCharacterButton : MonoBehaviour, IPointerEnterHandler, IPoint
     {
         if (avatar != null && UIPerso != null)
         {
-            //displayUI();
             avatar.GetComponent<Image>().sprite = characterInfo.characterPrefab.GetComponent<SpriteRenderer>().sprite;
 
             UIPerso.SetActive(true);
             avatar.SetActive(true);
             ability.SetActive(false);
+            
             avatar.GetComponent<Animator>().runtimeAnimatorController = characterInfo.characterPrefab.GetComponent<Animator>().runtimeAnimatorController;
+            Debug.Log("animator =" + avatar.GetComponent<Animator>().runtimeAnimatorController + "characterInfo.characterPrefab "+ characterInfo.characterPrefab);
         }
 
     }
