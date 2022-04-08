@@ -51,9 +51,7 @@ public class CustomCharacterButton : MonoBehaviour, IPointerEnterHandler, IPoint
             ability.SetActive(false);
             
             avatar.GetComponent<Animator>().runtimeAnimatorController = characterInfo.characterPrefab.GetComponent<Animator>().runtimeAnimatorController;
-            Debug.Log(characterInfo.characterPrefab);
         }
-
     }
 
     public virtual void hideUI()

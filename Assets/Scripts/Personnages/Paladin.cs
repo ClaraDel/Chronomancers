@@ -76,12 +76,6 @@ public class Paladin : Character
         base.die();
     }
 
-    public override void castAttack(GameObject cursor)
-    {
-        paladinAnim.Play("hitPaladin");
-        base.castAttack(cursor);
-    }
-
     public override void moveH(float sens)
     {
         if (sens > 0)
@@ -107,6 +101,12 @@ public class Paladin : Character
     {
         action();
         base.addAttack();
+    }
+
+    public override void castAttack()
+    {
+        paladinAnim.Play("hitPaladin");
+        base.castAttack();
     }
 
     // Imposition des mains

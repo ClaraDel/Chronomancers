@@ -107,12 +107,6 @@ public class Roublard : Character
         }
     }
 
-    public override void castAttack(GameObject cursor)
-    {
-        roublardAnim.Play("hit1Roublard");
-        base.castAttack(cursor);
-    }
-
     public override void addAttack()
     {
         if (hidden)
@@ -121,6 +115,12 @@ public class Roublard : Character
             hiddenDuration = 0;
         }
         base.addAttack();
+    }
+
+    public override void castAttack()
+    {
+        roublardAnim.Play("hit1Roublard");
+        base.castAttack();
     }
 
     // Trap
