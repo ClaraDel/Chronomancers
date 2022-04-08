@@ -27,7 +27,6 @@ public class Character : MonoBehaviour
     public GameObject cursor;
     public Transform characterDie;
 
-    public Sprite ghostSprite;
     public Sprite characterSprite;
 
     public bool alive;
@@ -200,7 +199,6 @@ public class Character : MonoBehaviour
     {
         transform.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0.5f);
         Instantiate(characterDie, transform.position, transform.rotation);
-        //gameObject.GetComponent<SpriteRenderer>().sprite = ghostSprite;
         health = 0;
         healthBar.transform.GetComponent<Slider>().value = health;
         healthBar.SetActive(false);

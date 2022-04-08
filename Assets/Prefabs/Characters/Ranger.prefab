@@ -197,8 +197,7 @@ MonoBehaviour:
   zoneSkill1: {fileID: 0}
   zoneSkill2: {fileID: 0}
   cursor: {fileID: 35057493891132365}
-  characterDie: {fileID: 0}
-  ghostSprite: {fileID: 21300000, guid: 2a833689455d8d2449cd821bf32982be, type: 3}
+  characterDie: {fileID: 3231304020904056291, guid: eadeb50726cbb21489e1059041c72995, type: 3}
   characterSprite: {fileID: 0}
   alive: 1
   isBlue: 0

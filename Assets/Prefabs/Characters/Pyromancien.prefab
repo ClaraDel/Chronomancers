@@ -194,9 +194,10 @@ MonoBehaviour:
   fill: {fileID: 601616401150968066}
   normalAttackDamage: 50
   zoneBasicAttack: {fileID: 0}
+  zoneSkill1: {fileID: 0}
+  zoneSkill2: {fileID: 0}
   cursor: {fileID: 9189789462710945656}
-  characterDie: {fileID: 0}
-  ghostSprite: {fileID: 0}
+  characterDie: {fileID: 3231304020904056291, guid: 20844644ba90ac6459029f231ed9526c, type: 3}
   characterSprite: {fileID: 0}
   alive: 1
   isBlue: 0
@@ -205,13 +206,15 @@ MonoBehaviour:
   castingTicks: 0
   castingSkill1: 0
   skill1CastTime: 4
-  skill1CoolDownTime: 0
   coolDownSkill1: 0
+  maxCoolDownSkill1: 0
   castingSkill2: 0
   skill2CastTime: 2
-  skill2CoolDownTime: 0
+  coolDownSkill2: 0
+  maxCoolDownSkill2: 0
+  shielded: 0
+  shieldDuration: 0
   moveManager: {fileID: 338856445525931781}
-  attacking: 0
 --- !u!95 &8271067784843259241
 Animator:
   serializedVersion: 3
