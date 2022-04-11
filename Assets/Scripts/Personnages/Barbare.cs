@@ -74,7 +74,7 @@ public class Barbare : Character
         base.moveV(sens);
     }
 
-    public override void castAttack()
+    public override void addAttack()
     {
         CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
         Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
@@ -86,8 +86,6 @@ public class Barbare : Character
         if (enraged)
         {
             TimeManager.instance.AddAction(() => castAttack(50));
-            
-            StartCoroutine(TimeManager.instance.PlayTick());
         }
         else
         {
