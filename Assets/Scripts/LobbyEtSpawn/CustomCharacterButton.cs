@@ -41,9 +41,9 @@ public class CustomCharacterButton : MonoBehaviour, IPointerEnterHandler, IPoint
 
     public virtual void displayUI()
     {
-        updateInfoUI();
         if (avatar != null && UIPerso != null)
         {
+            updateInfoUI();
             avatar.GetComponent<Image>().sprite = characterInfo.characterPrefab.GetComponent<SpriteRenderer>().sprite;
 
             UIPerso.SetActive(true);
