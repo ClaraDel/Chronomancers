@@ -88,7 +88,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -124,8 +124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 338856445525931782}
-  positionSpawnXTeam0: 22
-  positionSpawnYTeam0: 1
+  positionSpawnXTeam0: 2
+  positionSpawnYTeam0: 10
   positionSpawnXTeam1: 1
   positionSpawnYTeam1: 10
 --- !u!61 &1331976971692945730
@@ -146,7 +146,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
     oldSize: {x: 0.64, y: 0.64}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -215,6 +215,7 @@ MonoBehaviour:
   shielded: 0
   shieldDuration: 0
   moveManager: {fileID: 338856445525931781}
+  fireWallPrefab: {fileID: 5733318154153289747, guid: 06bdf5fe68fa6ba438ed6f6724615f34, type: 3}
 --- !u!95 &8271067784843259241
 Animator:
   serializedVersion: 3
