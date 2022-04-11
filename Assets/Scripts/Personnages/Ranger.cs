@@ -15,6 +15,12 @@ public class Ranger : Character
         coolDownSkill2 = 7;
     }
 
+    public override void castAttack(Vector3[] positions, CursorManager.directions direction)
+    {
+        // anim goes there
+        base.castAttack(positions, direction);
+    }
+
     public override void castSkill1()
     {
         if (coolDownSkill1 == 0)

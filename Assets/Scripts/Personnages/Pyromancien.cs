@@ -33,22 +33,20 @@ public class Pyromancien : Character
         {
             positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
         }
-        AttackManager.instance.addFutureAttack(this, positions, normalAttackDamage, 1);
-        
-        TimeManager.instance.AddAction(() => castAttack());
 
         castingTicks = 1;
 
-        TimeManager.instance.AddAction(() => castAttack());
-
+        TimeManager.instance.AddFutureAction(() => castAttack(positions, cursor.direction), 1);
+        
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
         cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
         TimeManager.instance.PlayTick();
     }
 
-    public override void castAttack()
+    public override void castAttack(Vector3[] positions, CursorManager.directions direction)
     {
         // Animation goes there
+        AttackManager.instance.attackTiles(this, positions, normalAttackDamage);
     }
 
     // Boule de feu

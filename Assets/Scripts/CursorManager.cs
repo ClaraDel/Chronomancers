@@ -158,9 +158,9 @@ public class CursorManager : MonoBehaviour
         this.transform.position = new_position;
         this.positionX = (int)Mathf.Floor(new_position.x);
         this.positionY = (int)Mathf.Floor(new_position.y);
+        this.calculOrientationCursor();
         if (rotationActive)
         {
-            this.calculOrientationCursor();
             this.rotateEffects();
         }
         return true;

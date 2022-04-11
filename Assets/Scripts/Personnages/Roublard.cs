@@ -117,10 +117,10 @@ public class Roublard : Character
         base.addAttack();
     }
 
-    public override void castAttack()
+    public override void castAttack(Vector3[] positions, CursorManager.directions direction)
     {
         roublardAnim.Play("hit1Roublard");
-        base.castAttack();
+        base.castAttack(positions, direction);
     }
 
     // Trap
