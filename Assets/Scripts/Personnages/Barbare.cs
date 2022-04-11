@@ -8,6 +8,7 @@ public class Barbare : Character
     public Sprite enragedSprite;
     public bool enraged;
     public int rageDuration;
+    private Animator barbareAnim;
 
     public void init(bool isBlue) {
         base.init(100, 50, isBlue);
@@ -18,6 +19,7 @@ public class Barbare : Character
         maxCoolDownSkill1 = 5;
         skill2CastTime = 0;
         maxCoolDownSkill2 = 7;
+        barbareAnim = transform.GetComponent<Animator>();
     }
 
     public override void reset()
@@ -61,16 +63,26 @@ public class Barbare : Character
     {
         testEnraged();
         base.moveH(sens);
+        if (sens > 0)
+        {
+            barbareAnim.Play("runBarbareR");
+        }
+        else if (sens < 0)
+        {
+            barbareAnim.Play("runBarbare");
+        }
     }
 
     public override void moveV(float sens)
     {
         testEnraged();
+        barbareAnim.Play("RunBarbare");
         base.moveV(sens);
     }
 
     public override void addAttack()
     {
+        barbareAnim.Play("hit1Barbare");
         GameObject Cursor = gameObject.transform.Find("Cursor").gameObject;
         if (enraged)
         {

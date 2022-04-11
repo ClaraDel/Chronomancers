@@ -72,7 +72,6 @@ public class Paladin : Character
 
     public override void die()
     {
-        //paladinAnim.Play("deathPaladin");
         base.die();
     }
 
