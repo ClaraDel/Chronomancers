@@ -74,7 +74,7 @@ public class Barbare : Character
         base.moveV(sens);
     }
 
-    public override void addAttack()
+    public override void castAttack()
     {
         CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
         Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];

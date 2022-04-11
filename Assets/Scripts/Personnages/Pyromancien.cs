@@ -37,6 +37,10 @@ public class Pyromancien : Character
         
         TimeManager.instance.AddAction(() => castAttack());
 
+        castingTicks = 1;
+
+        TimeManager.instance.AddAction(() => castAttack());
+
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
         cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
         TimeManager.instance.PlayTick();
