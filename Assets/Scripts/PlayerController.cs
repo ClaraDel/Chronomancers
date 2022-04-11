@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
                 if (Input.GetKeyUp(KeyCode.Alpha1))
                 {
-                    if (!attackingProcess && character != null)
+                    if (!attackingProcess)
                     {
                         clearAtk();
                         character.setUpAttack();

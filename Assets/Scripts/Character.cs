@@ -314,6 +314,8 @@ public class Character : MonoBehaviour
             TimeManager.instance.AddFutureAction(() => launchSkill1(positions), skill1CastTime - 1);
             StartCoroutine(TimeManager.instance.PlayTick());
         }
+        this.zoneSkill1.getZoneCiblable().SetActive(false);
+        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
     }
 
     public virtual void launchSkill1(Vector3[] positions) { }
@@ -350,6 +352,8 @@ public class Character : MonoBehaviour
             TimeManager.instance.AddFutureAction(() => launchSkill2(positions), skill1CastTime - 1);
             StartCoroutine(TimeManager.instance.PlayTick());
         }
+        this.zoneSkill1.getZoneCiblable().SetActive(false);
+        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
     }
 
     public virtual void launchSkill2(Vector3[] positions) { }

@@ -74,7 +74,7 @@ public class Barbare : Character
         base.moveV(sens);
     }
 
-    public override void castAttack()
+    public override void addAttack()
     {
         CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
         Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
@@ -85,14 +85,29 @@ public class Barbare : Character
 
         if (enraged)
         {
-            AttackManager.instance.addAttack(this, positions, 2 * normalAttackDamage);
+            TimeManager.instance.AddAction(() => castAttack(50));
+            
             StartCoroutine(TimeManager.instance.PlayTick());
         }
         else
         {
-            AttackManager.instance.addAttack(this, positions, normalAttackDamage);
-            StartCoroutine(TimeManager.instance.PlayTick());
+            TimeManager.instance.AddAction(() => castAttack(100));
         }
+        StartCoroutine(TimeManager.instance.PlayTick());
+        this.zoneBasicAttack.getZoneCiblable().SetActive(false);
+        cursor.gameObject.SetActive(false);
+    }
+
+    public void castAttack(int damage)
+    {
+        CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
+        Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
+        for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
+        {
+            positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
+        }
+
+        AttackManager.instance.attackTiles(this, positions, damage);
     }
 
     public override void setUpSkill1()
@@ -117,6 +132,8 @@ public class Barbare : Character
                 AttackManager.instance.attackTiles(this, positions, 50);
             }
         }
+        this.zoneSkill1.getZoneCiblable().SetActive(false);
+        cursor.SetActive(false);
     }
 
     public override void setUpSkill2()
@@ -183,6 +200,8 @@ public class Barbare : Character
             }
 
             StartCoroutine(TimeManager.instance.PlayTick());
+            this.zoneSkill2.getZoneCiblable().SetActive(false);
+            cursor.SetActive(false);
         }
     }
 
