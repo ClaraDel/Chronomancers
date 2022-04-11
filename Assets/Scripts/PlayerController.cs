@@ -42,11 +42,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(TimeManager.instance.currentTick == TimeManager.maxTick)
+        {
+            character.reset();
+        }
         if (pause.getIfPaused() || CharacterInfoPanel.instance.getIfPaused()) return;
 
         if (isControllable && !TimeManager.instance.isPlaying)
         {
-            if (character.getCastingTicks() >= 1)
+            if (character.getCastingTicks() > 0)
             {
                 character.wait();
             }
@@ -63,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
                 if (Input.GetKeyUp(KeyCode.Alpha1))
                 {
-                    if (!attackingProcess && character != null)
+                    if (!attackingProcess)
                     {
                         clearAtk();
                         character.setUpAttack();

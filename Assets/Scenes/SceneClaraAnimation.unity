@@ -1235,6 +1235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0742e499d189d648aea03523208b1c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeZone: {fileID: 0}
 --- !u!1 &172403752
 GameObject:
   m_ObjectHideFlags: 0
@@ -19339,22 +19340,6 @@ PrefabInstance:
       propertyPath: characterPrefab
       value: 
       objectReference: {fileID: 338856445525931777, guid: 253098e4e5236ce49a62fd64116e270f, type: 3}
-    - target: {fileID: 6070695204127895071, guid: d15f63821abcc524a9022299eff9e514, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6070695204127895071, guid: d15f63821abcc524a9022299eff9e514, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6070695204127895071, guid: d15f63821abcc524a9022299eff9e514, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6070695204127895071, guid: d15f63821abcc524a9022299eff9e514, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6070695204267300585, guid: d15f63821abcc524a9022299eff9e514, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

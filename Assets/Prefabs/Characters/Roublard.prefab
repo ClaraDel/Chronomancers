@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3997230169204260313}
   - component: {fileID: 7436534606675642587}
   m_Layer: 0
-  m_Name: Square
+  m_Name: PlayerTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 4134018670345688794}
-  positionSpawnXTeam0: 21
+  positionSpawnXTeam0: 20
   positionSpawnYTeam0: 2
   positionSpawnXTeam1: 1
   positionSpawnYTeam1: 10
@@ -427,9 +427,10 @@ MonoBehaviour:
   shielded: 0
   shieldDuration: 0
   moveManager: {fileID: 0}
-  hiddenSprite: {fileID: 0}
+  hiddenSprite: {fileID: 21300000, guid: 8ca780239be024f40a55e3ceabb2cea0, type: 3}
   hidden: 0
   hiddenDuration: 0
+  trap: {fileID: 8776624060962540055, guid: e864207b0c75517479f5a36394e8e1f8, type: 3}
 --- !u!95 &4710502383183083724
 Animator:
   serializedVersion: 3
@@ -769,6 +770,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Square (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5393328188371057157, guid: c09885caba4d59a48a9149228fc4a2a8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8537844868413029386, guid: c09885caba4d59a48a9149228fc4a2a8, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -921,6 +926,10 @@ PrefabInstance:
     - target: {fileID: 5393328188371057157, guid: c09885caba4d59a48a9149228fc4a2a8, type: 3}
       propertyPath: m_Name
       value: Square (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393328188371057157, guid: c09885caba4d59a48a9149228fc4a2a8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8537844868413029386, guid: c09885caba4d59a48a9149228fc4a2a8, type: 3}
       propertyPath: m_RootOrder
@@ -1265,6 +1274,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Square (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5393328188371057157, guid: c09885caba4d59a48a9149228fc4a2a8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8537844868413029386, guid: c09885caba4d59a48a9149228fc4a2a8, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1355,6 +1368,10 @@ PrefabInstance:
     - target: {fileID: 5393328188371057157, guid: c09885caba4d59a48a9149228fc4a2a8, type: 3}
       propertyPath: m_Name
       value: Square (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393328188371057157, guid: c09885caba4d59a48a9149228fc4a2a8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8537844868413029386, guid: c09885caba4d59a48a9149228fc4a2a8, type: 3}
       propertyPath: m_RootOrder
@@ -1544,6 +1561,10 @@ PrefabInstance:
     - target: {fileID: 3875495358034142765, guid: 63c7b5e0afea392458695cf014ef3a1a, type: 3}
       propertyPath: m_Name
       value: TileEffect (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875495358034142765, guid: 63c7b5e0afea392458695cf014ef3a1a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6423842539697493280, guid: 63c7b5e0afea392458695cf014ef3a1a, type: 3}
       propertyPath: m_Sprite
