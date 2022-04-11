@@ -91,11 +91,11 @@ public class Barbare : Character
 
         if (enraged)
         {
-            TimeManager.instance.AddAction(() => castAttack(50));
+            TimeManager.instance.AddAction(() => castAttack(100));
         }
         else
         {
-            TimeManager.instance.AddAction(() => castAttack(100));
+            TimeManager.instance.AddAction(() => castAttack(50));
         }
         StartCoroutine(TimeManager.instance.PlayTick());
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
@@ -104,8 +104,18 @@ public class Barbare : Character
 
     public void castAttack(int damage)
     {
-        barbareAnim.Play("hit1Barbare");
+        
         CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
+        
+        //CursorManager.directions;
+        if (cursor.direction == CursorManager.directions.right)
+        {
+            print(cursor.direction);
+            barbareAnim.Play("hit1BarbareR");
+        } else
+        {
+            barbareAnim.Play("hit1Barbare");
+        }
         Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
         for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
         {
