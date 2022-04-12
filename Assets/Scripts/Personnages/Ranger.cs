@@ -36,10 +36,12 @@ public class Ranger : Character
 
             if (cursor.direction == CursorManager.directions.right) {
                 rangerAnim.Play("HitRangerR");
+                Debug.Log("HitRangerR");
             }
             else
             {
                 rangerAnim.Play("HitRanger");
+                Debug.Log("HitRanger");
             }
 
             for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
@@ -74,10 +76,12 @@ public class Ranger : Character
         if (sens > 0)
         {
             rangerAnim.Play("RunRangerR");
+            Debug.Log("RunRangerR");
         }
         else
         {
             rangerAnim.Play("RunRanger");
+            Debug.Log("RunRanger");
         }
         base.moveH(sens);
     }

@@ -53,7 +53,6 @@ public class Paladin : Character
     {
         if (!blocking)
         {
-            paladinAnim.Play("hurtPaladinR");
             base.takeDamage(attacker, damage);
         }
         else
@@ -80,6 +79,7 @@ public class Paladin : Character
         if (sens > 0)
         {
             paladinAnim.Play("runPaladinR");
+            print("runPaladinR");
         }
         else if (sens < 0)
         {
