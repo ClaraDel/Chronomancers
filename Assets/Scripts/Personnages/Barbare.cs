@@ -88,14 +88,18 @@ public class Barbare : Character
     public override void addAttack()
     {
         CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
-
+        Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
+        for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
+        {
+            positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
+        }
         if (enraged)
         {
-            TimeManager.instance.AddAction(() => castAttack(100));
+            TimeManager.instance.AddAction(() => castAttack(positions, cursor.direction, 100));
         }
         else
         {
-            TimeManager.instance.AddAction(() => castAttack(50));
+            TimeManager.instance.AddAction(() => castAttack(positions, cursor.direction, 50));
         }
         StartCoroutine(TimeManager.instance.PlayTick());
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
