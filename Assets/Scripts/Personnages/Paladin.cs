@@ -102,10 +102,10 @@ public class Paladin : Character
         base.addAttack();
     }
 
-    public override void castAttack()
+    public override void castAttack(Vector3[] positions, CursorManager.directions direction)
     {
         paladinAnim.Play("hitPaladin");
-        base.castAttack();
+        base.castAttack(positions, direction);
     }
 
     // Imposition des mains

@@ -16,6 +16,12 @@ public class Ranger : Character
         rangerAnim = transform.GetComponent<Animator>();
     }
 
+    public override void castAttack(Vector3[] positions, CursorManager.directions direction)
+    {
+        // anim goes there
+        base.castAttack(positions, direction);
+    }
+
     public override void castSkill1()
     {
         if (coolDownSkill1 == 0)

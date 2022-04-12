@@ -245,7 +245,14 @@ public class Character : MonoBehaviour
     {
         // AbilityTimer.instance.launchUIAbility(1);
 
-        TimeManager.instance.AddAction(() => castAttack());
+        CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
+        Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
+        for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
+        {
+            positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
+        }
+
+        TimeManager.instance.AddAction(() => castAttack(positions, cursor.direction));
 
         coolDowns();
 
@@ -254,14 +261,8 @@ public class Character : MonoBehaviour
         StartCoroutine(TimeManager.instance.PlayTick());
     }
     
-    public virtual void castAttack()
+    public virtual void castAttack(Vector3[] positions, CursorManager.directions direction)
     {
-        CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
-        Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
-        for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
-        {
-            positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
-        }
         AttackManager.instance.attackTiles(this, positions, normalAttackDamage);
     }
 

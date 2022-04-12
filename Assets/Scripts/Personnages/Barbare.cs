@@ -102,7 +102,7 @@ public class Barbare : Character
         cursor.gameObject.SetActive(false);
     }
 
-    public void castAttack(int damage)
+    public void castAttack(Vector3[] positions, CursorManager.directions direction, int damage)
     {
         
         CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
