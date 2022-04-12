@@ -47,14 +47,8 @@ public class Pyromancien : Character
 
     public override void castAttack(Vector3[] positions, CursorManager.directions direction)
     {
-        /*if (cursor.direction == CursorManager.directions.right)
-        {*/
-            pyroAnim.Play("Hit1Pyromancien");
-        /*}
-        else
-        {
-            barbareAnim.Play("hit1Pyromancien");
-        }*/
+        print("Hit1Pyromancien");
+        pyroAnim.Play("Hit1Pyromancien");
         AttackManager.instance.attackTiles(this, positions, normalAttackDamage);
     }
 
@@ -110,5 +104,17 @@ public class Pyromancien : Character
                 fireWall.GetComponent<FireWall>().setSelf();
             }
         }
+    }
+
+    public override void moveH(float sens)
+    {
+        pyroAnim.Play("RunPyromancien");
+        base.moveH(sens);
+    }
+
+    public override void moveV(float sens)
+    {
+        pyroAnim.Play("RunPyromancien");
+        base.moveV(sens);
     }
 }

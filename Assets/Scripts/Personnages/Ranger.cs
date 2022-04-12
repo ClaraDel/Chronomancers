@@ -24,6 +24,7 @@ public class Ranger : Character
 
     public override void castSkill1()
     {
+        print("coolDownSkill1"+ coolDownSkill1);
         if (coolDownSkill1 == 0)
         {
             coolDowns();
@@ -33,7 +34,7 @@ public class Ranger : Character
 
             CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
             Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
-
+            print("positionX = " + cursor.getPositionX() + "positionY = " + cursor.getPositionY());
             if (cursor.direction == CursorManager.directions.right) {
                 rangerAnim.Play("HitRangerR");
                 Debug.Log("HitRangerR");
@@ -76,12 +77,10 @@ public class Ranger : Character
         if (sens > 0)
         {
             rangerAnim.Play("RunRangerR");
-            Debug.Log("RunRangerR");
         }
         else
         {
             rangerAnim.Play("RunRanger");
-            Debug.Log("RunRanger");
         }
         base.moveH(sens);
     }
@@ -90,6 +89,15 @@ public class Ranger : Character
     {
         base.moveV(sens);
         rangerAnim.Play("RunRanger");
+    }
+
+    public override void takeDamage(Character attacker, int damage)
+    {
+        if (alive)
+        {
+            rangerAnim.Play("HurtRanger");
+        }
+        base.takeDamage(attacker, damage);
     }
 
 }
