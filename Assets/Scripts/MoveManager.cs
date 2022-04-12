@@ -32,7 +32,6 @@ public class MoveManager : MonoBehaviour
 
     public IEnumerator Move(float horizontalDirection, float verticalDirection)
     {
-        Debug.Log("Move !");
         entity.PlayerTarget.Translate(new Vector2(horizontalDirection, verticalDirection));
 
         //gestion de l'order Layout

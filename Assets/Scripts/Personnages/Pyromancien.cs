@@ -7,6 +7,7 @@ public class Pyromancien : Character
 {
     public GameObject fireWallPrefab;
     public List<List<GameObject>> fireWalls;
+    private Animator pyroAnim;
     public void init(bool isBlue) {
         base.init(100, 50, isBlue);
         characterType = type.pyromancien;
@@ -15,6 +16,7 @@ public class Pyromancien : Character
         skill2CastTime = 2;
         maxCoolDownSkill2 = 10;
         fireWalls = new List<List<GameObject>>();
+        pyroAnim = transform.GetComponent<Animator>();
     }
 
     public override void reset()
@@ -48,7 +50,15 @@ public class Pyromancien : Character
 
     public override void castAttack()
     {
-        // Animation goes there
+        /*if (cursor.direction == CursorManager.directions.right)
+        {
+            print(cursor.direction);*/
+            pyroAnim.Play("Hit1Pyromancien");
+        /*}
+        else
+        {
+            barbareAnim.Play("hit1Barbare");
+        }*/
     }
 
     // Boule de feu

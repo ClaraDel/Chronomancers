@@ -80,8 +80,8 @@ public class Barbare : Character
 
     public override void moveV(float sens)
     {
+        barbareAnim.Play("runBarbare");
         testEnraged();
-        barbareAnim.Play("RunBarbare");
         base.moveV(sens);
     }
 
