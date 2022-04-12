@@ -24,7 +24,8 @@ public class Ranger : Character
 
     public override void castSkill1()
     {
-        print("coolDownSkill1"+ coolDownSkill1);
+        print("castSkill1 ranger" + coolDownSkill1);
+        Debug.Log("HitRangerR");
         if (coolDownSkill1 == 0)
         {
             coolDowns();

@@ -49,11 +49,11 @@ public class Pyromancien : Character
 
     public override void castAttack(Vector3[] positions, CursorManager.directions direction)
     {
-        pyroAnim.Play("castAttackPyromancien");
+        pyroAnim.Play("Hit1Pyromancien");
         for (int i = 0; i < positions.Length; i++)
             {
-            print("positions = (" + positions[i].x + ", " + positions[i].y + ", " + positions[i].z + ")");
-            print("direction = " + direction);
+            //print("positions = (" + positions[i].x + ", " + positions[i].y + ", " + positions[i].z + ")");
+            //print("direction = " + direction);
             Instantiate(Burst, positions[i], transform.rotation);
         }
 
