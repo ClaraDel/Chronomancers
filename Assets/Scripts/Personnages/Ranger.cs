@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Ranger : Character
 {
-
+    private Animator rangerAnim;
     public void init(bool isBlue) {
         base.init(100, 50, isBlue);
         characterType = type.ranger;
@@ -13,6 +13,7 @@ public class Ranger : Character
         coolDownSkill1 = 10;
         skill2CastTime = 0;
         coolDownSkill2 = 7;
+        rangerAnim = transform.GetComponent<Animator>();
     }
 
     public override void castSkill1()
@@ -26,6 +27,15 @@ public class Ranger : Character
 
             CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
             Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
+
+            if (cursor.direction == CursorManager.directions.right) {
+                rangerAnim.Play("HitRangerR");
+            }
+            else
+            {
+                rangerAnim.Play("HitRanger");
+            }
+
             for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
             {
                 positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
@@ -51,6 +61,25 @@ public class Ranger : Character
         // Ajouter mouvement vers case ciblee a 3 de port�e
         // TODO Check if target out of bounds
         gameObject.GetComponent<PlayerController>().PlayerTarget.position = positions[0];
+    }
+
+    public override void moveH(float sens)
+    {
+        if (sens > 0)
+        {
+            rangerAnim.Play("RunRangerR");
+        }
+        else
+        {
+            rangerAnim.Play("RunRanger");
+        }
+        base.moveH(sens);
+    }
+
+    public override void moveV(float sens)
+    {
+        base.moveV(sens);
+        rangerAnim.Play("RunRanger");
     }
 
 }

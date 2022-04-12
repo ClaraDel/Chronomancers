@@ -52,12 +52,11 @@ public class Pyromancien : Character
     {
         /*if (cursor.direction == CursorManager.directions.right)
         {
-            print(cursor.direction);*/
             pyroAnim.Play("Hit1Pyromancien");
         /*}
         else
         {
-            barbareAnim.Play("hit1Barbare");
+            barbareAnim.Play("hit1Pyromancien");
         }*/
     }
 
