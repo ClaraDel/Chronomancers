@@ -8,6 +8,7 @@ public class Pyromancien : Character
     public GameObject fireWallPrefab;
     public List<List<GameObject>> fireWalls;
     private Animator pyroAnim;
+    public Transform Burst;
     public void init(bool isBlue) {
         base.init(100, 50, isBlue);
         characterType = type.pyromancien;
@@ -17,6 +18,7 @@ public class Pyromancien : Character
         maxCoolDownSkill2 = 10;
         fireWalls = new List<List<GameObject>>();
         pyroAnim = transform.GetComponent<Animator>();
+
     }
 
     public override void reset()
@@ -47,8 +49,15 @@ public class Pyromancien : Character
 
     public override void castAttack(Vector3[] positions, CursorManager.directions direction)
     {
-        print("Hit1Pyromancien");
-        pyroAnim.Play("Hit1Pyromancien");
+        pyroAnim.Play("castAttackPyromancien");
+        for (int i = 0; i < positions.Length; i++)
+            {
+            print("positions = (" + positions[i].x + ", " + positions[i].y + ", " + positions[i].z + ")");
+            print("direction = " + direction);
+            Instantiate(Burst, positions[i], transform.rotation);
+        }
+
+        
         AttackManager.instance.attackTiles(this, positions, normalAttackDamage);
     }
 
@@ -64,6 +73,7 @@ public class Pyromancien : Character
 
     public override void castSkill2()
     {
+        pyroAnim.Play("castSkill2Pyromancien");
         if (coolDownSkill2 == 0)
         {
             coolDowns();

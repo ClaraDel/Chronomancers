@@ -216,6 +216,7 @@ MonoBehaviour:
   shieldDuration: 0
   moveManager: {fileID: 338856445525931781}
   fireWallPrefab: {fileID: 5733318154153289747, guid: 06bdf5fe68fa6ba438ed6f6724615f34, type: 3}
+  Burst: {fileID: 3231304020904056291, guid: 901322e22878650469184c950408c524, type: 3}
 --- !u!95 &8271067784843259241
 Animator:
   serializedVersion: 3
