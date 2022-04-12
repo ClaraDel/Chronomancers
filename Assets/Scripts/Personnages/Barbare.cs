@@ -8,14 +8,16 @@ public class Barbare : Character
     public Sprite enragedSprite;
     public bool enraged;
     public int rageDuration;
-    private Animator barbareAnim;
 
     private Vector3 up = new Vector3(0, 1, 0);
     private Vector3 left = new Vector3(-1, 0, 0);
     private Vector3 down = new Vector3(0, -1, 0);
     private Vector3 right = new Vector3(1, 0, 0);
 
-    public void init(bool isBlue) {
+    private Animator barbareAnim;
+
+    public void init(bool isBlue)
+    {
         base.init(100, 50, isBlue);
         enraged = false;
         characterType = type.barbare;
@@ -35,7 +37,7 @@ public class Barbare : Character
         base.reset();
     }
 
-    public void testEnraged() 
+    public void testEnraged()
     {
         if (enraged)
         {
@@ -51,7 +53,7 @@ public class Barbare : Character
         }
     }
 
-    public override void takeDamage(Character attacker, int damage) 
+    public override void takeDamage(Character attacker, int damage)
     {
         enraged = true;
         rageDuration = 5;
@@ -80,8 +82,8 @@ public class Barbare : Character
 
     public override void moveV(float sens)
     {
-        barbareAnim.Play("runBarbare");
         testEnraged();
+        barbareAnim.Play("runBarbare");
         base.moveV(sens);
     }
 
@@ -108,25 +110,17 @@ public class Barbare : Character
 
     public void castAttack(Vector3[] positions, CursorManager.directions direction, int damage)
     {
-        
+        AttackManager.instance.attackTiles(this, positions, damage);
         CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
-        
-        //CursorManager.directions;
         if (cursor.direction == CursorManager.directions.right)
         {
             print(cursor.direction);
             barbareAnim.Play("hit1BarbareR");
-        } else
+        }
+        else
         {
             barbareAnim.Play("hit1Barbare");
         }
-        Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
-        for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
-        {
-            positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
-        }
-
-        AttackManager.instance.attackTiles(this, positions, damage);
     }
 
     public override void setUpSkill1()
@@ -173,7 +167,7 @@ public class Barbare : Character
 
             CursorManager cursorManager = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
 
-            if (cursorManager.direction == CursorManager.directions.up) 
+            if (cursorManager.direction == CursorManager.directions.up)
             {
                 TimeManager.instance.AddFutureAction(() => launchSkill2(up), skill1CastTime);
                 for (int i = 0; i < 3; i++)
@@ -194,7 +188,7 @@ public class Barbare : Character
                     TimeManager.instance.AddFutureAction(() => moveManager.AddMove(-1, 0), skill1CastTime + i);
                     TimeManager.instance.AddFutureAction(() => bashAttack(left), skill1CastTime + i);
                 }
-            } 
+            }
             else if (cursorManager.direction == CursorManager.directions.down)
             {
                 TimeManager.instance.AddFutureAction(() => launchSkill2(down), skill1CastTime);
@@ -205,7 +199,7 @@ public class Barbare : Character
                     TimeManager.instance.AddFutureAction(() => moveManager.AddMove(0, -1), skill1CastTime + i);
                     TimeManager.instance.AddFutureAction(() => bashAttack(down), skill1CastTime + i);
                 }
-            } 
+            }
             else if (cursorManager.direction == CursorManager.directions.right)
             {
                 TimeManager.instance.AddFutureAction(() => launchSkill2(right), skill1CastTime);
