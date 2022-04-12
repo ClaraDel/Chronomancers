@@ -1287,6 +1287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0742e499d189d648aea03523208b1c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: 0
+  activeZone: {fileID: 0}
 --- !u!1 &172403752
 GameObject:
   m_ObjectHideFlags: 0
@@ -7675,6 +7677,11 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &912870530 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2440454055950030628, guid: d15f63821abcc524a9022299eff9e514, type: 3}
+  m_PrefabInstance: {fileID: 6070695204005007432}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &915034312
 GameObject:
   m_ObjectHideFlags: 0
@@ -7922,6 +7929,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &938910493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8227266418856633960, guid: d15f63821abcc524a9022299eff9e514, type: 3}
+  m_PrefabInstance: {fileID: 6070695204005007432}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &942285481
 GameObject:
   m_ObjectHideFlags: 0
@@ -21777,6 +21789,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 403199926, guid: d15f63821abcc524a9022299eff9e514, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249579766, guid: d15f63821abcc524a9022299eff9e514, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1491421566, guid: d15f63821abcc524a9022299eff9e514, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630870178, guid: d15f63821abcc524a9022299eff9e514, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1869946162, guid: d15f63821abcc524a9022299eff9e514, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1936150076, guid: d15f63821abcc524a9022299eff9e514, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1981618631, guid: d15f63821abcc524a9022299eff9e514, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2338693647422936247, guid: d15f63821abcc524a9022299eff9e514, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -22645,6 +22685,14 @@ PrefabInstance:
       propertyPath: slotsManager
       value: 
       objectReference: {fileID: 2113335512}
+    - target: {fileID: 8176065901973242773, guid: d67fb68df0767e14882942f8781175c8, type: 3}
+      propertyPath: HourGlassBleu
+      value: 
+      objectReference: {fileID: 912870530}
+    - target: {fileID: 8176065901973242773, guid: d67fb68df0767e14882942f8781175c8, type: 3}
+      propertyPath: HourGlassRouge
+      value: 
+      objectReference: {fileID: 938910493}
     - target: {fileID: 8176065901973242773, guid: d67fb68df0767e14882942f8781175c8, type: 3}
       propertyPath: actifCharacter
       value: 
