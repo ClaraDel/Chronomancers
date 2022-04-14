@@ -70,8 +70,13 @@ public class Ranger : Character
     {
         // Ajouter mouvement vers case ciblee a 3 de port�e
         // TODO Check if target out of bounds
-        gameObject.GetComponent<PlayerController>().PlayerTarget.position = positions[0] - new Vector3(0.5f, 0.5f, 0f);
-        StartCoroutine(rangerDash());        
+        Vector3 tmp = positions[0];
+        tmp.x = Mathf.Min(tmp.x, 23.5f);
+        tmp.x = Mathf.Max(tmp.x, 0.5f);
+        tmp.y = Mathf.Min(tmp.y, 11.5f);
+        tmp.y = Mathf.Max(tmp.y, 0.5f);
+        gameObject.GetComponent<PlayerController>().PlayerTarget.position = tmp - new Vector3(0.5f, 0.5f, 0f);
+        StartCoroutine(rangerDash());
     }
 
     public IEnumerator rangerDash()
