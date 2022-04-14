@@ -46,6 +46,7 @@ public class Pyromancien : Character
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
         cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
         TimeManager.instance.PlayTick();
+        Attack.Play();
     }
 
     public override void castAttack(Vector3[] positions, CursorManager.directions direction)
@@ -99,6 +100,7 @@ public class Pyromancien : Character
 
             TimeManager.instance.AddFutureAction(() => launchSkill2(index-1), skill1CastTime - 1);
             StartCoroutine(TimeManager.instance.PlayTick());
+            Attack.PlayOneShot(Ability2);
         }
     }
 

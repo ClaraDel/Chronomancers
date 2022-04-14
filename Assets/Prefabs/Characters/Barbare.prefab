@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 6462415604944014305}
   - component: {fileID: 5940542276562036855}
   - component: {fileID: 359539870404293326}
+  - component: {fileID: 6103369390455798853}
   m_Layer: 0
   m_Name: Barbare
   m_TagString: character
@@ -334,6 +335,9 @@ MonoBehaviour:
   enragedSprite: {fileID: 0}
   enraged: 0
   rageDuration: 0
+  Attack: {fileID: 6103369390455798853}
+  Ability1: {fileID: 8300000, guid: 3b537dc0db83f9848ba16ab778160fba, type: 3}
+  Ability2: {fileID: 8300000, guid: 1370c1180246b2748a3642ad17a0faa5, type: 3}
 --- !u!95 &359539870404293326
 Animator:
   serializedVersion: 3
@@ -353,6 +357,102 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!82 &6103369390455798853
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3068122577141492615}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 6293057490810858106, guid: bd1ed742af5a0b74ba1dca8a6654d7b3, type: 2}
+  m_audioClip: {fileID: 8300000, guid: ae9ab54c638c5de4d8e13fd019b81af8, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3488272334548718005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1158,14 +1258,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
---- !u!1 &1578543568715378586 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3697863086437347205, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
-  m_PrefabInstance: {fileID: 2790384459191500831}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1578543568622752816 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3697863087036945455, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
+  m_PrefabInstance: {fileID: 2790384459191500831}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1578543568715378586 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3697863086437347205, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
   m_PrefabInstance: {fileID: 2790384459191500831}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &1578543570253871354 stripped

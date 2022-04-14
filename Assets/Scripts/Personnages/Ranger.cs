@@ -54,6 +54,7 @@ public class Ranger : Character
             TimeManager.instance.AddAction(() => launchSkill1(positions));
             AttackManager.instance.addFutureAttack(this, positions, 75, skill1CastTime + 1);
             StartCoroutine(TimeManager.instance.PlayTick());
+            Attack.PlayOneShot(Ability1);
         }
     }
 

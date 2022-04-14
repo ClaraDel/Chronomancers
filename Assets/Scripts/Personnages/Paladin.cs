@@ -8,7 +8,7 @@ public class Paladin : Character
     public Sprite blockingSprite;
     public bool blocking { get; set; }
     public bool waited;
-    private Animator paladinAnim ;
+    private Animator paladinAnim;
 
     public void init(bool isBlue) {
         base.init(200, 50, isBlue);
@@ -100,6 +100,7 @@ public class Paladin : Character
     {
         action();
         base.addAttack();
+        Attack.Play();
     }
 
     public override void castAttack(Vector3[] positions, CursorManager.directions direction)

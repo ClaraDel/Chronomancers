@@ -27,6 +27,7 @@ public class Barbare : Character
         skill2CastTime = 0;
         maxCoolDownSkill2 = 7;
         barbareAnim = transform.GetComponent<Animator>();
+        
     }
 
     public override void reset()
@@ -106,6 +107,7 @@ public class Barbare : Character
         StartCoroutine(TimeManager.instance.PlayTick());
         this.zoneBasicAttack.getZoneCiblable().SetActive(false);
         cursor.gameObject.SetActive(false);
+        Attack.Play();
     }
 
     public void castAttack(Vector3[] positions, CursorManager.directions direction, int damage)
@@ -215,6 +217,7 @@ public class Barbare : Character
             StartCoroutine(TimeManager.instance.PlayTick());
             this.zoneSkill2.getZoneCiblable().SetActive(false);
             cursor.SetActive(false);
+            Attack.PlayOneShot(Ability2);
         }
     }
 
