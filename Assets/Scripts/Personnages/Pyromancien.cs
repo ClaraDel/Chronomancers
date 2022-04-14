@@ -103,7 +103,7 @@ public class Pyromancien : Character
             fireWalls.Add(newFireWall);
             int index = fireWalls.Count;
 
-            TimeManager.instance.AddFutureAction(() => launchSkill2(index-1), skill1CastTime - 1);
+            TimeManager.instance.AddFutureAction(() => launchSkill2(index-1), skill2CastTime - 1);
             wait();
         }
         cursor.GetComponent<CursorManager>().reset();
