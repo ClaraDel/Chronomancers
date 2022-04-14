@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fefe87f21e60ba4f882f1fcf9cdbcaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selfInfo: {fileID: 0}
+  selfInfo: {fileID: 11400000, guid: 553777fa96f07874b91a3d218703b0db, type: 2}
   health: 150
   maxHealth: 150
   healthBar: {fileID: 1578543568715378586}

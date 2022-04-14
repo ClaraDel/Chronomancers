@@ -161,7 +161,7 @@ public class Barbare : Character
         if (coolDownSkill2 == 0)
         {
             coolDowns();
-            castingTicks = skill2CastTime - 1;
+            castingTicks = skill2CastTime + 2;
             castingSkill2 = true;
             coolDownSkill2 = maxCoolDownSkill2 + skill2CastTime + 3;
 
