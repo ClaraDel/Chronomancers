@@ -104,8 +104,7 @@ public class Barbare : Character
             TimeManager.instance.AddAction(() => castAttack(positions, cursor.direction, 50));
         }
         StartCoroutine(TimeManager.instance.PlayTick());
-        this.zoneBasicAttack.getZoneCiblable().SetActive(false);
-        cursor.gameObject.SetActive(false);
+        cursor.GetComponent<CursorManager>().reset();
     }
 
     public void castAttack(Vector3[] positions, CursorManager.directions direction, int damage)
@@ -125,7 +124,7 @@ public class Barbare : Character
 
     public override void setUpSkill1()
     {
-        this.zoneSkill1.getZoneCiblable().SetActive(true);
+        cursor.GetComponent<CursorManager>().reset();
         cursor.SetActive(true);
         cursor.GetComponent<CursorManager>().setUpRotation(zoneSkill1);
     }
@@ -145,8 +144,6 @@ public class Barbare : Character
                 AttackManager.instance.attackTiles(this, positions, 50);
             }
         }
-        this.zoneSkill1.getZoneCiblable().SetActive(false);
-        cursor.SetActive(false);
     }
 
     public override void setUpSkill2()
@@ -161,7 +158,7 @@ public class Barbare : Character
         if (coolDownSkill2 == 0)
         {
             coolDowns();
-            castingTicks = skill2CastTime + 2;
+            castingTicks = skill2CastTime + 3;
             castingSkill2 = true;
             coolDownSkill2 = maxCoolDownSkill2 + skill2CastTime + 3;
 
@@ -212,9 +209,9 @@ public class Barbare : Character
                 }
             }
 
-            StartCoroutine(TimeManager.instance.PlayTick());
-            this.zoneSkill2.getZoneCiblable().SetActive(false);
+            cursor.GetComponent<CursorManager>().reset();
             cursor.SetActive(false);
+            StartCoroutine(TimeManager.instance.PlayTick());
         }
     }
 

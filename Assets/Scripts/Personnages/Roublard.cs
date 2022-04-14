@@ -17,9 +17,9 @@ public class Roublard : Character
         characterType = type.roublard;
         hiddenDuration = 0;
         skill1CastTime = 1;
-        coolDownSkill1 = 5;
+        maxCoolDownSkill1 = 5;
         skill2CastTime = 1;
-        coolDownSkill2 = 15;
+        maxCoolDownSkill2 = 15;
         roublardAnim = transform.GetComponent<Animator>();
     }
 

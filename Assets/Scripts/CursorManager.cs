@@ -43,6 +43,7 @@ public class CursorManager : MonoBehaviour
     public void setUpRotation(Zone zone)
     {
         rotationActive = true;
+        direction = directions.up;
         zone.getZoneCiblable().SetActive(true);
         listPositionsActif = new List<Vector3Int>();
         foreach (var tile in zone.getTilesCiblable())
@@ -58,13 +59,20 @@ public class CursorManager : MonoBehaviour
         positionX = (int)Mathf.Floor(transform.position.x);
         positionY = (int)Mathf.Floor(transform.position.y);
         activeZone.getZoneEffet().SetActive(true);
+        activeZone.getZoneEffet().transform.rotation = Quaternion.AngleAxis(0, Vector3Int.forward);
     }
 
     public void reset()
     {
+        if (activeZone != null)
+        {
+        this.activeZone.getZoneEffet().SetActive(false);
+        this.activeZone.getZoneCiblable().SetActive(false);
+        }
         listPositionsActif = new List<Vector3Int>();
         this.activeZone = null;
-    }
+        direction = directions.up;
+}
 
 
     private void calculOrientationCursor()

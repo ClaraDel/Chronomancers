@@ -10,9 +10,9 @@ public class Ranger : Character
         base.init(100, 50, isBlue);
         characterType = type.ranger;
         skill1CastTime = 2;
-        coolDownSkill1 = 10;
+        maxCoolDownSkill1 = 10;
         skill2CastTime = 0;
-        coolDownSkill2 = 7;
+        maxCoolDownSkill2 = 7;
         rangerAnim = transform.GetComponent<Animator>();
     }
 
@@ -53,8 +53,8 @@ public class Ranger : Character
             AttackManager.instance.addFutureAttack(this, positions, 75, skill1CastTime);
             StartCoroutine(TimeManager.instance.PlayTick());
         }
-        this.zoneSkill1.getZoneCiblable().SetActive(false);
-        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        cursor.GetComponent<CursorManager>().reset();
+        cursor.SetActive(false);
     }
 
     // Tir pr�cis

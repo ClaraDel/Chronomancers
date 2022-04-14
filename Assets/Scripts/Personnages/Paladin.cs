@@ -16,9 +16,9 @@ public class Paladin : Character
         characterType = type.paladin;
         waited = false;
         skill1CastTime = 1;
-        coolDownSkill1 = 6;
+        maxCoolDownSkill1 = 6;
         skill2CastTime = 2;
-        coolDownSkill2 = 10;
+        maxCoolDownSkill2 = 10;
         paladinAnim = transform.GetComponent <Animator> ();
     }
 

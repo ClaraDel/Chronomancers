@@ -42,9 +42,9 @@ public class Pyromancien : Character
 
         AttackManager.instance.addFutureAttack(this, positions, normalAttackDamage, 1);
         TimeManager.instance.AddAction(() => castAttack(positions, cursor.direction));
-        
-        this.zoneBasicAttack.getZoneCiblable().SetActive(false);
-        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+
+        this.cursor.GetComponent<CursorManager>().reset();
+        this.cursor.SetActive(false);
         TimeManager.instance.PlayTick();
     }
 
@@ -98,6 +98,8 @@ public class Pyromancien : Character
             TimeManager.instance.AddFutureAction(() => launchSkill2(index-1), skill1CastTime - 1);
             StartCoroutine(TimeManager.instance.PlayTick());
         }
+        cursor.GetComponent<CursorManager>().reset();
+        cursor.SetActive(false);
     }
 
     // Mur de feu

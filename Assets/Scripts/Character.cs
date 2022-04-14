@@ -139,6 +139,9 @@ public class Character : MonoBehaviour
 
         this.shielded = false;
         this.shieldDuration = 0;
+
+        this.cursor.GetComponent<CursorManager>().reset();
+        this.cursor.SetActive(false);
     }
 
     // Basic movement methods
@@ -256,8 +259,8 @@ public class Character : MonoBehaviour
 
         coolDowns();
 
-        this.zoneBasicAttack.getZoneCiblable().SetActive(false);
-        cursor.gameObject.SetActive(false);
+        this.cursor.GetComponent<CursorManager>().reset();
+        this.cursor.SetActive(false);
         StartCoroutine(TimeManager.instance.PlayTick());
     }
     
@@ -268,8 +271,8 @@ public class Character : MonoBehaviour
 
     public void cancelAtk()
     {
-        this.zoneBasicAttack.getZoneCiblable().SetActive(false);
-        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        cursor.GetComponent<CursorManager>().reset();
+        cursor.SetActive(false);
     }
 
     public void coolDowns()
@@ -315,16 +318,16 @@ public class Character : MonoBehaviour
             TimeManager.instance.AddFutureAction(() => launchSkill1(positions), skill1CastTime);
             StartCoroutine(TimeManager.instance.PlayTick());
         }
-        this.zoneSkill1.getZoneCiblable().SetActive(false);
-        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        cursor.GetComponent<CursorManager>().reset();
+        cursor.SetActive(false);
     }
 
     public virtual void launchSkill1(Vector3[] positions) { }
 
     public void cancelSkill1()
     {
-        this.zoneSkill1.getZoneCiblable().SetActive(false);
-        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        cursor.GetComponent<CursorManager>().reset();
+        cursor.SetActive(false);
     }
 
     public virtual void setUpSkill2()
@@ -353,16 +356,16 @@ public class Character : MonoBehaviour
             TimeManager.instance.AddFutureAction(() => launchSkill2(positions), skill2CastTime);
             StartCoroutine(TimeManager.instance.PlayTick());
         }
-        this.zoneSkill1.getZoneCiblable().SetActive(false);
-        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        cursor.GetComponent<CursorManager>().reset();
+        cursor.SetActive(false);
     }
 
     public virtual void launchSkill2(Vector3[] positions) { }
 
     public void cancelSkill2()
     {
-        this.zoneSkill2.getZoneCiblable().SetActive(false);
-        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        cursor.GetComponent<CursorManager>().reset();
+        cursor.SetActive(false);
     }
 
     // Update is called once per frame
