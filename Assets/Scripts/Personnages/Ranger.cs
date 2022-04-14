@@ -24,8 +24,6 @@ public class Ranger : Character
 
     public override void castSkill1()
     {
-        print("castSkill1 ranger" + coolDownSkill1);
-        Debug.Log("HitRangerR");
         if (coolDownSkill1 == 0)
         {
             coolDowns();
@@ -52,9 +50,11 @@ public class Ranger : Character
             }
 
             TimeManager.instance.AddAction(() => launchSkill1(positions));
-            AttackManager.instance.addFutureAttack(this, positions, 75, skill1CastTime + 1);
+            AttackManager.instance.addFutureAttack(this, positions, 75, skill1CastTime);
             StartCoroutine(TimeManager.instance.PlayTick());
         }
+        this.zoneSkill1.getZoneCiblable().SetActive(false);
+        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
     }
 
     // Tir pr�cis
@@ -70,7 +70,17 @@ public class Ranger : Character
     {
         // Ajouter mouvement vers case ciblee a 3 de port�e
         // TODO Check if target out of bounds
-        gameObject.GetComponent<PlayerController>().PlayerTarget.position = positions[0];
+        gameObject.GetComponent<PlayerController>().PlayerTarget.position = positions[0] - new Vector3(0.5f, 0.5f, 0f);
+        StartCoroutine(rangerDash());        
+    }
+
+    public IEnumerator rangerDash()
+    {
+        while (Vector2.Distance(transform.position, moveManager.entity.PlayerTarget.position) != 0f)
+        {
+            moveManager.entity.transform.position = Vector2.MoveTowards(moveManager.entity.transform.position, moveManager.entity.PlayerTarget.position, moveManager.entity.moveSpeed * Time.deltaTime * 3);
+            yield return null;
+        }
     }
 
     public override void moveH(float sens)

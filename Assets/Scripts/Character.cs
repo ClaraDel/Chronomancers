@@ -312,7 +312,7 @@ public class Character : MonoBehaviour
                 positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
             }
 
-            TimeManager.instance.AddFutureAction(() => launchSkill1(positions), skill1CastTime - 1);
+            TimeManager.instance.AddFutureAction(() => launchSkill1(positions), skill1CastTime);
             StartCoroutine(TimeManager.instance.PlayTick());
         }
         this.zoneSkill1.getZoneCiblable().SetActive(false);
@@ -350,7 +350,7 @@ public class Character : MonoBehaviour
                 positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
             }
 
-            TimeManager.instance.AddFutureAction(() => launchSkill2(positions), skill1CastTime - 1);
+            TimeManager.instance.AddFutureAction(() => launchSkill2(positions), skill2CastTime);
             StartCoroutine(TimeManager.instance.PlayTick());
         }
         this.zoneSkill1.getZoneCiblable().SetActive(false);
