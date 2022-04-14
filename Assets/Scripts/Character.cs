@@ -161,7 +161,7 @@ public class Character : MonoBehaviour
     public virtual void wait()
     {
         coolDowns();
-        StartCoroutine(TimeManager.instance.PlayTick());
+        this.StartCoroutine(TimeManager.instance.PlayTick());
         if (castingTicks > 0)
         {
             castingTicks--;

@@ -159,52 +159,124 @@ public class Barbare : Character
             coolDownSkill2 = maxCoolDownSkill2 + skill2CastTime + 3;
 
             CursorManager cursorManager = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
-
-            if (cursorManager.direction == CursorManager.directions.up)
+            switch (cursorManager.direction)
             {
-                TimeManager.instance.AddFutureAction(() => launchSkill2(up), skill1CastTime);
-                for (int i = 0; i < 3; i++)
-                {
-                    TimeManager.instance.AddFutureAction(() => moveManager.AddMove(0, 1), skill1CastTime + i);
-                    TimeManager.instance.AddFutureAction(() => bashAttack(up), skill1CastTime + i);
-                    TimeManager.instance.AddFutureAction(() => moveManager.AddMove(0, 1), skill1CastTime + i);
-                    TimeManager.instance.AddFutureAction(() => bashAttack(up), skill1CastTime + i);
-                }
+                case CursorManager.directions.up:
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Vector3 start = new Vector3(transform.position.x + 0.5f, transform.position.y + 0.5f, 0f);
+                        Vector3 dir = new Vector3(0f, 1, 0f);
+                        RaycastHit hit;
+                        if (Physics.Raycast(start, dir, out hit, 1f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")){
+                            if(hit.transform.tag == "character"){
+                                TimeManager.instance.AddAction(() => bashAttack(up));
+                            }
+                            wait(); //Tick de stun
+                            break; // On sort de la charge
+                        } else if (Physics.Raycast(start, dir, out hit, 2f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")) {
+                            TimeManager.instance.AddAction(() => moveManager.AddMove(0, 1));
+                            if(hit.transform.tag == "character") {
+                                TimeManager.instance.AddAction(() => bashAttack(up));
+                            } else if (hit.transform.tag == "Wall"){
+                                wait(); //Tick pour le déplacement vers le mur
+                            }
+                            wait(); //Tick pour le déplacement et l'attack ou le stun
+                            break; // On sort de la charge
+                        } else {
+                            TimeManager.instance.AddAction(() => moveManager.AddMove(0, 1));
+                            TimeManager.instance.AddAction(() => moveManager.AddMove(0, 1));
+                            wait(); //Tick pour le double déplacement
+                        }
+                    }
+                    break;
+                case CursorManager.directions.right:
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Vector3 start = new Vector3(transform.position.x + 0.5f, transform.position.y + 0.5f, 0f);
+                        Vector3 dir = new Vector3(1f, 0f, 0f);
+                        RaycastHit hit;
+                        if (Physics.Raycast(start, dir, out hit, 1f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")){
+                            if(hit.transform.tag == "character"){
+                                TimeManager.instance.AddAction(() => bashAttack(right));
+                                wait(); //Tick d'attack
+                            }
+                            wait(); //Tick de stun
+                            break; // On sort de la charge
+                        } else if (Physics.Raycast(start, dir, out hit, 2f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")) {
+                            TimeManager.instance.AddAction(() => moveManager.AddMove(1, 0));
+                            if(hit.transform.tag == "character") {
+                                TimeManager.instance.AddAction(() => bashAttack(right));
+                            } else if (hit.transform.tag == "Wall"){
+                                wait(); //Tick pour le déplacement vers le mur
+                            }
+                            wait(); //Tick pour le déplacement et l'attack ou le stun
+                            break; // On sort de la charge
+                        } else {
+                            TimeManager.instance.AddAction(() => moveManager.AddMove(1, 0));
+                            TimeManager.instance.AddAction(() => moveManager.AddMove(1, 0));
+                            wait(); //Tick pour le double déplacement
+                        }
+                    }
+                    break;
+                case CursorManager.directions.down:
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Vector3 start = new Vector3(transform.position.x + 0.5f, transform.position.y + 0.5f, 0f);
+                        Vector3 dir = new Vector3(0f, -1f, 0f);
+                        RaycastHit hit;
+                        if (Physics.Raycast(start, dir, out hit, 1f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")){
+                            if(hit.transform.tag == "character"){
+                                TimeManager.instance.AddAction(() => bashAttack(down));
+                                wait(); //Tick d'attack
+                            }
+                            wait(); //Tick de stun
+                            break; // On sort de la charge
+                        } else if (Physics.Raycast(start, dir, out hit, 2f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")) {
+                            TimeManager.instance.AddAction(() => moveManager.AddMove(0, -1));
+                            if(hit.transform.tag == "character") {
+                                TimeManager.instance.AddAction(() => bashAttack(down));
+                            } else if (hit.transform.tag == "Wall"){
+                                wait(); //Tick pour le déplacement vers le mur
+                            }
+                            wait(); //Tick pour le déplacement et l'attack ou le stun
+                            break; // On sort de la charge
+                        } else {
+                            TimeManager.instance.AddAction(() => moveManager.AddMove(0, -1));
+                            TimeManager.instance.AddAction(() => moveManager.AddMove(0, -1));
+                            wait(); //Tick pour le double déplacement
+                        }
+                    }
+                    break;
+                case CursorManager.directions.left:
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Vector3 start = new Vector3(transform.position.x + 0.5f, transform.position.y + 0.5f, 0f);
+                        Vector3 dir = new Vector3(-1f, 0f, 0f);
+                        RaycastHit hit;
+                        if (Physics.Raycast(start, dir, out hit, 1f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")){
+                            if(hit.transform.tag == "character"){
+                                TimeManager.instance.AddAction(() => bashAttack(left));
+                                wait(); //Tick d'attack
+                            }
+                            wait(); //Tick de stun
+                            break; // On sort de la charge
+                        } else if (Physics.Raycast(start, dir, out hit, 2f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")) {
+                            TimeManager.instance.AddAction(() => moveManager.AddMove(0, -1));
+                            if(hit.transform.tag == "character") {
+                                TimeManager.instance.AddAction(() => bashAttack(left));
+                            } else if (hit.transform.tag == "Wall"){
+                                wait(); //Tick pour le déplacement vers le mur
+                            }
+                            wait(); //Tick pour le déplacement et l'attack ou le stun
+                            break; // On sort de la charge
+                        } else {
+                            TimeManager.instance.AddAction(() => moveManager.AddMove(-1, 0));
+                            TimeManager.instance.AddAction(() => moveManager.AddMove(-1, 0));
+                            wait(); //Tick pour le double déplacement
+                        }
+                    }
+                    break;
             }
-            else if (cursorManager.direction == CursorManager.directions.left)
-            {
-                TimeManager.instance.AddFutureAction(() => launchSkill2(left), skill1CastTime);
-                for (int i = 0; i < 3; i++)
-                {
-                    TimeManager.instance.AddFutureAction(() => moveManager.AddMove(-1, 0), skill1CastTime + i);
-                    TimeManager.instance.AddFutureAction(() => bashAttack(left), skill1CastTime + i);
-                    TimeManager.instance.AddFutureAction(() => moveManager.AddMove(-1, 0), skill1CastTime + i);
-                    TimeManager.instance.AddFutureAction(() => bashAttack(left), skill1CastTime + i);
-                }
-            }
-            else if (cursorManager.direction == CursorManager.directions.down)
-            {
-                TimeManager.instance.AddFutureAction(() => launchSkill2(down), skill1CastTime);
-                for (int i = 0; i < 3; i++)
-                {
-                    TimeManager.instance.AddFutureAction(() => moveManager.AddMove(0, -1), skill1CastTime + i);
-                    TimeManager.instance.AddFutureAction(() => bashAttack(down), skill1CastTime + i);
-                    TimeManager.instance.AddFutureAction(() => moveManager.AddMove(0, -1), skill1CastTime + i);
-                    TimeManager.instance.AddFutureAction(() => bashAttack(down), skill1CastTime + i);
-                }
-            }
-            else if (cursorManager.direction == CursorManager.directions.right)
-            {
-                TimeManager.instance.AddFutureAction(() => launchSkill2(right), skill1CastTime);
-                for (int i = 0; i < 3; i++)
-                {
-                    TimeManager.instance.AddFutureAction(() => moveManager.AddMove(1, 0), skill1CastTime + i);
-                    TimeManager.instance.AddFutureAction(() => bashAttack(right), skill1CastTime + i);
-                    TimeManager.instance.AddFutureAction(() => moveManager.AddMove(1, 0), skill1CastTime + i);
-                    TimeManager.instance.AddFutureAction(() => bashAttack(right), skill1CastTime + i);
-                }
-            }
-
             cursor.GetComponent<CursorManager>().reset();
             cursor.SetActive(false);
             wait();
