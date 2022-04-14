@@ -31,7 +31,7 @@ public class Roublard : Character
         base.reset();
     }
 
-    public void testHidden() 
+    public override void coolDowns() 
     {
         if (hidden)
         {
@@ -45,11 +45,11 @@ public class Roublard : Character
                 hiddenDuration--;
             }
         }
+        base.coolDowns();
     }
 
     public override void wait()
     {
-        testHidden();
         base.wait();
     }
 
@@ -70,7 +70,6 @@ public class Roublard : Character
 
     public override void moveH(float sens)
     {
-        testHidden();
         if (hidden && !moveAction)
         {
             moveManager.AddDash(Mathf.Round(Input.GetAxisRaw("Horizontal")), 0);
@@ -93,7 +92,6 @@ public class Roublard : Character
 
     public override void moveV(float sens)
     {
-        testHidden();
         if (hidden && !moveAction)
         {
             moveManager.AddDash(0, Mathf.Round(Input.GetAxisRaw("Vertical")));

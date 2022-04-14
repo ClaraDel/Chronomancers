@@ -45,7 +45,7 @@ public class Pyromancien : Character
 
         this.cursor.GetComponent<CursorManager>().reset();
         this.cursor.SetActive(false);
-        TimeManager.instance.PlayTick();
+        wait();
     }
 
     public override void castAttack(Vector3[] positions, CursorManager.directions direction)
@@ -67,6 +67,14 @@ public class Pyromancien : Character
         }
     }
 
+    public override void setUpSkill2()
+    {
+        this.zoneSkill2.getZoneCiblable().SetActive(true);
+        cursor.SetActive(true);
+        cursor.GetComponent<CursorManager>().setUpFirewall(zoneSkill2);
+    }
+
+    // Mur de feu
     public override void castSkill2()
     {
         pyroAnim.Play("castSkill2Pyromancien");
@@ -96,13 +104,12 @@ public class Pyromancien : Character
             int index = fireWalls.Count;
 
             TimeManager.instance.AddFutureAction(() => launchSkill2(index-1), skill1CastTime - 1);
-            StartCoroutine(TimeManager.instance.PlayTick());
+            wait();
         }
         cursor.GetComponent<CursorManager>().reset();
         cursor.SetActive(false);
     }
 
-    // Mur de feu
     public void launchSkill2(int index)
     {
         if (alive)

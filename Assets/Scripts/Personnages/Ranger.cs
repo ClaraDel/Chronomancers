@@ -51,7 +51,7 @@ public class Ranger : Character
 
             TimeManager.instance.AddAction(() => launchSkill1(positions));
             AttackManager.instance.addFutureAttack(this, positions, 75, skill1CastTime);
-            StartCoroutine(TimeManager.instance.PlayTick());
+            wait();
         }
         cursor.GetComponent<CursorManager>().reset();
         cursor.SetActive(false);

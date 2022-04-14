@@ -37,7 +37,7 @@ public class Barbare : Character
         base.reset();
     }
 
-    public void testEnraged()
+    public override void coolDowns()
     {
         if (enraged)
         {
@@ -62,13 +62,11 @@ public class Barbare : Character
 
     public override void wait()
     {
-        testEnraged();
         base.wait();
     }
 
     public override void moveH(float sens)
     {
-        testEnraged();
         base.moveH(sens);
         if (sens > 0)
         {
@@ -82,7 +80,6 @@ public class Barbare : Character
 
     public override void moveV(float sens)
     {
-        testEnraged();
         barbareAnim.Play("runBarbare");
         base.moveV(sens);
     }
@@ -103,7 +100,7 @@ public class Barbare : Character
         {
             TimeManager.instance.AddAction(() => castAttack(positions, cursor.direction, 50));
         }
-        StartCoroutine(TimeManager.instance.PlayTick());
+        wait();
         cursor.GetComponent<CursorManager>().reset();
     }
 
@@ -134,7 +131,6 @@ public class Barbare : Character
     {
         if (alive)
         {
-            testEnraged();
             if (enraged)
             {
                 AttackManager.instance.attackTiles(this, positions, 100);
@@ -211,7 +207,7 @@ public class Barbare : Character
 
             cursor.GetComponent<CursorManager>().reset();
             cursor.SetActive(false);
-            StartCoroutine(TimeManager.instance.PlayTick());
+            wait();
         }
     }
 

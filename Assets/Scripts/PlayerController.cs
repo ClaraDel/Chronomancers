@@ -95,6 +95,11 @@ public class PlayerController : MonoBehaviour
                     }
                 }
 
+                if (Input.GetKeyUp(KeyCode.R) && castSkill2)
+                {
+                    character.cursor.GetComponent<CursorManager>().rotateZoneEffect();
+                }
+
                 if (Input.GetKeyUp(KeyCode.Return)) {
                     if (attackingProcess)
                     {

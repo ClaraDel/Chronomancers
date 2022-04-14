@@ -115,6 +115,7 @@ public class Character : MonoBehaviour
         this.shielded = false;
         this.shieldDuration = 0;
     }
+
     public type getType() { return characterType; }
     public bool isAlive() { return alive; }
     public int getCastingTicks() { return castingTicks; }
@@ -261,7 +262,7 @@ public class Character : MonoBehaviour
 
         this.cursor.GetComponent<CursorManager>().reset();
         this.cursor.SetActive(false);
-        StartCoroutine(TimeManager.instance.PlayTick());
+        wait();
     }
     
     public virtual void castAttack(Vector3[] positions, CursorManager.directions direction)
@@ -275,7 +276,7 @@ public class Character : MonoBehaviour
         cursor.SetActive(false);
     }
 
-    public void coolDowns()
+    public virtual void coolDowns()
     {
         if (coolDownSkill1 > 0)
         {
@@ -316,7 +317,7 @@ public class Character : MonoBehaviour
             }
 
             TimeManager.instance.AddFutureAction(() => launchSkill1(positions), skill1CastTime);
-            StartCoroutine(TimeManager.instance.PlayTick());
+            wait();
         }
         cursor.GetComponent<CursorManager>().reset();
         cursor.SetActive(false);
@@ -354,7 +355,7 @@ public class Character : MonoBehaviour
             }
 
             TimeManager.instance.AddFutureAction(() => launchSkill2(positions), skill2CastTime);
-            StartCoroutine(TimeManager.instance.PlayTick());
+            wait();
         }
         cursor.GetComponent<CursorManager>().reset();
         cursor.SetActive(false);
