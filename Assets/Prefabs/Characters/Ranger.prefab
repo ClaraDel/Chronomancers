@@ -6426,6 +6426,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TileEffect (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3875495358034142765, guid: 63c7b5e0afea392458695cf014ef3a1a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6423842539697493280, guid: 63c7b5e0afea392458695cf014ef3a1a, type: 3}
       propertyPath: m_Sprite
       value: 
