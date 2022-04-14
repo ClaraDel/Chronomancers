@@ -9,6 +9,7 @@ public class Roublard : Character
     public bool hidden;
     public int hiddenDuration;
     private Animator roublardAnim;
+    public GameObject trap;
 
     public void init(bool isBlue) {
         base.init(100, 50, isBlue);
@@ -50,6 +51,21 @@ public class Roublard : Character
     {
         testHidden();
         base.wait();
+    }
+
+    public override void takeDamage(Character attacker, int damage)
+    {
+        if (!shielded && alive)
+        {
+            roublardAnim.Play("hurtRoublardR");
+        }
+        base.takeDamage(attacker, damage);
+    }
+
+    public override void die()
+    {
+        //roublardAnim.Play("deathRoublard");
+        base.die();
     }
 
     public override void moveH(float sens)
@@ -101,21 +117,34 @@ public class Roublard : Character
         base.addAttack();
     }
 
-    // Trap
-    public override void launchSkill1(GameObject cursor)
+    public override void castAttack(Vector3[] positions, CursorManager.directions direction)
     {
-        if (hidden)
+        roublardAnim.Play("hit1Roublard");
+        base.castAttack(positions, direction);
+    }
+
+    // Trap
+    public override void launchSkill1(Vector3[] positions)
+    {
+        if (alive)
         {
-            hidden = false;
-            hiddenDuration = 0;
+            if (hidden)
+            {
+                hidden = false;
+                hiddenDuration = 0;
+            }
+            Instantiate(trap, positions[0], new Quaternion(), null);
         }
     }
 
-    public override void launchSkill2(GameObject cursor)
+    public override void launchSkill2(Vector3[] positions)
     {
-        hidden = true;
-        hiddenDuration = 5;
-        gameObject.GetComponent<SpriteRenderer>().sprite = hiddenSprite;
+        if (alive)
+        {
+            hidden = true;
+            hiddenDuration = 5;
+            gameObject.GetComponent<SpriteRenderer>().sprite = hiddenSprite;
+        }
     }
 
 }

@@ -8,7 +8,7 @@ public class TimeManager : MonoBehaviour
 {
     public static TimeManager instance { get; set; }
 
-    public static int currentTick;
+    public int currentTick;
     private int currentTurn;
     public static int maxTick = 10;
     public static int maxTurn = 4;
@@ -19,6 +19,8 @@ public class TimeManager : MonoBehaviour
     public PlayerController actifCharacter;
 
     public GameObject TimeManagerText;
+    public GameObject HourGlassBleu;
+    public GameObject HourGlassRouge;
     public bool isPlaying;
     public GameObject prefabPlayer;
     public Stack<PlayerController> characterOrder;
@@ -40,7 +42,6 @@ public class TimeManager : MonoBehaviour
         isPlaying = false;
         currentTick = 0;
         currentTurn = 0;
-        TimeManagerText = GameObject.Find("TimeManagerText");
         characterInfoPanel.SetActive(false);
     }
 
@@ -65,7 +66,7 @@ public class TimeManager : MonoBehaviour
 
     public IEnumerator PlayTick()
     {
-        AbilityTimer.instance.updateUIAbility();
+        // AbilityTimer.instance.updateUIAbility();
         isPlaying = true;
         Stack<Action> currentStack = turnTimeLine[currentTick];
         float index = 0.0f;
@@ -82,11 +83,13 @@ public class TimeManager : MonoBehaviour
             EndTurn();
         }
         actifCharacter.character.coolDowns();
+        HourGlassBleu.GetComponent<Animator>().Play("hourGlassBleu");
+        HourGlassRouge.GetComponent<Animator>().Play("hourGlassRouge");
     }
 
     public void EndTurn()
     {
-        AbilityTimer.instance.resetTimers();
+        // AbilityTimer.instance.resetTimers();
         actifCharacter.isControllable = false;
         if (currentTurn == maxTurn)
         {
@@ -102,6 +105,9 @@ public class TimeManager : MonoBehaviour
             //EndTurnPanel.SetActive(true);
             spawnZones[(currentTurn % 2)].SetActive(true);
 
+        }
+        foreach (GameObject item in GameObject.FindGameObjectsWithTag("placedObjects")) {
+            Destroy(item);
         }
     }
 
@@ -135,7 +141,11 @@ public class TimeManager : MonoBehaviour
             default:
                 break;
         }
-        //NB : Je n'ai pas mis de PlayTick ici afin d'être sûr que la méthode ResetPosition a bien été ajouté au tick 0 avant de lancer le tick
+        foreach (PlayerController character in characterOrder){
+            character.character.reset();
+        }
+        HourGlassBleu.SetActive(!HourGlassBleu.activeSelf);
+        HourGlassRouge.SetActive(!HourGlassRouge.activeSelf);
     }
 
     public void ResetTurn()

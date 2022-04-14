@@ -20,13 +20,14 @@ public class MoveManager : MonoBehaviour
 
     public void AddMove(float horizontalDirection, float verticalDirection)
     {
-        TimeManager.instance.AddAction(() => this.StartCoroutine(Move(horizontalDirection, verticalDirection)));
-        StartCoroutine(TimeManager.instance.PlayTick());
+        //TimeManager.instance.AddAction(() => this.StartCoroutine(Move(horizontalDirection, verticalDirection)));
+        this.StartCoroutine(Move(horizontalDirection, verticalDirection));
     }
 
     public void AddDash(float horizontalDirection, float verticalDirection)
     {
-        TimeManager.instance.AddAction(() => this.StartCoroutine(Move(horizontalDirection, verticalDirection)));
+        //TimeManager.instance.AddAction(() => this.StartCoroutine(Move(horizontalDirection, verticalDirection)));
+        this.StartCoroutine(Move(horizontalDirection, verticalDirection));
     }
 
     public IEnumerator Move(float horizontalDirection, float verticalDirection)
