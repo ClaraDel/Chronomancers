@@ -10,6 +10,7 @@ public class SlotSpawn : Slot
 
     public virtual void displayUI()
     {
+        Debug.Log("Display");
         CharacterInfo characterInfo = (CharacterInfo) gameObject.GetComponent<Info>();
         UIAbility.SetActive(true);
 
@@ -24,6 +25,7 @@ public class SlotSpawn : Slot
     {
         base.OnDrop(eventData);
         displayUI();
+        AbilityTimer.instance.setAbilities();
 
     }
     // Start is called before the first frame update
