@@ -50,6 +50,7 @@ public class Pyromancien : Character
         this.cursor.GetComponent<CursorManager>().reset();
         this.cursor.SetActive(false);
         this.StartCoroutine(TimeManager.instance.PlayTick());
+        Attack.Play();
     }
 
     public override void castAttack(Vector3[] positions, CursorManager.directions direction)
@@ -112,6 +113,7 @@ public class Pyromancien : Character
             {
                 this.StartCoroutine(TimeManager.instance.PlayTick());
             }
+            Attack.PlayOneShot(Ability2);
         }
         cursor.GetComponent<CursorManager>().reset();
         cursor.SetActive(false);

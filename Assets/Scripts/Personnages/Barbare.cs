@@ -31,6 +31,7 @@ public class Barbare : Character
         AbilityTimer.instance.getAbility(2).setCountTimer(coolDownSkill2 - 1);
         AbilityTimer.instance.launchUIAbility(2);
         barbareAnim = transform.GetComponent<Animator>();
+        
     }
 
     public override void reset()
@@ -101,6 +102,7 @@ public class Barbare : Character
         }
         this.StartCoroutine(TimeManager.instance.PlayTick());
         cursor.GetComponent<CursorManager>().reset();
+        Attack.Play();
     }
 
     public void castAttack(Vector3[] positions, CursorManager.directions direction, int damage)

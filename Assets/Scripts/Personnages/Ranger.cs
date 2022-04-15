@@ -54,6 +54,7 @@ public class Ranger : Character
             {
                 this.StartCoroutine(TimeManager.instance.PlayTick());
             }
+            Attack.PlayOneShot(Ability1);
         }
         cursor.GetComponent<CursorManager>().reset();
         cursor.SetActive(false);

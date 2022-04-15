@@ -54,6 +54,10 @@ public class Character : MonoBehaviour
 
     private int team ; //vaut 0 s'il est dans l'�quipe rouche et 1 s'il est dans l'�quipe bleu
 
+    public AudioSource Attack;
+    public AudioClip Ability1;
+    public AudioClip Ability2;
+
 
     public void init(int maxHealth, int damage, bool isBlue)
     {
@@ -257,6 +261,7 @@ public class Character : MonoBehaviour
         this.cursor.GetComponent<CursorManager>().reset();
         this.cursor.SetActive(false);
         this.StartCoroutine(TimeManager.instance.PlayTick());
+        Attack.Play();
     }
     
     public virtual void castAttack(Vector3[] positions, CursorManager.directions direction)
@@ -318,6 +323,7 @@ public class Character : MonoBehaviour
         }
         cursor.GetComponent<CursorManager>().reset();
         cursor.SetActive(false);
+        Attack.PlayOneShot(Ability1);
     }
 
     public virtual void launchSkill1(Vector3[] positions) { }
@@ -359,6 +365,7 @@ public class Character : MonoBehaviour
         }
         cursor.GetComponent<CursorManager>().reset();
         cursor.SetActive(false);
+        Attack.PlayOneShot(Ability2);
     }
 
     public virtual void launchSkill2(Vector3[] positions) { }

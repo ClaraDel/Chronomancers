@@ -139,6 +139,7 @@ public class PlayerController : MonoBehaviour
                     
                     if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) >= 0.5f)
                     {
+                        Debug.Log(PlayerTarget.position);
                         //Checks for wall collision
                         Vector3 start = new Vector3(PlayerTarget.position.x+0.5f, PlayerTarget.position.y+0.5f, 0f);
                         float sens = Mathf.Round(Input.GetAxisRaw("Horizontal"));
@@ -151,6 +152,7 @@ public class PlayerController : MonoBehaviour
                     }
                     else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) >= 0.5f)
                     {
+                        Debug.Log(PlayerTarget.position);
                         //Checks for wall collision
                         Vector3 start = new Vector3(PlayerTarget.position.x + 0.5f, PlayerTarget.position.y + 0.5f, 0f);
                         float sens = Mathf.Round(Input.GetAxisRaw("Vertical"));
