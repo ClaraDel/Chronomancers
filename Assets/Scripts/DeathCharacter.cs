@@ -14,7 +14,7 @@ public class DeathCharacter : MonoBehaviour
             animator.Play("deathRoublard");
             //Debug.Log("in death roublard");
         else if (animator.name.Contains("DeathPyromancien"))
-            animator.Play("deathPyromancien");
+            animator.Play("DisappearPyromancien");
         else if (animator.name.Contains("DeathBarbare"))
             animator.Play("deathBarbare");
         else if (animator.name.Contains("DeathRanger"))
