@@ -26,7 +26,6 @@ public class Ranger : Character
     {
         if (coolDownSkill1 == 0)
         {
-            coolDowns();
             castingTicks = skill1CastTime - 1;
             castingSkill1 = true;
             coolDownSkill1 = maxCoolDownSkill1 + skill1CastTime;
@@ -44,19 +43,17 @@ public class Ranger : Character
 
             for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
             {
-                positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
+                positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position - new Vector3(0.5f, 0.5f, 0f);
             }
 
             TimeManager.instance.AddAction(() => launchSkill1(positions));
 
-            for (int i = 0; i < skill1CastTime; i++)
-            {
-                wait();
-            }
 
-            
-            AttackManager.instance.addFutureAttack(this, positions, 75, 1);
-            wait();
+            AttackManager.instance.addFutureAttack(this, positions, 75, skill1CastTime + 1);
+            for (int i = 0; i < skill1CastTime + 1; i++)
+            {
+                this.StartCoroutine(TimeManager.instance.PlayTick());
+            }
         }
         cursor.GetComponent<CursorManager>().reset();
         cursor.SetActive(false);

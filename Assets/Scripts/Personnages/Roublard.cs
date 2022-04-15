@@ -26,8 +26,10 @@ public class Roublard : Character
     public override void reset()
     {
         hidden = false;
-        hiddenDuration = 0;
-        gameObject.GetComponent<SpriteRenderer>().sprite = characterSprite;
+        hiddenDuration = 0; 
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        healthBar.SetActive(true);
+        trap.GetComponent<SpriteRenderer>().enabled = false;
         base.reset();
     }
 
@@ -44,6 +46,11 @@ public class Roublard : Character
             {
                 hiddenDuration--;
             }
+        }
+        else if (!gameObject.GetComponent<SpriteRenderer>().enabled)
+        {
+            gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            healthBar.SetActive(true);
         }
         base.coolDowns();
     }
@@ -116,11 +123,18 @@ public class Roublard : Character
         base.castAttack(positions, direction);
     }
 
+    public override void castSkill1()
+    {
+        base.castSkill1();
+        trap.GetComponent<SpriteRenderer>().enabled = true;
+    }
+
     // Trap
     public override void launchSkill1(Vector3[] positions)
     {
         if (alive)
         {
+            trap.GetComponent<SpriteRenderer>().enabled = true;
             if (hidden)
             {
                 hidden = false;
@@ -130,6 +144,13 @@ public class Roublard : Character
         }
     }
 
+    public override void castSkill2()
+    {
+        base.castSkill2();
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        healthBar.SetActive(true);
+    }
+
     // Hidden
     public override void launchSkill2(Vector3[] positions)
     {
@@ -137,7 +158,8 @@ public class Roublard : Character
         {
             hidden = true;
             hiddenDuration = 5;
-            gameObject.GetComponent<SpriteRenderer>().sprite = hiddenSprite;
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            healthBar.SetActive(false);
         }
     }
 

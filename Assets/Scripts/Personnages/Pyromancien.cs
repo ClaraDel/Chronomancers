@@ -38,14 +38,14 @@ public class Pyromancien : Character
             positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
         }
 
-        castingTicks = 1;
-
-        AttackManager.instance.addFutureAttack(this, positions, normalAttackDamage, 1);
         TimeManager.instance.AddAction(() => castAttack(positions, cursor.direction));
+        AttackManager.instance.addFutureAttack(this, positions, normalAttackDamage, 1);
+        this.StartCoroutine(TimeManager.instance.PlayTick());
+        this.StartCoroutine(TimeManager.instance.PlayTick());
 
         this.cursor.GetComponent<CursorManager>().reset();
         this.cursor.SetActive(false);
-        wait();
+        this.StartCoroutine(TimeManager.instance.PlayTick());
     }
 
     public override void castAttack(Vector3[] positions, CursorManager.directions direction)
@@ -80,15 +80,9 @@ public class Pyromancien : Character
         pyroAnim.Play("castSkill2Pyromancien");
         if (coolDownSkill2 == 0)
         {
-            coolDowns();
             castingTicks = skill2CastTime - 1;
             castingSkill2 = true;
             coolDownSkill2 = maxCoolDownSkill2 + skill2CastTime;
-
-            for (int i = 0; i < skill2CastTime; i++)
-            {
-                wait();
-            }
 
             CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
             Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
@@ -108,8 +102,12 @@ public class Pyromancien : Character
             fireWalls.Add(newFireWall);
             int index = fireWalls.Count;
 
-            TimeManager.instance.AddAction(() => launchSkill2(index-1));
-            wait();
+            TimeManager.instance.AddFutureAction(() => launchSkill2(index-1), skill2CastTime);
+
+            for (int i = 0; i < skill2CastTime + 1; i++)
+            {
+                this.StartCoroutine(TimeManager.instance.PlayTick());
+            }
         }
         cursor.GetComponent<CursorManager>().reset();
         cursor.SetActive(false);

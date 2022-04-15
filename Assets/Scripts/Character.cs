@@ -148,19 +148,16 @@ public class Character : MonoBehaviour
     // Basic movement methods
     public virtual void moveH()
     {
-        coolDowns();
         moveManager.AddMove(Mathf.Round(Input.GetAxisRaw("Horizontal")), 0);
     }
 
     public virtual void moveV()
     {
-        coolDowns();
         moveManager.AddMove(0, Mathf.Round(Input.GetAxisRaw("Vertical")));
     }
 
     public virtual void wait()
     {
-        coolDowns();
         this.StartCoroutine(TimeManager.instance.PlayTick());
         if (castingTicks > 0)
         {
@@ -228,13 +225,11 @@ public class Character : MonoBehaviour
     public virtual void moveH(float sens)
     {
         moveManager.AddMove(sens, 0);
-        coolDowns();
     }
 
     public virtual void moveV(float sens)
     {
         moveManager.AddMove(0, sens);
-        coolDowns();
     }
 
     // Basic attack methods
@@ -258,11 +253,9 @@ public class Character : MonoBehaviour
 
         TimeManager.instance.AddAction(() => castAttack(positions, cursor.direction));
 
-        coolDowns();
-
         this.cursor.GetComponent<CursorManager>().reset();
         this.cursor.SetActive(false);
-        wait();
+        this.StartCoroutine(TimeManager.instance.PlayTick());
     }
     
     public virtual void castAttack(Vector3[] positions, CursorManager.directions direction)
@@ -304,7 +297,6 @@ public class Character : MonoBehaviour
     {
         if (coolDownSkill1 == 0)
         {
-            coolDowns();
             castingTicks = skill1CastTime - 1;
             castingSkill1 = true;
             coolDownSkill1 = maxCoolDownSkill1 + skill1CastTime;
@@ -316,13 +308,12 @@ public class Character : MonoBehaviour
                 positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
             }
 
-            for (int i = 0; i < skill1CastTime; i++)
-            {
-                wait();
-            }
 
             TimeManager.instance.AddFutureAction(() => launchSkill1(positions), skill1CastTime);
-            wait();
+            for (int i = 0; i < skill1CastTime + 1; i++)
+            {
+                this.StartCoroutine(TimeManager.instance.PlayTick());
+            }
         }
         cursor.GetComponent<CursorManager>().reset();
         cursor.SetActive(false);
@@ -347,7 +338,6 @@ public class Character : MonoBehaviour
     {
         if (coolDownSkill2 == 0)
         {
-            coolDowns();
             castingTicks = skill2CastTime - 1;
             castingSkill2 = true;
             coolDownSkill2 = maxCoolDownSkill2 + skill2CastTime;
@@ -359,13 +349,12 @@ public class Character : MonoBehaviour
                 positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
             }
 
-            for (int i = 0; i < skill2CastTime; i++)
-            {
-                wait();
-            }
 
             TimeManager.instance.AddFutureAction(() => launchSkill2(positions), skill2CastTime);
-            wait();
+            for (int i = 0; i < skill2CastTime + 1; i++)
+            {
+                this.StartCoroutine(TimeManager.instance.PlayTick());
+            }
         }
         cursor.GetComponent<CursorManager>().reset();
         cursor.SetActive(false);

@@ -95,7 +95,7 @@ public class Barbare : Character
         {
             TimeManager.instance.AddAction(() => castAttack(positions, cursor.direction, 50));
         }
-        wait();
+        this.StartCoroutine(TimeManager.instance.PlayTick());
         cursor.GetComponent<CursorManager>().reset();
     }
 
@@ -148,7 +148,6 @@ public class Barbare : Character
     {
         if (coolDownSkill2 == 0)
         {
-            coolDowns();
             castingTicks = skill2CastTime + 3;
             castingSkill2 = true;
             coolDownSkill2 = maxCoolDownSkill2 + skill2CastTime + 3;
@@ -166,21 +165,21 @@ public class Barbare : Character
                             if(hit.transform.tag == "character"){
                                 TimeManager.instance.AddAction(() => bashAttack(up));
                             }
-                            wait(); //Tick de stun
+                            this.StartCoroutine(TimeManager.instance.PlayTick()); //Tick de stun
                             break; // On sort de la charge
                         } else if (Physics.Raycast(start, dir, out hit, 2f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")) {
                             TimeManager.instance.AddAction(() => moveManager.AddMove(0, 1));
                             if(hit.transform.tag == "character") {
                                 TimeManager.instance.AddAction(() => bashAttack(up));
                             } else if (hit.transform.tag == "Wall"){
-                                wait(); //Tick pour le déplacement vers le mur
+                                this.StartCoroutine(TimeManager.instance.PlayTick()); //Tick pour le déplacement vers le mur
                             }
-                            wait(); //Tick pour le déplacement et l'attack ou le stun
+                            this.StartCoroutine(TimeManager.instance.PlayTick()); //Tick pour le déplacement et l'attack ou le stun
                             break; // On sort de la charge
                         } else {
                             TimeManager.instance.AddAction(() => moveManager.AddMove(0, 1));
                             TimeManager.instance.AddAction(() => moveManager.AddMove(0, 1));
-                            wait(); //Tick pour le double déplacement
+                            this.StartCoroutine(TimeManager.instance.PlayTick()); //Tick pour le double déplacement
                         }
                     }
                     break;
@@ -193,23 +192,23 @@ public class Barbare : Character
                         if (Physics.Raycast(start, dir, out hit, 1f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")){
                             if(hit.transform.tag == "character"){
                                 TimeManager.instance.AddAction(() => bashAttack(right));
-                                wait(); //Tick d'attack
+                                this.StartCoroutine(TimeManager.instance.PlayTick()); //Tick d'attack
                             }
-                            wait(); //Tick de stun
+                            this.StartCoroutine(TimeManager.instance.PlayTick()); //Tick de stun
                             break; // On sort de la charge
                         } else if (Physics.Raycast(start, dir, out hit, 2f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")) {
                             TimeManager.instance.AddAction(() => moveManager.AddMove(1, 0));
                             if(hit.transform.tag == "character") {
                                 TimeManager.instance.AddAction(() => bashAttack(right));
                             } else if (hit.transform.tag == "Wall"){
-                                wait(); //Tick pour le déplacement vers le mur
+                                this.StartCoroutine(TimeManager.instance.PlayTick()); //Tick pour le déplacement vers le mur
                             }
-                            wait(); //Tick pour le déplacement et l'attack ou le stun
+                            this.StartCoroutine(TimeManager.instance.PlayTick()); //Tick pour le déplacement et l'attack ou le stun
                             break; // On sort de la charge
                         } else {
                             TimeManager.instance.AddAction(() => moveManager.AddMove(1, 0));
                             TimeManager.instance.AddAction(() => moveManager.AddMove(1, 0));
-                            wait(); //Tick pour le double déplacement
+                            this.StartCoroutine(TimeManager.instance.PlayTick()); //Tick pour le double déplacement
                         }
                     }
                     break;
@@ -222,23 +221,23 @@ public class Barbare : Character
                         if (Physics.Raycast(start, dir, out hit, 1f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")){
                             if(hit.transform.tag == "character"){
                                 TimeManager.instance.AddAction(() => bashAttack(down));
-                                wait(); //Tick d'attack
+                                this.StartCoroutine(TimeManager.instance.PlayTick()); //Tick d'attack
                             }
-                            wait(); //Tick de stun
+                            this.StartCoroutine(TimeManager.instance.PlayTick()); //Tick de stun
                             break; // On sort de la charge
                         } else if (Physics.Raycast(start, dir, out hit, 2f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")) {
                             TimeManager.instance.AddAction(() => moveManager.AddMove(0, -1));
                             if(hit.transform.tag == "character") {
                                 TimeManager.instance.AddAction(() => bashAttack(down));
                             } else if (hit.transform.tag == "Wall"){
-                                wait(); //Tick pour le déplacement vers le mur
+                                this.StartCoroutine(TimeManager.instance.PlayTick()); //Tick pour le déplacement vers le mur
                             }
-                            wait(); //Tick pour le déplacement et l'attack ou le stun
+                            this.StartCoroutine(TimeManager.instance.PlayTick()); //Tick pour le déplacement et l'attack ou le stun
                             break; // On sort de la charge
                         } else {
                             TimeManager.instance.AddAction(() => moveManager.AddMove(0, -1));
                             TimeManager.instance.AddAction(() => moveManager.AddMove(0, -1));
-                            wait(); //Tick pour le double déplacement
+                            this.StartCoroutine(TimeManager.instance.PlayTick()); //Tick pour le double déplacement
                         }
                     }
                     break;
@@ -251,30 +250,30 @@ public class Barbare : Character
                         if (Physics.Raycast(start, dir, out hit, 1f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")){
                             if(hit.transform.tag == "character"){
                                 TimeManager.instance.AddAction(() => bashAttack(left));
-                                wait(); //Tick d'attack
+                                this.StartCoroutine(TimeManager.instance.PlayTick()); //Tick d'attack
                             }
-                            wait(); //Tick de stun
+                            this.StartCoroutine(TimeManager.instance.PlayTick()); //Tick de stun
                             break; // On sort de la charge
                         } else if (Physics.Raycast(start, dir, out hit, 2f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")) {
                             TimeManager.instance.AddAction(() => moveManager.AddMove(0, -1));
                             if(hit.transform.tag == "character") {
                                 TimeManager.instance.AddAction(() => bashAttack(left));
                             } else if (hit.transform.tag == "Wall"){
-                                wait(); //Tick pour le déplacement vers le mur
+                                this.StartCoroutine(TimeManager.instance.PlayTick()); //Tick pour le déplacement vers le mur
                             }
-                            wait(); //Tick pour le déplacement et l'attack ou le stun
+                            this.StartCoroutine(TimeManager.instance.PlayTick()); //Tick pour le déplacement et l'attack ou le stun
                             break; // On sort de la charge
                         } else {
                             TimeManager.instance.AddAction(() => moveManager.AddMove(-1, 0));
                             TimeManager.instance.AddAction(() => moveManager.AddMove(-1, 0));
-                            wait(); //Tick pour le double déplacement
+                            this.StartCoroutine(TimeManager.instance.PlayTick()); //Tick pour le double déplacement
                         }
                     }
                     break;
             }
             cursor.GetComponent<CursorManager>().reset();
             cursor.SetActive(false);
-            wait();
+            this.StartCoroutine(TimeManager.instance.PlayTick());
         }
     }
 
@@ -301,7 +300,6 @@ public class Barbare : Character
             //     coolDownSkill1 = skill2CoolDownTime;
             // }
             // launchSkill2();
-            // base.coolDowns();
         }
     }
 }
