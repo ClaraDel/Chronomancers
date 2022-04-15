@@ -26,6 +26,10 @@ public class Barbare : Character
         maxCoolDownSkill1 = 5;
         skill2CastTime = 0;
         maxCoolDownSkill2 = 7;
+        AbilityTimer.instance.getAbility(1).setCountTimer(coolDownSkill1 - 1);
+        AbilityTimer.instance.launchUIAbility(1);
+        AbilityTimer.instance.getAbility(2).setCountTimer(coolDownSkill2 - 1);
+        AbilityTimer.instance.launchUIAbility(2);
         barbareAnim = transform.GetComponent<Animator>();
     }
 

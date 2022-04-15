@@ -13,6 +13,11 @@ public class Ranger : Character
         coolDownSkill1 = 10;
         skill2CastTime = 0;
         coolDownSkill2 = 7;
+        AbilityTimer.instance.getAbility(1).setCountTimer(coolDownSkill1 - 1);
+        AbilityTimer.instance.launchUIAbility(1);
+        AbilityTimer.instance.getAbility(2).setCountTimer(coolDownSkill2 - 1);
+        AbilityTimer.instance.launchUIAbility(2);
+
         rangerAnim = transform.GetComponent<Animator>();
     }
 

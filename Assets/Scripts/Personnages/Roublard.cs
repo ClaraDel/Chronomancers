@@ -20,6 +20,10 @@ public class Roublard : Character
         coolDownSkill1 = 5;
         skill2CastTime = 1;
         coolDownSkill2 = 15;
+        AbilityTimer.instance.getAbility(1).setCountTimer(coolDownSkill1 - 1);
+        AbilityTimer.instance.launchUIAbility(1);
+        AbilityTimer.instance.getAbility(2).setCountTimer(coolDownSkill2 - 1);
+        AbilityTimer.instance.launchUIAbility(2);
         roublardAnim = transform.GetComponent<Animator>();
     }
 

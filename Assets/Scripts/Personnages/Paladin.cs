@@ -19,6 +19,10 @@ public class Paladin : Character
         coolDownSkill1 = 6;
         skill2CastTime = 2;
         coolDownSkill2 = 10;
+        AbilityTimer.instance.getAbility(1).setCountTimer(coolDownSkill1 - 1);
+        AbilityTimer.instance.launchUIAbility(1);
+        AbilityTimer.instance.getAbility(2).setCountTimer(coolDownSkill2 - 1);
+        AbilityTimer.instance.launchUIAbility(2);
         paladinAnim = transform.GetComponent <Animator> ();
     }
 

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Slot : MonoBehaviour, IDropHandler
 {
-    bool isEmpty = true;
+    public bool isEmpty = true;
     [SerializeReference] SlotsManager slotsManager;
 
 
@@ -18,6 +18,7 @@ public class Slot : MonoBehaviour, IDropHandler
 
     public void removeSelf()
     {
+        isEmpty = true;
         //delete sprite
         gameObject.GetComponent<Image>().sprite = null;
         Color tmpColor = gameObject.GetComponent<Image>().color;

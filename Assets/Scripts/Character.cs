@@ -131,7 +131,6 @@ public class Character : MonoBehaviour
         alive = true;
 
         this.castingTicks = 0;
-
         this.castingSkill1 = false;
         this.coolDownSkill1 = 0;
         this.castingSkill2 = false;

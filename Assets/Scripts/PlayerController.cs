@@ -105,12 +105,26 @@ public class PlayerController : MonoBehaviour
                     if (castSkill1)
                     {
                         character.castSkill1();
+                        int newCoolDownSkill1 = (character.coolDownSkill1 - 2);
+                        if (newCoolDownSkill1 <= 0)
+                        {
+                            newCoolDownSkill1 = 0;
+                        }
+                        AbilityTimer.instance.getAbility(1).setCountTimer(newCoolDownSkill1);
+                        AbilityTimer.instance.launchUIAbility(1);
                         clearAtk();
                     }
 
                     if (castSkill2)
                     {
                         character.castSkill2();
+                        int newCoolDownSkill2 = (character.coolDownSkill2 - 2);
+                        if(newCoolDownSkill2 <= 0)
+                        {
+                            newCoolDownSkill2 = 0;
+                        }
+                        AbilityTimer.instance.getAbility(2).setCountTimer(newCoolDownSkill2);
+                        AbilityTimer.instance.launchUIAbility(2);
                         clearAtk();
                     }
                 }

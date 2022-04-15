@@ -23,17 +23,31 @@ public class Timer : MonoBehaviour
         onEnd();
     }
 
+    public void setCountTimer(int count)
+    {
+       
+        UIText.text = count.ToString();
+        this.duration = int.Parse(UIText.text);
+        this.remainingDuration = duration;
+        UIFill.fillAmount = 1.0f;
+        Debug.Log("set count duration " + gameObject.transform.parent.name + " " + duration);
+        Debug.Log("set count remaining " + gameObject.transform.parent.name + " " + remainingDuration);
+
+    }
+
 
     public void playTick()
     {
-        if(isCounting)
+        Debug.Log("Play Tick duration "+ gameObject.transform.parent.name+ " " + duration);
+        Debug.Log("Play Tick remaining " + gameObject.transform.parent.name + " " + remainingDuration);
+        if (isCounting)
         {
             UIText.text = remainingDuration.ToString();
             Debug.Log(duration);
             Debug.Log(remainingDuration);
             UIFill.fillAmount = Mathf.InverseLerp(0, duration, remainingDuration);
-            remainingDuration--;
-            if (remainingDuration == -1)
+            remainingDuration-=2;
+            if (remainingDuration < -1)
             {
                 onEnd();
             }
@@ -42,14 +56,15 @@ public class Timer : MonoBehaviour
 
     public void startCountDown()
     {
-        Debug.Log("countdown");
         isCounting = true;
         gameObject.SetActive(true);
+        remainingDuration = duration;
     }
 
     void onEnd()
     {
-        isCounting = false;
+        Debug.Log("on end duration " + duration);
+        Debug.Log("on end remaining " + remainingDuration); isCounting = false;
         gameObject.SetActive(false);
 
         UIText.text = duration.ToString();
@@ -60,7 +75,7 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.duration = int.Parse(UIText.text);
+        
     }
 
     // Update is called once per frame
