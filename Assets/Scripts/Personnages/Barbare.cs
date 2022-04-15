@@ -60,11 +60,6 @@ public class Barbare : Character
         base.takeDamage(attacker, damage);
     }
 
-    public override void wait()
-    {
-        base.wait();
-    }
-
     public override void moveH(float sens)
     {
         base.moveH(sens);

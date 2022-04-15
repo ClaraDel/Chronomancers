@@ -316,6 +316,11 @@ public class Character : MonoBehaviour
                 positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
             }
 
+            for (int i = 0; i < skill1CastTime; i++)
+            {
+                wait();
+            }
+
             TimeManager.instance.AddFutureAction(() => launchSkill1(positions), skill1CastTime);
             wait();
         }
@@ -352,6 +357,11 @@ public class Character : MonoBehaviour
             for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
             {
                 positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
+            }
+
+            for (int i = 0; i < skill2CastTime; i++)
+            {
+                wait();
             }
 
             TimeManager.instance.AddFutureAction(() => launchSkill2(positions), skill2CastTime);

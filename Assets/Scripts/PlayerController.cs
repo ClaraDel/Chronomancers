@@ -50,11 +50,6 @@ public class PlayerController : MonoBehaviour
 
         if (isControllable && !TimeManager.instance.isPlaying)
         {
-            if (character.getCastingTicks() > 0)
-            {
-                character.wait();
-            }
-            else
             {
                 canMove = !(attackingProcess || castSkill1 || castSkill2);
 

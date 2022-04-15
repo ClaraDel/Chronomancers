@@ -33,15 +33,13 @@ public class Ranger : Character
 
             CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
             Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
-            print("positionX = " + cursor.getPositionX() + "positionY = " + cursor.getPositionY());
+            
             if (cursor.direction == CursorManager.directions.right) {
                 rangerAnim.Play("HitRangerR");
-                Debug.Log("HitRangerR");
             }
             else
             {
                 rangerAnim.Play("HitRanger");
-                Debug.Log("HitRanger");
             }
 
             for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
@@ -50,7 +48,14 @@ public class Ranger : Character
             }
 
             TimeManager.instance.AddAction(() => launchSkill1(positions));
-            AttackManager.instance.addFutureAttack(this, positions, 75, skill1CastTime);
+
+            for (int i = 0; i < skill1CastTime; i++)
+            {
+                wait();
+            }
+
+            
+            AttackManager.instance.addFutureAttack(this, positions, 75, 1);
             wait();
         }
         cursor.GetComponent<CursorManager>().reset();

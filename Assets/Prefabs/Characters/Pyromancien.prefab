@@ -124,8 +124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 338856445525931782}
-  positionSpawnXTeam0: 2
-  positionSpawnYTeam0: 10
+  positionSpawnXTeam0: 3
+  positionSpawnYTeam0: 9
   positionSpawnXTeam1: 1
   positionSpawnYTeam1: 10
 --- !u!61 &1331976971692945730
@@ -216,7 +216,7 @@ MonoBehaviour:
   shieldDuration: 0
   moveManager: {fileID: 338856445525931781}
   fireWallPrefab: {fileID: 5733318154153289747, guid: 06bdf5fe68fa6ba438ed6f6724615f34, type: 3}
-  Burst: {fileID: 3231304020904056291, guid: 901322e22878650469184c950408c524, type: 3}
+  Burst: {fileID: 585346488510006849, guid: 06bdf5fe68fa6ba438ed6f6724615f34, type: 3}
 --- !u!95 &8271067784843259241
 Animator:
   serializedVersion: 3

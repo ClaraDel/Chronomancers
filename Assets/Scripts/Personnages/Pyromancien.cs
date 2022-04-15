@@ -85,6 +85,11 @@ public class Pyromancien : Character
             castingSkill2 = true;
             coolDownSkill2 = maxCoolDownSkill2 + skill2CastTime;
 
+            for (int i = 0; i < skill2CastTime; i++)
+            {
+                wait();
+            }
+
             CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
             Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
             for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
@@ -103,7 +108,7 @@ public class Pyromancien : Character
             fireWalls.Add(newFireWall);
             int index = fireWalls.Count;
 
-            TimeManager.instance.AddFutureAction(() => launchSkill2(index-1), skill2CastTime - 1);
+            TimeManager.instance.AddAction(() => launchSkill2(index-1));
             wait();
         }
         cursor.GetComponent<CursorManager>().reset();

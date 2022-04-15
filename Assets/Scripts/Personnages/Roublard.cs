@@ -48,11 +48,6 @@ public class Roublard : Character
         base.coolDowns();
     }
 
-    public override void wait()
-    {
-        base.wait();
-    }
-
     public override void takeDamage(Character attacker, int damage)
     {
         if (!shielded && alive)
@@ -135,6 +130,7 @@ public class Roublard : Character
         }
     }
 
+    // Hidden
     public override void launchSkill2(Vector3[] positions)
     {
         if (alive)
