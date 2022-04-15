@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -11,6 +12,32 @@ public class MainMenu : MonoBehaviour
     public AudioClip soundHover;
     public AudioClip soundConfirm;
     public AudioClip soundBack;
+
+    public Slider mainSlider;
+    public Slider sfxSlider;
+    public Slider musicSlider;
+
+    private void Start()
+    {
+        if(mainSlider == null) return;
+
+        float value;
+        bool result1 = audiomixer.GetFloat("MainVolume", out value);
+        if (result1)
+        { 
+            mainSlider.SetValueWithoutNotify(value*2);
+        }
+        bool result2 = audiomixer.GetFloat("SFXVolume", out value);
+        if (result2)
+        {
+            sfxSlider.SetValueWithoutNotify(value*2);
+        }
+        bool result3 = audiomixer.GetFloat("MusicVolume", out value);
+        if (result3)
+        {
+            musicSlider.SetValueWithoutNotify(value*2);
+        }
+    }
 
     public void playSoundHover()
     {

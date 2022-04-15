@@ -255,6 +255,9 @@ MonoBehaviour:
   soundHover: {fileID: 8300000, guid: 1a8ac7b621871324b968ed880e4f356a, type: 3}
   soundConfirm: {fileID: 8300000, guid: 5cd6f964494d3ee4a85ab2d7d67ddc64, type: 3}
   soundBack: {fileID: 8300000, guid: 4087065bd96ba0546a21b7299210c170, type: 3}
+  mainSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  musicSlider: {fileID: 0}
 --- !u!1 &152377949
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +820,9 @@ MonoBehaviour:
   soundHover: {fileID: 8300000, guid: 1a8ac7b621871324b968ed880e4f356a, type: 3}
   soundConfirm: {fileID: 8300000, guid: 5cd6f964494d3ee4a85ab2d7d67ddc64, type: 3}
   soundBack: {fileID: 8300000, guid: 4087065bd96ba0546a21b7299210c170, type: 3}
+  mainSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  musicSlider: {fileID: 0}
 --- !u!1 &417039399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1607,6 +1613,9 @@ MonoBehaviour:
   soundHover: {fileID: 8300000, guid: 1a8ac7b621871324b968ed880e4f356a, type: 3}
   soundConfirm: {fileID: 8300000, guid: 5cd6f964494d3ee4a85ab2d7d67ddc64, type: 3}
   soundBack: {fileID: 8300000, guid: 4087065bd96ba0546a21b7299210c170, type: 3}
+  mainSlider: {fileID: 1600362399}
+  sfxSlider: {fileID: 615044586}
+  musicSlider: {fileID: 867952033}
 --- !u!1 &775754931
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,4 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Test Chara.unity
     guid: aef6e51d42bb4f74187d29a007553a23
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: dc86b54cd6d18e64a958f84fbcec23c5
+  - enabled: 1
+    path: Assets/Scenes/MainScene 3.unity
+    guid: 98e2f3f8950675948bfbaa66df8b0378
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 7456011f584266b4bb1fc36c96d188b5
   m_configObjects: {}
