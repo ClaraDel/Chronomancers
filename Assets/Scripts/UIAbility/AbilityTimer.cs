@@ -18,7 +18,6 @@ public class AbilityTimer : MonoBehaviour
 
     public Timer getAbility(int i)
     {
-        Debug.Log("getAbility " + abilities[i - 1].gameObject.name);
         return abilities[i - 1].transform.Find("CountDown").GetComponent<Timer>();
     }
 

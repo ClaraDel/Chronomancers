@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
                     if (castSkill1)
                     {
                         character.castSkill1();
-                        int newCoolDownSkill1 = (character.coolDownSkill1 - 2);
+                        int newCoolDownSkill1 = (character.coolDownSkill1);
                         if (newCoolDownSkill1 <= 0)
                         {
                             newCoolDownSkill1 = 0;
@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
                     if (castSkill2)
                     {
                         character.castSkill2();
-                        int newCoolDownSkill2 = (character.coolDownSkill2 - 2);
+                        int newCoolDownSkill2 = (character.coolDownSkill2);
                         if(newCoolDownSkill2 <= 0)
                         {
                             newCoolDownSkill2 = 0;
