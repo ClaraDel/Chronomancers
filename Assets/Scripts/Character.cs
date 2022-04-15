@@ -130,6 +130,7 @@ public class Character : MonoBehaviour
         healthBar.transform.GetComponent<Slider>().value = health;
         healthBar.SetActive(true);
         alive = true;
+        gameObject.tag = "character";
 
         this.castingTicks = 0;
         this.castingSkill1 = false;
@@ -197,6 +198,7 @@ public class Character : MonoBehaviour
 
     public virtual void die()
     {
+        gameObject.tag = "dead";
         transform.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0.5f);
         Instantiate(characterDie, transform.position, transform.rotation);
         health = 0;

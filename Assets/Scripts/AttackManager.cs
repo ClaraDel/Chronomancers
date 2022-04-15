@@ -54,7 +54,7 @@ public class AttackManager : MonoBehaviour
         hits = Physics2D.RaycastAll(cible + attacker.transform.position, Vector3.forward);
         for (int i = 0; i < hits.Length; i++)
         {
-            if (hits[i].collider != null)
+            if (hits[i].collider != null && hits[i].collider.gameObject.GetComponent<Character>() != null)
             {
                 Character target = hits[i].collider.gameObject.GetComponent<Character>();
                 target.takeDamage(attacker.GetComponent<Character>(), damage);
