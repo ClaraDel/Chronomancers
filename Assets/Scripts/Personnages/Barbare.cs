@@ -157,124 +157,52 @@ public class Barbare : Character
             switch (cursorManager.direction)
             {
                 case CursorManager.directions.up:
-                    for (int i = 0; i < 3; i++)
-                    {
-                        Vector3 start = new Vector3(transform.position.x + 0.5f, transform.position.y + 0.5f, 0f);
-                        Vector3 dir = new Vector3(0f, 1, 0f);
-                        RaycastHit hit;
-                        if (Physics.Raycast(start, dir, out hit, 1f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")){
-                            if(hit.transform.tag == "character"){
-                                TimeManager.instance.AddAction(() => bashAttack(up));
-                            }
-                            wait(); //Tick de stun
-                            break; // On sort de la charge
-                        } else if (Physics.Raycast(start, dir, out hit, 2f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")) {
-                            TimeManager.instance.AddAction(() => moveManager.AddMove(0, 1));
-                            if(hit.transform.tag == "character") {
-                                TimeManager.instance.AddAction(() => bashAttack(up));
-                            } else if (hit.transform.tag == "Wall"){
-                                wait(); //Tick pour le déplacement vers le mur
-                            }
-                            wait(); //Tick pour le déplacement et l'attack ou le stun
-                            break; // On sort de la charge
-                        } else {
-                            TimeManager.instance.AddAction(() => moveManager.AddMove(0, 1));
-                            TimeManager.instance.AddAction(() => moveManager.AddMove(0, 1));
-                            wait(); //Tick pour le double déplacement
-                        }
-                    }
+                    StartCoroutine(charge(0, 1));
                     break;
                 case CursorManager.directions.right:
-                    for (int i = 0; i < 3; i++)
-                    {
-                        Vector3 start = new Vector3(transform.position.x + 0.5f, transform.position.y + 0.5f, 0f);
-                        Vector3 dir = new Vector3(1f, 0f, 0f);
-                        RaycastHit hit;
-                        if (Physics.Raycast(start, dir, out hit, 1f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")){
-                            if(hit.transform.tag == "character"){
-                                TimeManager.instance.AddAction(() => bashAttack(right));
-                                wait(); //Tick d'attack
-                            }
-                            wait(); //Tick de stun
-                            break; // On sort de la charge
-                        } else if (Physics.Raycast(start, dir, out hit, 2f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")) {
-                            TimeManager.instance.AddAction(() => moveManager.AddMove(1, 0));
-                            if(hit.transform.tag == "character") {
-                                TimeManager.instance.AddAction(() => bashAttack(right));
-                            } else if (hit.transform.tag == "Wall"){
-                                wait(); //Tick pour le déplacement vers le mur
-                            }
-                            wait(); //Tick pour le déplacement et l'attack ou le stun
-                            break; // On sort de la charge
-                        } else {
-                            TimeManager.instance.AddAction(() => moveManager.AddMove(1, 0));
-                            TimeManager.instance.AddAction(() => moveManager.AddMove(1, 0));
-                            wait(); //Tick pour le double déplacement
-                        }
-                    }
+                    StartCoroutine(charge(1, 0));
                     break;
                 case CursorManager.directions.down:
-                    for (int i = 0; i < 3; i++)
-                    {
-                        Vector3 start = new Vector3(transform.position.x + 0.5f, transform.position.y + 0.5f, 0f);
-                        Vector3 dir = new Vector3(0f, -1f, 0f);
-                        RaycastHit hit;
-                        if (Physics.Raycast(start, dir, out hit, 1f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")){
-                            if(hit.transform.tag == "character"){
-                                TimeManager.instance.AddAction(() => bashAttack(down));
-                                wait(); //Tick d'attack
-                            }
-                            wait(); //Tick de stun
-                            break; // On sort de la charge
-                        } else if (Physics.Raycast(start, dir, out hit, 2f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")) {
-                            TimeManager.instance.AddAction(() => moveManager.AddMove(0, -1));
-                            if(hit.transform.tag == "character") {
-                                TimeManager.instance.AddAction(() => bashAttack(down));
-                            } else if (hit.transform.tag == "Wall"){
-                                wait(); //Tick pour le déplacement vers le mur
-                            }
-                            wait(); //Tick pour le déplacement et l'attack ou le stun
-                            break; // On sort de la charge
-                        } else {
-                            TimeManager.instance.AddAction(() => moveManager.AddMove(0, -1));
-                            TimeManager.instance.AddAction(() => moveManager.AddMove(0, -1));
-                            wait(); //Tick pour le double déplacement
-                        }
-                    }
+                    StartCoroutine(charge(0, -1));
                     break;
                 case CursorManager.directions.left:
-                    for (int i = 0; i < 3; i++)
-                    {
-                        Vector3 start = new Vector3(transform.position.x + 0.5f, transform.position.y + 0.5f, 0f);
-                        Vector3 dir = new Vector3(-1f, 0f, 0f);
-                        RaycastHit hit;
-                        if (Physics.Raycast(start, dir, out hit, 1f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")){
-                            if(hit.transform.tag == "character"){
-                                TimeManager.instance.AddAction(() => bashAttack(left));
-                                wait(); //Tick d'attack
-                            }
-                            wait(); //Tick de stun
-                            break; // On sort de la charge
-                        } else if (Physics.Raycast(start, dir, out hit, 2f) && (hit.transform.tag == "character" || hit.transform.tag == "Wall")) {
-                            TimeManager.instance.AddAction(() => moveManager.AddMove(0, -1));
-                            if(hit.transform.tag == "character") {
-                                TimeManager.instance.AddAction(() => bashAttack(left));
-                            } else if (hit.transform.tag == "Wall"){
-                                wait(); //Tick pour le déplacement vers le mur
-                            }
-                            wait(); //Tick pour le déplacement et l'attack ou le stun
-                            break; // On sort de la charge
-                        } else {
-                            TimeManager.instance.AddAction(() => moveManager.AddMove(-1, 0));
-                            TimeManager.instance.AddAction(() => moveManager.AddMove(-1, 0));
-                            wait(); //Tick pour le double déplacement
-                        }
-                    }
+                    StartCoroutine(charge(-1, 0));
                     break;
             }
             cursor.GetComponent<CursorManager>().reset();
             cursor.SetActive(false);
-            wait();
+        }
+    }
+
+    public IEnumerator charge(int x, int y){
+        for (int i = 0; i < 3; i++)
+        {
+            Vector3 start = new Vector3(transform.position.x + 0.5f + x/1.5f, transform.position.y + 0.5f + y/1.5f, 0f);
+            Vector3 dir = new Vector3(x, y, 0f);
+            RaycastHit hit;
+            RaycastHit2D hit2D1f = Physics2D.Raycast(start, dir, 0f);
+            RaycastHit2D hit2D2f = Physics2D.Raycast(start, dir, 1f);
+            if ((Physics.Raycast(start, dir, out hit, 0.1f) && hit.transform.tag == "Wall") || (hit2D1f.transform != null && hit2D1f.transform.tag == "character")){
+                if(hit2D1f.transform != null && hit2D1f.transform.tag == "character"){
+                    TimeManager.instance.AddAction(() => bashAttack(new Vector3(x,y,0)));
+                }
+                yield return StartCoroutine(TimeManager.instance.PlayTick()); //Tick de stun
+                break; // On sort de la charge
+            } else if ((Physics.Raycast(start, dir, out hit, 1.1f) && hit.transform.tag == "Wall") || (hit2D2f.transform != null && hit2D2f.transform.tag == "character")) {
+                if(hit2D2f.transform != null && hit2D2f.transform.tag == "character") {
+                    TimeManager.instance.AddAction(() => bashAttack(new Vector3(x,y,0)));
+                    TimeManager.instance.AddAction(() => moveManager.AddMove(x, y));
+                } else if (hit.transform.tag == "Wall"){
+                    TimeManager.instance.AddAction(() => moveManager.AddMove(x, y));
+                    yield return StartCoroutine(TimeManager.instance.PlayTick()); //Tick pour le déplacement vers le mur
+                }
+                yield return StartCoroutine(TimeManager.instance.PlayTick()); //Tick pour le déplacement et l'attack ou le stun
+                break; // On sort de la charge
+            } else {
+                TimeManager.instance.AddAction(() => moveManager.AddMove(x, y));
+                TimeManager.instance.AddAction(() => moveManager.AddMove(x, y));
+                yield return StartCoroutine(TimeManager.instance.PlayTick()); //Tick pour le double déplacement
+            }
         }
     }
 

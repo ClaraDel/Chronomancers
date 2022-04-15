@@ -10,7 +10,7 @@ public class TimeManager : MonoBehaviour
 
     public int currentTick;
     private int currentTurn;
-    public static int maxTick = 10;
+    public static int maxTick = 30;
     public static int maxTurn = 4;
 
     [SerializeField] SlotsManager slotsManager;
