@@ -115,6 +115,7 @@ public class Character : MonoBehaviour
         this.shielded = false;
         this.shieldDuration = 0;
     }
+
     public type getType() { return characterType; }
     public bool isAlive() { return alive; }
     public int getCastingTicks() { return castingTicks; }
@@ -138,6 +139,9 @@ public class Character : MonoBehaviour
 
         this.shielded = false;
         this.shieldDuration = 0;
+
+        this.cursor.GetComponent<CursorManager>().reset();
+        this.cursor.SetActive(false);
     }
 
     // Basic movement methods
@@ -156,7 +160,7 @@ public class Character : MonoBehaviour
     public virtual void wait()
     {
         coolDowns();
-        StartCoroutine(TimeManager.instance.PlayTick());
+        this.StartCoroutine(TimeManager.instance.PlayTick());
         if (castingTicks > 0)
         {
             castingTicks--;
@@ -255,9 +259,9 @@ public class Character : MonoBehaviour
 
         coolDowns();
 
-        this.zoneBasicAttack.getZoneCiblable().SetActive(false);
-        cursor.gameObject.SetActive(false);
-        StartCoroutine(TimeManager.instance.PlayTick());
+        this.cursor.GetComponent<CursorManager>().reset();
+        this.cursor.SetActive(false);
+        wait();
     }
     
     public virtual void castAttack(Vector3[] positions, CursorManager.directions direction)
@@ -267,11 +271,11 @@ public class Character : MonoBehaviour
 
     public void cancelAtk()
     {
-        this.zoneBasicAttack.getZoneCiblable().SetActive(false);
-        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        cursor.GetComponent<CursorManager>().reset();
+        cursor.SetActive(false);
     }
 
-    public void coolDowns()
+    public virtual void coolDowns()
     {
         if (coolDownSkill1 > 0)
         {
@@ -311,19 +315,24 @@ public class Character : MonoBehaviour
                 positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
             }
 
-            TimeManager.instance.AddFutureAction(() => launchSkill1(positions), skill1CastTime - 1);
-            StartCoroutine(TimeManager.instance.PlayTick());
+            for (int i = 0; i < skill1CastTime; i++)
+            {
+                wait();
+            }
+
+            TimeManager.instance.AddFutureAction(() => launchSkill1(positions), skill1CastTime);
+            wait();
         }
-        this.zoneSkill1.getZoneCiblable().SetActive(false);
-        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        cursor.GetComponent<CursorManager>().reset();
+        cursor.SetActive(false);
     }
 
     public virtual void launchSkill1(Vector3[] positions) { }
 
     public void cancelSkill1()
     {
-        this.zoneSkill1.getZoneCiblable().SetActive(false);
-        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        cursor.GetComponent<CursorManager>().reset();
+        cursor.SetActive(false);
     }
 
     public virtual void setUpSkill2()
@@ -349,19 +358,24 @@ public class Character : MonoBehaviour
                 positions[i] = cursor.activeZone.getTilesEffets()[i].transform.position;
             }
 
-            TimeManager.instance.AddFutureAction(() => launchSkill2(positions), skill1CastTime - 1);
-            StartCoroutine(TimeManager.instance.PlayTick());
+            for (int i = 0; i < skill2CastTime; i++)
+            {
+                wait();
+            }
+
+            TimeManager.instance.AddFutureAction(() => launchSkill2(positions), skill2CastTime);
+            wait();
         }
-        this.zoneSkill1.getZoneCiblable().SetActive(false);
-        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        cursor.GetComponent<CursorManager>().reset();
+        cursor.SetActive(false);
     }
 
     public virtual void launchSkill2(Vector3[] positions) { }
 
     public void cancelSkill2()
     {
-        this.zoneSkill2.getZoneCiblable().SetActive(false);
-        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
+        cursor.GetComponent<CursorManager>().reset();
+        cursor.SetActive(false);
     }
 
     // Update is called once per frame

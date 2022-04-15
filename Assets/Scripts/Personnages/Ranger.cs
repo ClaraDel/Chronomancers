@@ -10,14 +10,9 @@ public class Ranger : Character
         base.init(100, 50, isBlue);
         characterType = type.ranger;
         skill1CastTime = 2;
-        coolDownSkill1 = 10;
+        maxCoolDownSkill1 = 10;
         skill2CastTime = 0;
-        coolDownSkill2 = 7;
-        AbilityTimer.instance.getAbility(1).setCountTimer(coolDownSkill1 - 1);
-        AbilityTimer.instance.launchUIAbility(1);
-        AbilityTimer.instance.getAbility(2).setCountTimer(coolDownSkill2 - 1);
-        AbilityTimer.instance.launchUIAbility(2);
-
+        maxCoolDownSkill2 = 7;
         rangerAnim = transform.GetComponent<Animator>();
     }
 
@@ -29,8 +24,6 @@ public class Ranger : Character
 
     public override void castSkill1()
     {
-        print("castSkill1 ranger" + coolDownSkill1);
-        Debug.Log("HitRangerR");
         if (coolDownSkill1 == 0)
         {
             coolDowns();
@@ -40,15 +33,13 @@ public class Ranger : Character
 
             CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
             Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
-            print("positionX = " + cursor.getPositionX() + "positionY = " + cursor.getPositionY());
+            
             if (cursor.direction == CursorManager.directions.right) {
                 rangerAnim.Play("HitRangerR");
-                Debug.Log("HitRangerR");
             }
             else
             {
                 rangerAnim.Play("HitRanger");
-                Debug.Log("HitRanger");
             }
 
             for (int i = 0; i < cursor.activeZone.getTilesEffets().Count; i++)
@@ -57,9 +48,18 @@ public class Ranger : Character
             }
 
             TimeManager.instance.AddAction(() => launchSkill1(positions));
-            AttackManager.instance.addFutureAttack(this, positions, 75, skill1CastTime + 1);
-            StartCoroutine(TimeManager.instance.PlayTick());
+
+            for (int i = 0; i < skill1CastTime; i++)
+            {
+                wait();
+            }
+
+            
+            AttackManager.instance.addFutureAttack(this, positions, 75, 1);
+            wait();
         }
+        cursor.GetComponent<CursorManager>().reset();
+        cursor.SetActive(false);
     }
 
     // Tir pr�cis
@@ -75,7 +75,22 @@ public class Ranger : Character
     {
         // Ajouter mouvement vers case ciblee a 3 de port�e
         // TODO Check if target out of bounds
-        gameObject.GetComponent<PlayerController>().PlayerTarget.position = positions[0];
+        Vector3 tmp = positions[0];
+        tmp.x = Mathf.Min(tmp.x, 23.5f);
+        tmp.x = Mathf.Max(tmp.x, 0.5f);
+        tmp.y = Mathf.Min(tmp.y, 11.5f);
+        tmp.y = Mathf.Max(tmp.y, 0.5f);
+        gameObject.GetComponent<PlayerController>().PlayerTarget.position = tmp - new Vector3(0.5f, 0.5f, 0f);
+        StartCoroutine(rangerDash());
+    }
+
+    public IEnumerator rangerDash()
+    {
+        while (Vector2.Distance(transform.position, moveManager.entity.PlayerTarget.position) != 0f)
+        {
+            moveManager.entity.transform.position = Vector2.MoveTowards(moveManager.entity.transform.position, moveManager.entity.PlayerTarget.position, moveManager.entity.moveSpeed * Time.deltaTime * 3);
+            yield return null;
+        }
     }
 
     public override void moveH(float sens)

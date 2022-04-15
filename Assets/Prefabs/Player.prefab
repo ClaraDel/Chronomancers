@@ -183,10 +183,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fc3d8b4119dcaa4e8a606d39e9fe4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
   moveSpeed: 5
   PlayerTarget: {fileID: 2512450268868441787}
   isControllable: 0
+  pause: {fileID: 0}
+  character: {fileID: 0}
 --- !u!114 &3240898002689301947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,25 +217,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f517c44d4fc2c4e81e1124dc095c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selfInfo: {fileID: 0}
   health: 0
   maxHealth: 0
   healthBar: {fileID: 0}
+  fill: {fileID: 0}
   normalAttackDamage: 0
-  ghostSprite: {fileID: 21300000, guid: 2a833689455d8d2449cd821bf32982be, type: 3}
+  zoneBasicAttack: {fileID: 0}
+  zoneSkill1: {fileID: 0}
+  zoneSkill2: {fileID: 0}
+  cursor: {fileID: 0}
+  characterDie: {fileID: 0}
   characterSprite: {fileID: 0}
   alive: 0
   isBlue: 0
-  position: {x: 0, y: 0, z: 0}
   characterType: 0
   moveAction: 0
   castingTicks: 0
   castingSkill1: 0
   skill1CastTime: 0
-  skill1CoolDownTime: 0
   coolDownSkill1: 0
+  maxCoolDownSkill1: 0
   castingSkill2: 0
   skill2CastTime: 0
-  skill2CoolDownTime: 0
+  coolDownSkill2: 0
+  maxCoolDownSkill2: 0
+  shielded: 0
+  shieldDuration: 0
   moveManager: {fileID: 0}
 --- !u!61 &4194547060994677756
 BoxCollider2D:
@@ -415,10 +424,5 @@ PrefabInstance:
 --- !u!224 &2311324375897589622 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3697863087585769701, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
-  m_PrefabInstance: {fileID: 1387684438238298003}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2311324376455850940 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3697863087036945455, guid: c908f55abdc518a4a9da0c87cf278aca, type: 3}
   m_PrefabInstance: {fileID: 1387684438238298003}
   m_PrefabAsset: {fileID: 0}
