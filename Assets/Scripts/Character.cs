@@ -61,6 +61,7 @@ public class Character : MonoBehaviour
 
     public void init(int maxHealth, int damage, bool isBlue)
     {
+        transform.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1f);
         this.maxHealth = maxHealth;
         this.health = maxHealth;
 
@@ -129,6 +130,7 @@ public class Character : MonoBehaviour
 
     public virtual void reset()
     {
+        transform.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1f);
         gameObject.GetComponent<SpriteRenderer>().sprite = characterSprite;
         health = maxHealth;
         healthBar.transform.GetComponent<Slider>().value = health;
