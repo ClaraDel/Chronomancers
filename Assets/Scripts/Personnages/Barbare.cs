@@ -176,6 +176,7 @@ public class Barbare : Character
             }
             cursor.GetComponent<CursorManager>().reset();
             cursor.SetActive(false);
+            Attack.PlayOneShot(Ability2);
         }
     }
 
