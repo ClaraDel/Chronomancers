@@ -50,11 +50,6 @@ public class PlayerController : MonoBehaviour
 
         if (isControllable && !TimeManager.instance.isPlaying)
         {
-            if (character.getCastingTicks() > 0)
-            {
-                character.wait();
-            }
-            else
             {
                 canMove = !(attackingProcess || castSkill1 || castSkill2);
 
@@ -93,6 +88,11 @@ public class PlayerController : MonoBehaviour
                         character.setUpSkill2();
                         castSkill2 = true;
                     }
+                }
+
+                if (Input.GetKeyUp(KeyCode.R) && castSkill2)
+                {
+                    character.cursor.GetComponent<CursorManager>().rotateZoneEffect();
                 }
 
                 if (Input.GetKeyUp(KeyCode.Return)) {

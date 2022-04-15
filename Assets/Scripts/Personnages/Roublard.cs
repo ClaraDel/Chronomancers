@@ -17,9 +17,9 @@ public class Roublard : Character
         characterType = type.roublard;
         hiddenDuration = 0;
         skill1CastTime = 1;
-        coolDownSkill1 = 5;
+        maxCoolDownSkill1 = 5;
         skill2CastTime = 1;
-        coolDownSkill2 = 15;
+        maxCoolDownSkill2 = 15;
         roublardAnim = transform.GetComponent<Animator>();
     }
 
@@ -31,7 +31,7 @@ public class Roublard : Character
         base.reset();
     }
 
-    public void testHidden() 
+    public override void coolDowns() 
     {
         if (hidden)
         {
@@ -45,12 +45,7 @@ public class Roublard : Character
                 hiddenDuration--;
             }
         }
-    }
-
-    public override void wait()
-    {
-        testHidden();
-        base.wait();
+        base.coolDowns();
     }
 
     public override void takeDamage(Character attacker, int damage)
@@ -70,7 +65,6 @@ public class Roublard : Character
 
     public override void moveH(float sens)
     {
-        testHidden();
         if (hidden && !moveAction)
         {
             moveManager.AddDash(Mathf.Round(Input.GetAxisRaw("Horizontal")), 0);
@@ -93,7 +87,6 @@ public class Roublard : Character
 
     public override void moveV(float sens)
     {
-        testHidden();
         if (hidden && !moveAction)
         {
             moveManager.AddDash(0, Mathf.Round(Input.GetAxisRaw("Vertical")));
@@ -137,6 +130,7 @@ public class Roublard : Character
         }
     }
 
+    // Hidden
     public override void launchSkill2(Vector3[] positions)
     {
         if (alive)

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8271067784843259241}
   m_Layer: 0
   m_Name: Pyromancien
-  m_TagString: Untagged
+  m_TagString: character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,8 +124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 338856445525931782}
-  positionSpawnXTeam0: 2
-  positionSpawnYTeam0: 10
+  positionSpawnXTeam0: 3
+  positionSpawnYTeam0: 9
   positionSpawnXTeam1: 1
   positionSpawnYTeam1: 10
 --- !u!61 &1331976971692945730
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05a2e7612a371e841934d890c45f5e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selfInfo: {fileID: 0}
+  selfInfo: {fileID: 11400000, guid: ca1ac5bbf01c44c4184604f94ba3288f, type: 2}
   health: 75
   maxHealth: 75
   healthBar: {fileID: 601616400793631400}
@@ -216,7 +216,7 @@ MonoBehaviour:
   shieldDuration: 0
   moveManager: {fileID: 338856445525931781}
   fireWallPrefab: {fileID: 5733318154153289747, guid: 06bdf5fe68fa6ba438ed6f6724615f34, type: 3}
-  Burst: {fileID: 3231304020904056291, guid: 901322e22878650469184c950408c524, type: 3}
+  Burst: {fileID: 585346488510006849, guid: 06bdf5fe68fa6ba438ed6f6724615f34, type: 3}
 --- !u!95 &8271067784843259241
 Animator:
   serializedVersion: 3

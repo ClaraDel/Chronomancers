@@ -42,19 +42,17 @@ public class Pyromancien : Character
 
         AttackManager.instance.addFutureAttack(this, positions, normalAttackDamage, 1);
         TimeManager.instance.AddAction(() => castAttack(positions, cursor.direction));
-        
-        this.zoneBasicAttack.getZoneCiblable().SetActive(false);
-        cursor.GetComponent<CursorManager>().gameObject.SetActive(false);
-        TimeManager.instance.PlayTick();
+
+        this.cursor.GetComponent<CursorManager>().reset();
+        this.cursor.SetActive(false);
+        wait();
     }
 
     public override void castAttack(Vector3[] positions, CursorManager.directions direction)
     {
         pyroAnim.Play("Hit1Pyromancien");
         for (int i = 0; i < positions.Length; i++)
-            {
-            //print("positions = (" + positions[i].x + ", " + positions[i].y + ", " + positions[i].z + ")");
-            //print("direction = " + direction);
+        {
             Instantiate(Burst, positions[i], transform.rotation);
         }
     }
@@ -69,6 +67,14 @@ public class Pyromancien : Character
         }
     }
 
+    public override void setUpSkill2()
+    {
+        this.zoneSkill2.getZoneCiblable().SetActive(true);
+        cursor.SetActive(true);
+        cursor.GetComponent<CursorManager>().setUpFirewall(zoneSkill2);
+    }
+
+    // Mur de feu
     public override void castSkill2()
     {
         pyroAnim.Play("castSkill2Pyromancien");
@@ -78,6 +84,11 @@ public class Pyromancien : Character
             castingTicks = skill2CastTime - 1;
             castingSkill2 = true;
             coolDownSkill2 = maxCoolDownSkill2 + skill2CastTime;
+
+            for (int i = 0; i < skill2CastTime; i++)
+            {
+                wait();
+            }
 
             CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
             Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
@@ -97,12 +108,13 @@ public class Pyromancien : Character
             fireWalls.Add(newFireWall);
             int index = fireWalls.Count;
 
-            TimeManager.instance.AddFutureAction(() => launchSkill2(index-1), skill1CastTime - 1);
-            StartCoroutine(TimeManager.instance.PlayTick());
+            TimeManager.instance.AddAction(() => launchSkill2(index-1));
+            wait();
         }
+        cursor.GetComponent<CursorManager>().reset();
+        cursor.SetActive(false);
     }
 
-    // Mur de feu
     public void launchSkill2(int index)
     {
         if (alive)

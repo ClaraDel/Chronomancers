@@ -19,6 +19,7 @@ public class CursorManager : MonoBehaviour
     public Zone activeZone;
     private List<Vector3Int> listPositionsActif;
     private bool rotationActive;
+    private bool rotateZone;
 
     public void setUp(Zone zone)
     {
@@ -43,6 +44,7 @@ public class CursorManager : MonoBehaviour
     public void setUpRotation(Zone zone)
     {
         rotationActive = true;
+        direction = directions.up;
         zone.getZoneCiblable().SetActive(true);
         listPositionsActif = new List<Vector3Int>();
         foreach (var tile in zone.getTilesCiblable())
@@ -58,13 +60,42 @@ public class CursorManager : MonoBehaviour
         positionX = (int)Mathf.Floor(transform.position.x);
         positionY = (int)Mathf.Floor(transform.position.y);
         activeZone.getZoneEffet().SetActive(true);
+        activeZone.getZoneEffet().transform.rotation = Quaternion.AngleAxis(0, Vector3Int.forward);
+    }
+
+    public void setUpFirewall(Zone zone)
+    {
+        rotateZone = true;
+        direction = directions.up;
+        zone.getZoneCiblable().SetActive(true);
+        listPositionsActif = new List<Vector3Int>();
+        foreach (var tile in zone.getTilesCiblable())
+        {
+            Vector3Int tmp = new Vector3Int(0, 0, 0);
+            tmp.x = (int)Mathf.RoundToInt(tile.transform.position.x);
+            tmp.y = (int)Mathf.RoundToInt(tile.transform.position.y);
+            tmp.z = (int)Mathf.RoundToInt(tile.transform.position.z);
+            listPositionsActif.Add(tmp);
+        }
+        this.activeZone = zone;
+        transform.position = listPositionsActif[0];
+        positionX = (int)Mathf.Floor(transform.position.x);
+        positionY = (int)Mathf.Floor(transform.position.y);
+        activeZone.getZoneEffet().SetActive(true);
+        activeZone.getZoneEffet().transform.rotation = Quaternion.AngleAxis(0, Vector3Int.forward);
     }
 
     public void reset()
     {
+        if (activeZone != null)
+        {
+        this.activeZone.getZoneEffet().SetActive(false);
+        this.activeZone.getZoneCiblable().SetActive(false);
+        }
         listPositionsActif = new List<Vector3Int>();
         this.activeZone = null;
-    }
+        direction = directions.up;
+}
 
 
     private void calculOrientationCursor()
@@ -97,6 +128,14 @@ public class CursorManager : MonoBehaviour
             case directions.left:
                 activeZone.getZoneEffet().transform.rotation = Quaternion.AngleAxis(90, Vector3Int.forward);
                 break;
+        }
+    }
+
+    public void rotateZoneEffect()
+    {
+        if (rotateZone && activeZone != null)
+        {
+            activeZone.getZoneEffet().transform.Rotate(new Vector3(0,0,90));
         }
     }
 

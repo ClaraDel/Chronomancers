@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8417215976417848418}
   m_Layer: 0
   m_Name: Ranger
-  m_TagString: Untagged
+  m_TagString: character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,8 +124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 911230239939805141}
-  positionSpawnXTeam0: 22
-  positionSpawnYTeam0: 1
+  positionSpawnXTeam0: 20
+  positionSpawnYTeam0: 2
   positionSpawnXTeam1: 1
   positionSpawnYTeam1: 10
 --- !u!61 &1903521571702192529
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 994cf615dc30a4b439a25ba5d68c7fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selfInfo: {fileID: 0}
+  selfInfo: {fileID: 11400000, guid: f9a02f6cb125e9845bac68fa53e0b7ff, type: 2}
   health: 125
   maxHealth: 125
   healthBar: {fileID: 22471658879218299}
