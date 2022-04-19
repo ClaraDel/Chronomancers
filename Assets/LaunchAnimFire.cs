@@ -8,7 +8,18 @@ public class LaunchAnimFire : MonoBehaviour
     void Start()
     {
         Animator animator = transform.GetComponent<Animator>();
-        animator.Play("FireExplodePyromancien");
+        if(transform.name.Contains("Bomb"))
+        {
+            animator.Play("BombPyromancien");
+            Debug.Log("in BombPyromancien");
+        } else if (transform.name.Contains("Burst"))
+        {
+            animator.Play("FireExplodePyromancien");
+            Debug.Log("in FireExplodePyromancien");
+        } else
+        {
+            Debug.Log("no name corresponding for bomb or burst");
+        }
         StartCoroutine(WaitAndDie());
     }
 

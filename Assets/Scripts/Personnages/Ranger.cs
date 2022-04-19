@@ -87,11 +87,14 @@ public class Ranger : Character
         tmp.y = Mathf.Min(tmp.y, 11.5f);
         tmp.y = Mathf.Max(tmp.y, 0.5f);
         gameObject.GetComponent<PlayerController>().PlayerTarget.position = tmp - new Vector3(0.5f, 0.5f, 0f);
+        
         StartCoroutine(rangerDash());
+        
     }
 
     public IEnumerator rangerDash()
     {
+        rangerAnim.Play("DashRangerR");
         while (Vector2.Distance(transform.position, moveManager.entity.PlayerTarget.position) != 0f)
         {
             moveManager.entity.transform.position = Vector2.MoveTowards(moveManager.entity.transform.position, moveManager.entity.PlayerTarget.position, moveManager.entity.moveSpeed * Time.deltaTime * 3);

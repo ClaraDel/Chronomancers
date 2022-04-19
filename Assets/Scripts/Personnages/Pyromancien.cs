@@ -9,6 +9,7 @@ public class Pyromancien : Character
     public List<List<GameObject>> fireWalls;
     private Animator pyroAnim;
     [SerializeField] Transform Burst;
+    [SerializeField] Transform Bomb;
     public void init(bool isBlue) {
         base.init(100, 50, isBlue);
         characterType = type.pyromancien;
@@ -67,7 +68,6 @@ public class Pyromancien : Character
         if (alive)
         {
             AttackManager.instance.attackTiles(this, positions, 100);
-            Debug.Log("launchSkill1");
             // Mettre animation ici
         }
     }
@@ -83,7 +83,7 @@ public class Pyromancien : Character
     public override void castSkill2()
     {
         pyroAnim.Play("castSkill2Pyromancien");
-        Debug.Log("castSkill2Pyromancien");
+        //Debug.Log("castSkill2Pyromancien");
         if (coolDownSkill2 == 0)
         {
             castingTicks = skill2CastTime - 1;
@@ -103,6 +103,8 @@ public class Pyromancien : Character
             foreach (Vector3 position in positions)
             {
                 newFireWall.Add(Instantiate(fireWallPrefab, position, new Quaternion(), null));
+                Debug.Log("Bomb instanciated");
+                Instantiate(Bomb, position - new Vector3(0.5f, 0.5f, 0), transform.rotation);
             }
 
             fireWalls.Add(newFireWall);
@@ -124,10 +126,12 @@ public class Pyromancien : Character
     {
         if (alive)
         {
-            Debug.Log("launchSkill1");
+            Debug.Log("launchSkill2");
             foreach (GameObject fireWall in fireWalls[index])
             {
                 fireWall.GetComponent<FireWall>().setSelf();
+                Debug.Log("Bomb instanciated");
+                Instantiate(Bomb, fireWall.transform.position - new Vector3(0.5f, 0.5f, 0), transform.rotation);
             }
         }
     }
@@ -142,5 +146,14 @@ public class Pyromancien : Character
     {
         pyroAnim.Play("RunPyromancien");
         base.moveV(sens);
+    }
+
+    public override void takeDamage(Character attacker, int damage)
+    {
+        if (alive)
+        {
+            pyroAnim.Play("HurtPyromancien");
+        }
+        base.takeDamage(attacker, damage);
     }
 }
