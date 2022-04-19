@@ -18,12 +18,20 @@ public class Ranger : Character
 
     public override void castAttack(Vector3[] positions, CursorManager.directions direction)
     {
-        // anim goes there
         base.castAttack(positions, direction);
+        if (positions[0].x >= transform.position.x)
+        {
+            rangerAnim.Play("HitRangerR");
+        }
+        else
+        {
+            rangerAnim.Play("HitRanger");
+        }
     }
 
     public override void castSkill1()
     {
+        Debug.Log("In castSkill1");
         if (coolDownSkill1 == 0)
         {
             castingTicks = skill1CastTime - 1;
