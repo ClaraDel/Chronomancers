@@ -220,7 +220,7 @@ MonoBehaviour:
   Ability1: {fileID: 8300000, guid: b256999520c582b46b4d08580ad3935f, type: 3}
   Ability2: {fileID: 8300000, guid: 88989140c011a2e44b345ab70bdb66ca, type: 3}
   fireWallPrefab: {fileID: 5733318154153289747, guid: 06bdf5fe68fa6ba438ed6f6724615f34, type: 3}
-  Burst: {fileID: 585346488510006849, guid: 06bdf5fe68fa6ba438ed6f6724615f34, type: 3}
+  Burst: {fileID: 3231304020904056291, guid: 901322e22878650469184c950408c524, type: 3}
 --- !u!95 &8271067784843259241
 Animator:
   serializedVersion: 3

@@ -8,7 +8,7 @@ public class Pyromancien : Character
     public GameObject fireWallPrefab;
     public List<List<GameObject>> fireWalls;
     private Animator pyroAnim;
-    public Transform Burst;
+    [SerializeField] Transform Burst;
     public void init(bool isBlue) {
         base.init(100, 50, isBlue);
         characterType = type.pyromancien;
@@ -22,7 +22,6 @@ public class Pyromancien : Character
         AbilityTimer.instance.launchUIAbility(2);
         fireWalls = new List<List<GameObject>>();
         pyroAnim = transform.GetComponent<Animator>();
-
     }
 
     public override void reset()
@@ -58,7 +57,8 @@ public class Pyromancien : Character
         pyroAnim.Play("Hit1Pyromancien");
         for (int i = 0; i < positions.Length; i++)
         {
-            Instantiate(Burst, positions[i], transform.rotation);
+            Instantiate(Burst, positions[i]- new Vector3(0.5f, 0.5f, 0), transform.rotation);
+            Debug.Log("Hit1Pyromancien = "+ positions[i]);
         }
     }
 
@@ -68,6 +68,7 @@ public class Pyromancien : Character
         if (alive)
         {
             AttackManager.instance.attackTiles(this, positions, 100);
+            Debug.Log("launchSkill1");
             // Mettre animation ici
         }
     }
@@ -83,6 +84,7 @@ public class Pyromancien : Character
     public override void castSkill2()
     {
         pyroAnim.Play("castSkill2Pyromancien");
+        Debug.Log("castSkill2Pyromancien");
         if (coolDownSkill2 == 0)
         {
             castingTicks = skill2CastTime - 1;
@@ -123,6 +125,7 @@ public class Pyromancien : Character
     {
         if (alive)
         {
+            Debug.Log("launchSkill1");
             foreach (GameObject fireWall in fireWalls[index])
             {
                 fireWall.GetComponent<FireWall>().setSelf();
