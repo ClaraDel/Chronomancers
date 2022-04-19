@@ -58,7 +58,6 @@ public class Pyromancien : Character
         for (int i = 0; i < positions.Length; i++)
         {
             Instantiate(Burst, positions[i]- new Vector3(0.5f, 0.5f, 0), transform.rotation);
-            Debug.Log("Hit1Pyromancien = "+ positions[i]);
         }
     }
 
