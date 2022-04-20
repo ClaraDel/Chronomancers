@@ -48,6 +48,7 @@ public class Character : MonoBehaviour
     public int maxCoolDownSkill2;
 
     public bool shielded;
+    GameObject shieldSprite;
     public int shieldDuration;
 
     public MoveManager moveManager;
@@ -117,6 +118,8 @@ public class Character : MonoBehaviour
         this.castingSkill2 = false;
         this.coolDownSkill2 = 0;
 
+        shieldSprite = transform.Find("Shield").gameObject;
+        shieldSprite.SetActive(false);
         this.shielded = false;
         this.shieldDuration = 0;
     }
@@ -145,6 +148,7 @@ public class Character : MonoBehaviour
         this.coolDownSkill2 = 0;
 
         this.shielded = false;
+        shieldSprite.SetActive(false);
         this.shieldDuration = 0;
 
         this.cursor.GetComponent<CursorManager>().reset();
@@ -180,6 +184,7 @@ public class Character : MonoBehaviour
             if (shielded)
             {
                 shielded = false;
+                shieldSprite.SetActive(false);
                 shieldDuration = 0;
             }
             else
@@ -216,6 +221,7 @@ public class Character : MonoBehaviour
 
     public void shield(int nbturns)
     {
+        shieldSprite.SetActive(true);
         shielded = true;
         shieldDuration = nbturns;
     }
