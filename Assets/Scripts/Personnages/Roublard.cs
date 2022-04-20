@@ -26,30 +26,32 @@ public class Roublard : Character
     public override void reset()
     {
         hidden = false;
-        hiddenDuration = 0; 
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        hiddenDuration = 0;
+        transform.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1f);
         healthBar.SetActive(true);
-        trap.GetComponent<SpriteRenderer>().enabled = false;
+        //trap.GetComponent<SpriteRenderer>().enabled = false;
         base.reset();
     }
 
     public override void coolDowns() 
     {
-        if (hidden)
+        if (hidden && alive)
         {
             if (hiddenDuration == 0)
             {
                 hidden = false;
-                gameObject.GetComponent<SpriteRenderer>().sprite = characterSprite;
+                transform.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1f);
+                healthBar.SetActive(true);
             }
             else
             {
+                transform.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0.1f);
                 hiddenDuration--;
             }
         }
-        else if (!gameObject.GetComponent<SpriteRenderer>().enabled)
+        else if(!hidden && alive)
         {
-            gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            transform.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1f);
             healthBar.SetActive(true);
         }
         base.coolDowns();
@@ -66,7 +68,6 @@ public class Roublard : Character
 
     public override void die()
     {
-        //roublardAnim.Play("deathRoublard");
         base.die();
     }
 
@@ -109,12 +110,14 @@ public class Roublard : Character
 
     public override void addAttack()
     {
-        if (hidden)
+        base.addAttack();
+        healthBar.SetActive(true);
+        if (hidden && alive)
         {
+            transform.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1f);
             hidden = false;
             hiddenDuration = 0;
         }
-        base.addAttack();
     }
 
     public override void castAttack(Vector3[] positions, CursorManager.directions direction)
@@ -126,7 +129,7 @@ public class Roublard : Character
     public override void castSkill1()
     {
         base.castSkill1();
-        trap.GetComponent<SpriteRenderer>().enabled = true;
+        //trap.GetComponent<SpriteRenderer>().enabled = true;
     }
 
     // Trap
@@ -134,12 +137,15 @@ public class Roublard : Character
     {
         if (alive)
         {
-            trap.GetComponent<SpriteRenderer>().enabled = true;
+            //trap.GetComponent<SpriteRenderer>().enabled = true;
+            Debug.Log("add Trap");
             if (hidden)
             {
                 hidden = false;
                 hiddenDuration = 0;
             }
+            transform.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1f);
+            healthBar.SetActive(true);
             Instantiate(trap, positions[0], new Quaternion(), null);
         }
     }
@@ -147,8 +153,6 @@ public class Roublard : Character
     public override void castSkill2()
     {
         base.castSkill2();
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
-        healthBar.SetActive(true);
     }
 
     // Hidden
@@ -158,7 +162,7 @@ public class Roublard : Character
         {
             hidden = true;
             hiddenDuration = 5;
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            transform.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0.1f);
             healthBar.SetActive(false);
         }
     }

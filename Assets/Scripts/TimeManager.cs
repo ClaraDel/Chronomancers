@@ -66,8 +66,6 @@ public class TimeManager : MonoBehaviour
 
     public IEnumerator PlayTick()
     {
-        
-        
         AbilityTimer.instance.updateUIAbility();
         
 

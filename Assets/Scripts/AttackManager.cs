@@ -43,7 +43,10 @@ public class AttackManager : MonoBehaviour
             if (hits[i].collider != null)
             {
                 Character target = hits[i].collider.gameObject.GetComponent<Character>();
-                target.takeDamage(attacker, damage);
+                if(target != null)
+                {
+                    target.takeDamage(attacker, damage);
+                }
             }
         }
     }

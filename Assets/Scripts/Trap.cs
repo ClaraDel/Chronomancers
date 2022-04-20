@@ -8,8 +8,15 @@ public class Trap : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Character>().alive)
         {
+            transform.GetComponent<Animator>().Play("Trap");
             other.gameObject.GetComponent<Character>().takeDamage(null, 50);
-            Destroy(this.gameObject);
+            StartCoroutine(WaitAndDie());
         }
+    }
+
+    IEnumerator WaitAndDie()
+    {
+        yield return new WaitForSeconds(0.6f);
+        Destroy(gameObject);
     }
 }
