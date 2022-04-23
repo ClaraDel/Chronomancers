@@ -73,7 +73,7 @@ public class ScoreManager : MonoBehaviour
         if (scoreTeam1Total > scoreTeam2Total) TeamWinner = 0;
         else if (scoreTeam1Total < scoreTeam2Total) TeamWinner = 1;
         else TeamWinner = 2; //égalité
-        Debug.Log("scoreTeam1Total = " + scoreTeam1Total + ", scoreTeam2Total = " + scoreTeam2Total + ", TeamWinner = " + TeamWinner);
+        //Debug.Log("scoreTeam1Total = " + scoreTeam1Total + ", scoreTeam2Total = " + scoreTeam2Total + ", TeamWinner = " + TeamWinner);
     }
     public void SwitchTeam(int team)
     {
@@ -88,7 +88,7 @@ public class ScoreManager : MonoBehaviour
             MageBleu.SetActive(true);
         }
         
-        Debug.Log("Team n." + currentTeam);
+        //Debug.Log("Team n." + currentTeam);
     }
         
         void Update()

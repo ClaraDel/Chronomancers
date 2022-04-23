@@ -58,15 +58,18 @@ public class Ranger : Character
 
 
             AttackManager.instance.addFutureAttack(this, positions, 75, skill1CastTime + 1);
-            for (int i = 0; i < skill1CastTime + 1; i++)
+            /*for (int i = 0; i < skill1CastTime + 1; i++)
             {
                 this.StartCoroutine(TimeManager.instance.PlayTick());
-            }
+            }*/
+            StartCoroutine(TimeManager.instance.PlaySeveralTicks(skill1CastTime + 1));
             Attack.PlayOneShot(Ability1);
         }
         cursor.GetComponent<CursorManager>().reset();
         cursor.SetActive(false);
     }
+
+
 
     // Tir pr�cis
     public override void launchSkill1(Vector3[] positions)
