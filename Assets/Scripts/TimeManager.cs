@@ -64,6 +64,15 @@ public class TimeManager : MonoBehaviour
         characterOrder.Push(new_character);
     }
 
+    public IEnumerator PlaySeveralTicks(int nbr)
+    {
+        for (int i = 0; i<nbr; i++)
+        {
+            yield return StartCoroutine(PlayTick());
+        }
+    }
+
+
     public IEnumerator PlayTick()
     {
         AbilityTimer.instance.updateUIAbility();
@@ -71,12 +80,7 @@ public class TimeManager : MonoBehaviour
         isPlaying = true;
         Stack<Action> currentStack = turnTimeLine[currentTick];
         float index = 0.0f;
-        foreach (Action method in currentStack)
-        {
-            index++;
-            method();
-            yield return new WaitForSeconds(0.2f/index);
-        }
+
         isPlaying = false;
         currentTick++;
         if (currentTick == maxTick)
@@ -92,8 +96,14 @@ public class TimeManager : MonoBehaviour
             if (character.character.alive)
             {
                 ScoreManager.instance.CheckInControlArea(character.character, (int)character.transform.position.x, (int)character.transform.position.y);
-                Debug.Log(character.character + " is at " + (int)character.transform.position.x + (int)character.transform.position.y);
             }
+        }
+
+        foreach (Action method in currentStack)
+        {
+            index++;
+            method();
+            yield return new WaitForSeconds(0.2f / index);
         }
     }
 
