@@ -132,6 +132,14 @@ public class Barbare : Character
     {
         if (alive)
         {
+            if (positions[0].x >= transform.position.x)
+            {
+                barbareAnim.Play("hit1BarbareR");
+            }
+            else
+            {
+                barbareAnim.Play("hit1Barbare");
+            }
             if (enraged)
             {
                 AttackManager.instance.attackTiles(this, positions, 100);
@@ -174,6 +182,7 @@ public class Barbare : Character
                     StartCoroutine(charge(-1, 0));
                     break;
             }
+            barbareAnim.Play("dashBarbare");
             cursor.GetComponent<CursorManager>().reset();
             cursor.SetActive(false);
             Attack.PlayOneShot(Ability2);

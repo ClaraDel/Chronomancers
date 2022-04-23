@@ -6,7 +6,7 @@ public class Trap : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<Character>().alive)
+        if (other.gameObject.GetComponent<Character>().alive && other.gameObject.GetComponent<Character>() != null)
         {
             transform.GetComponent<Animator>().Play("Trap");
             other.gameObject.GetComponent<Character>().takeDamage(null, 50);
