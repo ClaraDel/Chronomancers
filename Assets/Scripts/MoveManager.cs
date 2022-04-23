@@ -39,12 +39,6 @@ public class MoveManager : MonoBehaviour
         int posY = (int)entity.transform.position.y + (int)verticalDirection;
         entity.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 13 - posY;
 
-        //Mise � jour du score
-        if (entity.gameObject.GetComponent<Character>().alive)
-        {
-            ScoreManager.instance.CheckInControlArea(entity.gameObject.GetComponent<Character>(), posX, posY);
-        }
-
         //int orderLayout = (int)entity.gameObject.transform.position.y + (int)verticalDirection;
         entity.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 13 - posY;
         while (Vector2.Distance(transform.position, entity.PlayerTarget.position) != 0f)

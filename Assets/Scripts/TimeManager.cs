@@ -67,7 +67,6 @@ public class TimeManager : MonoBehaviour
     public IEnumerator PlayTick()
     {
         AbilityTimer.instance.updateUIAbility();
-        
 
         isPlaying = true;
         Stack<Action> currentStack = turnTimeLine[currentTick];
@@ -87,6 +86,15 @@ public class TimeManager : MonoBehaviour
         actifCharacter.character.coolDowns();
         HourGlassBleu.GetComponent<Animator>().Play("hourGlassBleu");
         HourGlassRouge.GetComponent<Animator>().Play("hourGlassRouge");
+
+        foreach (PlayerController character in characterOrder)
+        {
+            if (character.character.alive)
+            {
+                ScoreManager.instance.CheckInControlArea(character.character, (int)character.transform.position.x, (int)character.transform.position.y);
+                Debug.Log(character.character + " is at " + (int)character.transform.position.x + (int)character.transform.position.y);
+            }
+        }
     }
 
     public void EndTurn()
