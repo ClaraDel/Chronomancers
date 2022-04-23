@@ -54,6 +54,7 @@ public class Paladin : Character
         if (!blocking)
         {
             base.takeDamage(attacker, damage);
+            paladinAnim.Play("hurtPaladinR");
         }
         else
         {

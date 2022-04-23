@@ -23,5 +23,14 @@ public class DeathCharacter : MonoBehaviour
             Debug.Log("Aucun perso ne correspond, Animator.parameters = "+ animator.parameters+ animator.name);
     }
 
+    void Update()
+    {
+        if (TimeManager.instance.currentTick == TimeManager.maxTick)
+        {
+            Destroy(gameObject);
+        }
+        
+    }
+
 
 }
