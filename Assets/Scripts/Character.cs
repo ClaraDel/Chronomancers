@@ -324,10 +324,7 @@ public class Character : MonoBehaviour
 
 
             TimeManager.instance.AddFutureAction(() => launchSkill1(positions), skill1CastTime);
-            for (int i = 0; i < skill1CastTime + 1; i++)
-            {
-                this.StartCoroutine(TimeManager.instance.PlayTick());
-            }
+            StartCoroutine(TimeManager.instance.PlaySeveralTicks(skill1CastTime + 1));
         }
         cursor.GetComponent<CursorManager>().reset();
         cursor.SetActive(false);
@@ -366,10 +363,7 @@ public class Character : MonoBehaviour
 
 
             TimeManager.instance.AddFutureAction(() => launchSkill2(positions), skill2CastTime);
-            for (int i = 0; i < skill2CastTime + 1; i++)
-            {
-                this.StartCoroutine(TimeManager.instance.PlayTick());
-            }
+            StartCoroutine(TimeManager.instance.PlaySeveralTicks(skill2CastTime + 1));
         }
         cursor.GetComponent<CursorManager>().reset();
         cursor.SetActive(false);

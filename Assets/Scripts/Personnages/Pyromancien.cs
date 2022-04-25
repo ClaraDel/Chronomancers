@@ -112,10 +112,7 @@ public class Pyromancien : Character
 
             TimeManager.instance.AddFutureAction(() => launchSkill2(index-1), skill2CastTime);
 
-            for (int i = 0; i < skill2CastTime + 1; i++)
-            {
-                this.StartCoroutine(TimeManager.instance.PlayTick());
-            }
+            StartCoroutine(TimeManager.instance.PlaySeveralTicks(skill2CastTime + 1));
             Attack.PlayOneShot(Ability2);
         }
         cursor.GetComponent<CursorManager>().reset();
