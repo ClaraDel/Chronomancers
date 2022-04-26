@@ -19,7 +19,7 @@ public class FireWall : MonoBehaviour
         {
             TimeManager.instance.AddFutureAction(() => fireTick(), i);   
         }
-        TimeManager.instance.AddFutureAction(() => gameObject.SetActive(false), delay-1);
+        TimeManager.instance.AddFutureAction(() => gameObject.SetActive(false), delay);
     }
 
     void Start()

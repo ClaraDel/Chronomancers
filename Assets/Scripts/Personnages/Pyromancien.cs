@@ -83,7 +83,6 @@ public class Pyromancien : Character
     public override void castSkill2()
     {
         pyroAnim.Play("castSkill2Pyromancien");
-        //Debug.Log("castSkill2Pyromancien");
         if (coolDownSkill2 == 0)
         {
             castingTicks = skill2CastTime - 1;
@@ -103,14 +102,13 @@ public class Pyromancien : Character
             foreach (Vector3 position in positions)
             {
                 newFireWall.Add(Instantiate(fireWallPrefab, position, new Quaternion(), null));
-                Debug.Log("Bomb instanciated");
                 Instantiate(Bomb, position - new Vector3(0.5f, 0.5f, 0), transform.rotation);
             }
 
             fireWalls.Add(newFireWall);
             int index = fireWalls.Count;
 
-            TimeManager.instance.AddFutureAction(() => launchSkill2(index-1), skill2CastTime);
+            TimeManager.instance.AddFutureAction(() => launchSkill2(index-1), skill2CastTime - 1);
 
             StartCoroutine(TimeManager.instance.PlaySeveralTicks(skill2CastTime + 1));
             Attack.PlayOneShot(Ability2);
@@ -123,7 +121,6 @@ public class Pyromancien : Character
     {
         if (alive)
         {
-            Debug.Log("launchSkill2");
             foreach (GameObject fireWall in fireWalls[index])
             {
                 fireWall.GetComponent<FireWall>().setSelf();
