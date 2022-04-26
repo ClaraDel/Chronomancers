@@ -108,6 +108,11 @@ public class Pyromancien : Character
             fireWalls.Add(newFireWall);
             int index = fireWalls.Count;
 
+            foreach (GameObject fireWall in fireWalls[index - 1])
+            {
+                fireWall.GetComponent<FireWall>().setSelf(skill2CastTime - 1);
+            }
+
             TimeManager.instance.AddFutureAction(() => launchSkill2(index-1), skill2CastTime - 1);
 
             StartCoroutine(TimeManager.instance.PlaySeveralTicks(skill2CastTime + 1));
@@ -123,8 +128,7 @@ public class Pyromancien : Character
         {
             foreach (GameObject fireWall in fireWalls[index])
             {
-                fireWall.GetComponent<FireWall>().setSelf();
-                Debug.Log("Bomb instanciated");
+                fireWall.SetActive(true);
                 Instantiate(Bomb, fireWall.transform.position - new Vector3(0.5f, 0.5f, 0), transform.rotation);
             }
         }

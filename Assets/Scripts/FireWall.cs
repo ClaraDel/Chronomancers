@@ -12,14 +12,14 @@ public class FireWall : MonoBehaviour
         }
     }
 
-    public void setSelf(){
-        int delay = Mathf.Min(TimeManager.maxTick - TimeManager.instance.currentTick, 6);
-        TimeManager.instance.AddAction(() => gameObject.SetActive(true));
-        for (int i = 0; i < delay-1; i++)
+    public void setSelf(int castTime){
+        int delay = Mathf.Min(TimeManager.maxTick - (TimeManager.instance.currentTick + castTime), 6);
+        TimeManager.instance.AddFutureAction(() => gameObject.SetActive(true), castTime);
+        for (int i = 0; i < delay; i++)
         {
-            TimeManager.instance.AddFutureAction(() => fireTick(), i);   
+            TimeManager.instance.AddFutureAction(() => fireTick(), castTime + i);   
         }
-        TimeManager.instance.AddFutureAction(() => gameObject.SetActive(false), delay);
+        TimeManager.instance.AddFutureAction(() => gameObject.SetActive(false), castTime + delay);
     }
 
     void Start()
