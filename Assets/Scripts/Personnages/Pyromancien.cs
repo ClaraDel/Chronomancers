@@ -69,6 +69,7 @@ public class Pyromancien : Character
         {
             AttackManager.instance.attackTiles(this, positions, 100);
             // Mettre animation ici
+            Debug.Log("launchSkill1 : boule de feu");
         }
     }
 
@@ -101,8 +102,7 @@ public class Pyromancien : Character
             // Creer murs de feu
             foreach (Vector3 position in positions)
             {
-                newFireWall.Add(Instantiate(fireWallPrefab, position, new Quaternion(), null));
-                Instantiate(Bomb, position - new Vector3(0.5f, 0.5f, 0), transform.rotation);
+                newFireWall.Add(Instantiate(fireWallPrefab, position - new Vector3(0.5f, 0.5f, 0), transform.rotation, null));
             }
 
             fireWalls.Add(newFireWall);
@@ -129,7 +129,7 @@ public class Pyromancien : Character
             foreach (GameObject fireWall in fireWalls[index])
             {
                 fireWall.SetActive(true);
-                Instantiate(Bomb, fireWall.transform.position - new Vector3(0.5f, 0.5f, 0), transform.rotation);
+                Instantiate(Bomb, fireWall.transform.position , transform.rotation);
             }
         }
     }
