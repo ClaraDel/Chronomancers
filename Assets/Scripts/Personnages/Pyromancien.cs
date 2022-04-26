@@ -68,6 +68,7 @@ public class Pyromancien : Character
     {
         if (alive)
         {
+            pyroAnim.Play("Hit1Pyromancien");
             foreach (Vector3 position in positions)
             {
                 Vector3 diff = position - transform.position;
