@@ -10,6 +10,7 @@ public class Pyromancien : Character
     private Animator pyroAnim;
     [SerializeField] Transform Burst;
     [SerializeField] Transform Bomb;
+    [SerializeField] Transform fireBall;
     public void init(bool isBlue) {
         base.init(100, 50, isBlue);
         characterType = type.pyromancien;
@@ -67,9 +68,16 @@ public class Pyromancien : Character
     {
         if (alive)
         {
+            foreach (Vector3 position in positions)
+            {
+                Vector3 diff = position - transform.position;
+                diff.Normalize();
+                float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+                Transform fireballClone = Instantiate(fireBall, transform.position + new Vector3(0.5f, 0.5f, 0), Quaternion.Euler(0f, 0f, rot_z + 180), null);
+                fireballClone.gameObject.SetActive(true);
+                StartCoroutine(fireballClone.GetComponent<FireBall>().Move(position + new Vector3(0f, 1f, 0)));
+            }
             AttackManager.instance.attackTiles(this, positions, 100);
-            // Mettre animation ici
-            Debug.Log("launchSkill1 : boule de feu");
         }
     }
 
