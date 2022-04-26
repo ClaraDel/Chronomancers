@@ -15,7 +15,6 @@ public class LaunchAnimFire : MonoBehaviour
         } else if (transform.name.Contains("Burst"))
         {
             animator.Play("FireExplodePyromancien");
-            Debug.Log("in FireExplodePyromancien");
         } else
         {
             Debug.Log("no name corresponding for bomb or burst");
