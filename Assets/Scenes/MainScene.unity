@@ -21609,6 +21609,10 @@ PrefabInstance:
       propertyPath: NomVainqueur
       value: 
       objectReference: {fileID: 1932386145}
+    - target: {fileID: 8484248153846218520, guid: d15f63821abcc524a9022299eff9e514, type: 3}
+      propertyPath: m_text
+      value: Commencer !
+      objectReference: {fileID: 0}
     - target: {fileID: 8484248153901208994, guid: d15f63821abcc524a9022299eff9e514, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 139
@@ -21744,6 +21748,22 @@ PrefabInstance:
     - target: {fileID: 8484248154373166570, guid: d15f63821abcc524a9022299eff9e514, type: 3}
       propertyPath: m_Name
       value: UITMP
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484248154707527513, guid: d15f63821abcc524a9022299eff9e514, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 621.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484248154707527513, guid: d15f63821abcc524a9022299eff9e514, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484248154707527513, guid: d15f63821abcc524a9022299eff9e514, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8484248154707527513, guid: d15f63821abcc524a9022299eff9e514, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8484248154707527514, guid: d15f63821abcc524a9022299eff9e514, type: 3}
       propertyPath: m_IsActive

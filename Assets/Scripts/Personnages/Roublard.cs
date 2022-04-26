@@ -54,7 +54,6 @@ public class Roublard : Character
             transform.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1f);
             healthBar.SetActive(true);
         }
-        base.coolDowns();
     }
 
     public override void takeDamage(Character attacker, int damage)
@@ -73,39 +72,39 @@ public class Roublard : Character
 
     public override void moveH(float sens)
     {
-        if (hidden && !moveAction)
+        // if (hidden && !moveAction)
+        // {
+        //     moveManager.AddDash(Mathf.Round(Input.GetAxisRaw("Horizontal")), 0);
+        //     moveAction = true;
+        // }
+        // else
+        // {
+        if (sens > 0)
         {
-            moveManager.AddDash(Mathf.Round(Input.GetAxisRaw("Horizontal")), 0);
-            moveAction = true;
+            roublardAnim.Play("runRoublardR");
         }
-        else
+        else if (sens < 0)
         {
-            if (sens > 0)
-            {
-                roublardAnim.Play("runRoublardR");
-            }
-            else if (sens < 0)
-            {
-                roublardAnim.Play("runRoublard");
-            }
-            base.moveH(sens);
-            moveAction = false;
+            roublardAnim.Play("runRoublard");
         }
+        base.moveH(sens);
+        moveAction = false;
+        // }
     }
 
     public override void moveV(float sens)
     {
-        if (hidden && !moveAction)
-        {
-            moveManager.AddDash(0, Mathf.Round(Input.GetAxisRaw("Vertical")));
-            moveAction = true;
-        } 
-        else
-        {
-            roublardAnim.Play("runRoublard");
-            base.moveV(sens);
-            moveAction = false;
-        }
+        // if (hidden && !moveAction)
+        // {
+        //     moveManager.AddDash(0, Mathf.Round(Input.GetAxisRaw("Vertical")));
+        //     moveAction = true;
+        // } 
+        // else
+        // {
+        roublardAnim.Play("runRoublard");
+        base.moveV(sens);
+        moveAction = false;
+        // }
     }
 
     public override void addAttack()

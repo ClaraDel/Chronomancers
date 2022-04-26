@@ -24,11 +24,11 @@ public class MoveManager : MonoBehaviour
         this.StartCoroutine(Move(horizontalDirection, verticalDirection));
     }
 
-    public void AddDash(float horizontalDirection, float verticalDirection)
-    {
-        //TimeManager.instance.AddAction(() => this.StartCoroutine(Move(horizontalDirection, verticalDirection)));
-        this.StartCoroutine(Move(horizontalDirection, verticalDirection));
-    }
+    // public void AddDash(float horizontalDirection, float verticalDirection)
+    // {
+    //     //TimeManager.instance.AddAction(() => this.StartCoroutine(Move(horizontalDirection, verticalDirection)));
+    //     this.StartCoroutine(Move(horizontalDirection, verticalDirection));
+    // }
 
     public IEnumerator Move(float horizontalDirection, float verticalDirection)
     {

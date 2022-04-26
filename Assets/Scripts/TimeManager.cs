@@ -87,7 +87,10 @@ public class TimeManager : MonoBehaviour
         {
             EndTurn();
         }
-        actifCharacter.character.coolDowns();
+        foreach (var curcharacter in characterOrder)
+        {
+            curcharacter.character.coolDowns();
+        }
         HourGlassBleu.GetComponent<Animator>().Play("hourGlassBleu");
         HourGlassRouge.GetComponent<Animator>().Play("hourGlassRouge");
 
