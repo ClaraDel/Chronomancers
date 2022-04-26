@@ -14,8 +14,8 @@ public class FireWall : MonoBehaviour
 
     public void setSelf(){
         int delay = Mathf.Min(TimeManager.maxTick - TimeManager.instance.currentTick, 6);
-        TimeManager.instance.AddFutureAction(() => gameObject.SetActive(true), 1);
-        for (int i = 1; i < delay-1; i++)
+        TimeManager.instance.AddAction(() => gameObject.SetActive(true));
+        for (int i = 0; i < delay-1; i++)
         {
             TimeManager.instance.AddFutureAction(() => fireTick(), i);   
         }
