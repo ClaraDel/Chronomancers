@@ -122,7 +122,7 @@ public class Pyromancien : Character
                 fireWall.GetComponent<FireWall>().setSelf(skill2CastTime - 1);
             }
 
-            TimeManager.instance.AddFutureAction(() => launchSkill2(index-1), skill2CastTime - 1);
+            TimeManager.instance.AddFutureAction(() => launchSkill2(index-1), skill2CastTime);
 
             StartCoroutine(TimeManager.instance.PlaySeveralTicks(skill2CastTime + 1));
             Attack.PlayOneShot(Ability2);
