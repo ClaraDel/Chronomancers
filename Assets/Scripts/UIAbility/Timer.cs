@@ -12,11 +12,11 @@ public class Timer : MonoBehaviour
     public int remainingDuration;
     public bool isCounting = false;
 
-    void Being(int second)
-    {
-        remainingDuration = second;
-        playTick();
-    }
+    /* void Being(int second)
+     {
+         remainingDuration = second;
+         playTick();
+     }*/
 
     public void resetTimer()
     {
@@ -25,7 +25,7 @@ public class Timer : MonoBehaviour
 
     public void setCountTimer(int count)
     {
-       
+
         UIText.text = count.ToString();
         this.duration = int.Parse(UIText.text);
         this.remainingDuration = duration;
@@ -35,20 +35,17 @@ public class Timer : MonoBehaviour
     }
 
 
-    public void playTick()
+    public void playTick(int coolDown)
     {
-        
         if (isCounting)
         {
-            remainingDuration -= 2;
+            remainingDuration = coolDown;
             if (remainingDuration <= 0)
             {
                 onEnd();
             }
             UIText.text = remainingDuration.ToString();
-           
             UIFill.fillAmount = Mathf.InverseLerp(0, duration, remainingDuration);
-            
         }
     }
 
@@ -73,12 +70,12 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

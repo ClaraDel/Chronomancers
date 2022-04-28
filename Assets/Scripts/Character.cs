@@ -288,10 +288,12 @@ public class Character : MonoBehaviour
         if (coolDownSkill1 > 0)
         {
             coolDownSkill1--;
+            AbilityTimer.instance.updateUIAbility(1, Mathf.Min(coolDownSkill1, maxCoolDownSkill1));
         }
         if (coolDownSkill2 > 0)
         {
             coolDownSkill2--;
+            AbilityTimer.instance.updateUIAbility(2, Mathf.Min(coolDownSkill2, maxCoolDownSkill2));
         }
         if (shieldDuration > 0)
         {

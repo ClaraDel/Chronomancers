@@ -6,14 +6,17 @@ public class AbilityTimer : MonoBehaviour
 {
     List<GameObject> abilities;
     public static AbilityTimer instance;
-    public void updateUIAbility()
+    public void updateUIAbility(int i, int nb)
     {
-        for(int i = 0; i < abilities.Count; i++)
+        /*for(int i = 0; i < abilities.Count; i++)
         {
             GameObject countDown_ability_i = abilities[i].transform.Find("CountDown").gameObject;
             Timer timer = countDown_ability_i.GetComponent<Timer>();
             timer.playTick();
-        }
+        }*/
+        GameObject countDown_ability_i = abilities[i - 1].transform.Find("CountDown").gameObject;
+        Timer timer = countDown_ability_i.GetComponent<Timer>();
+        timer.playTick(nb);
     }
 
     public Timer getAbility(int i)
@@ -25,7 +28,7 @@ public class AbilityTimer : MonoBehaviour
 
     public void resetTimers()
     {
-        for(int i = 0; i < abilities.Count; i++)
+        for (int i = 0; i < abilities.Count; i++)
         {
             abilities[i].transform.Find("CountDown").GetComponent<Timer>().resetTimer();
         }
@@ -43,6 +46,7 @@ public class AbilityTimer : MonoBehaviour
 
     public void launchUIAbility(int i)
     {
+        Debug.Log("launch");
         abilities[i - 1].SetActive(true);
         GameObject countDown_ability_i = abilities[i - 1].transform.Find("CountDown").gameObject;
         countDown_ability_i.SetActive(true);
@@ -59,6 +63,6 @@ public class AbilityTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
