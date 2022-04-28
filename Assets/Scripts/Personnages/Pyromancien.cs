@@ -97,7 +97,7 @@ public class Pyromancien : Character
         {
             castingTicks = skill2CastTime - 1;
             castingSkill2 = true;
-            coolDownSkill2 = maxCoolDownSkill2 + skill2CastTime;
+            coolDownSkill2 = maxCoolDownSkill2 + skill2CastTime + 1;
 
             CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
             Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
