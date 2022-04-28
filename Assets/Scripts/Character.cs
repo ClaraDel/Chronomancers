@@ -362,7 +362,7 @@ public class Character : MonoBehaviour
             }
 
 
-            TimeManager.instance.AddFutureAction(() => launchSkill2(positions), skill2CastTime - 1);
+            TimeManager.instance.AddFutureAction(() => launchSkill2(positions), skill2CastTime);
             StartCoroutine(TimeManager.instance.PlaySeveralTicks(skill2CastTime + 1));
         }
         cursor.GetComponent<CursorManager>().reset();
