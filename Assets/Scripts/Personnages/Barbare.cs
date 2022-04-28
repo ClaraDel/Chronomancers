@@ -56,6 +56,7 @@ public class Barbare : Character
                 rageDuration--;
             }
         }
+        base.coolDowns();
     }
 
     public override void takeDamage(Character attacker, int damage)

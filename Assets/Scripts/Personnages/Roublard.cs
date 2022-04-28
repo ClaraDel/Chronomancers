@@ -54,6 +54,7 @@ public class Roublard : Character
             transform.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1f);
             healthBar.SetActive(true);
         }
+        base.coolDowns();
     }
 
     public override void takeDamage(Character attacker, int damage)
