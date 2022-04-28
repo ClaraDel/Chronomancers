@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviour
                     clearAtk();
                 }
 
-                if (canMove && Vector2.Distance(transform.position, PlayerTarget.position) == 0f && (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)))
+                if (canMove && Vector2.Distance(transform.position, PlayerTarget.position) == 0f && (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.Space)))
                 {
                     
                     if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) >= 0.5f)
