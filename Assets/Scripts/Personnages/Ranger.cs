@@ -36,7 +36,7 @@ public class Ranger : Character
         {
             castingTicks = skill1CastTime - 1;
             castingSkill1 = true;
-            coolDownSkill1 = maxCoolDownSkill1 + skill1CastTime;
+            coolDownSkill1 = maxCoolDownSkill1 + skill1CastTime + 1;
 
             CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
             Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];

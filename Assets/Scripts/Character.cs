@@ -313,7 +313,7 @@ public class Character : MonoBehaviour
         {
             castingTicks = skill1CastTime - 1;
             castingSkill1 = true;
-            coolDownSkill1 = maxCoolDownSkill1 + skill1CastTime;
+            coolDownSkill1 = maxCoolDownSkill1 + skill1CastTime + 1;
 
             CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
             Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];
@@ -352,7 +352,7 @@ public class Character : MonoBehaviour
         {
             castingTicks = skill2CastTime - 1;
             castingSkill2 = true;
-            coolDownSkill2 = maxCoolDownSkill2 + skill2CastTime;
+            coolDownSkill2 = maxCoolDownSkill2 + skill2CastTime + 1;
 
             CursorManager cursor = gameObject.transform.Find("Cursor").GetComponent<CursorManager>();
             Vector3[] positions = new Vector3[cursor.activeZone.getTilesEffets().Count];

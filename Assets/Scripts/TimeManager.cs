@@ -66,9 +66,11 @@ public class TimeManager : MonoBehaviour
 
     public IEnumerator PlaySeveralTicks(int nbr)
     {
-        for (int i = 0; i<nbr; i++)
+        int i = 0;
+        while (i<nbr && currentTick < maxTick)
         {
             yield return StartCoroutine(PlayTick());
+            i++;
         }
     }
 
